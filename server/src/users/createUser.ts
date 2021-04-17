@@ -8,7 +8,7 @@ import userModel from "../../models/user.model";
 import sendEmail from "../utils/email";
 
 // Function for creating a new user
-export default async function createUser(req: Request, res: Response) {
+export default async (req: Request, res: Response) => {
   const { error } = validateUser(req.body);
   if (error)
     return res.status(StatusCodes.BAD_REQUEST).send(error.details[0].message);
@@ -28,9 +28,9 @@ export default async function createUser(req: Request, res: Response) {
   user = await user.save();
 
   const token = user.generateAuthToken();
-  const url = `http://${process.env.ADDRESS}/users/confirmation/${token}`;
+  const url = `http://${process.env.ADDRESS}:${process.env.PORT}/users/confirmation/${token}`;
   const message = await sendEmail(req.body.email, url);
   console.log(message);
 
   res.header("x-auth-token", token).send(_.pick(user, ["id", "name", "email"]));
-}
+};

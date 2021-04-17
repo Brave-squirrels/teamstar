@@ -31,9 +31,9 @@ export default class UserController {
     // this.router.get(`${this.path}/me`, auth, this.getUserMe);
     // this.router.get(`${this.path}/:id`, findUser, this.getUser);
     // this.router.get(`${this.path}/confirmation/:token`, this.confirmation);
-    this.router.post(`${this.path}/create`, this.createUser);
+    this.router.post(`${this.path}/create`, createUser);
     // this.router.post(`${this.path}/sendreset`, this.sendResetMail);
-    this.router.post(`${this.path}/email`, this.sendEmailToUser);
+    this.router.post(`${this.path}/email`, sendEmailToUser);
     // this.router.put(`${this.path}/password`, auth, this.newPassword);
     // this.router.put(`${this.path}/changepassword`, auth, this.changePassword);
     // this.router.put(`${this.path}/name`, auth, this.changeName);
@@ -41,51 +41,43 @@ export default class UserController {
     // this.router.get(`${this.path}/search/:email?`, this.searchUser);
   }
 
-//   getAllUsers(req: Request, res: Response) {
-//     getAllUsers(req, res);
-//   }
+  //   getAllUsers(req: Request, res: Response) {
+  //     getAllUsers(req, res);
+  //   }
 
-//   getUserMe(req: Request, res: Response) {
-//     getUserMe(req, res);
-//   }
+  //   getUserMe(req: Request, res: Response) {
+  //     getUserMe(req, res);
+  //   }
 
-//   getUser(req: Request, res: Response) {
-//     getUser(req, res);
-//   }
+  //   getUser(req: Request, res: Response) {
+  //     getUser(req, res);
+  //   }
 
-//   confirmation(req: Request, res: Response) {
-//     confirmation(req, res);
-//   }
+  //   confirmation(req: Request, res: Response) {
+  //     confirmation(req, res);
+  //   }
 
-  createUser(req: Request, res: Response) {
-    createUser(req, res);
-  }
+  //   changePassword(req: Request, res: Response) {
+  //     changePassword(req, res);
+  //   }
 
-  sendEmailToUser(req: Request, res: Response) {
-    sendEmailToUser(req, res);
-  }
+  //   newPassword(req: Request, res: Response) {
+  //     newPassword(req, res);
+  //   }
 
-//   changePassword(req: Request, res: Response) {
-//     changePassword(req, res);
-//   }
+  //   changeName(req: Request, res: Response) {
+  //     changeName(req, res);
+  //   }
 
-//   newPassword(req: Request, res: Response) {
-//     newPassword(req, res);
-//   }
+  //   deleteUser(req: Request, res: Response) {
+  //     deleteUser(req, res);
+  //   }
 
-//   changeName(req: Request, res: Response) {
-//     changeName(req, res);
-//   }
+  //   searchUser(req: Request, res: Response) {
+  //     searchUser(req, res);
+  //   }
 
-//   deleteUser(req: Request, res: Response) {
-//     deleteUser(req, res);
-//   }
-
-//   searchUser(req: Request, res: Response) {
-//     searchUser(req, res);
-//   }
-
-//   sendResetMail(req: Request, res: Response) {
-//     sendResetMail(req, res);
-//   }
+  //   sendResetMail(req: Request, res: Response) {
+  //     sendResetMail(req, res);
+  //   }
 }

@@ -6,7 +6,8 @@
   "scripts": {
     "build": "tsc",
     "start": "node ./dist/src/server.js",
-    "dev": "ts-node ./src/server.ts"
+    "dev": "NODE_ENV=production ts-node ./src/server.ts",
+    "dev:w": "set NODE_ENV=production && ts-node ./src/server.ts"
   },
   "dependencies": {
     "bcrypt": "^5.0.0",

@@ -1,0 +1,14 @@
+{
+  "name": "mystery",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/Brave-squirrels/mystery.git",
+  "author": "Olek <aleksander.atamanczuk@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "start": ""
+  },
+  "devDependencies": {
+    "concurrently": "^6.0.2"
+  }
+}
