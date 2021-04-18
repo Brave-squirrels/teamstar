@@ -1,7 +1,7 @@
 import { Response, Request } from "express";
 import _ from "lodash";
-import "dotenv/config";
 import { StatusCodes } from "http-status-codes";
+
 import validateEmail from "./validateEmail";
 import sendEmail from "../utils/email";
 import userModel from "../../models/user.model";

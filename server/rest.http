@@ -7,19 +7,28 @@ POST http://localhost:5000/login HTTP/1.1
 Content-Type: application/json
 
 {
-    "email": "mloogdguohcgnmggbk@upived.online",
-    "password": "12345678"
+    "email": "xevdsczobinfxdrcki@upived.online",
+    "password": "123456789"
 }
 
 # __________________________________ USER __________________________________
+###
+# get me
+GET http://localhost:5000/users/me HTTP/1.1
+x-auth-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MDdiNTBkMWJhZWE4YzE4ZWNlNmE0MzIiLCJuYW1lIjoiT2xlayIsImlhdCI6MTYxODc1NjM5MX0.6GciXFyVUqqN9XBDFQYkKtTzChEEzJ3iE-WwOn8WHaw
+
+###
+# confirm user
+GET http://localhost:5000/users/confirmation/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MDdjNDY1ODMyNDdkYjBlYzRjNDIwOTQiLCJuYW1lIjoiVGVzdCBVc2VyIDAxIiwiaWF0IjoxNjE4NzU3MzM5fQ.SccUBSeekdT6frQDZZmi2WapUii3zDHATUJimYYWGyk HTTP/1.1
+
 ###
 # Create Account
 POST http://localhost:5000/users/create HTTP/1.1
 Content-Type: application/json
 
 {
-    "name": "Olek",
-    "email": "mloogdguohcgnmggbk@upived.online",
+    "name": "Test User 01",
+    "email": "xevdsczobinfxdrcki@upived.online",
     "password": "12345678",
     "confirmPassword": "12345678"
 }
@@ -31,4 +40,16 @@ Content-Type: application/json
 
 {
     "email": "ipjuxtvfrxksdajjwr@upived.online"
+}
+
+###
+# change password
+PUT http://localhost:5000/users/changepassword HTTP/1.1
+x-auth-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MDdjNDY1ODMyNDdkYjBlYzRjNDIwOTQiLCJuYW1lIjoiVGVzdCBVc2VyIDAxIiwiaWF0IjoxNjE4NzU3MjQxfQ.eTwMem-XjJC0Rv4W4exRsgNhzxPn9By42UyPxKvYXug
+Content-Type: application/json
+
+{
+    "oldPassword": "12345678",
+    "password": "123456789",
+    "confirmPassword": "123456789"
 }
