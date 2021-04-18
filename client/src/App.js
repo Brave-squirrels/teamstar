@@ -5,6 +5,7 @@ import { fetchData } from "./reduxState/test/test";
 
 const App = () => {
   const dispatch = useDispatch();
+  console.log("test", process.env.NODE_ENV);
 
   const testData = useSelector((state) => state.testData);
 
