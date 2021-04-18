@@ -10,7 +10,7 @@ const App = () => {
 
   useEffect(() => {
     dispatch(fetchData());
-  }, []);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   return <div className="App">{testData.data.title}</div>;
 };
