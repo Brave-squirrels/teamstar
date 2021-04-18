@@ -31,9 +31,9 @@ export default class UserController {
     // this.router.get(`${this.path}/me`, auth, this.getUserMe);
     // this.router.get(`${this.path}/:id`, findUser, this.getUser);
     // this.router.get(`${this.path}/confirmation/:token`, this.confirmation);
-    this.router.post(`${this.path}/create`, createUser);
+    this.router.post(`${this.path}/create`, this.createUser);
     // this.router.post(`${this.path}/sendreset`, this.sendResetMail);
-    this.router.post(`${this.path}/email`, sendEmailToUser);
+    this.router.post(`${this.path}/email`, this.sendEmailToUser);
     // this.router.put(`${this.path}/password`, auth, this.newPassword);
     // this.router.put(`${this.path}/changepassword`, auth, this.changePassword);
     // this.router.put(`${this.path}/name`, auth, this.changeName);
@@ -57,9 +57,17 @@ export default class UserController {
   //     confirmation(req, res);
   //   }
 
+  createUser(req: Request, res: Response) {
+    createUser(req, res);
+  }
+
   //   changePassword(req: Request, res: Response) {
   //     changePassword(req, res);
   //   }
+
+  sendEmailToUser(req: Request, res: Response) {
+    sendEmailToUser(req, res);
+  }
 
   //   newPassword(req: Request, res: Response) {
   //     newPassword(req, res);

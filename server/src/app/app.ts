@@ -1,15 +1,13 @@
 import express, { Application } from "express";
-import config from "config";
 import loggerMiddleware from "../../middleware/logger";
 import Controller from "../../interfaces/controller.interface";
 import mongoose from "mongoose";
-const cors = require('cors');
+const cors = require("cors");
 
 /**
  * Main App class, responsible for initializing middlewares,
  * connecting to database, running local server
  */
-
 
 export default class App {
   public app: Application;
@@ -29,7 +27,6 @@ export default class App {
     this.app.use(express.urlencoded({ extended: true }));
     this.app.use(cors());
   }
-  
 
   private initializeControllers(controllers: Controller[]) {
     controllers.forEach((controller) => {
@@ -40,8 +37,8 @@ export default class App {
   private connectToDatabase() {
     const { MONGO_USER, MONGO_PASSWORD, MONGO_DB_NAME } = process.env;
 
-    const dbName = !!config.get("dbName")
-      ? <string>config.get("dbName")
+    const dbName = !!process.env.MONGO_DB_NAME
+      ? <string>process.env.MONGO_DB_NAME
       : MONGO_DB_NAME;
 
     mongoose

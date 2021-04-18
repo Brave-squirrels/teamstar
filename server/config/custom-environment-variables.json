@@ -1,4 +1,0 @@
-{
-  "jwtPrivateKey": "JWT_PRIVATE_KEY",
-  "nodeEnv": "NODE_ENV"
-}

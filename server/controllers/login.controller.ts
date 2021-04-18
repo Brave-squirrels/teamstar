@@ -14,6 +14,10 @@ export default class LoginController {
   }
 
   public initializeRoutes() {
-    this.router.post(this.path, login);
+    this.router.post(this.path, this.login);
+  }
+
+  login(req: Request, res: Response) {
+    login(req, res);
   }
 }
