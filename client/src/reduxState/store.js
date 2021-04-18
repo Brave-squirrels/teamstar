@@ -14,5 +14,5 @@ export const store = configureStore({
     }),
     thunk,
   ],
-  devTools: process.env.NODE_ENV === "production",
+  devTools: process.env.REACT_APP_ENV === "development",
 });

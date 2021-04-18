@@ -10,12 +10,9 @@
     "server:i": "cd server && yarn install",
     "current:i": "concurrently \"yarn client:i\" \"yarn server:i\"",
     "client": "cd client && yarn dev",
-    "client:w": "cd client && yarn dev:w",
     "server": "cd server && yarn dev",
-    "server:w": "cd server && yarn dev:w",
     "dev:i": "yarn install && yarn current:i",
-    "dev": "concurrently \"yarn server\" \"yarn client\"",
-    "dev:w": "concurrently \"yarn server:w\" \"yarn client:w\""
+    "dev": "concurrently \"yarn server\" \"yarn client\""
   },
   "devDependencies": {
     "concurrently": "^6.0.2"
