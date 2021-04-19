@@ -11,6 +11,7 @@ const ProtectedRoute = ({ component: Component, ...rest }: any) => {
   return (
     <Route
       {...rest}
+      exact
       render={(props) =>
         isAuth ? (
           <Component {...props} />
