@@ -3,10 +3,12 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { fetchData } from "./reduxState/test/test";
 
+import { RootState } from "./reduxState/store";
+
 const App = () => {
   const dispatch = useDispatch();
 
-  const testData = useSelector((state) => state.testData);
+  const testData = useSelector((state: RootState) => state.testData);
 
   useEffect(() => {
     dispatch(fetchData());

@@ -1,8 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
-
 import axios from "../../axios/axiosMain";
+import { AppThunk, RootState } from '../store'
 
-const initialState = {
+const initialState: any = {
   loading: true,
   data: {},
 };
@@ -19,7 +19,7 @@ const testData = createSlice({
 
 export const { getData } = testData.actions;
 
-export const fetchData = () => async (dispatch) => {
+export const fetchData = (): AppThunk => async (dispatch) => {
   await axios
     .get("/posts/1")
     .then((res) => {
@@ -30,6 +30,6 @@ export const fetchData = () => async (dispatch) => {
     });
 };
 
-export const selectData = (state) => state.testData;
+export const selectData = (state: RootState) => state.testData;
 
 export default testData.reducer;
