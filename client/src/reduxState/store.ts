@@ -5,11 +5,11 @@ import {
 
 import thunk from "redux-thunk";
 
-import testData from "./test/test";
+import loginUser from './test/loginUser';
 
 export const store = configureStore({
   reducer: {
-    testData,
+    loginUser,
   },
   middleware: [
     ...getDefaultMiddleware({
