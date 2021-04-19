@@ -1,13 +1,11 @@
 import express, { Request, Response } from "express";
 
-import login from "../src/login/login";
-
 /**
- * Login Class,
+ * Default Class,
  * responsible for managing CRUD operations inside of /comments edpoint
  */
-export default class LoginController {
-  public path = "/login";
+export default class DefaultController {
+  public path = "/";
   public router = express.Router();
 
   constructor() {
@@ -15,10 +13,10 @@ export default class LoginController {
   }
 
   public initializeRoutes() {
-    this.router.post(this.path, this.login);
+    this.router.get(this.path, this.default);
   }
 
-  login(req: Request, res: Response) {
-    login(req, res);
+  default(req: Request, res: Response) {
+    res.send("Welcome to the server!");
   }
 }

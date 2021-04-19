@@ -6,7 +6,13 @@
   "author": "Olek <aleksander.atamanczuk@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "start": ""
+    "client:i": "cd client && yarn install",
+    "server:i": "cd server && yarn install",
+    "current:i": "concurrently \"yarn client:i\" \"yarn server:i\"",
+    "client": "cd client && yarn dev",
+    "server": "cd server && yarn dev",
+    "dev:i": "yarn install && yarn current:i",
+    "dev": "concurrently \"yarn server\" \"yarn client\""
   },
   "devDependencies": {
     "concurrently": "^6.0.2"
