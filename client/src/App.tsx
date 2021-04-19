@@ -1,10 +1,10 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Route } from "react-router-dom";
 import { useDispatch } from "react-redux";
 
 import ProtectedRoute from "./containers/protectedRoute/protectedRoute";
 
-import { loginUserFetch } from "./reduxState/user/loginUser";
+import { loginUserFetch, authUser } from "./reduxState/user/loginUser";
 
 const Hello = () => {
   return <span>YO YO YO</span>;
@@ -12,6 +12,11 @@ const Hello = () => {
 
 const App = () => {
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(authUser());
+  }, [dispatch]);
+
   return (
     <>
       <Route exact path="/" render={() => <span>Home page</span>} />
