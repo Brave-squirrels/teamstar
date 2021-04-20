@@ -5,6 +5,7 @@ import { AppThunk, RootState } from 'reduxState/store';
 interface User {
     authenticated: boolean;
     userData: any;
+    loading: boolean;
 }
 
 interface Data {
@@ -14,7 +15,8 @@ interface Data {
 
 const initialState: User = {
     authenticated: false,
-    userData: {}
+    userData: {},
+    loading: false,
 }
 
 const loginUser = createSlice({
@@ -24,19 +26,23 @@ const loginUser = createSlice({
         login: (state) => {
             state.authenticated = false;
             state.userData = null;
+            state.loading = true;
         },
         loginSuccess: (state, action) => {
             state.authenticated = true;
             state.userData = action.payload;
+            state.loading = false;
         },
         loginFailed: (state) => {
             state.authenticated = false;
             state.userData = null;
+            state.loading = false;
         },
         logout: (state) => {
             localStorage.clear();
             state.authenticated = false;
             state.userData = null;
+            state.loading = false;
         }
     }
 })
@@ -69,5 +75,6 @@ export const authUser = (): AppThunk => async (dispatch) => {
 
 export const selectAuth = (state: RootState) => state.loginUser.authenticated;
 export const selectData = (state: RootState) => state.loginUser.userData;
+export const selectLoading = (state: RootState) => state.loginUser.loading;
 
 export default loginUser.reducer;

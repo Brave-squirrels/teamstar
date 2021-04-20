@@ -8,10 +8,12 @@ import {
 import thunk from "redux-thunk";
 
 import loginUser from "reduxState/user/loginUser";
+import createUser from 'reduxState/user/registerUser';
 
 export const store = configureStore({
   reducer: {
     loginUser,
+    createUser,
   },
   middleware: [
     ...getDefaultMiddleware({
