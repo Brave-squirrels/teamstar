@@ -1,16 +1,15 @@
 import React, { useEffect } from "react";
-import { Route, Switch } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { Route, Switch, useHistory } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 
 import LandingPage from "containers/landingPage/landingPage";
 import Main from "hoc/main/main";
 import NavBar from "hoc/navbar/navbar";
-import Content from "hoc/content/content";
 import ProtectedRoute from "containers/protectedRoute/protectedRoute";
 
-import MyTextInput from "./components/form/MyTextInput";
-import { loginUserFetch, authUser } from "reduxState/user/loginUser";
+import { authUser } from "reduxState/user/loginUser";
 import SampleForm from "containers/forms/Sampleform";
+import { RootState } from "reduxState/store";
 
 const Hello = () => {
   return <span>YO YO YO</span>;
@@ -18,10 +17,16 @@ const Hello = () => {
 
 const App = () => {
   const dispatch = useDispatch();
-
+  const history = useHistory();
+  const loginState = useSelector((state: RootState) => state.loginUser);
   useEffect(() => {
     dispatch(authUser());
   }, [dispatch]);
+
+  useEffect(() => {
+    if (localStorage.getItem("token") && history.location.pathname === "/")
+      history.push("/home");
+  }, [loginState.authenticated]);
 
   return (
     <>
@@ -33,7 +38,7 @@ const App = () => {
             <NavBar />
             <Main>
               <Switch>
-                <ProtectedRoute path="/test" component={Hello} />
+                <ProtectedRoute path="/home" component={Hello} />
                 <ProtectedRoute
                   exact
                   path="/testInput"
@@ -45,15 +50,6 @@ const App = () => {
           </>
         )}
       />
-      <button
-        onClick={() =>
-          dispatch(
-            loginUserFetch({ email: "mail@mail.com", password: "password" })
-          )
-        }
-      >
-        LOGIN
-      </button>
     </>
   );
 };
