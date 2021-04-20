@@ -2,6 +2,7 @@ import _ from "lodash";
 import bcrypt from "bcrypt";
 import { StatusCodes } from "http-status-codes";
 import { Response, Request } from "express";
+
 import userModel from "../../models/user.model";
 import validate from "./validateLogin";
 

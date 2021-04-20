@@ -1,8 +1,8 @@
 import { Response, Request } from "express";
 import _ from "lodash";
-import "dotenv/config";
 import bcrypt from "bcrypt";
 import { StatusCodes } from "http-status-codes";
+
 import validateUser from "./validateUser";
 import userModel from "../../models/user.model";
 import sendEmail from "../utils/email";
