@@ -12,10 +12,9 @@
   </head>
   <body>
     <div id="root"></div>
+    <script>
+      if (process.env.REACT_APP_ENV === "development")
+        window.__REACT_DEVTOOLS_GLOBAL_HOOK__.inject = function () {};
+    </script>
   </body>
-
-  <script>
-    if (!process.env.REACT_APP_ENV)
-      window.__REACT_DEVTOOLS_GLOBAL_HOOK__.inject = function () {};
-  </script>
 </html>
