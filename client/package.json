@@ -33,7 +33,7 @@
     "yup": "^0.32.9"
   },
   "scripts": {
-    "start": "cross-env SERVER_ADDRESS=https://bravesquirrels2021.herokuapp.com react-scripts start",
+    "start": "react-scripts start",
     "dev": "cross-env REACT_APP_ENV=development react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
