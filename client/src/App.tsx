@@ -5,6 +5,7 @@ import { useDispatch } from "react-redux";
 import ProtectedRoute from "./containers/protectedRoute/protectedRoute";
 
 import { loginUserFetch } from "./reduxState/user/loginUser";
+import MyTextInput from "./components/form/MyTextInput";
 
 const Hello = () => {
   return <span>YO YO YO</span>;
@@ -19,7 +20,8 @@ const App = () => {
         path="/(.+)"
         render={() => (
           <>
-            <ProtectedRoute path="/test" component={Hello} />
+            <ProtectedRoute exact path="/test" component={Hello} />
+            <ProtectedRoute exact path="/testInput" component={MyTextInput} />
           </>
         )}
       />
