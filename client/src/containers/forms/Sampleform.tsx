@@ -1,28 +1,28 @@
-import { useEffect, useState } from "react";
-import { useHistory, useParams } from "react-router";
-import { Link } from "react-router-dom";
+/* import { useEffect, useState } from "react"; */
+/* import { useHistory, useParams } from "react-router";
+import { Link } from "react-router-dom"; */
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
-import { Button, Card, InputGroup, Modal } from "react-bootstrap";
+import { Button, /* Card, InputGroup, */ Modal } from "react-bootstrap";
 import MyTextInput from "components/form/MyTextInput";
 
 interface SampleObject {
-  sampleTitle: string;
-  sampleDescription: string;
-  sampleDate: string;
+  title: string;
+  description: string;
+  date: string;
 }
+
+const sampleValues: SampleObject = {
+  title: "",
+  description: "",
+  date: "",
+};
 
 const SampleForm = () => {
   const validationSchema = Yup.object({
     title: Yup.string().required("The activity title is required"),
     description: Yup.string().required("The activity description is required"),
     date: Yup.string().required("Date is required").nullable(),
-  });
-
-  const [sampleValues, setSampleValues] = useState<SampleObject>({
-    sampleTitle: "",
-    sampleDescription: "",
-    sampleDate: "",
   });
 
   const handleFormSubmit = (data: any) => {

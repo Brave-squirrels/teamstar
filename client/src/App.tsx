@@ -30,7 +30,7 @@ const App = () => {
   useEffect(() => {
     if (localStorage.getItem("token") && history.location.pathname === "/")
       history.push("/home");
-  }, [loginState.authenticated]);
+  }, [loginState.authenticated, history]);
 
   return (
     <>
