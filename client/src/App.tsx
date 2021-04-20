@@ -2,9 +2,13 @@ import React, { useEffect } from "react";
 import { Route } from "react-router-dom";
 import { useDispatch } from "react-redux";
 
-import ProtectedRoute from "./containers/protectedRoute/protectedRoute";
+import LandingPage from "containers/landingPage/landingPage";
+import Main from "hoc/main/main";
+import NavBar from "hoc/navbar/navbar";
+import Content from "hoc/content/content";
+import ProtectedRoute from "containers/protectedRoute/protectedRoute";
 
-import { loginUserFetch, authUser } from "./reduxState/user/loginUser";
+import { loginUserFetch, authUser } from "reduxState/user/loginUser";
 
 const Hello = () => {
   return <span>YO YO YO</span>;
@@ -19,13 +23,16 @@ const App = () => {
 
   return (
     <>
-      <Route exact path="/" render={() => <span>Home page</span>} />
+      <Route exact path="/" component={LandingPage} />
       <Route
         path="/(.+)"
         render={() => (
-          <>
-            <ProtectedRoute path="/test" component={Hello} />
-          </>
+          <Main>
+            <NavBar />
+            <Content>
+              <ProtectedRoute path="/test" component={Hello} />
+            </Content>
+          </Main>
         )}
       />
       <button
