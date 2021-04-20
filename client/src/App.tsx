@@ -7,7 +7,7 @@ import Main from "hoc/main/main";
 import NavBar from "hoc/navbar/navbar";
 import ProtectedRoute from "containers/protectedRoute/protectedRoute";
 
-import { authUser } from "reduxState/user/loginUser";
+import { authUser, logout } from "reduxState/user/loginUser";
 import SampleForm from "containers/forms/Sampleform";
 import { RootState } from "reduxState/store";
 
@@ -20,7 +20,11 @@ const App = () => {
   const history = useHistory();
   const loginState = useSelector((state: RootState) => state.loginUser);
   useEffect(() => {
-    dispatch(authUser());
+    if (localStorage.getItem("token")) {
+      dispatch(authUser());
+    } else {
+      dispatch(logout());
+    }
   }, [dispatch]);
 
   useEffect(() => {
