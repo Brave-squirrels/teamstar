@@ -1,6 +1,6 @@
 import { useField } from "formik";
 import React from "react";
-import { Form } from "react-bootstrap";
+import { Form, FormLabel } from "react-bootstrap";
 
 interface Props {
   placeholder: string;
@@ -11,7 +11,17 @@ interface Props {
 const MyTextInput = (props: Props) => {
   const [field, meta] = useField(props.name);
 
-  return <Form.Text></Form.Text>;
+  return (
+    <Form.Text>
+      <label>{props.label}</label>
+      <input {...field} {...props} />
+      {meta.touched && meta.error ? (
+        <FormLabel style={{ position: "absolute" }} color="red">
+          {meta.error}
+        </FormLabel>
+      ) : null}
+    </Form.Text>
+  );
 };
 
 export default MyTextInput;

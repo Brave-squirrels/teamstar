@@ -1,19 +1,13 @@
 import React from "react";
-import { useSelector } from "react-redux";
 import { Route, Redirect } from "react-router-dom";
-import { RootState } from "../../reduxState/store";
 
-const ProtectedRoute = ({ component: Component, ...rest }: any) => {
-  const isAuth = useSelector(
-    (state: RootState) => state.loginUser.authenticated
-  );
-
+const ProtectedRoute = ({ component: Component, isAuth, ...rest }: any) => {
   return (
     <Route
       {...rest}
       exact
       render={(props) =>
-        isAuth ? (
+        localStorage.getItem("token") ? (
           <Component {...props} />
         ) : (
           <Redirect

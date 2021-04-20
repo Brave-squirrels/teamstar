@@ -1,11 +1,16 @@
-import React from "react";
-import { Route } from "react-router-dom";
+import React, { useEffect } from "react";
+import { Route, Switch } from "react-router-dom";
 import { useDispatch } from "react-redux";
 
-import ProtectedRoute from "./containers/protectedRoute/protectedRoute";
+import LandingPage from "containers/landingPage/landingPage";
+import Main from "hoc/main/main";
+import NavBar from "hoc/navbar/navbar";
+import Content from "hoc/content/content";
+import ProtectedRoute from "containers/protectedRoute/protectedRoute";
 
-import { loginUserFetch } from "./reduxState/user/loginUser";
 import MyTextInput from "./components/form/MyTextInput";
+import { loginUserFetch, authUser } from "reduxState/user/loginUser";
+import SampleForm from "containers/forms/Sampleform";
 
 const Hello = () => {
   return <span>YO YO YO</span>;
@@ -13,15 +18,30 @@ const Hello = () => {
 
 const App = () => {
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(authUser());
+  }, [dispatch]);
+
   return (
     <>
-      <Route exact path="/" render={() => <span>Home page</span>} />
+      <Route exact path="/" component={LandingPage} />
       <Route
         path="/(.+)"
         render={() => (
           <>
-            <ProtectedRoute exact path="/test" component={Hello} />
-            <ProtectedRoute exact path="/testInput" component={MyTextInput} />
+            <NavBar />
+            <Main>
+              <Switch>
+                <ProtectedRoute path="/test" component={Hello} />
+                <ProtectedRoute
+                  exact
+                  path="/testInput"
+                  component={SampleForm}
+                />
+                <Route render={() => <span>Not found</span>} />
+              </Switch>
+            </Main>
           </>
         )}
       />

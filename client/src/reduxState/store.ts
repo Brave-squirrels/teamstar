@@ -5,7 +5,7 @@ import {
 
 import thunk from "redux-thunk";
 
-import loginUser from './user/loginUser';
+import loginUser from 'reduxState/user/loginUser';
 
 export const store = configureStore({
   reducer: {

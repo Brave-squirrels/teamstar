@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
-import axios from "../../axios/axiosMain";
-import { AppThunk, RootState } from '../store'
+import axios from "axios/axiosMain";
+import { AppThunk, RootState } from 'reduxState/store';
 
 interface User {
     authenticated: boolean;
