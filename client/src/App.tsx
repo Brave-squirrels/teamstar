@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Route } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 import { useDispatch } from "react-redux";
 
 import LandingPage from "containers/landingPage/landingPage";
@@ -30,7 +30,10 @@ const App = () => {
           <Main>
             <NavBar />
             <Content>
-              <ProtectedRoute path="/test" component={Hello} />
+              <Switch>
+                <ProtectedRoute path="/test" component={Hello} />
+                <Route render={() => <span>Not found</span>} />
+              </Switch>
             </Content>
           </Main>
         )}
