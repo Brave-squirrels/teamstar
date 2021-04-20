@@ -3,13 +3,13 @@ import { useHistory, useParams } from "react-router";
 import { Link } from "react-router-dom";
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
-import { Card } from "react-bootstrap";
+import { Button, Card, InputGroup, Modal } from "react-bootstrap";
 import MyTextInput from "components/form/MyTextInput";
 
 interface SampleObject {
   sampleTitle: string;
   sampleDescription: string;
-  sampleDate: Date | null;
+  sampleDate: string;
 }
 
 const SampleForm = () => {
@@ -22,7 +22,7 @@ const SampleForm = () => {
   const [sampleValues, setSampleValues] = useState<SampleObject>({
     sampleTitle: "",
     sampleDescription: "",
-    sampleDate: null,
+    sampleDate: "",
   });
 
   const handleFormSubmit = (data: any) => {
@@ -30,7 +30,10 @@ const SampleForm = () => {
   };
 
   return (
-    <Card>
+    <Modal.Dialog>
+      <Modal.Header>
+        <Modal.Title>Sample Form</Modal.Title>
+      </Modal.Header>
       <Formik
         validationSchema={validationSchema}
         enableReinitialize
@@ -43,11 +46,25 @@ const SampleForm = () => {
             onSubmit={handleSubmit}
             autoComplete="off"
           >
-            <MyTextInput name="title" placeholder="title" />
+            <Modal.Body>
+              <MyTextInput name="title" placeholder="title" />
+              <MyTextInput name="description" placeholder="description" />
+              <MyTextInput name="date" placeholder="date" />
+            </Modal.Body>
+            <Modal.Footer>
+              <Button
+                disabled={isSubmitting || !dirty || !isValid}
+                type="submit"
+                variant="success"
+                className="pull-right"
+              >
+                Submit
+              </Button>
+            </Modal.Footer>
           </Form>
         )}
       </Formik>
-    </Card>
+    </Modal.Dialog>
   );
 };
 

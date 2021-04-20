@@ -16,9 +16,7 @@ const MyTextInput = (props: Props) => {
       <label>{props.label}</label>
       <input {...field} {...props} />
       {meta.touched && meta.error ? (
-        <FormLabel style={{ position: "absolute" }} color="red">
-          {meta.error}
-        </FormLabel>
+        <FormLabel style={{ color: "red" }}>{meta.error}</FormLabel>
       ) : null}
     </Form.Text>
   );

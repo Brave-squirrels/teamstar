@@ -10,3 +10,7 @@ body {
 *::before {
   box-sizing: border-box;
 }
+
+.form-text input{
+  width: 100%!important;
+}
