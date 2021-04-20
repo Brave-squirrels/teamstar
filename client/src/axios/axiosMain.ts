@@ -1,6 +1,9 @@
 import axios from "axios";
 
-const address = process.env.SERVER_ADDRESS || "http://localhost:5000";
+const address =
+  process.env.REACT_APP_ENV === "development"
+    ? "http://localhost:5000"
+    : "https://bravesquirrels2021.herokuapp.com";
 
 const instance = axios.create({
   baseURL: address,
