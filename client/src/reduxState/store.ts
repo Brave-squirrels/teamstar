@@ -1,11 +1,13 @@
 import {
-  configureStore, getDefaultMiddleware, ThunkAction,
-  Action
+  configureStore,
+  getDefaultMiddleware,
+  ThunkAction,
+  Action,
 } from "@reduxjs/toolkit";
 
 import thunk from "redux-thunk";
 
-import loginUser from 'reduxState/user/loginUser';
+import loginUser from "reduxState/user/loginUser";
 
 export const store = configureStore({
   reducer: {
@@ -17,6 +19,7 @@ export const store = configureStore({
     }),
     thunk,
   ],
+  devTools: process.env.REACT_APP_ENV === "development",
 });
 
 export type RootState = ReturnType<typeof store.getState>;
