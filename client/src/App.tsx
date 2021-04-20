@@ -19,6 +19,7 @@ const App = () => {
   const dispatch = useDispatch();
   const history = useHistory();
   const loginState = useSelector((state: RootState) => state.loginUser);
+
   useEffect(() => {
     if (localStorage.getItem("token")) {
       dispatch(authUser());

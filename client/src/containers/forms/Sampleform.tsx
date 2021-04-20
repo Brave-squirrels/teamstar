@@ -1,28 +1,33 @@
-/* import { useEffect, useState } from "react"; */
-/* import { useHistory, useParams } from "react-router";
-import { Link } from "react-router-dom"; */
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
-import { Button, /* Card, InputGroup, */ Modal } from "react-bootstrap";
+import { Button, Modal } from "react-bootstrap";
 import MyTextInput from "components/form/MyTextInput";
+import MyTextArea from "components/form/MyTextArea";
+import MyDateInput from "components/form/MyDateInput";
+import { useState } from "react";
+import MySelectInput from "components/form/MySelectInputs";
+import { categoryOptions } from "./sampleSelectValues";
 
 interface SampleObject {
   title: string;
   description: string;
   date: string;
+  category: string;
 }
-
-const sampleValues: SampleObject = {
-  title: "",
-  description: "",
-  date: "",
-};
 
 const SampleForm = () => {
   const validationSchema = Yup.object({
-    title: Yup.string().required("The activity title is required"),
+    title: Yup.string().min(3).required("The activity title is required"),
     description: Yup.string().required("The activity description is required"),
     date: Yup.string().required("Date is required").nullable(),
+    category: Yup.string().required(),
+  });
+
+  const [initialState, setInitialState] = useState<SampleObject>({
+    title: "",
+    description: "",
+    date: "",
+    category: "",
   });
 
   const handleFormSubmit = (data: any) => {
@@ -37,7 +42,7 @@ const SampleForm = () => {
       <Formik
         validationSchema={validationSchema}
         enableReinitialize
-        initialValues={sampleValues}
+        initialValues={initialState}
         onSubmit={(values) => handleFormSubmit(values)}
       >
         {({ handleSubmit, isValid, isSubmitting, dirty }) => (
@@ -48,15 +53,29 @@ const SampleForm = () => {
           >
             <Modal.Body>
               <MyTextInput name="title" placeholder="title" />
-              <MyTextInput name="description" placeholder="description" />
-              <MyTextInput name="date" placeholder="date" />
+              <MyTextArea
+                name="description"
+                placeholder="description"
+                rows={3}
+              />
+              <MyDateInput
+                placeholderText="Date"
+                name="date"
+                showTimeSelect
+                timeCaption="time"
+                dateFormat="MMMM d, yyyy"
+              />
+              <MySelectInput
+                options={categoryOptions}
+                placeholder="Category"
+                name="category"
+              />
             </Modal.Body>
             <Modal.Footer>
               <Button
                 disabled={isSubmitting || !dirty || !isValid}
                 type="submit"
                 variant="success"
-                className="pull-right"
               >
                 Submit
               </Button>

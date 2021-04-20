@@ -13,11 +13,12 @@ import {
 interface Props {
   placeholder: string;
   name: string;
+  rows: number;
   label?: string;
   type?: string;
 }
 
-const MyTextInput = (props: Props) => {
+const MyTextArea = (props: Props) => {
   const [field, meta] = useField(props.name);
 
   // return (
@@ -41,7 +42,7 @@ const MyTextInput = (props: Props) => {
 
   return (
     <Form.Text>
-      <input {...field} {...props} />
+      <textarea {...field} {...props} />
       {meta.touched && meta.error ? (
         <FormLabel style={{ color: "#e80000" }}>{meta.error}</FormLabel>
       ) : null}
@@ -49,4 +50,4 @@ const MyTextInput = (props: Props) => {
   );
 };
 
-export default MyTextInput;
+export default MyTextArea;

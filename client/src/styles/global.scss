@@ -11,6 +11,21 @@ body {
   box-sizing: border-box;
 }
 
-.form-text input{
-  width: 100%!important;
+//______________________________ Form styles _______________________________
+
+.form-text input, textarea, select{
+  border: 1px solid rgba(34,36,38,.15);
+  width: 100%;
+  margin-top: 1em;
+  font-size: 1.2em;
+  border-radius: 2%;
+}
+
+.react-datepicker-wrapper{
+  width: 100%;
+}
+
+.form-label {
+  padding: 0;
+  margin: 0;
 }
