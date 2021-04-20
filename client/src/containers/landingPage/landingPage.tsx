@@ -46,8 +46,12 @@ const LandingPage = () => {
             autoComplete="off"
           >
             <Modal.Body>
-              <MyTextInput name="email" placeholder="E-mail" />
-              <MyTextInput name="password" placeholder="********" />
+              <MyTextInput name="email" placeholder="E-mail" type="email" />
+              <MyTextInput
+                name="password"
+                placeholder="********"
+                type="password"
+              />
             </Modal.Body>
             <Modal.Footer>
               <Button
