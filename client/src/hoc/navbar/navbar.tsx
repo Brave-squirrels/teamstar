@@ -20,6 +20,9 @@ const Navigation = () => {
           <Nav.Link to="/testInput" as={NavLink}>
             Test input
           </Nav.Link>
+          <Nav.Link to="/secondform" as={NavLink}>
+            Second form
+          </Nav.Link>
           <NavDropdown title="Sample dropdown" id="collasible-nav-dropdown">
             <NavDropdown.Item to="/home" as={NavLink}>
               Sample dropdown link
