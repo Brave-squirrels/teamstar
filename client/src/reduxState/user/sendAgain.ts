@@ -10,18 +10,15 @@ interface State {
 
 interface Data {
     email: string;
-    password: string;
-    confirmPassword: string;
-    name: string;
 }
 
 const initialState: State = {
     loading: false,
-    success: false
+    success: false,
 }
 
-const createUser = createSlice({
-    name: 'createUser',
+const sendAgain = createSlice({
+    name: 'sendReset',
     initialState,
     reducers: {
         start: (state) => {
@@ -39,21 +36,21 @@ const createUser = createSlice({
     }
 })
 
-export const { start, success, failed } = createUser.actions;
+export const { start, success, failed } = sendAgain.actions;
 
-export const createUserFetch = (data: Data): AppThunk => async (dispatch) => {
+export const sendAgainFetch = (data: Data): AppThunk => async (dispatch) => {
     dispatch(start());
-    await axios.post('/users/create', data)
-        .then((res) => {
+    await axios.post('/users/email', data)
+        .then(res => {
             dispatch(success());
-        })
-        .catch((err) => {
+            toastNofity(res.status);
+        }).catch((err) => {
             dispatch(failed());
             toastNofity(err.response.status, err.response.data);
         })
 }
 
-export const selectLoading = (state: RootState) => state.createUser.loading;
-export const selectSuccess = (state: RootState) => state.createUser.success;
+export const selectLoading = (state: RootState) => state.sendAgain.loading;
+export const selectSuccess = (state: RootState) => state.sendAgain.success;
 
-export default createUser.reducer;
+export default sendAgain.reducer;
