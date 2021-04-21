@@ -29,7 +29,7 @@ const SendResetPassword = () => {
     formValid: false,
   });
 
-  const sendMail = (e: any) => {
+  const sendMail = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     dispatch(sendResetFetch(mutateToAxios(form)));
   };
