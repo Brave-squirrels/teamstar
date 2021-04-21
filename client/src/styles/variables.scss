@@ -10,9 +10,11 @@ $fontPlaceholder: #f3f9f6aa;
 
 $invalid: #f56e69;
 
-$backgroundLanding: #3a3d50;
-$backgroundCircle: #3d4371;
+$backgroundLanding: #070E30;
+$backgroundCircle: radial-gradient(circle , #49A3D1 0%, rgba(255, 0, 0, 0) 70%);
 $backgroundLight: #414858;
+
+$buttonBackground: #6EEED7;
 
 $inputActiveBackground: #576075;
 $inputFilter: drop-shadow(4px 4px 14px rgba(0, 0, 0, 0.2));

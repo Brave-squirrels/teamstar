@@ -11,18 +11,15 @@
   &:before {
     content: "";
     position: absolute;
-    height: 2000px;
-    width: 2000px;
+    height: 2200px;
+    width: 2200px;
     top: -10%;
     right: 48%;
     transform: translateY(-50%);
-    background-image: linear-gradient(
-      -45deg,
-      $backgroundCircle 0%,
-      $backgroundCircle 100%
-    );
+    background-image: $backgroundCircle;
     transition: 1.5s ease-in-out;
     border-radius: 50%;
+    // box-shadow: 0px 0px 500px #49a4d1;
     z-index: 6;
   }
 }
