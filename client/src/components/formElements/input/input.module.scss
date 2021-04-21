@@ -1,8 +1,12 @@
-/* @import "styles/variables.scss";
+@import "styles/variables.scss";
+
+.container {
+  box-sizing: border-box;
+}
 
 .inputContainer {
   box-sizing: border-box;
-  font-family: $robotoFont;
+  font-family: $Roboto;
   max-width: 380px;
   min-width: 260px;
   width: 80%;
@@ -12,29 +16,29 @@
   background: $backgroundLight;
   display: flex;
   flex-flow: column;
-  border-bottom: 1.5px solid $fontLightGreen;
   color: $fontLightGreen;
-  border-radius: 6px 6px 0 0;
-  transition: background 0.4s ease-in;
+  border-radius: 4px;
+  transition: border 0.2s ease;
   &:focus-within {
-    background: $inputActiveBackground;
+    border-left: 4px solid $fontLightGreen;
+    border-right: 4px solid $fontLightGreen;
   }
   &:hover {
     cursor: pointer;
   }
 }
-.invalidInput {
-  border: 1.5px solid $invalidInputBorder;
-}
+
 .input {
+  border: none;
+  border-bottom: 1.5px solid $fontLightGreen;
+  box-sizing: border-box;
   font-size: 1.2em;
   padding: 0.2em 10px;
-  border: none;
   background: transparent;
-  color: $secondFontColor;
+  color: $fontWhite;
   transition: all 0.4s ease-in;
   &::placeholder {
-    color: $placeholderColor;
+    color: $fontPlaceholder;
   }
   &:focus {
     outline: none;
@@ -46,15 +50,10 @@
 
 .textarea {
   resize: none;
-  font-family: $robotoFont;
+  font-family: $Roboto;
   font-size: 1em;
   height: 8em;
   @include scrollbar;
-}
-
-.label {
-  font-size: 0.9em;
-  padding: 0.2em 10px;
 }
 
 .select {
@@ -62,7 +61,7 @@
   margin: 0.2em 7px;
   outline: none;
   border: none;
-  color: $secondFontColor;
+  color: $fontWhite;
   transition: all 0.4s ease-in;
   &:hover {
     cursor: pointer;
@@ -72,4 +71,20 @@
   }
   background-image: none;
 }
- */
+
+.invalidInput {
+  border: 1.5px solid $invalid;
+}
+
+.label {
+  color: $fontLightGreen;
+  font-size: 1.1em;
+  padding: 0 0.8em;
+  font-weight: 500;
+}
+
+.error {
+  color: $invalid;
+  font-size: 0.8em;
+  font-weight: 500;
+}

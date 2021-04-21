@@ -13,6 +13,7 @@ interface Props {
   stateMain?: any;
   name?: string;
   error?: string;
+  inputName: string;
 }
 
 const input: FunctionComponent<Props> = (props) => {
@@ -23,8 +24,8 @@ const input: FunctionComponent<Props> = (props) => {
 
   let selectOptions = [];
   if (props.inputType === "select") {
-    for (let key in props.stateMain.select.options) {
-      selectOptions.push(props.stateMain.select.options[key]);
+    for (let key in props.stateMain[props.inputName].options) {
+      selectOptions.push(props.stateMain[props.inputName].options[key]);
     }
   }
 
@@ -32,52 +33,56 @@ const input: FunctionComponent<Props> = (props) => {
   switch (props.inputType) {
     case "input":
       input = (
-        <label className={inputClasses.join(" ")}>
+        <div className={styles.container}>
           <span className={styles.label}>{props.label}</span>
-
-          <input
-            className={styles.input}
-            type={props.type}
-            placeholder={props.placeholder}
-            value={props.inputValue}
-            onChange={props.onChangeInput}
-          />
-        </label>
+          <label className={inputClasses.join(" ")}>
+            <input
+              className={styles.input}
+              type={props.type}
+              placeholder={props.placeholder}
+              value={props.inputValue}
+              onChange={props.onChangeInput}
+            />
+          </label>
+        </div>
       );
       break;
     case "textarea":
       input = (
-        <label className={inputClasses.join(" ")}>
+        <div className={styles.container}>
           <span className={styles.label}>{props.label}</span>
-
-          <textarea
-            className={[styles.input, styles.textarea].join(" ")}
-            placeholder={props.placeholder}
-            value={props.inputValue}
-            onChange={props.onChangeInput}
-          />
-        </label>
+          <label className={inputClasses.join(" ")}>
+            <textarea
+              className={[styles.input, styles.textarea].join(" ")}
+              placeholder={props.placeholder}
+              value={props.inputValue}
+              onChange={props.onChangeInput}
+            />
+          </label>
+        </div>
       );
       break;
     case "select":
       input = (
-        <label className={inputClasses.join(" ")}>
+        <div className={styles.container}>
           <span className={styles.label}>{props.label}</span>
-          <select
-            name={props.name}
-            value={props.inputValue}
-            onChange={props.onChangeInput}
-            className={styles.select}
-          >
-            {selectOptions.map((option) => {
-              return (
-                <option value={option.val} key={option.val}>
-                  {option.name}
-                </option>
-              );
-            })}
-          </select>
-        </label>
+          <label className={inputClasses.join(" ")}>
+            <select
+              name={props.name}
+              value={props.inputValue}
+              onChange={props.onChangeInput}
+              className={styles.select}
+            >
+              {selectOptions.map((option) => {
+                return (
+                  <option value={option.val} key={option.val}>
+                    {option.name}
+                  </option>
+                );
+              })}
+            </select>
+          </label>
+        </div>
       );
       break;
   }
@@ -86,7 +91,7 @@ const input: FunctionComponent<Props> = (props) => {
     <>
       {input}{" "}
       {!props.validity && props.touched && props.error && (
-        <span>{props.error}</span>
+        <span className={styles.error}>{props.error}</span>
       )}
     </>
   );
