@@ -70,7 +70,7 @@ const LandingPage = () => {
   return (
     <>
       <div>
-        <button
+        <Button
           onClick={() =>
             setSignIn((prevState) => {
               if (prevState.btnText === "Sign In") {
@@ -88,7 +88,7 @@ const LandingPage = () => {
           }
         >
           {signIn.btnText}
-        </button>
+        </Button>
       </div>
 
       <Modal.Dialog>
