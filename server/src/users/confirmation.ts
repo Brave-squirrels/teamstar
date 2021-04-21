@@ -22,7 +22,7 @@ const confirmUser = async (req: Request, res: Response) => {
 
     res
       .status(StatusCodes.OK)
-      .redirect(`http://${process.env.FRONTEND_ADDRESS}/confirmed`);
+      .redirect(`http://${process.env.FRONT_ADDRESS}/confirmed`);
   } catch (ex) {
     res.status(StatusCodes.BAD_REQUEST).send("Invalid token.");
   }
