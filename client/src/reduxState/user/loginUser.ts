@@ -61,7 +61,7 @@ export const loginUserFetch = (data: Data): AppThunk => async (dispatch) => {
         .catch((err) => {
             localStorage.clear();
             dispatch(loginFailed());
-            toastNofity(err.response.status);
+            toastNofity(err.response.status, err.response.data);
         })
 }
 
