@@ -38,7 +38,7 @@ const LandingPage = () => {
 
   const [signIn, setSignIn] = useState({
     display: false,
-    btnText: "Sign In",
+    btnText: "Sign Up",
   });
 
   const loginState = useSelector((state: RootState) => state.loginUser);
@@ -73,15 +73,15 @@ const LandingPage = () => {
         <Button
           onClick={() =>
             setSignIn((prevState) => {
-              if (prevState.btnText === "Sign In") {
+              if (prevState.btnText === "Sign Up") {
                 return {
                   display: true,
-                  btnText: "Sign Up",
+                  btnText: "Sign In",
                 };
               } else {
                 return {
                   display: false,
-                  btnText: "Sign In",
+                  btnText: "Sign Up",
                 };
               }
             })
