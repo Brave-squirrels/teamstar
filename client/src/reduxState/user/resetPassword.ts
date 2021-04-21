@@ -41,9 +41,9 @@ export const { start, success, failed } = resetPassword.actions;
 
 export const resetPasswordFetch = (data: Data, token: string): AppThunk => async (dispatch) => {
     dispatch(start());
-    await axios.post('/users/password', data, {
+    await axios.put('/users/password', data, {
         headers: {
-            'x-auth-token': token
+            'x-auth-token': `${token}`
         }
     })
         .then(res => {

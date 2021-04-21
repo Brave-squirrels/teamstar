@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useHistory, useLocation } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 
 import FormStructure from "containers/form/formStructure";
 
@@ -10,8 +10,9 @@ import { RootState } from "reduxState/store";
 
 const ResetPassword = () => {
   const dispatch = useDispatch();
-  const history = useHistory();
   const location = useLocation();
+
+  const { token }: any = useParams();
 
   const resetState = useSelector((state: RootState) => state.resetPassword);
 
@@ -25,7 +26,7 @@ const ResetPassword = () => {
       validation: {
         required: true,
         minLength: 8,
-        maxLength: 50,
+        maxLength: 26,
       },
       error: "Pass at least 8",
       touched: false,
@@ -40,7 +41,7 @@ const ResetPassword = () => {
       validation: {
         required: true,
         minLength: 8,
-        maxLength: 50,
+        maxLength: 26,
       },
       error: "Pass should match",
       touched: false,
@@ -51,9 +52,10 @@ const ResetPassword = () => {
 
   const handleResetPassword = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const token = location.pathname.substring(
+    /* const token = location.pathname.substring(
       location.pathname.lastIndexOf("/") + 1
-    );
+    ); */
+    console.log(token);
     dispatch(resetPasswordFetch(mutateToAxios(form), token));
   };
 

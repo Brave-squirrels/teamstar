@@ -54,7 +54,7 @@ const LandingPage = () => {
       validation: {
         required: true,
         minLength: 8,
-        maxLength: 50,
+        maxLength: 26,
       },
       error: "At least 8",
       touched: false,
@@ -102,7 +102,7 @@ const LandingPage = () => {
       validation: {
         required: true,
         minLength: 8,
-        maxLength: 50,
+        maxLength: 26,
       },
       error: "Pass at least 8",
       touched: false,
@@ -117,7 +117,7 @@ const LandingPage = () => {
       validation: {
         required: true,
         minLength: 8,
-        maxLength: 50,
+        maxLength: 26,
       },
       error: "Pass should match",
       touched: false,
