@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useLocation, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 import FormStructure from "containers/form/formStructure";
 
@@ -10,7 +10,6 @@ import { RootState } from "reduxState/store";
 
 const ResetPassword = () => {
   const dispatch = useDispatch();
-  const location = useLocation();
 
   const { token }: any = useParams();
 
@@ -52,9 +51,6 @@ const ResetPassword = () => {
 
   const handleResetPassword = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    /* const token = location.pathname.substring(
-      location.pathname.lastIndexOf("/") + 1
-    ); */
     console.log(token);
     dispatch(resetPasswordFetch(mutateToAxios(form), token));
   };
