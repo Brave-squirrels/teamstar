@@ -3,6 +3,7 @@ interface Rules {
     minLength?: number;
     maxLength?: number;
     minDate?: Date
+    passwordRule: boolean;
 }
 
 /* Input data validation 
@@ -10,7 +11,7 @@ interface Rules {
   @param {rules} - object with validation rules
 */
 const validation = (value: string, rules?: Rules) => {
-    let isValid = true;
+    let isValid: any = true;
     if (!rules) {
         return true;
     }
@@ -28,6 +29,9 @@ const validation = (value: string, rules?: Rules) => {
         isValid = new Date(value) >= rules.minDate && isValid;
     }
 
+    if (rules.passwordRule) {
+        isValid = value.match(/^(?=.*?[a-z])(?=.*?[A-Z])(?=.*?[0-9])(?=.*?\W).*$/) && isValid;
+    }
 
     return isValid;
 };
@@ -61,7 +65,6 @@ const mutateState = (
 ) => {
     let inputFields;
     if (inputType === "password" && passwordCheck) {
-        valid = valid && e.target.value === stateCopy.confirmPassword.val;
         inputFields = {
             ...stateCopy,
             [inputType]: {
@@ -84,11 +87,7 @@ const mutateState = (
                 val: e.target.value,
                 valid: valid,
                 touched: e.target.value.length > 0,
-            },
-            password: {
-                ...stateCopy.password,
-                valid: valid,
-            },
+            }
         };
     } else {
         inputFields = {

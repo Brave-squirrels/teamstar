@@ -27,7 +27,8 @@ const ResetPassword = () => {
         minLength: 8,
         maxLength: 26,
       },
-      error: "Pass at least 8",
+      error:
+        "Password should be at least 8 characters long, contain 1 uppercase letter, 1 lowercase, 1 number and 1 symbol",
       touched: false,
       valid: false,
     },
@@ -42,7 +43,7 @@ const ResetPassword = () => {
         minLength: 8,
         maxLength: 26,
       },
-      error: "Pass should match",
+      error: "Passwords should match",
       touched: false,
       valid: false,
     },
