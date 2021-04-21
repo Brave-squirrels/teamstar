@@ -21,6 +21,9 @@ const Navigation = () => {
             <NavDropdown.Item to="/home" as={NavLink}>
               Sample dropdown link
             </NavDropdown.Item>
+            <NavDropdown.Item to="/dnd" as={NavLink}>
+              Drag&Drop
+            </NavDropdown.Item>
             <NavDropdown.Divider />
             <NavDropdown.Item href="#action/3.4">
               Sample separator link

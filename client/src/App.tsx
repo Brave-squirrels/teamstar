@@ -9,6 +9,7 @@ import ProtectedRoute from "containers/protectedRoute/protectedRoute";
 
 import { authUser, logout } from "reduxState/user/loginUser";
 import { RootState } from "reduxState/store";
+import Dnd from "containers/dnd/Dnd";
 
 const Hello = () => {
   return <span>YO YO YO</span>;
@@ -35,6 +36,7 @@ const App = () => {
   return (
     <>
       <Route exact path="/" component={LandingPage} />
+      <Route exact path="/dnd" component={Dnd} />
       <Route
         path="/(.+)"
         render={() => (
