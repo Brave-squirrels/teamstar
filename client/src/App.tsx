@@ -1,11 +1,13 @@
 import React, { useEffect } from "react";
-import { Route, Switch, useHistory } from "react-router-dom";
+import { Route, Switch, useHistory, Redirect } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
 import LandingPage from "containers/landingPage/landingPage";
 import Main from "hoc/main/main";
 import NavBar from "hoc/navbar/navbar";
 import ProtectedRoute from "containers/protectedRoute/protectedRoute";
+import SendResetPassword from "containers/sendResetPassword/sendResetPassword";
+import ResetPassword from "containers/resetPassword/resetPassword";
 
 import { authUser, logout } from "reduxState/user/loginUser";
 import { RootState } from "reduxState/store";
@@ -36,6 +38,14 @@ const App = () => {
   return (
     <Switch>
       <Route exact path="/" component={LandingPage} />
+      <Route exact path="/sendResetPassword" component={SendResetPassword} />
+      <Route exact path="/resetPassword" component={ResetPassword} />
+      <Route
+        exact
+        path="/confirmed"
+        render={() => <span>Acc confirmed</span>}
+      />
+      <Route exact path="/not-found" render={() => <span>Not found</span>} />
       <Route
         path="/(.+)"
         render={() => (
@@ -45,7 +55,7 @@ const App = () => {
               <Switch>
                 <Route exact path="/dnd" component={Dnd} />
                 <ProtectedRoute path="/home" component={Hello} />
-                <Route render={() => <span>Not found</span>} />
+                <Route render={() => <Redirect to="/not-found" />} />
               </Switch>
             </Main>
           </>

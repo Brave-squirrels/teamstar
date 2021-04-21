@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Button } from "react-bootstrap";
+import { Link } from "react-router-dom";
+import { Button, Spinner } from "react-bootstrap";
 import FormStructure from "containers/form/formStructure";
 import { mutateToAxios } from "utils/onChangeForm";
 
 import { loginUserFetch } from "reduxState/user/loginUser";
 import { createUserFetch } from "reduxState/user/registerUser";
+import { sendAgainFetch } from "reduxState/user/sendAgain";
 import { RootState } from "reduxState/store";
 
 import signInTmp from "../../assets/signInTmp.svg";
@@ -15,6 +17,10 @@ import styles from "./landingPage.module.scss";
 
 const LandingPage = () => {
   const dispatch = useDispatch();
+
+  const loginState = useSelector((state: RootState) => state.loginUser);
+  const registerState = useSelector((state: RootState) => state.createUser);
+  const sendAgainState = useSelector((state: RootState) => state.sendAgain);
 
   /* Handle animation */
   const [view, changeView] = useState(true);
@@ -54,7 +60,6 @@ const LandingPage = () => {
       touched: false,
       valid: false,
     },
-
     formValid: false,
   });
   const [signUp, setSignUp] = useState({
@@ -121,17 +126,18 @@ const LandingPage = () => {
     formValid: false,
   });
 
-  const loginState = useSelector((state: RootState) => state.loginUser);
-  const registerState = useSelector((state: RootState) => state.createUser);
-
-  const handleSignIn = (e: any) => {
+  const handleSignIn = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     dispatch(loginUserFetch(mutateToAxios(signInForm)));
   };
 
-  const handleSignUp = (e: any) => {
+  const handleSignUp = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     dispatch(createUserFetch(mutateToAxios(signUp)));
+  };
+
+  const handleSendAgain = () => {
+    dispatch(sendAgainFetch({ email: signUp.email.val }));
   };
 
   return (
@@ -139,15 +145,27 @@ const LandingPage = () => {
       <div className={styles.formContainer}>
         <div className={styles.signInSignUp}>
           <div className={styles.signUpForm}>
-            <FormStructure
-              title="Sign up"
-              state={signUp}
-              setState={setSignUp}
-              btnText="SIGN UP"
-              submitted={handleSignUp}
-              checkPass={true}
-              spinner={registerState.loading}
-            />
+            {registerState.success ? (
+              <>
+                {sendAgainState.loading ? (
+                  <Spinner animation="border" />
+                ) : (
+                  <Button onClick={handleSendAgain}>Send again</Button>
+                )}
+              </>
+            ) : (
+              <>
+                <FormStructure
+                  title="Sign up"
+                  state={signUp}
+                  setState={setSignUp}
+                  btnText="SIGN UP"
+                  submitted={handleSignUp}
+                  checkPass={true}
+                  spinner={registerState.loading}
+                />
+              </>
+            )}
           </div>
 
           <div className={styles.signInForm}>
@@ -159,7 +177,9 @@ const LandingPage = () => {
               submitted={handleSignIn}
               checkPass={false}
               spinner={loginState.loading}
-            />
+            >
+              <Link to="/sendresetpassword"> Forgot password? </Link>
+            </FormStructure>
           </div>
         </div>
       </div>
