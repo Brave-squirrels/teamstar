@@ -4,6 +4,20 @@
 $Montserrat: "Montserrat", sans-serif;
 $Roboto: "Roboto", sans-serif;
 
+$fontLightGreen: #acf7d0;
+$fontWhite: #f3f9f6;
+$fontPlaceholder: #f3f9f6aa;
+
+$invalid: #f56e69;
+
+$backgroundLanding: #3a3d50;
+$backgroundCircle: #3d4371;
+$backgroundLight: #414858;
+
+$inputActiveBackground: #576075;
+$inputFilter: drop-shadow(4px 4px 14px rgba(0, 0, 0, 0.2));
+$placeholderColor: #f3f9f6aa;
+
 @mixin scrollbar(
   $scrollSize: 4px,
   $backgroundTrack: #333845,

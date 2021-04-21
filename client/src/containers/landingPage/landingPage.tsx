@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Button } from "react-bootstrap";
-import { Spinner } from "react-bootstrap";
 import FormStructure from "containers/form/formStructure";
 import { mutateToAxios } from "utils/onChangeForm";
 
@@ -9,8 +8,20 @@ import { loginUserFetch } from "reduxState/user/loginUser";
 import { createUserFetch } from "reduxState/user/registerUser";
 import { RootState } from "reduxState/store";
 
+import signInTmp from "../../assets/signInTmp.svg";
+import signUpTmp from "../../assets/signUpTmp.svg";
+
+import styles from "./landingPage.module.scss";
+
 const LandingPage = () => {
   const dispatch = useDispatch();
+
+  /* Handle animation */
+  const [view, changeView] = useState(true);
+
+  let classes = view
+    ? [styles.container]
+    : [styles.container, styles.signUpMode];
 
   const [signInForm, setSignInForm] = useState({
     email: {
@@ -43,6 +54,7 @@ const LandingPage = () => {
       touched: false,
       valid: false,
     },
+
     formValid: false,
   });
   const [signUp, setSignUp] = useState({
@@ -109,66 +121,36 @@ const LandingPage = () => {
     formValid: false,
   });
 
-  const [signIn, setSignIn] = useState({
-    display: false,
-    btnText: "Sign Up",
-  });
-
   const loginState = useSelector((state: RootState) => state.loginUser);
   const registerState = useSelector((state: RootState) => state.createUser);
 
-  const handleSignIn = () => {
+  const handleSignIn = (e: any) => {
+    e.preventDefault();
     dispatch(loginUserFetch(mutateToAxios(signInForm)));
   };
 
-  const handleSignUp = () => {
+  const handleSignUp = (e: any) => {
+    e.preventDefault();
     dispatch(createUserFetch(mutateToAxios(signUp)));
   };
 
   return (
-    <>
-      <div>
-        <Button
-          onClick={() =>
-            setSignIn((prevState) => {
-              if (prevState.btnText === "Sign Up") {
-                return {
-                  display: true,
-                  btnText: "Sign In",
-                };
-              } else {
-                return {
-                  display: false,
-                  btnText: "Sign Up",
-                };
-              }
-            })
-          }
-        >
-          {signIn.btnText}
-        </Button>
-      </div>
-
-      {signIn.display ? (
-        <>
-          {registerState.loading ? (
-            <Spinner animation="border" role="status" />
-          ) : (
+    <div className={classes.join(" ")}>
+      <div className={styles.formContainer}>
+        <div className={styles.signInSignUp}>
+          <div className={styles.signUpForm}>
             <FormStructure
               title="Sign up"
               state={signUp}
               setState={setSignUp}
               btnText="SIGN UP"
               submitted={handleSignUp}
-              checkPass={false}
+              checkPass={true}
+              spinner={registerState.loading}
             />
-          )}
-        </>
-      ) : (
-        <>
-          {loginState.loading ? (
-            <Spinner animation="border" role="status" />
-          ) : (
+          </div>
+
+          <div className={styles.signInForm}>
             <FormStructure
               title="Sign in"
               state={signInForm}
@@ -176,11 +158,32 @@ const LandingPage = () => {
               btnText="SIGN IN"
               submitted={handleSignIn}
               checkPass={false}
+              spinner={loginState.loading}
             />
-          )}
-        </>
-      )}
-    </>
+          </div>
+        </div>
+      </div>
+
+      <div className={styles.panelsContainer}>
+        <div className={styles.panelLeft}>
+          <div className={styles.content}>
+            <span className={styles.goNext}>Don't have an account?</span>
+            <Button onClick={() => changeView(false)}>Sign Up</Button>
+          </div>
+
+          <img src={signUpTmp} alt="SignUp" className={styles.image} />
+        </div>
+        <div className={styles.panelRight} id={styles.rightId}>
+          <div className={styles.content}>
+            <span className={styles.goNext}>One of us?</span>
+            <Button onClick={() => changeView(true)} disabled={view}>
+              Sign In
+            </Button>
+          </div>
+          <img src={signInTmp} alt="SignIn" className={styles.image} />
+        </div>
+      </div>
+    </div>
   );
 };
 

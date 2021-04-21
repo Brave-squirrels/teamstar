@@ -36,7 +36,7 @@ const App = () => {
   return (
     <>
       <Route exact path="/" component={LandingPage} />
-      <Route exact path="/dnd" component={Dnd} />
+
       <Route
         path="/(.+)"
         render={() => (
@@ -44,6 +44,7 @@ const App = () => {
             <NavBar />
             <Main>
               <Switch>
+                <Route exact path="/dnd" component={Dnd} />
                 <ProtectedRoute path="/home" component={Hello} />
                 <Route render={() => <span>Not found</span>} />
               </Switch>
