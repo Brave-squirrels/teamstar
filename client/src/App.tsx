@@ -34,7 +34,7 @@ const App = () => {
   }, [loginState.authenticated, history]);
 
   return (
-    <>
+    <Switch>
       <Route exact path="/" component={LandingPage} />
       <Route
         path="/(.+)"
@@ -51,7 +51,7 @@ const App = () => {
           </>
         )}
       />
-    </>
+    </Switch>
   );
 };
 
