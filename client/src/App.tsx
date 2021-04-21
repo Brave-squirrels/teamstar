@@ -11,6 +11,7 @@ import { authUser, logout } from "reduxState/user/loginUser";
 import SampleForm from "containers/forms/Sampleform";
 import Sheet from "containers/forms/Sheet";
 import { RootState } from "reduxState/store";
+import TestErrors from "containers/testErrors/TestErrors";
 
 const Hello = () => {
   return <span>YO YO YO</span>;
@@ -51,6 +52,11 @@ const App = () => {
                   component={SampleForm}
                 />
                 <ProtectedRoute exact path="/secondform" component={Sheet} />
+                <ProtectedRoute
+                  exact
+                  path="/testerrors"
+                  component={TestErrors}
+                />
                 <Route render={() => <span>Not found</span>} />
               </Switch>
             </Main>

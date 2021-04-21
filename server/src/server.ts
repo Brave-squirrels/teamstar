@@ -2,7 +2,7 @@ import "dotenv/config";
 import App from "./app/app";
 import validateEnv from "./app/validateEnv";
 
-import DefaultController from "../controllers/default.controller";
+import ErrosController from "../controllers/errors.controller";
 import UserController from "../controllers/users.controller";
 import LoginController from "../controllers/login.controller";
 
@@ -18,7 +18,7 @@ validateEnv();
 // Starting app
 const app = new App([
   // Adding all controllers
-  new DefaultController(),
+  new ErrosController(),
   new UserController(),
   new LoginController(),
 ]);

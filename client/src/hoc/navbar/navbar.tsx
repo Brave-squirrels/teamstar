@@ -10,7 +10,7 @@ import { logout } from "reduxState/user/loginUser";
 const Navigation = () => {
   const dispatch = useDispatch();
   return (
-    <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
+    <Navbar collapseOnSelect expand="lg" bg="secondary" variant="dark">
       <Navbar.Brand to="/home" as={NavLink}>
         Hackathon
       </Navbar.Brand>
@@ -22,6 +22,9 @@ const Navigation = () => {
           </Nav.Link>
           <Nav.Link to="/secondform" as={NavLink}>
             Second form
+          </Nav.Link>
+          <Nav.Link to="/testerrors" as={NavLink}>
+            Test errors
           </Nav.Link>
           <NavDropdown title="Sample dropdown" id="collasible-nav-dropdown">
             <NavDropdown.Item to="/home" as={NavLink}>

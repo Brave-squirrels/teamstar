@@ -7,6 +7,7 @@ import MyDateInput from "components/form/MyDateInput";
 import { useState } from "react";
 import MySelectInput from "components/form/MySelectInputs";
 import { categoryOptions } from "./sampleSelectValues";
+import Sheet from "./Sheet";
 
 interface SampleObject {
   title: string;
@@ -45,7 +46,7 @@ const SampleForm = () => {
         initialValues={initialState}
         onSubmit={(values) => handleFormSubmit(values)}
       >
-        {({ handleSubmit, isValid, isSubmitting, dirty }) => (
+        {({ handleSubmit, isValid, isSubmitting, dirty, handleChange }) => (
           <Form
             className={"form-group"}
             onSubmit={handleSubmit}
@@ -54,6 +55,7 @@ const SampleForm = () => {
             <Modal.Body>
               <MyTextInput name="title" placeholder="title" />
               <MyTextArea
+                label="Description"
                 name="description"
                 placeholder="description"
                 rows={3}
@@ -69,6 +71,7 @@ const SampleForm = () => {
                 options={categoryOptions}
                 placeholder="Category"
                 name="category"
+                onChange={handleChange}
               />
             </Modal.Body>
             <Modal.Footer>

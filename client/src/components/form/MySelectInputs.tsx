@@ -6,6 +6,7 @@ interface Props {
   placeholder: string;
   name: string;
   options: any[];
+  onChange: (e: any) => void;
   label?: string;
 }
 
@@ -14,16 +15,11 @@ const MySelectInput = (props: Props) => {
 
   return (
     <Form.Text>
-      <Form.Control
-        value={field.value}
-        as="select"
-        onBlur={() => helpers.setTouched(true)}
-        placeholder={props.placeholder}
-      >
+      <select placeholder={props.placeholder} onChange={props.onChange}>
         {props.options.map((option: any) => (
           <option value={`${option.value}`}>{option.text}</option>
         ))}
-      </Form.Control>
+      </select>
       {meta.touched && meta.error ? (
         <FormLabel style={{ color: "#e80000" }}>{meta.error}</FormLabel>
       ) : null}
