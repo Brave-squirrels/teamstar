@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import axios from "axios/axiosMain";
 import { AppThunk, RootState } from 'reduxState/store';
+import toastNofity from 'utils/toastNotify';
 
 interface User {
     authenticated: boolean;
@@ -55,10 +56,12 @@ export const loginUserFetch = (data: Data): AppThunk => async (dispatch) => {
         .then((res) => {
             dispatch(loginSuccess(res.data));
             localStorage.setItem('token', res.data.token);
+            toastNofity(res.status);
         })
         .catch((err) => {
             localStorage.clear();
             dispatch(loginFailed());
+            toastNofity(err.response.status);
         })
 }
 
