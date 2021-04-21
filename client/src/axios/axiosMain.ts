@@ -1,5 +1,4 @@
 import axios from "axios";
-import "react-toastify/dist/ReactToastify.css";
 
 const address =
   process.env.REACT_APP_ENV === "development"
