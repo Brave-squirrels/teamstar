@@ -1,8 +1,11 @@
 import React from "react";
 
 import Input from "components/formElements/input/input";
-import { Button, Modal } from "react-bootstrap";
+import { Button } from "react-bootstrap";
+import { Spinner } from "react-bootstrap";
+
 import styles from "./formStructure.module.scss";
+
 import onChangeForm from "utils/onChangeForm";
 
 interface Props {
@@ -12,7 +15,8 @@ interface Props {
   btnText: string;
   submitted: any;
   children?: JSX.Element;
-  checkPass: boolean;
+  checkPass?: boolean;
+  spinner?: boolean;
 }
 
 const formStructure = (props: Props) => {
@@ -21,6 +25,7 @@ const formStructure = (props: Props) => {
   for (key in props.state) {
     elements.push({
       id: key,
+      name: key,
       config: props.state[key],
     });
   }
@@ -50,6 +55,7 @@ const formStructure = (props: Props) => {
         onChangeInput={(e: { target: HTMLInputElement }) =>
           onChangeInput(e, input.id)
         }
+        inputName={input.name}
         label={input.config.label}
         validity={input.config.valid}
         touched={input.config.touched}
@@ -60,20 +66,22 @@ const formStructure = (props: Props) => {
   });
 
   return (
-    <Modal.Dialog>
-      <Modal.Header>
-        <Modal.Title>{props.title}</Modal.Title>
-      </Modal.Header>
+    <>
+      <span className={styles.formTitle}>{props.title}</span>
       <form
         onSubmit={(event) => props.submitted(event)}
         className={styles.form}
       >
-        {formElements} {props.children}{" "}
-        <Button disabled={!props.state.formValid} type="submit">
-          {props.btnText}
-        </Button>
+        {formElements} {props.children}
+        {props.spinner ? (
+          <Spinner animation="border" />
+        ) : (
+          <Button disabled={!props.state.formValid} type="submit">
+            {props.btnText}
+          </Button>
+        )}
       </form>
-    </Modal.Dialog>
+    </>
   );
 };
 
