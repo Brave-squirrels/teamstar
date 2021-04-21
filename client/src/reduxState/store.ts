@@ -9,12 +9,14 @@ import thunk from "redux-thunk";
 
 import loginUser from "reduxState/user/loginUser";
 import createUser from 'reduxState/user/registerUser';
+import sendReset from 'reduxState/user/sendResetPassword';
 
 
 export const store = configureStore({
   reducer: {
     loginUser,
     createUser,
+    sendReset,
   },
   middleware: [
     ...getDefaultMiddleware({

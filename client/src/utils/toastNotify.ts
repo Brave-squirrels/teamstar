@@ -1,6 +1,5 @@
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { history } from "../index";
 
 const toastNofity = (status: number, text?: string) => {
     switch (status) {
@@ -17,8 +16,7 @@ const toastNofity = (status: number, text?: string) => {
         case 401:
             return toast.error(text ? text : "Unauthorized");
         case 404:
-            history.push("/not-found");
-            break;
+            return toast.error(text ? text : "Not found");
         case 500:
             return toast.info(text ? text : "Internal server error, try again later");
         case 200:
