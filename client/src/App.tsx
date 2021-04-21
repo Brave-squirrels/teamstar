@@ -39,7 +39,7 @@ const App = () => {
     <Switch>
       <Route exact path="/" component={LandingPage} />
       <Route exact path="/sendResetPassword" component={SendResetPassword} />
-      <Route exact path="/resetPassword" component={ResetPassword} />
+      <Route exact path="/resetPassword/:token" component={ResetPassword} />
       <Route
         exact
         path="/confirmed"
