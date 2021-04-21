@@ -36,7 +36,6 @@ const App = () => {
   return (
     <>
       <Route exact path="/" component={LandingPage} />
-
       <Route
         path="/(.+)"
         render={() => (
