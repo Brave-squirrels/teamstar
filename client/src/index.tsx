@@ -6,7 +6,6 @@ import { ToastContainer } from "react-toastify";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import "react-toastify/dist/ReactToastify.min.css";
-import "react-datepicker/dist/react-datepicker.css";
 import "./styles/global.scss";
 
 import App from "./App";
