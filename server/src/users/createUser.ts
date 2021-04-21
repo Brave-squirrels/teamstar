@@ -9,7 +9,7 @@ import sendEmail from "../utils/email";
 
 // Function for creating a new user
 export default async (req: Request, res: Response) => {
-  const { error } = validateUser(req.body);
+  let { error } = validateUser(req.body);
   if (error)
     return res.status(StatusCodes.BAD_REQUEST).send(error.details[0].message);
 
