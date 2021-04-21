@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Route, Switch, useHistory } from "react-router-dom";
+import { Route, Switch, useHistory, Redirect } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
 import LandingPage from "containers/landingPage/landingPage";
@@ -38,6 +38,7 @@ const App = () => {
     <Switch>
       <Route exact path="/" component={LandingPage} />
       <Route exact path="/sendResetPassword" component={SendResetPassword} />
+      <Route exact path="/not-found" render={() => <span>Not found</span>} />
       <Route
         path="/(.+)"
         render={() => (
@@ -47,7 +48,7 @@ const App = () => {
               <Switch>
                 <Route exact path="/dnd" component={Dnd} />
                 <ProtectedRoute path="/home" component={Hello} />
-                <Route render={() => <span>Not found</span>} />
+                <Route render={() => <Redirect to="/not-found" />} />
               </Switch>
             </Main>
           </>
