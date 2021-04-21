@@ -1,40 +1,113 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Formik, Form } from "formik";
-import * as Yup from "yup";
-import { Button, Modal } from "react-bootstrap";
+import { Button } from "react-bootstrap";
 import { Spinner } from "react-bootstrap";
-import MyTextInput from "components/form/MyTextInput";
+import FormStructure from "containers/form/formStructure";
+import { mutateToAxios } from "utils/onChangeForm";
 
 import { loginUserFetch } from "reduxState/user/loginUser";
 import { createUserFetch } from "reduxState/user/registerUser";
 import { RootState } from "reduxState/store";
-interface LoginData {
-  email: string;
-  password: string;
-}
-
-interface RegisterData {
-  email: string;
-  password: string;
-  confirmPassword: string;
-  name: string;
-}
-
-const signUpValues: LoginData = {
-  email: "",
-  password: "",
-};
-
-const signInValues: RegisterData = {
-  email: "",
-  password: "",
-  name: "",
-  confirmPassword: "",
-};
 
 const LandingPage = () => {
   const dispatch = useDispatch();
+
+  const [signInForm, setSignInForm] = useState({
+    email: {
+      val: "",
+      type: "email",
+      inputType: "input",
+      placeholder: "E-mail",
+      label: "E-mail",
+      validation: {
+        required: true,
+        minLength: 5,
+        maxLength: 50,
+      },
+      error: "Mail should be 5-50",
+      touched: false,
+      valid: false,
+    },
+    password: {
+      val: "",
+      type: "password",
+      inputType: "input",
+      placeholder: "********",
+      label: "Password",
+      validation: {
+        required: true,
+        minLength: 8,
+        maxLength: 50,
+      },
+      error: "At least 8",
+      touched: false,
+      valid: false,
+    },
+    formValid: false,
+  });
+  const [signUp, setSignUp] = useState({
+    name: {
+      val: "",
+      type: "text",
+      inputType: "input",
+      placeholder: "Name",
+      label: "Name",
+      validation: {
+        required: true,
+        minLength: 4,
+        maxLength: 50,
+      },
+      error: "Name should be between 4 and 50",
+      touched: false,
+      valid: false,
+    },
+    email: {
+      val: "",
+      type: "email",
+      inputType: "input",
+      placeholder: "E-mail",
+      label: "E-mail",
+      validation: {
+        required: true,
+        minLength: 5,
+        maxLength: 50,
+      },
+      error: "Mail should be 5-50",
+      touched: false,
+      valid: false,
+    },
+    password: {
+      val: "",
+      type: "password",
+      inputType: "input",
+      placeholder: "********",
+      label: "Password",
+      validation: {
+        required: true,
+        minLength: 8,
+        maxLength: 50,
+      },
+      error: "Pass at least 8",
+      touched: false,
+      valid: false,
+    },
+    confirmPassword: {
+      val: "",
+      type: "password",
+      inputType: "input",
+      placeholder: "********",
+      label: "Confirm Password",
+      validation: {
+        required: true,
+        minLength: 8,
+        maxLength: 50,
+      },
+      error: "Pass should match",
+      touched: false,
+      valid: false,
+    },
+    formValid: false,
+  });
 
   const [signIn, setSignIn] = useState({
     display: false,
@@ -44,134 +117,17 @@ const LandingPage = () => {
   const loginState = useSelector((state: RootState) => state.loginUser);
   const registerState = useSelector((state: RootState) => state.createUser);
 
-  const validationSignUp = Yup.object({
-    email: Yup.string().required("Email pls"),
-    password: Yup.string().required("Password pls"),
-  });
-
-  const validationSignIn = Yup.object({
-    email: Yup.string().required("Email pls"),
-    name: Yup.string().required("Name pls"),
-    password: Yup.string().required("Password is required"),
-    confirmPassword: Yup.string().oneOf(
-      [Yup.ref("password"), null],
-      "Passwords must match"
-    ),
-  });
-
-  const handleSignUp = (data: any) => {
-    dispatch(loginUserFetch(data));
+  const handleSignIn = () => {
+    dispatch(loginUserFetch(mutateToAxios(signInForm)));
   };
 
-  const handleSignIn = (data: any) => {
-    dispatch(createUserFetch(data));
+  const handleSignUp = () => {
+    dispatch(createUserFetch(mutateToAxios(signUp)));
   };
 
   return (
     <>
-      <Modal.Dialog>
-        <Modal.Header>
-          <Modal.Title>
-            {signIn.btnText === "Sign In" ? "Sign Up" : "Sign In"}
-          </Modal.Title>
-        </Modal.Header>
-        {signIn.display ? (
-          <>
-            {registerState.loading ? (
-              <Spinner animation="border" role="status" />
-            ) : (
-              <Formik
-                validationSchema={validationSignIn}
-                enableReinitialize
-                initialValues={signInValues}
-                onSubmit={(values) => handleSignIn(values)}
-              >
-                {({ handleSubmit, isValid, isSubmitting, dirty }) => (
-                  <Form
-                    className={"form-group"}
-                    onSubmit={handleSubmit}
-                    autoComplete="off"
-                  >
-                    <Modal.Body>
-                      <MyTextInput name="name" placeholder="Name" type="text" />
-                      <MyTextInput
-                        name="email"
-                        placeholder="E-mail"
-                        type="email"
-                      />
-                      <MyTextInput
-                        name="password"
-                        placeholder="********"
-                        type="password"
-                      />
-                      <MyTextInput
-                        name="confirmPassword"
-                        placeholder="********"
-                        type="password"
-                      />
-                    </Modal.Body>
-                    <Modal.Footer>
-                      <Button
-                        disabled={isSubmitting || !dirty || !isValid}
-                        type="submit"
-                        variant="success"
-                        className="pull-right"
-                      >
-                        Submit
-                      </Button>
-                    </Modal.Footer>
-                  </Form>
-                )}
-              </Formik>
-            )}
-          </>
-        ) : (
-          <>
-            {loginState.loading ? (
-              <Spinner animation="border" role="status" />
-            ) : (
-              <Formik
-                validationSchema={validationSignUp}
-                enableReinitialize
-                initialValues={signUpValues}
-                onSubmit={(values) => handleSignUp(values)}
-              >
-                {({ handleSubmit, isValid, isSubmitting, dirty }) => (
-                  <Form
-                    className={"form-group"}
-                    onSubmit={handleSubmit}
-                    autoComplete="off"
-                  >
-                    <Modal.Body>
-                      <MyTextInput
-                        name="email"
-                        placeholder="E-mail"
-                        type="email"
-                      />
-                      <MyTextInput
-                        name="password"
-                        placeholder="********"
-                        type="password"
-                      />
-                    </Modal.Body>
-                    <Modal.Footer>
-                      <Button
-                        disabled={isSubmitting || !dirty || !isValid}
-                        type="submit"
-                        variant="success"
-                        className="pull-right"
-                      >
-                        Submit
-                      </Button>
-                    </Modal.Footer>
-                  </Form>
-                )}
-              </Formik>
-            )}{" "}
-          </>
-        )}
-      </Modal.Dialog>
-      <div className="container text-center">
+      <div>
         <Button
           onClick={() =>
             setSignIn((prevState) => {
@@ -192,6 +148,38 @@ const LandingPage = () => {
           {signIn.btnText}
         </Button>
       </div>
+
+      {signIn.display ? (
+        <>
+          {registerState.loading ? (
+            <Spinner animation="border" role="status" />
+          ) : (
+            <FormStructure
+              title="Sign up"
+              state={signUp}
+              setState={setSignUp}
+              btnText="SIGN UP"
+              submitted={handleSignUp}
+              checkPass={false}
+            />
+          )}
+        </>
+      ) : (
+        <>
+          {loginState.loading ? (
+            <Spinner animation="border" role="status" />
+          ) : (
+            <FormStructure
+              title="Sign in"
+              state={signInForm}
+              setState={setSignInForm}
+              btnText="SIGN IN"
+              submitted={handleSignIn}
+              checkPass={false}
+            />
+          )}
+        </>
+      )}
     </>
   );
 };

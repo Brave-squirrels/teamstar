@@ -17,15 +17,6 @@ const Navigation = () => {
       <Navbar.Toggle aria-controls="responsive-navbar-nav" />
       <Navbar.Collapse id="responsive-navbar-nav">
         <Nav className="mr-auto">
-          <Nav.Link to="/testInput" as={NavLink}>
-            Test input
-          </Nav.Link>
-          <Nav.Link to="/secondform" as={NavLink}>
-            Second form
-          </Nav.Link>
-          <Nav.Link to="/testerrors" as={NavLink}>
-            Test errors
-          </Nav.Link>
           <NavDropdown title="Sample dropdown" id="collasible-nav-dropdown">
             <NavDropdown.Item to="/home" as={NavLink}>
               Sample dropdown link
