@@ -16,5 +16,8 @@
   },
   "devDependencies": {
     "concurrently": "^6.0.2"
+  },
+  "dependencies": {
+    "react-particles-js": "^3.4.1"
   }
 }
