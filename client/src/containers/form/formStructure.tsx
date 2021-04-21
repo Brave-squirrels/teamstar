@@ -66,7 +66,7 @@ const formStructure = (props: Props) => {
   });
 
   return (
-    <>
+    <div className={styles.formWrapper}>
       <span className={styles.formTitle}>{props.title}</span>
       <form
         onSubmit={(event) => props.submitted(event)}
@@ -81,7 +81,7 @@ const formStructure = (props: Props) => {
           </Button>
         )}
       </form>
-    </>
+    </div>
   );
 };
 

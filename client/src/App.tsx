@@ -6,6 +6,7 @@ import LandingPage from "containers/landingPage/landingPage";
 import Main from "hoc/main/main";
 import NavBar from "hoc/navbar/navbar";
 import ProtectedRoute from "containers/protectedRoute/protectedRoute";
+import SendResetPassword from "containers/sendResetPassword/sendResetPassword";
 
 import { authUser, logout } from "reduxState/user/loginUser";
 import { RootState } from "reduxState/store";
@@ -36,6 +37,7 @@ const App = () => {
   return (
     <Switch>
       <Route exact path="/" component={LandingPage} />
+      <Route exact path="/sendResetPassword" component={SendResetPassword} />
       <Route
         path="/(.+)"
         render={() => (

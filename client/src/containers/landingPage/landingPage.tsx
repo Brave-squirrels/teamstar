@@ -54,7 +54,6 @@ const LandingPage = () => {
       touched: false,
       valid: false,
     },
-
     formValid: false,
   });
   const [signUp, setSignUp] = useState({
