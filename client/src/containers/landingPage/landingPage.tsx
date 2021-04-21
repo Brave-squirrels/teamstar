@@ -69,28 +69,6 @@ const LandingPage = () => {
 
   return (
     <>
-      <div>
-        <Button
-          onClick={() =>
-            setSignIn((prevState) => {
-              if (prevState.btnText === "Sign Up") {
-                return {
-                  display: true,
-                  btnText: "Sign In",
-                };
-              } else {
-                return {
-                  display: false,
-                  btnText: "Sign Up",
-                };
-              }
-            })
-          }
-        >
-          {signIn.btnText}
-        </Button>
-      </div>
-
       <Modal.Dialog>
         <Modal.Header>
           <Modal.Title>
@@ -193,6 +171,27 @@ const LandingPage = () => {
           </>
         )}
       </Modal.Dialog>
+      <div className="container text-center">
+        <Button
+          onClick={() =>
+            setSignIn((prevState) => {
+              if (prevState.btnText === "Sign Up") {
+                return {
+                  display: true,
+                  btnText: "Sign In",
+                };
+              } else {
+                return {
+                  display: false,
+                  btnText: "Sign Up",
+                };
+              }
+            })
+          }
+        >
+          {signIn.btnText}
+        </Button>
+      </div>
     </>
   );
 };
