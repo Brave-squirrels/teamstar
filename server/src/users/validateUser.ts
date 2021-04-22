@@ -7,7 +7,7 @@ export default function validateUser(user: User) {
   const schema = Joi.object({
     name: Joi.string().min(4).max(50).required(),
     password: Joi.string().required(),
-    confirmPassword: Joi.string().min(8).max(255).required(),
+    confirmPassword: Joi.string().required(),
     email: Joi.string().min(5).max(50).required().email(),
   });
 
