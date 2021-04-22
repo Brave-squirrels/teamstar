@@ -18,6 +18,7 @@
     "concurrently": "^6.0.2"
   },
   "dependencies": {
-    "react-particles-js": "^3.4.1"
+    "react-particles-js": "^3.4.1",
+    "react-spring": "^9.1.2"
   }
 }

@@ -15,6 +15,7 @@ import Settings from "containers/user/settings/settings";
 
 import { authUser, logout } from "reduxState/user/loginUser";
 import { RootState } from "reduxState/store";
+import NotFound from "containers/notFound/NotFound";
 
 const Hello = () => {
   return <span>YO YO YO</span>;
