@@ -64,7 +64,14 @@ select:-webkit-autofill:focus {
 
 // ___________________ Navbar _______________________
 
-.navbar{
-  background: linear-gradient(0deg, $backgroundLanding 0%, $backgroundLanding 100%);
+.navbar {
+  background: linear-gradient(
+    0deg,
+    $backgroundLanding 0%,
+    $backgroundLanding 100%
+  );
   font-size: 1.3em;
+}
+
+.card {
 }
