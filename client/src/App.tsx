@@ -8,14 +8,13 @@ import NavBar from "hoc/navbar/navbar";
 import ProtectedRoute from "containers/protectedRoute/protectedRoute";
 import SendResetPassword from "containers/sendResetPassword/sendResetPassword";
 import ResetPassword from "containers/resetPassword/resetPassword";
-import NotFound from "containers/notFound/notFound";
 import Dnd from "containers/dnd/Dnd";
 import Confirmed from "containers/confirmed/confirmed";
 import Settings from "containers/user/settings/settings";
+import NotFound from "containers/notFound/notFound";
 
 import { authUser, logout } from "reduxState/user/loginUser";
 import { RootState } from "reduxState/store";
-import NotFound from "containers/notFound/NotFound";
 
 const Hello = () => {
   return <span>YO YO YO</span>;
