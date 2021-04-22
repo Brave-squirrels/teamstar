@@ -7,7 +7,7 @@ POST http://localhost:5000/login HTTP/1.1
 Content-Type: application/json
 
 {
-    "email": "olo1.a@wp.pl",
+    "email": "olo.a@wp.pl",
     "password": "Password1!"
 }
 

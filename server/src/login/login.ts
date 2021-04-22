@@ -29,6 +29,7 @@ export default async (req: Request, res: Response) => {
       .send("You must first confirm the registration.");
 
   const id = user._id;
+  const name = user.name;
   const token = user.generateAuthToken();
-  res.status(StatusCodes.OK).send({ token, id });
+  res.status(StatusCodes.OK).send({ name, token, id });
 };
