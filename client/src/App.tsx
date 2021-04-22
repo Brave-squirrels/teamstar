@@ -8,6 +8,7 @@ import NavBar from "hoc/navbar/navbar";
 import ProtectedRoute from "containers/protectedRoute/protectedRoute";
 import SendResetPassword from "containers/sendResetPassword/sendResetPassword";
 import ResetPassword from "containers/resetPassword/resetPassword";
+import NotFound from "containers/notFound/notFound";
 import Dnd from "containers/dnd/Dnd";
 import Confirmed from "containers/confirmed/confirmed";
 
@@ -42,7 +43,7 @@ const App = () => {
       <Route exact path="/sendResetPassword" component={SendResetPassword} />
       <Route exact path="/resetPassword/:token" component={ResetPassword} />
       <Route exact path="/confirmed" component={Confirmed} />
-      <Route exact path="/not-found" render={() => <span>Not found</span>} />
+      <Route exact path="/not-found" component={NotFound} />
       <Route
         path="/(.+)"
         render={() => (

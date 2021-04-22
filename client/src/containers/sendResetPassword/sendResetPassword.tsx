@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import FormStructure from "containers/form/formStructure";
-import { Particle } from "components/particle/particle";
+import { Layout } from "hoc/layout/layout";
 
 import { sendResetFetch } from "reduxState/user/sendResetPassword";
 import { mutateToAxios } from "utils/onChangeForm";
@@ -40,13 +40,12 @@ const SendResetPassword = () => {
   };
 
   return (
-    <div className={styles.wrapper}>
+    <Layout >
       <div className={styles.btnWrapper}>
         <Link to="/">
           <Button> Go back </Button>
         </Link>
       </div>
-      <Particle />
       <div className={styles.innerWrapper}>
         <FormStructure
           title="Reset password"
@@ -57,7 +56,7 @@ const SendResetPassword = () => {
           spinner={reduxState.loading}
         />
       </div>
-    </div>
+    </Layout>
   );
 };
 

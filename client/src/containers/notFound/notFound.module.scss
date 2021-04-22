@@ -1,15 +1,9 @@
 @import "styles/variables.scss";
 
-
 .innerWrapper {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-}
-
-.btnWrapper {
-  position: absolute;
-  top: 1em;
-  left: 1em;
+  color: $fontWhite;
 }
