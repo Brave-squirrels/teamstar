@@ -11,6 +11,7 @@ import newPassword from "../src/users/newPassword";
 import confirmation from "../src/users/confirmation";
 import searchUser from "../src/users/searchUser";
 import sendResetMail from "../src/users/changePasswordMail";
+import changeName from '../src/users/changeName';
 
 /**
  * UserControll Class,
@@ -39,6 +40,7 @@ export default class UserController {
       password,
       this.changePassword
     );
+    this.router.put(`${this.path}/changeName`, auth, this.changeName);
   }
 
   createUser(req: Request, res: Response) {
@@ -75,5 +77,9 @@ export default class UserController {
 
   changePassword(req: Request, res: Response) {
     changePassword(req, res);
+  }
+
+  changeName(req: Request, res: Response) {
+    changeName(req, res);
   }
 }
