@@ -36,7 +36,7 @@ export default async function sendEmail(email: string, url: string) {
 									<td
 										align="center"
 										valign="top"
-										bgcolor="#414858"
+										bgcolor="linear-gradient(266deg, rgba(52,123,150,1) 0%, rgba(6,85,119,1) 100%)"
 										style="background-size: cover; background-position: top"
 									>
 										<table
@@ -89,7 +89,7 @@ export default async function sendEmail(email: string, url: string) {
 																font-weight: 300;
 																letter-spacing: 5px;
 															"
-															>IN THE MANAGEMENT SYSTEM</span
+															>IN THE HACKATHON</span
 														>
 													</td>
 												</tr>
@@ -178,11 +178,8 @@ export default async function sendEmail(email: string, url: string) {
 											"
 											><div
 												style="
-													background: linear-gradient(
-														90.55deg,
-														#4ccfe4 0%,
-														#2ce6c8 99.9%
-													);
+												background: linear-gradient(266deg, rgba(52,123,150,1) 0%, rgba(6,85,119,1) 100%);
+
 													border-radius: 5.11111px;
 													width: 8rem;
 													padding: 0.5rem;

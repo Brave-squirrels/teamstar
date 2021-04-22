@@ -10,8 +10,9 @@ const confirmed = () => {
   return (
     <Layout>
       <div className={styles.innerWrapper}>
+        <p>Your email has been succesfully confirmed!</p>
         <Link to="/">
-          <Button> Main page </Button>
+          <Button> Log In </Button>
         </Link>
       </div>
     </Layout>
