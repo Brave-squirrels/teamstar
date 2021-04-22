@@ -2,6 +2,7 @@ import express, { Application } from "express";
 import loggerMiddleware from "../../middleware/logger";
 import Controller from "../../interfaces/controller.interface";
 import mongoose from "mongoose";
+import rateLimit from "express-rate-limit";
 const cors = require("cors");
 
 /**
@@ -12,10 +13,14 @@ const cors = require("cors");
 export default class App {
   public app: Application;
   private port = process.env.PORT;
+  private limiter = rateLimit({
+    windowMs: 15 * 60 * 1000,
+    max: 100,
+  });
 
   constructor(controllers: Controller[]) {
     this.app = express();
-
+    this.app.set("trust proxy", 1);
     this.connectToDatabase();
     this.initializeMiddlewares();
     this.initializeControllers(controllers);
@@ -26,6 +31,7 @@ export default class App {
     this.app.use(loggerMiddleware);
     this.app.use(express.urlencoded({ extended: true }));
     this.app.use(cors());
+    this.app.use(this.limiter);
   }
 
   private initializeControllers(controllers: Controller[]) {
