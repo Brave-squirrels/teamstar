@@ -3,9 +3,11 @@ import axios from "axios/axiosMain";
 import { AppThunk, RootState } from "reduxState/store";
 import toastNofity from "utils/toastNotify";
 
+import * as types from 'utils/types';
+
 interface User {
   authenticated: boolean;
-  userData: any;
+  userData: types.UserData | null;
   loading: boolean;
 }
 
@@ -16,7 +18,7 @@ interface Data {
 
 const initialState: User = {
   authenticated: false,
-  userData: {},
+  userData: { ...types.UserBasic },
   loading: false,
 };
 
@@ -26,7 +28,7 @@ const loginUser = createSlice({
   reducers: {
     login: (state) => {
       state.authenticated = false;
-      state.userData = null;
+      state.userData = { ...types.UserBasic };
       state.loading = true;
     },
     loginSuccess: (state, action) => {
@@ -36,13 +38,13 @@ const loginUser = createSlice({
     },
     loginFailed: (state) => {
       state.authenticated = false;
-      state.userData = null;
+      state.userData = { ...types.UserBasic };
       state.loading = false;
     },
     logout: (state) => {
       localStorage.clear();
       state.authenticated = false;
-      state.userData = null;
+      state.userData = { ...types.UserBasic };
       state.loading = false;
     },
   },
