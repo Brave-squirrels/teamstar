@@ -6,6 +6,7 @@
   align-items: center;
   gap: 1em;
   width: 100%;
+  max-width: 320px;
 }
 
 .formRow {
@@ -15,9 +16,11 @@
   align-items: center;
   gap: 1em;
   width: 100%;
+  max-width: 320px;
 }
 
 .formTitle {
+  text-align: center;
   color: $fontWhite;
   font-size: 1.7em;
   font-weight: 500;
@@ -25,7 +28,6 @@
 }
 
 .formWrapper {
-  width: 500px;
   display: flex;
   justify-content: center;
   flex-direction: column;

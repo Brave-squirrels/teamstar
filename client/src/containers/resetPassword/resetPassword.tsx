@@ -2,11 +2,16 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 
+import { Button } from "react-bootstrap";
+import { Link } from "react-router-dom";
 import FormStructure from "containers/form/formStructure";
+import { Particle } from "components/particle/particle";
 
 import { mutateToAxios } from "utils/onChangeForm";
 import { resetPasswordFetch } from "reduxState/user/resetPassword";
 import { RootState } from "reduxState/store";
+
+import styles from "./resetPassword.module.scss";
 
 const ResetPassword = () => {
   const dispatch = useDispatch();
@@ -57,16 +62,24 @@ const ResetPassword = () => {
   };
 
   return (
-    <div>
-      <FormStructure
-        state={form}
-        setState={setForm}
-        btnText="RESET"
-        title="Reset password"
-        submitted={handleResetPassword}
-        spinner={resetState.loading}
-        checkPass={true}
-      />
+    <div className={styles.wrapper}>
+      <div className={styles.btnWrapper}>
+        <Link to="/">
+          <Button> Main page </Button>
+        </Link>
+      </div>
+      <Particle />
+      <div className={styles.innerWrapper}>
+        <FormStructure
+          state={form}
+          setState={setForm}
+          btnText="RESET"
+          title="Reset password"
+          submitted={handleResetPassword}
+          spinner={resetState.loading}
+          checkPass={true}
+        />
+      </div>
     </div>
   );
 };
