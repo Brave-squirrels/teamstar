@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import { Button } from "react-bootstrap";
-import { Link } from "react-router-dom";
 import FormStructure from "containers/form/formStructure";
 import { Layout } from "hoc/layout/layout";
 
@@ -40,11 +39,11 @@ const SendResetPassword = () => {
   };
 
   return (
-    <Layout >
+    <Layout>
       <div className={styles.btnWrapper}>
-        <Link to="/">
+        <a href="/">
           <Button> Go back </Button>
-        </Link>
+        </a>
       </div>
       <div className={styles.innerWrapper}>
         <FormStructure
