@@ -9,7 +9,7 @@ const mainParticles = () => {
       params={{
         particles: {
           number: {
-            value: 60,
+            value: 100,
             density: {
               enable: true,
               value_area: 1500,
@@ -24,7 +24,7 @@ const mainParticles = () => {
             speed: 0.05,
           },
           size: {
-            value: 1,
+            value: 1.3,
           },
           opacity: {
             anim: {
