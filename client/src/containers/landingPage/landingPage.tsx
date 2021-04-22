@@ -12,7 +12,7 @@ import { createUserFetch } from "reduxState/user/registerUser";
 import { sendAgainFetch } from "reduxState/user/sendAgain";
 import { RootState } from "reduxState/store";
 
-import signInTmp from "../../assets/sign.svg";
+import signInTmp from "../../assets/signInTmp.svg";
 import signUpTmp from "../../assets/signUpTmp.svg";
 
 import styles from "./landingPage.module.scss";
