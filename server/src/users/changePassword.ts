@@ -3,9 +3,14 @@ import { StatusCodes } from "http-status-codes";
 import _ from "lodash";
 import bcrypt from "bcrypt";
 
+import validatePassword from "./validatePassword";
 import userModel from "../../models/user.model";
 
 const changePassword = async (req: Request, res: Response) => {
+  const { error } = validatePassword(req.body);
+  if (error)
+    return res.status(StatusCodes.BAD_REQUEST).send(error.details[0].message);
+
   let user = await userModel.findById(req.userInfo._id);
   if (!user)
     return res

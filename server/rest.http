@@ -19,7 +19,7 @@ Content-Type: application/json
 
 {
     "name": "olek",
-    "email": "olo1.a@wp.pl",
+    "email": "olo3.a@wp.pl",
     "password": "Password1!",
     "confirmPassword": "Password1!"
 }
@@ -67,7 +67,7 @@ Content-Type: application/json
 
 {
     "password": "Password1!",
-    "confirmPassword": "Password1"
+    "confirmPassword": "Password1!"
 }
 
 ###
