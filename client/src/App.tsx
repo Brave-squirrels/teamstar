@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { Route, Switch, useHistory, Redirect } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
-import MainParticles  from "components/mainParticles/mainParticles";
+import MainParticles from "components/mainParticles/mainParticles";
 
 import LandingPage from "containers/landingPage/landingPage";
 import Main from "hoc/main/main";
@@ -22,6 +22,7 @@ const Hello = () => {
   return (
     <div>
       <span>YO YO YO</span>
+      <button onClick={() => console.log(";xd")}>xD</button>
     </div>
   );
 };

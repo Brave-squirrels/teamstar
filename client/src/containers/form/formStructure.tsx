@@ -17,7 +17,7 @@ interface Props {
   children?: JSX.Element;
   checkPass?: boolean;
   spinner?: boolean;
-  direction?: string;
+  directionClass?: string;
 }
 
 const formStructure = (props: Props) => {
@@ -71,11 +71,18 @@ const formStructure = (props: Props) => {
       <span className={styles.formTitle}>{props.title}</span>
       <form
         onSubmit={(event) => props.submitted(event)}
-        className={
-          props.direction === "row" ? styles.formRow : styles.formColumn
-        }
+        className={styles.formColumn}
       >
-        {formElements} {props.children}
+        <div
+          className={
+            props.directionClass
+              ? styles[props.directionClass]
+              : styles.formColumn
+          }
+        >
+          {formElements}
+        </div>{" "}
+        {props.children}
         {props.spinner ? (
           <Spinner animation="border" style={{ color: "#02ADDB" }} />
         ) : (
