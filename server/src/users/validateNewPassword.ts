@@ -1,19 +1,15 @@
 import Joi from "joi";
 import JoiPasswordComplexity from "joi-password";
-
 import User from "../../interfaces/user.interface";
 
-// Validating new user
-export default function validateUser(user: User) {
+export default function validatePassword(user: User) {
   const schema = Joi.object({
-    name: Joi.string().min(4).max(50).required(),
     password: JoiPasswordComplexity.string()
       .minOfSpecialCharacters(1)
       .minOfUppercase(1)
       .minOfNumeric(1)
       .required(),
-    confirmPassword: Joi.string().required(),
-    email: Joi.string().min(5).max(50).required().email(),
+    confirmPassword: Joi.string().min(8).max(255).required(),
   });
 
   return schema.validate(user);
