@@ -154,7 +154,7 @@ const LandingPage = () => {
             {registerState.success ? (
               <>
                 {sendAgainState.loading ? (
-                  <Spinner animation="border" />
+                  <Spinner animation="border" style={{ color: "#02ADDB" }} />
                 ) : (
                   <Button onClick={handleSendAgain}>Send again</Button>
                 )}
