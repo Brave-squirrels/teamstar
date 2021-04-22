@@ -65,6 +65,7 @@ const ResetPassword = () => {
         title="Reset password"
         submitted={handleResetPassword}
         spinner={resetState.loading}
+        checkPass={true}
       />
     </div>
   );

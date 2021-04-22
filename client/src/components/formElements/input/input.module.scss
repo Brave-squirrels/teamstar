@@ -18,10 +18,9 @@
   flex-flow: column;
   color: $fontLightGreen;
   border-radius: 4px;
-  transition: border 0.2s ease;
+  transition: all 0.2s ease;
   &:focus-within {
-    border-left: 4px solid $fontLightGreen;
-    border-right: 4px solid $fontLightGreen;
+    box-shadow: 0 0 10px $buttonBackground;
   }
   &:hover {
     cursor: pointer;
@@ -36,7 +35,7 @@
   padding: 0.2em 10px;
   background: transparent;
   color: $fontWhite;
-  transition: all 0.4s ease-in;
+  transition: background 0.6s ease;
   width: 100%;
   &::placeholder {
     color: $fontPlaceholder;
@@ -74,7 +73,7 @@
 }
 
 .invalidInput {
-  border: 1.5px solid $invalid;
+  box-shadow: 0 0 10px $invalid;
 }
 
 .label {

@@ -5,12 +5,14 @@ import { Button, Spinner } from "react-bootstrap";
 import FormStructure from "containers/form/formStructure";
 import { mutateToAxios } from "utils/onChangeForm";
 
+import Particles from "react-particles-js";
+
 import { loginUserFetch } from "reduxState/user/loginUser";
 import { createUserFetch } from "reduxState/user/registerUser";
 import { sendAgainFetch } from "reduxState/user/sendAgain";
 import { RootState } from "reduxState/store";
 
-import signInTmp from "../../assets/signInTmp.svg";
+import signInTmp from "../../assets/sign.svg";
 import signUpTmp from "../../assets/signUpTmp.svg";
 
 import styles from "./landingPage.module.scss";
@@ -145,6 +147,7 @@ const LandingPage = () => {
 
   return (
     <div className={classes.join(" ")}>
+      <Particles className={styles.xd} />
       <div className={styles.formContainer}>
         <div className={styles.signInSignUp}>
           <div className={styles.signUpForm}>
@@ -191,7 +194,9 @@ const LandingPage = () => {
         <div className={styles.panelLeft}>
           <div className={styles.content}>
             <span className={styles.goNext}>Don't have an account?</span>
-            <Button onClick={() => changeView(false)}>Sign Up</Button>
+            <Button className="primary" onClick={() => changeView(false)}>
+              Sign Up
+            </Button>
           </div>
 
           <img src={signUpTmp} alt="SignUp" className={styles.image} />
@@ -199,7 +204,11 @@ const LandingPage = () => {
         <div className={styles.panelRight} id={styles.rightId}>
           <div className={styles.content}>
             <span className={styles.goNext}>One of us?</span>
-            <Button onClick={() => changeView(true)} disabled={view}>
+            <Button
+              className="primary"
+              onClick={() => changeView(true)}
+              disabled={view}
+            >
               Sign In
             </Button>
           </div>

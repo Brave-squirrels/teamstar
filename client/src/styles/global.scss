@@ -47,3 +47,8 @@ select:-webkit-autofill:focus {
   background-color: transparent;
   transition: background-color 5000s ease-in-out 0s;
 }
+
+.primary {
+  background: $buttonBackground;
+  border: none;
+}
