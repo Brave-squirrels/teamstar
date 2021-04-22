@@ -12,6 +12,7 @@ import createUser from 'reduxState/user/registerUser';
 import sendReset from 'reduxState/user/sendResetPassword';
 import sendAgain from 'reduxState/user/sendAgain';
 import resetPassword from 'reduxState/user/resetPassword';
+import changeName from 'reduxState/user/changeName';
 
 export const store = configureStore({
   reducer: {
@@ -20,6 +21,7 @@ export const store = configureStore({
     sendReset,
     sendAgain,
     resetPassword,
+    changeName,
   },
   middleware: [
     ...getDefaultMiddleware({
