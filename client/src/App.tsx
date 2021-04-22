@@ -2,6 +2,8 @@ import React, { useEffect } from "react";
 import { Route, Switch, useHistory, Redirect } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
+import MainParticles  from "components/mainParticles/mainParticles";
+
 import LandingPage from "containers/landingPage/landingPage";
 import Main from "hoc/main/main";
 import NavBar from "hoc/navbar/navbar";
@@ -17,7 +19,11 @@ import { authUser, logout } from "reduxState/user/loginUser";
 import { RootState } from "reduxState/store";
 
 const Hello = () => {
-  return <span>YO YO YO</span>;
+  return (
+    <div>
+      <span>YO YO YO</span>
+    </div>
+  );
 };
 
 const App = () => {
@@ -48,17 +54,16 @@ const App = () => {
       <Route
         path="/(.+)"
         render={() => (
-          <>
+          <Main>
             <NavBar />
-            <Main>
-              <Switch>
-                <ProtectedRoute path="/dnd" component={Dnd} />
-                <ProtectedRoute path="/home" component={Hello} />
-                <ProtectedRoute path="/settings" component={Settings} />
-                <Route render={() => <Redirect to="/not-found" />} />
-              </Switch>
-            </Main>
-          </>
+            <MainParticles />
+            <Switch>
+              <ProtectedRoute path="/dnd" component={Dnd} />
+              <ProtectedRoute path="/home" component={Hello} />
+              <ProtectedRoute path="/settings" component={Settings} />
+              <Route render={() => <Redirect to="/not-found" />} />
+            </Switch>
+          </Main>
         )}
       />
     </Switch>

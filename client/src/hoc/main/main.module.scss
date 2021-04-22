@@ -1,0 +1,10 @@
+@import "styles/variables.scss";
+
+/* Main container */
+.container {
+  background: $backgroundLanding;
+  height: 100vh;
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+}
