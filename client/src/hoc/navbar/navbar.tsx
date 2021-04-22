@@ -31,6 +31,9 @@ const Navigation = () => {
           </NavDropdown>
         </Nav>
         <Nav>
+          <Nav.Link to="/settings" as={NavLink}>
+            Settings
+          </Nav.Link>
           <Nav.Link href="/" onClick={() => dispatch(logout())}>
             Logout
           </Nav.Link>
