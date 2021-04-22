@@ -19,12 +19,7 @@ import { authUser, logout } from "reduxState/user/loginUser";
 import { RootState } from "reduxState/store";
 
 const Hello = () => {
-  return (
-    <div>
-      <span>YO YO YO</span>
-      <button onClick={() => console.log(";xd")}>xD</button>
-    </div>
-  );
+  return <div>TEST</div>;
 };
 
 const App = () => {
