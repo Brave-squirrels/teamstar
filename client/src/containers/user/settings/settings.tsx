@@ -128,6 +128,7 @@ const Settings = () => {
         submitted={handleChangePassword}
         spinner={changePassword.loading}
         checkPass={true}
+        directionClass="row"
       />
     </div>
   );
