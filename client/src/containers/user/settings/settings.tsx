@@ -17,18 +17,16 @@ const Settings = () => {
   );
 
   useEffect(() => {
-    if (userInfo.userData.name) {
-      setChangeNameForm((prevState) => {
-        return {
-          ...prevState,
-          name: {
-            ...prevState.name,
-            val: userInfo.userData.name,
-          },
-        };
-      });
-    }
-  }, [changeName.success]);
+    setChangeNameForm((prevState) => {
+      return {
+        ...prevState,
+        name: {
+          ...prevState.name,
+          val: userInfo.userData!.name,
+        },
+      };
+    });
+  }, [changeName.success, userInfo.userData!.name, userInfo.userData]);
 
   const [changeNameForm, setChangeNameForm] = useState({
     name: {
