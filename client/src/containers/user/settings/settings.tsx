@@ -1,4 +1,4 @@
-import React, { useState /* useEffect */ } from "react";
+import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
 import FormStructure from "containers/form/formStructure";
@@ -11,10 +11,24 @@ import { mutateToAxios } from "utils/onChangeForm";
 const Settings = () => {
   const dispatch = useDispatch();
   const changeName = useSelector((state: RootState) => state.changeName);
-  //   const userInfo = useSelector((state: RootState) => state.loginUser);
+  const userInfo = useSelector((state: RootState) => state.loginUser);
   const changePassword = useSelector(
     (state: RootState) => state.changePassword
   );
+
+  useEffect(() => {
+    if (userInfo.userData.name) {
+      setChangeNameForm((prevState) => {
+        return {
+          ...prevState,
+          name: {
+            ...prevState.name,
+            val: userInfo.userData.name,
+          },
+        };
+      });
+    }
+  }, [changeName.success]);
 
   const [changeNameForm, setChangeNameForm] = useState({
     name: {
