@@ -5,7 +5,7 @@ import { Button, Spinner } from "react-bootstrap";
 import FormStructure from "containers/form/formStructure";
 import { mutateToAxios } from "utils/onChangeForm";
 
-import Particles from "react-particles-js";
+import { Particle } from "components/particle/particle";
 
 import { loginUserFetch } from "reduxState/user/loginUser";
 import { createUserFetch } from "reduxState/user/registerUser";
@@ -147,7 +147,7 @@ const LandingPage = () => {
 
   return (
     <div className={classes.join(" ")}>
-      <Particles className={styles.xd} />
+      <Particle />
       <div className={styles.formContainer}>
         <div className={styles.signInSignUp}>
           <div className={styles.signUpForm}>

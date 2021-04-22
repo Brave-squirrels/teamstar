@@ -174,7 +174,7 @@
 /* Small screen styles */
 @media (max-width: 900px) {
   .container {
-    // min-height: 800px;
+    min-height: 630px;
     height: 100vh;
     &:before {
       width: 1500px;
@@ -259,6 +259,10 @@
 
 /* Mobile styles */
 @media (max-width: 570px) {
+  
+}
+
+@media (max-width: 570px) {
   .form {
     padding: 0 1.5rem;
     width: 190%;
@@ -283,8 +287,4 @@
   color: $fontWhite;
   font-weight: 500;
   font-size: 1.6em;
-}
-
-.xd {
-  height: 100%;
 }

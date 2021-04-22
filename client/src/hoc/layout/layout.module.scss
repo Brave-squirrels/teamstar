@@ -1,0 +1,11 @@
+@import "styles/variables.scss";
+
+.wrapper {
+    background-color: $backgroundLanding;
+    display: flex;
+    height: 100vh;
+}
+
+.stretch {
+    height: 100%;
+}
