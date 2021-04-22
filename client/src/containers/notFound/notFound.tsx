@@ -1,7 +1,9 @@
 import React from "react";
 import { animated, useSpring } from "react-spring";
 
-import styles from "./notfound.module.scss";
+import styles from "./notFound.module.scss";
+
+import { Particle } from "components/particle/particle";
 
 const NotFound = () => {
   const fof = "404";
@@ -16,20 +18,23 @@ const NotFound = () => {
 
   return (
     <div className={styles.notfound}>
-      <p className="text-center">
+      <Particle />
+      <div className={styles.textCenter}>
+      <p >
         {fof.split("").map((letter, i) => (
           <animated.span key={i} style={Animation(i)}>
             {letter}
           </animated.span>
         ))}
       </p>
-      <p className="text-center">
+      <p >
         {message.split("").map((letter, i) => (
           <animated.span key={i + 4} style={Animation(i)}>
             {letter}
           </animated.span>
         ))}
       </p>
+      </div>
     </div>
   );
 };

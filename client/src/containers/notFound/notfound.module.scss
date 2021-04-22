@@ -1,4 +1,19 @@
+@import "styles/variables.scss";
+
 .notfound{
-    font-size: 2em;
-    margin-top: 40vh;
+  background: $backgroundLanding;
+  height: 100vh;
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+  color: $fontWhite;
+}
+
+.textCenter {
+  text-align: center;
+  font-size: 2em;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
