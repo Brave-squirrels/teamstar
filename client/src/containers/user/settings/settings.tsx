@@ -26,7 +26,7 @@ const Settings = () => {
         },
       };
     });
-  }, [changeName.success, userInfo.userData!.name, userInfo.userData]);
+  }, [changeName.success, userInfo.userData]);
 
   const [changeNameForm, setChangeNameForm] = useState({
     name: {
