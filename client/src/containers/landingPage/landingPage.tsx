@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { Button, Spinner } from "react-bootstrap";
+import { Button, Jumbotron, Spinner } from "react-bootstrap";
 import FormStructure from "containers/form/formStructure";
 import { mutateToAxios } from "utils/onChangeForm";
 
@@ -156,7 +156,18 @@ const LandingPage = () => {
                 {sendAgainState.loading ? (
                   <Spinner animation="border" style={{ color: "#02ADDB" }} />
                 ) : (
-                  <Button onClick={handleSendAgain}>Send again</Button>
+                  <Jumbotron className={styles.verifyJumbotron}>
+                    <h1>Verification email has been sent!</h1>
+                    <p>Would you like to send it again?</p>
+                    <p>
+                      <Button
+                        className="btn btn-dark"
+                        onClick={handleSendAgain}
+                      >
+                        Send again
+                      </Button>
+                    </p>
+                  </Jumbotron>
                 )}
               </>
             ) : (

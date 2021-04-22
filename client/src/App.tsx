@@ -13,6 +13,7 @@ import Confirmed from "containers/confirmed/confirmed";
 
 import { authUser, logout } from "reduxState/user/loginUser";
 import { RootState } from "reduxState/store";
+import NotFound from "containers/notFound/NotFound";
 
 const Hello = () => {
   return <span>YO YO YO</span>;
@@ -42,7 +43,7 @@ const App = () => {
       <Route exact path="/sendResetPassword" component={SendResetPassword} />
       <Route exact path="/resetPassword/:token" component={ResetPassword} />
       <Route exact path="/confirmed" component={Confirmed} />
-      <Route exact path="/not-found" render={() => <span>Not found</span>} />
+      <Route exact path="/not-found" component={NotFound} />
       <Route
         path="/(.+)"
         render={() => (
