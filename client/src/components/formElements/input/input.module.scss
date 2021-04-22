@@ -5,6 +5,7 @@
 }
 
 .inputContainer {
+ 
   box-sizing: border-box;
   font-family: $Roboto;
   max-width: 380px;
@@ -20,8 +21,8 @@
   border-radius: 4px;
   transition: border 0.2s ease;
   &:focus-within {
-    border-left: 4px solid $fontLightGreen;
-    border-right: 4px solid $fontLightGreen;
+    box-shadow: 0 0 10px $buttonBackground;
+    
   }
   &:hover {
     cursor: pointer;
@@ -73,7 +74,7 @@
 }
 
 .invalidInput {
-  border: 1.5px solid $invalid;
+  box-shadow: 0 0 10px $invalid;
 }
 
 .label {

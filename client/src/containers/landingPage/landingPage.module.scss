@@ -174,7 +174,7 @@
 /* Small screen styles */
 @media (max-width: 900px) {
   .container {
-    min-height: 800px;
+    // min-height: 800px;
     height: 100vh;
     &:before {
       width: 1500px;
@@ -220,6 +220,7 @@
       }
       .content {
         padding-right: 15%;
+        padding-left: 15%;
         transition: transform 0.9s ease-in-out;
         transition-delay: 0.8s;
       }
@@ -241,7 +242,7 @@
     .panelRight {
       .image,
       .content {
-        transform: translateY(0px);
+        transform: translateY(30px);
       }
     }
     .signInSignUp {
@@ -282,4 +283,8 @@
   color: $fontWhite;
   font-weight: 500;
   font-size: 1.6em;
+}
+
+.xd {
+  height: 100%;
 }

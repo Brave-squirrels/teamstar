@@ -10,7 +10,7 @@ import { loginUserFetch } from "reduxState/user/loginUser";
 import { createUserFetch } from "reduxState/user/registerUser";
 import { RootState } from "reduxState/store";
 
-import signInTmp from "../../assets/signInTmp.svg";
+import signInTmp from "../../assets/sign.svg";
 import signUpTmp from "../../assets/signUpTmp.svg";
 
 import styles from "./landingPage.module.scss";
@@ -138,7 +138,7 @@ const LandingPage = () => {
 
   return (
     <div className={classes.join(" ")}>
-      <Particles/>
+      <Particles className={styles.xd} />
       <div className={styles.formContainer}>
         <div className={styles.signInSignUp}>
           <div className={styles.signUpForm}>
