@@ -8,10 +8,11 @@ import NavBar from "hoc/navbar/navbar";
 import ProtectedRoute from "containers/protectedRoute/protectedRoute";
 import SendResetPassword from "containers/sendResetPassword/sendResetPassword";
 import ResetPassword from "containers/resetPassword/resetPassword";
+import Dnd from "containers/dnd/Dnd";
+import Confirmed from "containers/confirmed/confirmed";
 
 import { authUser, logout } from "reduxState/user/loginUser";
 import { RootState } from "reduxState/store";
-import Dnd from "containers/dnd/Dnd";
 
 const Hello = () => {
   return <span>YO YO YO</span>;
@@ -40,11 +41,7 @@ const App = () => {
       <Route exact path="/" component={LandingPage} />
       <Route exact path="/sendResetPassword" component={SendResetPassword} />
       <Route exact path="/resetPassword/:token" component={ResetPassword} />
-      <Route
-        exact
-        path="/confirmed"
-        render={() => <span>Acc confirmed</span>}
-      />
+      <Route exact path="/confirmed" component={Confirmed} />
       <Route exact path="/not-found" render={() => <span>Not found</span>} />
       <Route
         path="/(.+)"

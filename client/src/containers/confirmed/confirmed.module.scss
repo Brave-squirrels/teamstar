@@ -1,0 +1,13 @@
+@import "styles/variables.scss";
+
+.wrapper {
+  background: $backgroundLanding;
+  height: 100vh;
+}
+
+.innerWrapper {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
