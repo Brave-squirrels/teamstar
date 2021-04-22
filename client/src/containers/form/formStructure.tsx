@@ -74,7 +74,7 @@ const formStructure = (props: Props) => {
       >
         {formElements} {props.children}
         {props.spinner ? (
-          <Spinner animation="border" />
+          <Spinner animation="border" style={{ color: "#02ADDB" }} />
         ) : (
           <Button disabled={!props.state.formValid} type="submit">
             {props.btnText}
