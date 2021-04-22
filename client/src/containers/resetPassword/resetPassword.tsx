@@ -5,7 +5,7 @@ import { useParams } from "react-router-dom";
 import { Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import FormStructure from "containers/form/formStructure";
-import { Particle } from "components/particle/particle";
+import { Layout } from "hoc/layout/layout";
 
 import { mutateToAxios } from "utils/onChangeForm";
 import { resetPasswordFetch } from "reduxState/user/resetPassword";
@@ -62,13 +62,12 @@ const ResetPassword = () => {
   };
 
   return (
-    <div className={styles.wrapper}>
+    <Layout>
       <div className={styles.btnWrapper}>
         <Link to="/">
           <Button> Main page </Button>
         </Link>
       </div>
-      <Particle />
       <div className={styles.innerWrapper}>
         <FormStructure
           state={form}
@@ -80,7 +79,7 @@ const ResetPassword = () => {
           checkPass={true}
         />
       </div>
-    </div>
+    </Layout>
   );
 };
 

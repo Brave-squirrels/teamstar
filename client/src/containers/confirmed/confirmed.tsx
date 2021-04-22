@@ -2,20 +2,19 @@ import React from "react";
 
 import { Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import { Particle } from "components/particle/particle";
+import { Layout } from "hoc/layout/layout";
 
 import styles from "./confirmed.module.scss";
 
 const confirmed = () => {
   return (
-    <div className={styles.wrapper}>
-      <Particle />
+    <Layout>
       <div className={styles.innerWrapper}>
         <Link to="/">
           <Button> Main page </Button>
         </Link>
       </div>
-    </div>
+    </Layout>
   );
 };
 

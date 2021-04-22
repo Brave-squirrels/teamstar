@@ -8,6 +8,7 @@ import NavBar from "hoc/navbar/navbar";
 import ProtectedRoute from "containers/protectedRoute/protectedRoute";
 import SendResetPassword from "containers/sendResetPassword/sendResetPassword";
 import ResetPassword from "containers/resetPassword/resetPassword";
+import NotFound from "containers/notFound/notFound";
 import Dnd from "containers/dnd/Dnd";
 import Confirmed from "containers/confirmed/confirmed";
 
