@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Button } from "react-bootstrap";
+import { Link } from "react-router-dom";
+import { Button, Spinner } from "react-bootstrap";
 import FormStructure from "containers/form/formStructure";
 import { mutateToAxios } from "utils/onChangeForm";
 
@@ -8,6 +9,7 @@ import Particles from "react-particles-js";
 
 import { loginUserFetch } from "reduxState/user/loginUser";
 import { createUserFetch } from "reduxState/user/registerUser";
+import { sendAgainFetch } from "reduxState/user/sendAgain";
 import { RootState } from "reduxState/store";
 
 import signInTmp from "../../assets/sign.svg";
@@ -17,6 +19,10 @@ import styles from "./landingPage.module.scss";
 
 const LandingPage = () => {
   const dispatch = useDispatch();
+
+  const loginState = useSelector((state: RootState) => state.loginUser);
+  const registerState = useSelector((state: RootState) => state.createUser);
+  const sendAgainState = useSelector((state: RootState) => state.sendAgain);
 
   /* Handle animation */
   const [view, changeView] = useState(true);
@@ -37,7 +43,7 @@ const LandingPage = () => {
         minLength: 5,
         maxLength: 50,
       },
-      error: "Mail should be 5-50",
+      error: "Mail should be between 5 and 50 characters long",
       touched: false,
       valid: false,
     },
@@ -50,13 +56,12 @@ const LandingPage = () => {
       validation: {
         required: true,
         minLength: 8,
-        maxLength: 50,
+        maxLength: 26,
       },
-      error: "At least 8",
+      error: "Password should be at least 8 characters long",
       touched: false,
       valid: false,
     },
-
     formValid: false,
   });
   const [signUp, setSignUp] = useState({
@@ -71,7 +76,7 @@ const LandingPage = () => {
         minLength: 4,
         maxLength: 50,
       },
-      error: "Name should be between 4 and 50",
+      error: "Name should be between 4 and 50 characters long",
       touched: false,
       valid: false,
     },
@@ -86,7 +91,7 @@ const LandingPage = () => {
         minLength: 5,
         maxLength: 50,
       },
-      error: "Mail should be 5-50",
+      error: "Mail should be between 5 and 50 characters long",
       touched: false,
       valid: false,
     },
@@ -99,9 +104,11 @@ const LandingPage = () => {
       validation: {
         required: true,
         minLength: 8,
-        maxLength: 50,
+        maxLength: 26,
+        passwordRule: true,
       },
-      error: "Pass at least 8",
+      error:
+        "Password should be at least 8 characters long, contain 1 uppercase letter, 1 lowercase, 1 number and 1 symbol",
       touched: false,
       valid: false,
     },
@@ -114,26 +121,28 @@ const LandingPage = () => {
       validation: {
         required: true,
         minLength: 8,
-        maxLength: 50,
+        maxLength: 26,
+        passwordRule: true,
       },
-      error: "Pass should match",
+      error: "Passwords should match",
       touched: false,
       valid: false,
     },
     formValid: false,
   });
 
-  const loginState = useSelector((state: RootState) => state.loginUser);
-  const registerState = useSelector((state: RootState) => state.createUser);
-
-  const handleSignIn = (e: any) => {
+  const handleSignIn = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     dispatch(loginUserFetch(mutateToAxios(signInForm)));
   };
 
-  const handleSignUp = (e: any) => {
+  const handleSignUp = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     dispatch(createUserFetch(mutateToAxios(signUp)));
+  };
+
+  const handleSendAgain = () => {
+    dispatch(sendAgainFetch({ email: signUp.email.val }));
   };
 
   return (
@@ -142,15 +151,27 @@ const LandingPage = () => {
       <div className={styles.formContainer}>
         <div className={styles.signInSignUp}>
           <div className={styles.signUpForm}>
-            <FormStructure
-              title="Sign up"
-              state={signUp}
-              setState={setSignUp}
-              btnText="SIGN UP"
-              submitted={handleSignUp}
-              checkPass={true}
-              spinner={registerState.loading}
-            />
+            {registerState.success ? (
+              <>
+                {sendAgainState.loading ? (
+                  <Spinner animation="border" />
+                ) : (
+                  <Button onClick={handleSendAgain}>Send again</Button>
+                )}
+              </>
+            ) : (
+              <>
+                <FormStructure
+                  title="Sign up"
+                  state={signUp}
+                  setState={setSignUp}
+                  btnText="SIGN UP"
+                  submitted={handleSignUp}
+                  checkPass={true}
+                  spinner={registerState.loading}
+                />
+              </>
+            )}
           </div>
 
           <div className={styles.signInForm}>
@@ -162,7 +183,9 @@ const LandingPage = () => {
               submitted={handleSignIn}
               checkPass={false}
               spinner={loginState.loading}
-            />
+            >
+              <Link to="/sendresetpassword"> Forgot password? </Link>
+            </FormStructure>
           </div>
         </div>
       </div>

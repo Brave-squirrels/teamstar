@@ -2,14 +2,9 @@ import { Request, Response } from "express";
 import { StatusCodes } from "http-status-codes";
 import _ from "lodash";
 import bcrypt from "bcrypt";
-import validatePassword from "./validateNewPassword";
 import userModel from "../../models/user.model";
 
 const newPassword = async (req: Request, res: Response) => {
-  const { error } = validatePassword(req.body);
-  if (error)
-    return res.status(StatusCodes.BAD_REQUEST).send(error.details[0].message);
-
   if (req.body.password !== req.body.confirmPassword)
     return res
       .status(StatusCodes.BAD_REQUEST)
@@ -23,7 +18,10 @@ const newPassword = async (req: Request, res: Response) => {
     { password: newPassword },
     { new: true }
   );
-  if (!user) return res.status(StatusCodes.NOT_FOUND).send("User not found");
+  if (!user)
+    return res
+      .status(StatusCodes.INTERNAL_SERVER_ERROR)
+      .send("Password not saved");
 
   res.status(StatusCodes.OK).send(_.pick(user, ["_id", "name", "email"]));
 };

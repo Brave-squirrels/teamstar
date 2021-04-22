@@ -23,11 +23,10 @@ export default async (req: Request, res: Response) => {
       .status(StatusCodes.BAD_REQUEST)
       .send("Invalid email or password.");
 
-  // TODO uncomment when ready
-  // if (!user.isVerified)
-  //   return res
-  //     .status(StatusCodes.BAD_REQUEST)
-  //     .send("You must first confirm the registration.");
+  if (!user.isVerified)
+    return res
+      .status(StatusCodes.BAD_REQUEST)
+      .send("You must first confirm the registration.");
 
   const id = user._id;
   const token = user.generateAuthToken();
