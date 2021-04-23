@@ -7,6 +7,8 @@ import NavDropdown from "react-bootstrap/NavDropdown";
 
 import Logo from "assets/logo.png";
 
+import { Team } from "utils/types";
+
 import { logout } from "reduxState/user/loginUser";
 import { RootState } from "reduxState/store";
 
@@ -34,20 +36,26 @@ const Navigation = () => {
       <Navbar.Collapse id="responsive-navbar-nav">
         <Nav className="ml-auto" style={{ gap: "1.5em" }}>
           <NavDropdown title="Teams" id="collasible-nav-dropdown">
-            {/* {userData.teams.map((team)=> (
-              <NavDropdown.Item to={`/team/${team.id}`} as={NavLink}>
-              {team.name}
-            </NavDropdown.Item>
-            ))} */}
-            <NavDropdown.Item to="/home" as={NavLink}>
-              Here team name
-            </NavDropdown.Item>
+            {userData!.teams.length > 0 ? (
+              <>
+                {userData!.teams.map((team: Team) => (
+                  <NavDropdown.Item
+                    to={`/team/${team.teamId}`}
+                    as={NavLink}
+                    key={team.teamId}
+                  >
+                    {team.teamName}
+                  </NavDropdown.Item>
+                ))}
+              </>
+            ) : (
+              <NavDropdown.Item to={`/home`} as={NavLink}>
+                You don't belong to any teams
+              </NavDropdown.Item>
+            )}
+
             <NavDropdown.Item to="/dnd" as={NavLink}>
               Drag&Drop
-            </NavDropdown.Item>
-            <NavDropdown.Divider />
-            <NavDropdown.Item href="#action/3.4">
-              Sample separator link
             </NavDropdown.Item>
           </NavDropdown>
           {teamId && (

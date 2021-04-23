@@ -127,3 +127,37 @@ select:-webkit-autofill:focus {
   background: $backgroundJumbotron;
   color: $fontWhite;
 }
+
+// ____________________ Calendar _________________________
+
+.rbc-toolbar-label {
+  color: $fontWhite;
+  font-family: $Roboto;
+  letter-spacing: 0.1em;
+}
+
+span.rbc-btn-group {
+  padding: 1em;
+  display: flex;
+  gap: 1em;
+  &:nth-child(2) {
+    display: none;
+  }
+  button {
+    color: $fontSmoke;
+    border: none;
+    background: $buttonBackground;
+    &:hover {
+      background: $buttonBackgroundHover;
+      color: $fontWhite;
+    }
+  }
+}
+
+div.rbc-row.rbc-month-header {
+  background: $fontBlue;
+}
+
+span.rbc-btn-group:nth-child(3) {
+  display: none;
+}

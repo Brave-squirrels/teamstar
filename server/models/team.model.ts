@@ -17,9 +17,12 @@ const teamSchema = new mongoose.Schema<Team>({
     maxlength: 254,
   },
   owner: {
-    id: mongoose.Schema.Types.ObjectId,
-    required: true,
-    name: string,
+    id: {
+      type: String,
+    },
+    name: {
+      type: String,
+    },
   },
   date: {
     type: Date,
@@ -29,7 +32,9 @@ const teamSchema = new mongoose.Schema<Team>({
     type: [
       {
         _id: false,
-        name: string,
+        name: {
+          type: String,
+        },
         id: mongoose.Schema.Types.ObjectId,
       },
     ],
@@ -38,8 +43,10 @@ const teamSchema = new mongoose.Schema<Team>({
     type: [
       {
         _id: false,
-        name: string,
-        userName: string,
+        name: {
+          type: String,
+        },
+        userName: { type: String },
         userId: mongoose.Schema.Types.ObjectId,
         id: mongoose.Schema.Types.ObjectId,
       },
@@ -49,9 +56,9 @@ const teamSchema = new mongoose.Schema<Team>({
     type: [
       {
         _id: false,
-        name: string,
+        name: String,
         userId: mongoose.Schema.Types.ObjectId,
-        userName: string,
+        userName: String,
         id: mongoose.Schema.Types.ObjectId,
       },
     ],
@@ -63,7 +70,7 @@ const teamSchema = new mongoose.Schema<Team>({
     type: [
       {
         userId: mongoose.Schema.Types.ObjectId,
-        userName: string,
+        userName: String,
       },
     ],
   },
