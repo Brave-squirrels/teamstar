@@ -15,7 +15,13 @@ import Confirmed from "containers/confirmed/confirmed";
 import Settings from "containers/user/settings/settings";
 import NotFound from "containers/notFound/notFound";
 import ConfirmedEmailChange from "containers/confirmedEmailChange/confirmedEmailChange";
-import Dashboard from "containers/dashboard/Dashboard";
+/* import Dashboard from "containers/dashboard/Dashboard"; */
+import Teams from "containers/teams/teams";
+import TeamInvites from "containers/teamInvites/teamInvites";
+import Team from "containers/team/team";
+import Tasks from "containers/tasks/tasks";
+import Raports from "containers/raports/raports";
+import Calendar from "containers/calendar/calendar";
 
 import { authUser, logout } from "reduxState/user/loginUser";
 import { RootState } from "reduxState/store";
@@ -54,8 +60,19 @@ const App = () => {
             <MainParticles />
             <Switch>
               <ProtectedRoute path="/dnd" component={Dnd} />
-              <ProtectedRoute path="/home" component={Dashboard} />
+              <ProtectedRoute path="/home" component={Teams} />
               <ProtectedRoute path="/settings" component={Settings} />
+              <ProtectedRoute path="/invites" component={TeamInvites} />
+              <ProtectedRoute path="/team/:teamId" component={Team} />
+              <ProtectedRoute path="/team/:teamId/tasks" component={Tasks} />
+              <ProtectedRoute
+                path="/team/:teamId/calendar"
+                component={Calendar}
+              />
+              <ProtectedRoute
+                path="/team/:teamId/raports"
+                component={Raports}
+              />
               <Route render={() => <Redirect to="/not-found" />} />
             </Switch>
           </Main>
