@@ -2,40 +2,45 @@ import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
 import FormStructure from "containers/form/formStructure";
-import { Button, Container, Jumbotron, Modal, Nav, Row } from "react-bootstrap";
+import { Button, Container, Jumbotron, Nav, Row } from "react-bootstrap";
 
 import { changeNameFetch } from "reduxState/user/changeName";
+// import { changeEmailFetch } from "reduxState/user/changeEmail";
 import { changePasswordFetch } from "reduxState/user/changePassword";
 import { RootState } from "reduxState/store";
 import { mutateToAxios } from "utils/onChangeForm";
 
-function MyVerticallyCenteredModal(props: any) {
-  return (
-    <Modal {...props} aria-labelledby="contained-modal-title-vcenter" centered>
-      <Modal.Header closeButton className="text-center"></Modal.Header>
+import MyVerticallyCenteredModal from "./MyVerticallyCenteredModal";
 
-      <Modal.Body className="mb-4">{props.children}</Modal.Body>
-    </Modal>
-  );
-}
+type ShowType = "Show" | "Hide";
 
 const Settings = () => {
   const [modalNameShow, setModalNameShow] = React.useState(false);
+  const [modalEmailShow, setModalEmailShow] = React.useState(false);
   const [modalPasswordShow, setModalPasswordShow] = React.useState(false);
+  const [modalDeleteShow, setModalDeleteShow] = React.useState(false);
+
+  const [userEmail, setUserEmail] = useState("");
+  const [hiddenEmail, sethiddenEmail] = useState("");
+  const [showToggle, setShowToggle] = useState<ShowType>("Show");
 
   const dispatch = useDispatch();
   const changeName = useSelector((state: RootState) => state.changeName);
+  // const changeEmail = useSelector((state: RootState) => state.changeEmail);
   const userInfo = useSelector((state: RootState) => state.loginUser);
-
-  const { name, email } = userInfo.userData!;
-  const userEmail =
-    email.split("@")[0].replace(/./g, "*") + "@" + email.split("@")[1];
+  let { name, email } = userInfo.userData!;
 
   const changePassword = useSelector(
     (state: RootState) => state.changePassword
   );
 
   useEffect(() => {
+    email &&
+      sethiddenEmail(
+        email.split("@")[0].replace(/./g, "*") + "@" + email.split("@")[1]
+      );
+    setUserEmail(hiddenEmail);
+
     setChangeNameForm((prevState) => {
       return {
         ...prevState,
@@ -45,7 +50,8 @@ const Settings = () => {
         },
       };
     });
-  }, [changeName.success, userInfo.userData]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [changeName.success, email, userInfo.userData]);
 
   const [changeNameForm, setChangeNameForm] = useState({
     name: {
@@ -60,6 +66,25 @@ const Settings = () => {
         maxLength: 50,
       },
       error: "Name should be between 4 and 50 characters long",
+      touched: false,
+      valid: false,
+    },
+    formValid: false,
+  });
+
+  const [changeEmailForm, setChangeEmailForm] = useState({
+    email: {
+      val: "",
+      type: "text",
+      inputType: "input",
+      placeholder: "Email",
+      label: "Email",
+      validation: {
+        required: true,
+        minLength: 4,
+        maxLength: 50,
+      },
+      error: "Email should be between 4 and 50 characters long",
       touched: false,
       valid: false,
     },
@@ -124,9 +149,29 @@ const Settings = () => {
     e.preventDefault();
     dispatch(changeNameFetch(mutateToAxios(changeNameForm)));
   };
+
+  const handleChangeEmail = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    dispatch(changeNameFetch(mutateToAxios(changeEmailForm)));
+  };
+
   const handleChangePassword = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     dispatch(changePasswordFetch(mutateToAxios(changePasswordForm)));
+  };
+
+  const handleToggleShow = () => {
+    if (showToggle === "Show") {
+      setUserEmail(email);
+      setShowToggle("Hide");
+    } else {
+      setUserEmail(hiddenEmail);
+      setShowToggle("Show");
+    }
+  };
+
+  const handleDeleteCancelBtn = () => {
+    setModalDeleteShow(false);
   };
 
   return (
@@ -147,9 +192,9 @@ const Settings = () => {
             <div className="d-flex justify-content-between align-items-center">
               <div className="d-flex align-items-center">
                 <p className="m-0">{userEmail}</p>{" "}
-                <Nav.Link eventKey="link-2">Show</Nav.Link>
+                <Nav.Link onClick={handleToggleShow}>{showToggle}</Nav.Link>
               </div>
-              <Button size="sm" onClick={() => setModalPasswordShow(true)}>
+              <Button size="sm" onClick={() => setModalEmailShow(true)}>
                 Edit
               </Button>
             </div>
@@ -163,7 +208,9 @@ const Settings = () => {
               Change password
             </Button>
             <hr className="mb-4 mt-5 ml-0" />
-            <Button variant="danger">Delete account</Button>
+            <Button variant="danger" onClick={() => setModalDeleteShow(true)}>
+              Delete account
+            </Button>
           </div>
         </Row>
       </Container>
@@ -172,13 +219,30 @@ const Settings = () => {
         show={modalNameShow}
         onHide={() => setModalNameShow(false)}
         user={userInfo}
+        title="Change your user name"
       >
         <FormStructure
           state={changeNameForm}
           setState={setChangeNameForm}
           btnText="Change"
-          title="Change your user name"
+          title=""
           submitted={handleChangeName}
+          spinner={changeName.loading}
+        />
+      </MyVerticallyCenteredModal>
+
+      <MyVerticallyCenteredModal
+        show={modalEmailShow}
+        onHide={() => setModalEmailShow(false)}
+        user={userInfo}
+        title="Change your email address"
+      >
+        <FormStructure
+          state={changeEmailForm}
+          setState={setChangeEmailForm}
+          btnText="Change"
+          title=""
+          submitted={handleChangeEmail}
           spinner={changeName.loading}
         />
       </MyVerticallyCenteredModal>
@@ -187,16 +251,31 @@ const Settings = () => {
         show={modalPasswordShow}
         onHide={() => setModalPasswordShow(false)}
         user={userInfo}
+        title="Change password"
       >
         <FormStructure
           state={changePasswordForm}
           setState={setChangePasswordForm}
           btnText="Change"
-          title="Change password"
+          title=""
           submitted={handleChangePassword}
           spinner={changePassword.loading}
           checkPass={true}
         />
+      </MyVerticallyCenteredModal>
+
+      <MyVerticallyCenteredModal
+        show={modalDeleteShow}
+        onHide={() => setModalDeleteShow(false)}
+        user={userInfo}
+        title="Arey you sure?"
+      >
+        <div className="d-flex justify-content-around">
+          <Button variant="danger" onClick={handleDeleteCancelBtn}>
+            Candel
+          </Button>
+          <Button variant="primary">Delete</Button>
+        </div>
       </MyVerticallyCenteredModal>
     </>
   );

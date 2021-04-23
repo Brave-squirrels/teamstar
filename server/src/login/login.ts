@@ -30,6 +30,7 @@ export default async (req: Request, res: Response) => {
 
   const id = user._id;
   const name = user.name;
+  const email = user.email;
   const token = user.generateAuthToken();
-  res.status(StatusCodes.OK).send({ name, token, id });
+  res.status(StatusCodes.OK).send({ name, email, token, id });
 };

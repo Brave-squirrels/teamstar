@@ -81,3 +81,23 @@ Content-Type: application/json
     "password": "Password1!",
     "confirmPassword": "Password1!"
 }
+
+###
+# change name
+PUT http://localhost:5000/users/changeName HTTP/1.1
+x-auth-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MDgxZDRlN2Y5MmEzYTFkODg0ZjM1YjkiLCJuYW1lIjoiT2xlazEyMzEiLCJpYXQiOjE2MTkxNzY3Nzh9.BVKHHGBVkcq7ymKXXcApccUo_roAnwPmpltcB3O_FMg
+Content-Type: application/json
+
+{
+    "name": "Olek"
+}
+
+###
+# change email
+PUT http://localhost:5000/users/changeEmail HTTP/1.1
+x-auth-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MDgxZDRlN2Y5MmEzYTFkODg0ZjM1YjkiLCJuYW1lIjoiT2xlazEyMzEiLCJpYXQiOjE2MTkxNzY3Nzh9.BVKHHGBVkcq7ymKXXcApccUo_roAnwPmpltcB3O_FMg
+Content-Type: application/json
+
+{
+    "email": "olo.a@wp.pl"
+}
