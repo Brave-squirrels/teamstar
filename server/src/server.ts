@@ -2,6 +2,8 @@ import "dotenv/config";
 import App from "./app/app";
 import validateEnv from "./app/validateEnv";
 
+require("./scrapper/scrapper");
+
 import UserController from "../controllers/users.controller";
 import LoginController from "../controllers/login.controller";
 
