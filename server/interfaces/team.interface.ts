@@ -5,6 +5,11 @@ interface NameAndId {
   id: string;
 }
 
+interface UserIDNAME {
+  userId: string;
+  userName: string;
+}
+
 interface Raport {
   userName: string;
   name: string;
@@ -21,7 +26,7 @@ interface Team extends mongoose.Document {
   raports: Raport[];
   calendarId: string;
   owner: NameAndId;
-  invitations: NameAndId[];
+  invitations: UserIDNAME[];
 }
 
 export default Team;
