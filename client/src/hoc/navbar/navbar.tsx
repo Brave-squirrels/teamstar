@@ -1,5 +1,5 @@
 import React from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
@@ -8,9 +8,11 @@ import NavDropdown from "react-bootstrap/NavDropdown";
 import Logo from "assets/logo.png";
 
 import { logout } from "reduxState/user/loginUser";
+import { RootState } from "reduxState/store";
 
 const Navigation = () => {
   const dispatch = useDispatch();
+  const userData = useSelector((state: RootState) => state.loginUser.userData);
   return (
     <Navbar collapseOnSelect expand="lg" bg="secondary" variant="dark">
       <Navbar.Brand to="/home" as={NavLink}>
@@ -29,9 +31,14 @@ const Navigation = () => {
       <Navbar.Toggle aria-controls="responsive-navbar-nav" />
       <Navbar.Collapse id="responsive-navbar-nav">
         <Nav className="ml-auto">
-          <NavDropdown title="Sample dropdown" id="collasible-nav-dropdown">
+          <NavDropdown title="Teams" id="collasible-nav-dropdown">
+            {/* {userData.teams.map((team)=> (
+              <NavDropdown.Item to={`/team/${team.id}`} as={NavLink}>
+              {team.name}
+            </NavDropdown.Item>
+            ))} */}
             <NavDropdown.Item to="/home" as={NavLink}>
-              Sample dropdown link
+              Here team name
             </NavDropdown.Item>
             <NavDropdown.Item to="/dnd" as={NavLink}>
               Drag&Drop

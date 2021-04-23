@@ -22,13 +22,74 @@ const userSchema = new mongoose.Schema<User>({
     minlength: 5,
     maxLength: 50,
   },
+  workTime: {
+    type: String,
+    default: "",
+  },
+  isActive: {
+    type: Boolean,
+    default: false,
+  },
+  teamInvitation: {
+    type: [
+      {
+        _id: false,
+        teamId: mongoose.Schema.Types.ObjectId,
+        teamName: String,
+      },
+    ],
+    default: [],
+  },
+  teams: {
+    type: [
+      {
+        _id: false,
+        teamId: mongoose.Schema.Types.ObjectId,
+        teamName: String,
+      },
+    ],
+    default: [],
+  },
+  tasks: {
+    type: [
+      {
+        _id: false,
+        teamId: mongoose.Schema.Types.ObjectId,
+        taskId: mongoose.Schema.Types.ObjectId,
+        taskName: String,
+      },
+    ],
+    default: [],
+  },
+  reports: {
+    type: [
+      {
+        _id: false,
+        teamId: mongoose.Schema.Types.ObjectId,
+        chatId: mongoose.Schema.Types.ObjectId,
+        chatName: String,
+      },
+    ],
+    default: [],
+  },
+  chats: {
+    type: [
+      {
+        _id: false,
+        reportId: mongoose.Schema.Types.ObjectId,
+        reportName: String,
+      },
+    ],
+    default: [],
+  },
+
+  isVerified: {
+    type: Boolean,
+    default: true, // TODO change to false if done
+  },
   date: {
     type: Date,
     default: Date.now,
-  },
-  isVerified: {
-    type: Boolean,
-    default: false,
   },
 });
 
