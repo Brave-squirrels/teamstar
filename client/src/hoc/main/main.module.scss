@@ -4,7 +4,7 @@
 .container {
   height: 100vh;
   width: 100%;
-  overflow: auto;
+  overflow-y: auto;
   position: relative;
   @include scrollbar;
 }
