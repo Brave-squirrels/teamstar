@@ -7,6 +7,8 @@ $Roboto: "Roboto", sans-serif;
 $fontLightGreen: #acf7d0;
 $fontWhite: #f3f9f6;
 $fontPlaceholder: #f3f9f6aa;
+$fontSmoke: whitesmoke;
+$fontBlue: #64afff;
 
 $invalid: #f56e69;
 
@@ -14,10 +16,27 @@ $backgroundLanding: #070e30;
 $backgroundCircle: radial-gradient(circle, #49a3d1 0%, rgba(255, 0, 0, 0) 70%);
 $backgroundLight: linear-gradient(45deg, #36b3c8 0%, #0679a2 99.9%);
 
-$backgroundDropdown: #1c2659;
+$backgroundDropdown: linear-gradient(
+  70deg,
+  rgba(75, 120, 139, 1) 0%,
+  rgba(100, 128, 156, 1) 100%
+);
 $backgroundDropdownHover: rgba(0, 0, 0, 0.2);
 
 $buttonBackground: #02addb;
+
+$backgroundModal: linear-gradient(
+  70deg,
+  rgba(75, 120, 139, 1) 0%,
+  rgba(100, 128, 156, 1) 100%
+);
+$borderModal: rgb(105, 142, 177);
+
+$backgroundJumbotron: linear-gradient(
+  70deg,
+  rgba(75, 120, 139, 0.8) 0%,
+  rgba(100, 128, 156, 0.8) 100%
+);
 
 $inputActiveBackground: #576075;
 $inputFilter: drop-shadow(4px 4px 14px rgba(0, 0, 0, 0.2));
