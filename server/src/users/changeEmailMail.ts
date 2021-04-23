@@ -16,8 +16,8 @@ export default async function sendChangeEmail(req: Request, res: Response) {
   const user = await userModel.findOne({ email }).select("id name email");
   if (!user) return res.status(StatusCodes.BAD_REQUEST).send("User not found");
 
-  const newUser = await userModel.findOne({ newEmail }).select("id name email");
-  if (newUser) await res.status(StatusCodes.BAD_REQUEST).send('User with this email already exists');
+  const newUser = await userModel.findOne({ email: newEmail });
+  if (newUser) return res.status(StatusCodes.BAD_REQUEST).send('User with this email already exists');
 
   const token = user.generateAuthToken();
   const url = `http://${process.env.BACKEND_ADDRESS}/users/email/${token}/${newEmail}`;
