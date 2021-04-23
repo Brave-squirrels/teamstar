@@ -14,7 +14,7 @@ export default async (req: Request, res: Response) => {
       .status(StatusCodes.UNAUTHORIZED)
       .send("You are not allowed to do that!");
 
-  const user = await userModel.findById(req.body.id);
+  const user = await userModel.findOne({ email: req.body.email });
   if (!user) return res.status(StatusCodes.NOT_FOUND).send("User not found!");
 
   user.teamInvitation?.push({ teamId: team._id, teamName: team.name });
