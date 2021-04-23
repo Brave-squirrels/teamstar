@@ -15,13 +15,13 @@ import MyVerticallyCenteredModal from "./MyVerticallyCenteredModal";
 type ShowType = "Show" | "Hide";
 
 const Settings = () => {
-  const [modalNameShow, setModalNameShow] = React.useState(false);
-  const [modalEmailShow, setModalEmailShow] = React.useState(false);
-  const [modalPasswordShow, setModalPasswordShow] = React.useState(false);
-  const [modalDeleteShow, setModalDeleteShow] = React.useState(false);
+  const [modalNameShow, setModalNameShow] = useState(false);
+  const [modalEmailShow, setModalEmailShow] = useState(false);
+  const [modalPasswordShow, setModalPasswordShow] = useState(false);
+  const [modalDeleteShow, setModalDeleteShow] = useState(false);
 
   const [userEmail, setUserEmail] = useState("");
-  const [hiddenEmail, sethiddenEmail] = useState("");
+  const [hiddenEmail, setHiddenEmail] = useState("");
   const [showToggle, setShowToggle] = useState<ShowType>("Show");
 
   const dispatch = useDispatch();
@@ -36,7 +36,7 @@ const Settings = () => {
 
   useEffect(() => {
     email &&
-      sethiddenEmail(
+      setHiddenEmail(
         email.split("@")[0].replace(/./g, "*") + "@" + email.split("@")[1]
       );
     setUserEmail(hiddenEmail);
@@ -51,7 +51,7 @@ const Settings = () => {
       };
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [changeName.success, email, userInfo.userData]);
+  }, [changeName.success, userInfo.userData!.email, userInfo.userData]);
 
   const [changeNameForm, setChangeNameForm] = useState({
     name: {
