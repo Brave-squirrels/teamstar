@@ -78,9 +78,9 @@ select:-webkit-autofill:focus {
 }
 
 .dropdown-menu {
-  background: $backgroundDropdown;
+  background: $backgroundModal;
   .dropdown-item {
-    color: $fontWhite;
+    color: $fontSmoke;
     &.active {
       background: $buttonBackground;
     }
@@ -89,31 +89,28 @@ select:-webkit-autofill:focus {
     }
   }
 }
+
 .dropdown-toggle::after {
   display: none;
 }
 
 .nav-link {
-  color: #64afff;
+  color: $fontBlue;
 }
 
 // ___________________ MODAL ___________________________
 
 .modal-content {
-  background: linear-gradient(
-    70deg,
-    rgba(75, 120, 139, 1) 0%,
-    rgba(100, 128, 156, 1) 100%
-  );
-  color: whitesmoke;
+  background: $backgroundModal;
+  color: $fontSmoke;
 }
 
 .modal-header {
-  border-color: rgb(105, 142, 177);
+  border-color: $borderModal;
 }
 
 .modal-footer {
-  border-color: rgb(105, 142, 177);
+  border-color: $borderModal;
 }
 
 .close {
@@ -127,10 +124,6 @@ select:-webkit-autofill:focus {
 // ___________________ Jumbotron _______________________
 
 .jumbotron {
-  background: linear-gradient(
-    70deg,
-    rgba(75, 120, 139, 0.8) 0%,
-    rgba(100, 128, 156, 0.8) 100%
-  );
+  background: $backgroundJumbotron;
   color: $fontWhite;
 }
