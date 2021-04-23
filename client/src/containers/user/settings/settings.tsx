@@ -17,7 +17,7 @@ import { changePasswordFetch } from "reduxState/user/changePassword";
 import { deleteUserFetch } from "reduxState/user/deleteUser";
 import { RootState } from "reduxState/store";
 import { mutateToAxios } from "utils/onChangeForm";
-import { teamDataFetch } from "reduxState/team/getTeamInfo";
+/* import { teamDataFetch } from "reduxState/team/getTeamInfo"; */
 
 import MyVerticallyCenteredModal from "./MyVerticallyCenteredModal";
 
@@ -55,7 +55,6 @@ const Settings = () => {
         },
       };
     });
-    dispatch(teamDataFetch("60835399fce5a635c0b35572"));
     setHiddenEmail(
       userInfo.userData!.email.split("@")[0].replace(/./g, "*") +
         "@" +
