@@ -39,7 +39,7 @@ export const { start, success, failed } = teamData.actions;
 export const teamDataFetch = (teamId: string): AppThunk => async (dispatch) => {
     dispatch(start());
     await axios
-        .post(`/teams/${teamId}`, {
+        .get(`/teams/${teamId}`, {
             headers: {
                 'x-auth-token': localStorage.getItem('token')
             }
