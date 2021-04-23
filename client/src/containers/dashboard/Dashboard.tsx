@@ -12,11 +12,14 @@ import { Team, TeamInvitation } from "utils/types";
 
 import styles from "./dashboard.module.scss";
 
+import { createTeamFetch } from "reduxState/team/createTeam";
 import { mutateToAxios } from "utils/onChangeForm";
 import { authUser } from "reduxState/user/loginUser";
 
 const Dashboard = () => {
   const userData = useSelector((state: RootState) => state.loginUser.userData);
+  const createState = useSelector((state: RootState) => state.createTeam);
+
   const [show, setShow] = useState(false);
   const [date, setDate] = useState({ date: new Date() });
   const [currentButton, setCurrentButton] = useState("");
@@ -29,7 +32,7 @@ const Dashboard = () => {
 
   useEffect(() => {
     dispatch(authUser());
-  }, [dispatch]);
+  }, [dispatch, createState.success]);
 
   const [form, setForm] = useState({
     name: {
@@ -66,7 +69,7 @@ const Dashboard = () => {
 
   const handleCreateTeam = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const data = mutateToAxios(form);
+    dispatch(createTeamFetch(mutateToAxios(form)));
   };
 
   const handleAcceptInvite = (id: string) => {
@@ -90,6 +93,7 @@ const Dashboard = () => {
           title={""}
           btnText="CREATE"
           submitted={handleCreateTeam}
+          spinner={createState.loading}
         />
       </MyVerticallyCenteredModal>
       <div className={styles.topWrapper}>
