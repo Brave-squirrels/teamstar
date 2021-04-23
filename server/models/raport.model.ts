@@ -17,7 +17,7 @@ const raportSchema = new mongoose.Schema<Raport>({
     maxlength: 254,
   },
   author: {
-    id: String,
+    id: mongoose.Schema.Types.ObjectId,
     required: true,
     name: string,
   },
@@ -26,7 +26,7 @@ const raportSchema = new mongoose.Schema<Raport>({
     default: Date.now,
   },
   team: {
-    id: String,
+    id: mongoose.Schema.Types.ObjectId,
     name: String,
     required: true,
   },
