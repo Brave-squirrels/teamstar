@@ -76,7 +76,6 @@ const App = () => {
           <Main>
             <NavBar />
             <MainParticles />
-
             <Switch>
               <ProtectedRoute path="/dnd" component={Dnd} />
               <ProtectedRoute path="/home" component={Dashboard} />
@@ -91,6 +90,7 @@ const App = () => {
                 path="/team/:teamId/raports"
                 component={Raports}
               />
+              <ProtectedRoute path="/calendar" component={Calendar} />
               <Route render={() => <Redirect to="/not-found" />} />
             </Switch>
           </Main>

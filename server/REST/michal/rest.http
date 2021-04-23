@@ -6,9 +6,9 @@ Content-Type: application/json
 
 {
     "name": "sampleName",
-    "email": "sample@email.com",
-    "password": "Password1!",
-    "confirmPassword": "Password1!"
+    "email": "niblopeel@gmail.com",
+    "password": "Dupa.123",
+    "confirmPassword": "Dupa.123"
 }
 
 ###
@@ -17,6 +17,18 @@ POST http://localhost:5000/login HTTP/1.1
 Content-Type: application/json
 
 {
-    "email": "ltnfodtydsppdixxmh@miucce.com",
-    "password": "Password1!"
+    "email": "niblopeel@gmail.com",
+    "password": "Dupa.123"
+}
+
+#_______________________TEAMS________________
+
+###
+POST http://localhost:5000/teams HTTP/1.1
+x-auth-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MDgzNDE0ZGZkMTU3NzM2ZDQzMzlkOTAiLCJuYW1lIjoic2FtcGxlTmFtZSIsImlhdCI6MTYxOTIxNDcyMH0.4Ok1OG0KlLaxXjGLigw7OQTy6fXeU6lGtkaarpgq8fU
+Content-Type: application/json
+
+{
+    "name":"None",
+    "description": "sample description"
 }

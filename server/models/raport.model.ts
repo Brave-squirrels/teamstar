@@ -18,8 +18,7 @@ const raportSchema = new mongoose.Schema<Raport>({
   },
   author: {
     id: mongoose.Schema.Types.ObjectId,
-    required: true,
-    name: string,
+    name: { type: String },
   },
   date: {
     type: Date,
@@ -28,7 +27,6 @@ const raportSchema = new mongoose.Schema<Raport>({
   team: {
     id: mongoose.Schema.Types.ObjectId,
     name: String,
-    required: true,
   },
 });
 
