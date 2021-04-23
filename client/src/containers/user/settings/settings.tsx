@@ -227,6 +227,10 @@ const Settings = () => {
                 Edit
               </Button>
             </div>
+            <span className="text-info small">
+              Check your inbox and follow the instructions to finish chagne your
+              email address
+            </span>
           </Jumbotron>
         </Row>
 
