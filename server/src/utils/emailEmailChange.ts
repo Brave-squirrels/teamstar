@@ -2,23 +2,23 @@ import nodemailer from "nodemailer";
 import "dotenv/config";
 
 export default async function sendEmail(email: string, url: string) {
-  const transporter = nodemailer.createTransport({
-    host: "smtp.mail.yahoo.com",
-    port: 465,
-    service: "yahoo",
-    secure: false,
-    auth: {
-      user: process.env.EMAIL,
-      pass: process.env.PASSWORD,
-    },
-    debug: false,
-  });
+	const transporter = nodemailer.createTransport({
+		host: "smtp.mail.yahoo.com",
+		port: 465,
+		service: "yahoo",
+		secure: false,
+		auth: {
+			user: process.env.EMAIL,
+			pass: process.env.PASSWORD,
+		},
+		debug: false,
+	});
 
-  const mailOptions = {
-    from: process.env.EMAIL,
-    to: email,
-    subject: "Change Password",
-    html: `
+	const mailOptions = {
+		from: process.env.EMAIL,
+		to: email,
+		subject: "Change email",
+		html: `
 		<table width="100%" border="0" align="center" cellpadding="0" cellspacing="0">
 			<tbody>
 				<tr>
@@ -104,7 +104,7 @@ export default async function sendEmail(email: string, url: string) {
 															font-weight: 300;
 														"
 													>
-														Thank you for registering in our platform
+														Thank you for using our platform
 													</td>
 												</tr>
 												<tr>
@@ -148,7 +148,7 @@ export default async function sendEmail(email: string, url: string) {
 											color: #333;
 										"
 									>
-										To change your email address just click this link below
+										To confirm change of email adress just click this link below
 									</td>
 								</tr>
 								<tr>
@@ -185,7 +185,7 @@ export default async function sendEmail(email: string, url: string) {
 													padding: 0.5rem;
 												"
 											>
-												Change password
+												Confirm
 											</div></a
 										>
 									</td>
@@ -196,12 +196,12 @@ export default async function sendEmail(email: string, url: string) {
 				</tr>
 			</tbody>
 		</table>`,
-  };
+	};
 
-  try {
-    await transporter.sendMail(mailOptions);
-    return "Mail Send!";
-  } catch (ex) {
-    return ex;
-  }
+	try {
+		await transporter.sendMail(mailOptions);
+		return "Mail Send!";
+	} catch (ex) {
+		return ex;
+	}
 }

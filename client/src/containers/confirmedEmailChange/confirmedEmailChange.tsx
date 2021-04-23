@@ -3,13 +3,13 @@ import React from "react";
 import { Button } from "react-bootstrap";
 import { Layout } from "hoc/layout/layout";
 
-import styles from "./confirmed.module.scss";
+import styles from "./confirmedEmailChange.module.scss";
 
-const confirmed = () => {
+const confirmedEmailChange = () => {
   return (
     <Layout>
       <div className={styles.innerWrapper}>
-        <p>Your email has been successfully confirmed!</p>
+        <p>Your email has been successfully changed!</p>
         <a href="/">
           <Button> Log In </Button>
         </a>
@@ -18,4 +18,4 @@ const confirmed = () => {
   );
 };
 
-export default confirmed;
+export default confirmedEmailChange;

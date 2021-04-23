@@ -38,7 +38,7 @@ export default class UserController {
     this.router.put(`${this.path}/changepassword`, auth, this.changePassword);
     this.router.put(`${this.path}/changeEmail`, auth, this.sendChangeEmail);
     this.router.put(`${this.path}/changeName`, auth, this.changeName);
-    this.router.put(`${this.path}/email`, auth, this.changeEmail);
+    this.router.get(`${this.path}/email/:token/:newEmail`, this.changeEmail);
   }
 
   createUser(req: Request, res: Response) {

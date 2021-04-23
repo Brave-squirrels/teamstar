@@ -1,0 +1,20 @@
+@import "styles/variables.scss";
+
+.wrapper {
+  background: $backgroundLanding;
+  height: 100vh;
+  overflow-y: hidden;
+}
+
+.innerWrapper {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  color: whitesmoke;
+  & > p {
+    font-size: 2em;
+    letter-spacing: 4px;
+  }
+}
