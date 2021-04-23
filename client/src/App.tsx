@@ -15,9 +15,7 @@ import Confirmed from "containers/confirmed/confirmed";
 import Settings from "containers/user/settings/settings";
 import NotFound from "containers/notFound/notFound";
 import ConfirmedEmailChange from "containers/confirmedEmailChange/confirmedEmailChange";
-/* import Dashboard from "containers/dashboard/Dashboard"; */
-import Teams from "containers/teams/teams";
-import TeamInvites from "containers/teamInvites/teamInvites";
+import Dashboard from "containers/dashboard/Dashboard";
 import Team from "containers/team/team";
 import Tasks from "containers/tasks/tasks";
 import Raports from "containers/raports/raports";
@@ -60,9 +58,8 @@ const App = () => {
             <MainParticles />
             <Switch>
               <ProtectedRoute path="/dnd" component={Dnd} />
-              <ProtectedRoute path="/home" component={Teams} />
+              <ProtectedRoute path="/home" component={Dashboard} />
               <ProtectedRoute path="/settings" component={Settings} />
-              <ProtectedRoute path="/invites" component={TeamInvites} />
               <ProtectedRoute path="/team/:teamId" component={Team} />
               <ProtectedRoute path="/team/:teamId/tasks" component={Tasks} />
               <ProtectedRoute
