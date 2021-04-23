@@ -4,6 +4,9 @@ import Controller from "../../interfaces/controller.interface";
 import mongoose from "mongoose";
 import rateLimit from "express-rate-limit";
 const cors = require("cors");
+import { createServer } from "http";
+import { Server, Socket } from "socket.io"; 
+import changeConnectionStatus from '../../src/users/changeConnectionStatus';
 
 /**
  * Main App class, responsible for initializing middlewares,
@@ -17,6 +20,8 @@ export default class App {
     windowMs: 15 * 60 * 1000,
     max: 100,
   });
+  private httpServer:any;
+
 
   constructor(controllers: Controller[]) {
     this.app = express();
@@ -24,6 +29,7 @@ export default class App {
     this.connectToDatabase();
     this.initializeMiddlewares();
     this.initializeControllers(controllers);
+    this.initializeSocket();
   }
 
   private initializeMiddlewares() {
@@ -32,6 +38,36 @@ export default class App {
     this.app.use(express.urlencoded({ extended: true }));
     this.app.use(cors());
     this.app.use(this.limiter);
+  }
+
+  private initializeSocket() {
+    this.httpServer = createServer(this.app);
+    const io = new Server(this.httpServer,{
+      cors: {
+        origin: "*",
+        methods: ["GET", "POST"]
+      }
+    });
+  
+    io.on("connection", async (socket: Socket) => {
+      if(socket.handshake.headers.token!=="null") {
+      let online = await changeConnectionStatus(socket.handshake.headers.token, true);
+      console.log(online)
+      }
+
+      socket.on("message", (message) => {
+        socket.emit("message", message);
+      });
+
+      socket.on("disconnect", async (reason) => {
+        if(socket.handshake.headers.token!=="null") {
+        let offline = await changeConnectionStatus(socket.handshake.headers.token, false);
+        console.log(offline);
+        }
+      })
+
+    });
+
   }
 
   private initializeControllers(controllers: Controller[]) {
@@ -60,8 +96,10 @@ export default class App {
       .catch((err) => console.log(err.message));
   }
 
+  
+
   public listen() {
-    return this.app.listen(this.port, () => {
+    return this.httpServer.listen(this.port, () => {
       console.log(`App listening on the port ${this.port}`);
     });
   }

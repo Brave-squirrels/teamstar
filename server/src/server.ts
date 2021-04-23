@@ -2,6 +2,7 @@ import "dotenv/config";
 import App from "./app/app";
 import validateEnv from "./app/validateEnv";
 
+
 require("./scrapper/scrapper");
 
 import UserController from "../controllers/users.controller";
@@ -24,6 +25,7 @@ const app = new App([
 ]);
 
 // Express app listen
+
 const server = app.listen();
 
 module.exports = server;
