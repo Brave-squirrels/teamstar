@@ -6,6 +6,7 @@ import rateLimit from "express-rate-limit";
 const cors = require("cors");
 import { createServer } from "http";
 import { Server, Socket } from "socket.io"; 
+import changeConnectionStatus from '../../src/users/changeConnectionStatus';
 
 /**
  * Main App class, responsible for initializing middlewares,
@@ -48,18 +49,21 @@ export default class App {
       }
     });
   
-    io.on("connection", (socket: Socket) => {
-      console.log(socket.handshake.headers.token);
-
+    io.on("connection", async (socket: Socket) => {
+      if(socket.handshake.headers.token!=="null") {
+      let online = await changeConnectionStatus(socket.handshake.headers.token, true);
+      console.log(online)
+      }
 
       socket.on("message", (message) => {
-        console.log(message)
         socket.emit("message", message);
       });
 
-      socket.on("disconnect", (reason) => {
-        console.log(socket.handshake.headers.token + "disconected");
-        console.log("disconnet");
+      socket.on("disconnect", async (reason) => {
+        if(socket.handshake.headers.token!=="null") {
+        let offline = await changeConnectionStatus(socket.handshake.headers.token, false);
+        console.log(offline);
+        }
       })
 
     });

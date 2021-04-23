@@ -26,8 +26,6 @@ const app = new App([
 
 // Express app listen
 
-// console.log(app);
-
 const server = app.listen();
 
 module.exports = server;

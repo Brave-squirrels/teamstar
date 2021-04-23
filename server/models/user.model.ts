@@ -91,6 +91,10 @@ const userSchema = new mongoose.Schema<User>({
     type: Date,
     default: Date.now,
   },
+  isOnline: {
+    type: Boolean,
+    default: false
+  }
 });
 
 userSchema.methods.generateAuthToken = function () {
