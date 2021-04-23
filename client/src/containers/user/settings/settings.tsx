@@ -2,15 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
 import FormStructure from "containers/form/formStructure";
-import {
-  Button,
-  Card,
-  Col,
-  Container,
-  Form,
-  Modal,
-  Row,
-} from "react-bootstrap";
+import { Button, Container, Jumbotron, Modal, Nav, Row } from "react-bootstrap";
 
 import { changeNameFetch } from "reduxState/user/changeName";
 import { changePasswordFetch } from "reduxState/user/changePassword";
@@ -19,44 +11,26 @@ import { mutateToAxios } from "utils/onChangeForm";
 
 function MyVerticallyCenteredModal(props: any) {
   return (
-    <Modal
-      {...props}
-      size="lg"
-      aria-labelledby="contained-modal-title-vcenter"
-      centered
-    >
-      <Modal.Header
-        closeButton
-        className="flex-column-reverse align-items-center"
-      >
-        <p>Type new user name and current password</p>
+    <Modal {...props} aria-labelledby="contained-modal-title-vcenter" centered>
+      <Modal.Header closeButton className="text-center"></Modal.Header>
 
-        <Modal.Title id="contained-modal-title-vcenter">
-          Change your user name
-        </Modal.Title>
-      </Modal.Header>
-
-      <Modal.Body>
-        <Form.Label>USER NAME</Form.Label>
-        <Form.Control type="text" placeholder="user_name"></Form.Control>
-        <br />
-        <Form.Label>CURRENT PASSWORD</Form.Label>
-        <Form.Control type="text"></Form.Control>
-      </Modal.Body>
-      <Modal.Footer>
-        <Button onClick={props.onHide}>Cancel</Button>
-        <Button onClick={props.onHide}>Done</Button>
-      </Modal.Footer>
+      <Modal.Body className="mb-4">{props.children}</Modal.Body>
     </Modal>
   );
 }
 
 const Settings = () => {
-  const [modalShow, setModalShow] = React.useState(false);
+  const [modalNameShow, setModalNameShow] = React.useState(false);
+  const [modalPasswordShow, setModalPasswordShow] = React.useState(false);
 
   const dispatch = useDispatch();
   const changeName = useSelector((state: RootState) => state.changeName);
   const userInfo = useSelector((state: RootState) => state.loginUser);
+
+  const { name, email } = userInfo.userData!;
+  const userEmail =
+    email.split("@")[0].replace(/./g, "*") + "@" + email.split("@")[1];
+
   const changePassword = useSelector(
     (state: RootState) => state.changePassword
   );
@@ -71,6 +45,7 @@ const Settings = () => {
         },
       };
     });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [changeName.success, userInfo.userData!.name, userInfo.userData]);
 
   const [changeNameForm, setChangeNameForm] = useState({
@@ -86,21 +61,6 @@ const Settings = () => {
         maxLength: 50,
       },
       error: "Name should be between 4 and 50 characters long",
-      touched: false,
-      valid: false,
-    },
-    email: {
-      val: "",
-      type: "text",
-      inputType: "input",
-      placeholder: "Email",
-      label: "Email",
-      validation: {
-        required: true,
-        minLength: 4,
-        maxLength: 50,
-      },
-      error: "",
       touched: false,
       valid: false,
     },
@@ -174,56 +134,71 @@ const Settings = () => {
     <>
       <Container className="mt-5">
         <h2 className="text-light">MY ACCOUNT</h2>
-        <Card bg="secondary" text="white">
-          <Card.Body>
-            <Card.Subtitle>USER NAME</Card.Subtitle>
-            <Row md="2" className="mb-4">
-              <Card.Text className="w-50%">user_name</Card.Text>
-              <div className="text-right">
-                <Button onClick={() => setModalShow(true)}>Edit</Button>
-              </div>
-            </Row>
+        <Row xs="1" md="2" className="mr-1 ml-1">
+          <Jumbotron className="position-relative pt-4 pb-4">
+            <h6>USER NAME</h6>
+            <div className="d-flex justify-content-between align-items-center">
+              <p className="m-0">{name}</p>
+              <Button size="sm" onClick={() => setModalNameShow(true)}>
+                Edit
+              </Button>
+            </div>
 
-            <Card.Subtitle>EMAIL ADDRESS</Card.Subtitle>
-            <Row md="2" className="mb-4">
-              <Card.Text className="w-50%">
-                ****@mail.com<Card.Link href="#">show</Card.Link>
-              </Card.Text>
-              <div className="text-right">
-                <Button>Edit</Button>
+            <h6 className="mt-4">EMAIL ADDRESS</h6>
+            <div className="d-flex justify-content-between align-items-center">
+              <div className="d-flex align-items-center">
+                <p className="m-0">{userEmail}</p>{" "}
+                <Nav.Link eventKey="link-2">Show</Nav.Link>
               </div>
-            </Row>
-          </Card.Body>
-        </Card>
-        <hr />
-        <Button>Change password</Button>
-        <hr />
-        <Button variant="danger">Delete account</Button>
-        {/* <FormStructure
-              state={changeNameForm}
-              setState={setChangeNameForm}
-              btnText="Change"
-              title="Change name"
-              submitted={handleChangeName}
-              spinner={changeName.loading}
-              direction="row"
-            /> */}
+              <Button size="sm" onClick={() => setModalPasswordShow(true)}>
+                Edit
+              </Button>
+            </div>
+          </Jumbotron>
+        </Row>
 
-        {/* <FormStructure
-              state={changePasswordForm}
-              setState={setChangePasswordForm}
-              btnText="Change"
-              title="Change password"
-              submitted={handleChangePassword}
-              spinner={changePassword.loading}
-              checkPass={true}
-              direction="row"
-            /> */}
+        <Row xs="1" md="2" className="mr-1 ml-1 position-relative">
+          <div>
+            <hr className="mb-4 mt-4 ml-0 " />
+            <Button onClick={() => setModalPasswordShow(true)}>
+              Change password
+            </Button>
+            <hr className="mb-4 mt-5 ml-0" />
+            <Button variant="danger">Delete account</Button>
+          </div>
+        </Row>
       </Container>
+
       <MyVerticallyCenteredModal
-        show={modalShow}
-        onHide={() => setModalShow(false)}
-      />
+        show={modalNameShow}
+        onHide={() => setModalNameShow(false)}
+        user={userInfo}
+      >
+        <FormStructure
+          state={changeNameForm}
+          setState={setChangeNameForm}
+          btnText="Change"
+          title="Change your user name"
+          submitted={handleChangeName}
+          spinner={changeName.loading}
+        />
+      </MyVerticallyCenteredModal>
+
+      <MyVerticallyCenteredModal
+        show={modalPasswordShow}
+        onHide={() => setModalPasswordShow(false)}
+        user={userInfo}
+      >
+        <FormStructure
+          state={changePasswordForm}
+          setState={setChangePasswordForm}
+          btnText="Change"
+          title="Change password"
+          submitted={handleChangePassword}
+          spinner={changePassword.loading}
+          checkPass={true}
+        />
+      </MyVerticallyCenteredModal>
     </>
   );
 };

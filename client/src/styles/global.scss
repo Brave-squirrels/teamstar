@@ -15,6 +15,10 @@ body {
   box-sizing: border-box;
 }
 
+hr {
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
 //______________________________ Form styles _______________________________
 
 .form-text input,
@@ -73,5 +77,23 @@ select:-webkit-autofill:focus {
   font-size: 1.3em;
 }
 
-.card {
+// ___________________ Jumbotron _______________________
+
+.jumbotron {
+  background-color: #49657d;
+  color: $fontWhite;
+}
+
+// ___________________ Modal _______________________
+
+.modal-content {
+  background-color: #49657d;
+}
+
+.close {
+  color: $fontWhite;
+}
+
+.close:hover {
+  color: $fontWhite;
 }
