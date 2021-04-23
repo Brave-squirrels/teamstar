@@ -9,8 +9,10 @@ interface State {
 }
 
 interface Data {
-    name: string;
-    description: string;
+    invitation: {
+        teamId: string;
+        teamName: string;
+    }
 }
 
 const initialState: State = {
@@ -41,7 +43,7 @@ export const { start, success, failed } = acceptInvite.actions;
 
 export const acceptInviteFetch = (data: Data, teamId: string): AppThunk => async (dispatch) => {
     dispatch(start());
-    await axios.post(`/teams/${teamId}`, data, {
+    await axios.put(`/teams/${teamId}/acceptInvite`, data, {
         headers: {
             'x-auth-token': localStorage.getItem('token')
         }
