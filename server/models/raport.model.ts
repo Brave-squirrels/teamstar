@@ -17,18 +17,16 @@ const raportSchema = new mongoose.Schema<Raport>({
     maxlength: 254,
   },
   author: {
-    id: String,
-    required: true,
-    name: string,
+    id: mongoose.Schema.Types.ObjectId,
+    name: { type: String },
   },
   date: {
     type: Date,
     default: Date.now,
   },
   team: {
-    id: String,
+    id: mongoose.Schema.Types.ObjectId,
     name: String,
-    required: true,
   },
 });
 

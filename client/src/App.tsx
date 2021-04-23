@@ -1,6 +1,7 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Route, Switch, useHistory, Redirect } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+import socketIOClient from "socket.io-client";
 
 import MainParticles from "components/mainParticles/mainParticles";
 
@@ -24,10 +25,29 @@ import Calendar from "containers/calendar/calendar";
 import { authUser, logout } from "reduxState/user/loginUser";
 import { RootState } from "reduxState/store";
 
+const ENDPOINT = "http://localhost:5000"
+
+
 const App = () => {
   const dispatch = useDispatch();
   const history = useHistory();
   const loginState = useSelector((state: RootState) => state.loginUser);
+  const [response, setResponse] = useState("");
+  const token:string = localStorage.getItem('token') || "null";
+  
+  useEffect(() => {
+    const socket = socketIOClient(ENDPOINT, {
+      extraHeaders: {
+        "Access-Control-Allow-Origin": "*",
+        "token": token
+      }      
+    });
+    socket.on("connected", data => {
+      setResponse(data)
+      console.log(data);
+      console.log(response);
+    })
+  });
 
   useEffect(() => {
     if (localStorage.getItem("token")) {
