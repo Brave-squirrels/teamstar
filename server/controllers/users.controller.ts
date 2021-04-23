@@ -64,12 +64,12 @@ export default class UserController {
     getAllUsers(req, res);
   }
 
-  getUser(req: Request, res: Response) {
-    getUser(req, res);
-  }
-
   getUserMe(req: Request, res: Response) {
     getUserMe(req, res);
+  }
+
+  getUser(req: Request, res: Response) {
+    getUser(req, res);
   }
 
   confirmation(req: Request, res: Response) {

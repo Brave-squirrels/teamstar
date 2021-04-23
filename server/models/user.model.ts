@@ -65,9 +65,8 @@ const userSchema = new mongoose.Schema<User>({
     type: [
       {
         _id: false,
-        teamId: mongoose.Schema.Types.ObjectId,
-        chatId: mongoose.Schema.Types.ObjectId,
-        chatName: String,
+        reportId: mongoose.Schema.Types.ObjectId,
+        reportName: String,
       },
     ],
     default: [],
@@ -76,8 +75,9 @@ const userSchema = new mongoose.Schema<User>({
     type: [
       {
         _id: false,
-        reportId: mongoose.Schema.Types.ObjectId,
-        reportName: String,
+        teamId: mongoose.Schema.Types.ObjectId,
+        chatId: mongoose.Schema.Types.ObjectId,
+        chatName: String,
       },
     ],
     default: [],
