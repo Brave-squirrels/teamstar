@@ -10,6 +10,7 @@ import newPassword from "../src/users/newPassword";
 import confirmation from "../src/users/confirmation";
 import searchUser from "../src/users/searchUser";
 import sendResetMail from "../src/users/changePasswordMail";
+import sendChangeEmail from "../src/users/changeEmailMail";
 import changeName from "../src/users/changeName";
 import changeEmail from "../src/users/changeEmail";
 
@@ -35,8 +36,9 @@ export default class UserController {
     this.router.get(`${this.path}/search/:email?`, this.searchUser);
     this.router.put(`${this.path}/password`, auth, this.newPassword);
     this.router.put(`${this.path}/changepassword`, auth, this.changePassword);
+    this.router.put(`${this.path}/changeEmail`, auth, this.sendChangeEmail);
     this.router.put(`${this.path}/changeName`, auth, this.changeName);
-    this.router.put(`${this.path}/changeEmail`, auth, this.changeEmail);
+    this.router.put(`${this.path}/email`, auth, this.changeEmail);
   }
 
   createUser(req: Request, res: Response) {
@@ -73,6 +75,10 @@ export default class UserController {
 
   changePassword(req: Request, res: Response) {
     changePassword(req, res);
+  }
+
+  sendChangeEmail(req: Request, res: Response) {
+    sendChangeEmail(req, res);
   }
 
   changeName(req: Request, res: Response) {
