@@ -17,10 +17,7 @@ import NotFound from "containers/notFound/notFound";
 
 import { authUser, logout } from "reduxState/user/loginUser";
 import { RootState } from "reduxState/store";
-
-const Hello = () => {
-  return <div>TEST</div>;
-};
+import Dashboard from "containers/dashboard/Dashboard";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -55,7 +52,7 @@ const App = () => {
             <MainParticles />
             <Switch>
               <ProtectedRoute path="/dnd" component={Dnd} />
-              <ProtectedRoute path="/home" component={Hello} />
+              <ProtectedRoute path="/home" component={Dashboard} />
               <ProtectedRoute path="/settings" component={Settings} />
               <Route render={() => <Redirect to="/not-found" />} />
             </Switch>
