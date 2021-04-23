@@ -5,7 +5,7 @@ import FormStructure from "containers/form/formStructure";
 import { Button, Container, Jumbotron, Nav, Row } from "react-bootstrap";
 
 import { changeNameFetch } from "reduxState/user/changeName";
-// import { changeEmailFetch } from "reduxState/user/changeEmail";
+// XXX import { changeEmailFetch } from "reduxState/user/changeEmail";
 import { changePasswordFetch } from "reduxState/user/changePassword";
 import { RootState } from "reduxState/store";
 import { mutateToAxios } from "utils/onChangeForm";
@@ -26,7 +26,7 @@ const Settings = () => {
 
   const dispatch = useDispatch();
   const changeName = useSelector((state: RootState) => state.changeName);
-  // const changeEmail = useSelector((state: RootState) => state.changeEmail);
+  // XXX const changeEmail = useSelector((state: RootState) => state.changeEmail);
   const userInfo = useSelector((state: RootState) => state.loginUser);
   let { name, email } = userInfo.userData!;
 
@@ -208,7 +208,10 @@ const Settings = () => {
               Change password
             </Button>
             <hr className="mb-4 mt-5 ml-0" />
-            <Button variant="danger" onClick={() => setModalDeleteShow(true)}>
+            <Button
+              variant="outline-danger"
+              onClick={() => setModalDeleteShow(true)}
+            >
               Delete account
             </Button>
           </div>
@@ -243,7 +246,7 @@ const Settings = () => {
           btnText="Change"
           title=""
           submitted={handleChangeEmail}
-          spinner={changeName.loading}
+          spinner={changeName.loading} // XXX
         />
       </MyVerticallyCenteredModal>
 
@@ -271,10 +274,10 @@ const Settings = () => {
         title="Arey you sure?"
       >
         <div className="d-flex justify-content-around">
-          <Button variant="danger" onClick={handleDeleteCancelBtn}>
+          <Button variant="primary" onClick={handleDeleteCancelBtn}>
             Candel
           </Button>
-          <Button variant="primary">Delete</Button>
+          <Button variant="danger">Delete</Button>
         </div>
       </MyVerticallyCenteredModal>
     </>
