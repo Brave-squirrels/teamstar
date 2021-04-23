@@ -6,15 +6,11 @@ const chatSchema = new mongoose.Schema<Chat>({
   name: {
     type: String,
     required: true,
-    minlength: 4,
-    maxLength: 50,
   },
 
   teamId: {
-    type: String,
+    type: mongoose.Schema.Types.ObjectId,
     required: true,
-    minlength: 4,
-    maxLength: 50,
   },
 
   messages: {

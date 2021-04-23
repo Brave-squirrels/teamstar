@@ -6,6 +6,7 @@ require("./scrapper/scrapper");
 
 import UserController from "../controllers/users.controller";
 import LoginController from "../controllers/login.controller";
+import ChatController from "../controllers/chat.controller";
 
 // Check if private key exist
 if (!process.env.JWT_PRIVATE_KEY) {
@@ -21,6 +22,7 @@ const app = new App([
   // Adding all controllers
   new UserController(),
   new LoginController(),
+  new ChatController(),
 ]);
 
 // Express app listen
