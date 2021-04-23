@@ -1,4 +1,10 @@
 import mongoose from "mongoose";
+
+import TeamArr from "./teamArr.interface";
+import InviteArr from "./inviteArr.interface";
+import TaskArr from "./taskArr.interface";
+import ChatArr from "./chatArr.interface";
+
 // User interface
 interface User extends mongoose.Document {
   name: string;
@@ -6,12 +12,12 @@ interface User extends mongoose.Document {
   email: string;
   workTime?: number; // XXX not sure
   isActive?: boolean;
-  teamInvitation?: any; // TODO change type
-  teams?: any; // TODO change type
-  tasks?: any; // TODO change type
+  teamInvitation?: InviteArr[];
+  teams?: TeamArr[];
+  tasks?: TaskArr[];
   reports?: any; // TODO change type
   isVerified?: boolean;
-  chats?: any; // TODO change type
+  chats?: ChatArr[];
   date?: Date;
   generateAuthToken(): string;
 }

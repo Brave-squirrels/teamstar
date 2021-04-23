@@ -13,12 +13,14 @@ const userActivity = async (req: Request, res: Response) => {
 
   const user = await userModel.findByIdAndUpdate(
     req.userInfo._id,
-    { name: req.body.name },
+    { isActive: req.body.isActive },
     { new: true }
   );
   if (!user) return res.status(StatusCodes.NOT_FOUND).send("User not found");
 
-  res.status(StatusCodes.OK).send(_.pick(user, ["_id", "name", "email"]));
+  res
+    .status(StatusCodes.OK)
+    .send(_.pick(user, ["_id", "name", "email", "isActive"]));
 };
 
 export default userActivity;

@@ -47,6 +47,10 @@ Content-Type: application/json
 GET http://localhost:5000/users HTTP/1.1
 
 ###
+# get user
+GET http://localhost:5000/users/608315a2a8831d25f8f42729 HTTP/1.1
+
+###
 # get me
 GET http://localhost:5000/users/me HTTP/1.1
 x-auth-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MDgzMTVhMmE4ODMxZDI1ZjhmNDI3MjkiLCJuYW1lIjoib2xlayIsImlhdCI6MTYxOTIwMzUwMX0.x2qQ0s20tiF54npju0QB5-9_mfLmQVKv-jfkmPv2Osc
@@ -90,6 +94,16 @@ Content-Type: application/json
 
 {
     "name": "Olek"
+}
+
+###
+# change activity
+PUT http://localhost:5000/users/active HTTP/1.1
+x-auth-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MDgzMTVhMmE4ODMxZDI1ZjhmNDI3MjkiLCJuYW1lIjoib2xlayIsImlhdCI6MTYxOTIwNTcxM30.NJrvOH3ZTV56c15LT5FaTSSD7wilvs6WRrznFt0kMQY
+Content-Type: application/json
+
+{
+    "isActive": true
 }
 
 ###
