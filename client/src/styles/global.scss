@@ -15,6 +15,10 @@ body {
   box-sizing: border-box;
 }
 
+hr {
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
 //______________________________ Form styles _______________________________
 
 .form-text input,
@@ -94,8 +98,8 @@ select:-webkit-autofill:focus {
 .modal-content {
   background: linear-gradient(
     70deg,
-    rgba(75, 120, 139, 0.8) 0%,
-    rgba(100, 128, 156, 0.8) 100%
+    rgba(75, 120, 139, 1) 0%,
+    rgba(100, 128, 156, 1) 100%
   );
   color: whitesmoke;
 }
@@ -106,4 +110,23 @@ select:-webkit-autofill:focus {
 
 .modal-footer {
   border-color: rgb(105, 142, 177);
+}
+
+.close {
+  color: $fontWhite;
+}
+
+.close:hover {
+  color: $fontWhite;
+}
+
+// ___________________ Jumbotron _______________________
+
+.jumbotron {
+  background: linear-gradient(
+    70deg,
+    rgba(75, 120, 139, 0.8) 0%,
+    rgba(100, 128, 156, 0.8) 100%
+  );
+  color: $fontWhite;
 }
