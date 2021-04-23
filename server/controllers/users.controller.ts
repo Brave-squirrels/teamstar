@@ -13,6 +13,7 @@ import sendResetMail from "../src/users/changePasswordMail";
 import sendChangeEmail from "../src/users/changeEmailMail";
 import changeName from "../src/users/changeName";
 import changeEmail from "../src/users/changeEmail";
+import deleteUser from "../src/users/deleteUser";
 
 /**
  * UserControll Class,
@@ -39,6 +40,7 @@ export default class UserController {
     this.router.put(`${this.path}/changeEmail`, auth, this.sendChangeEmail);
     this.router.put(`${this.path}/changeName`, auth, this.changeName);
     this.router.get(`${this.path}/email/:token/:newEmail`, this.changeEmail);
+    this.router.delete(`${this.path}/`, auth, this.deleteUser);
   }
 
   createUser(req: Request, res: Response) {
@@ -87,5 +89,9 @@ export default class UserController {
 
   changeEmail(req: Request, res: Response) {
     changeEmail(req, res);
+  }
+
+  deleteUser(req: Request, res: Response) {
+    deleteUser(req, res);
   }
 }
