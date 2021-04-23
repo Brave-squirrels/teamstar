@@ -19,6 +19,7 @@ export default class TeamController {
 
   public initializeRoutes() {
     this.router.post(this.path, auth, this.createTeam);
+    this.router.get(`${this.path}/:teamId`, auth, this.getTeam);
     this.router.put(`${this.path}/:teamId`, auth, this.sendInvite);
     this.router.put(`${this.path}/:teamId`, auth, this.deleteInvite);
     this.router.delete(`${this.path}/:teamId`, auth, this.deleteTeam);
@@ -26,6 +27,10 @@ export default class TeamController {
 
   createTeam(req: Request, res: Response) {
     createTeam(req, res);
+  }
+
+  getTeam(req: Request, res: Response) {
+    this.getTeam(req, res);
   }
 
   sendInvite(req: Request, res: Response) {
