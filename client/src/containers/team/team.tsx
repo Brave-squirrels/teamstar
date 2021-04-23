@@ -18,6 +18,7 @@ const team = () => {
               className={styles.settingsImg}
             />
           </div>
+          <div className={styles.taskPanel}></div>
         </div>
       </div>
 
