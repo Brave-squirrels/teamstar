@@ -14,10 +14,11 @@ import Dnd from "containers/dnd/Dnd";
 import Confirmed from "containers/confirmed/confirmed";
 import Settings from "containers/user/settings/settings";
 import NotFound from "containers/notFound/notFound";
+import ConfirmedEmailChange from "containers/confirmedEmailChange/confirmedEmailChange";
+import Dashboard from "containers/dashboard/Dashboard";
 
 import { authUser, logout } from "reduxState/user/loginUser";
 import { RootState } from "reduxState/store";
-import Dashboard from "containers/dashboard/Dashboard";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -43,6 +44,7 @@ const App = () => {
       <Route exact path="/sendResetPassword" component={SendResetPassword} />
       <Route exact path="/resetPassword/:token" component={ResetPassword} />
       <Route exact path="/confirmed" component={Confirmed} />
+      <Route exact path="/emailChanged" component={ConfirmedEmailChange} />
       <Route exact path="/not-found" component={NotFound} />
       <Route
         path="/(.+)"

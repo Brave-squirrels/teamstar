@@ -5,7 +5,7 @@ import FormStructure from "containers/form/formStructure";
 import { Button, Container, Jumbotron, Nav, Row } from "react-bootstrap";
 
 import { changeNameFetch } from "reduxState/user/changeName";
-// XXX import { changeEmailFetch } from "reduxState/user/changeEmail";
+import { changeEmailFetch } from "reduxState/user/changeEmail";
 import { changePasswordFetch } from "reduxState/user/changePassword";
 import { RootState } from "reduxState/store";
 import { mutateToAxios } from "utils/onChangeForm";
@@ -26,7 +26,7 @@ const Settings = () => {
 
   const dispatch = useDispatch();
   const changeName = useSelector((state: RootState) => state.changeName);
-  // XXX const changeEmail = useSelector((state: RootState) => state.changeEmail);
+  const changeEmail = useSelector((state: RootState) => state.changeEmail);
   const userInfo = useSelector((state: RootState) => state.loginUser);
   let { name, email } = userInfo.userData!;
 
@@ -152,7 +152,12 @@ const Settings = () => {
 
   const handleChangeEmail = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    dispatch(changeNameFetch(mutateToAxios(changeEmailForm)));
+    dispatch(
+      changeEmailFetch({
+        email: userInfo.userData!.email,
+        newEmail: changeEmailForm.email.val,
+      })
+    );
   };
 
   const handleChangePassword = (e: React.FormEvent<HTMLFormElement>) => {
@@ -246,7 +251,7 @@ const Settings = () => {
           btnText="Change"
           title=""
           submitted={handleChangeEmail}
-          spinner={changeName.loading} // XXX
+          spinner={changeEmail.loading}
         />
       </MyVerticallyCenteredModal>
 
