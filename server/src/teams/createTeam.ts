@@ -1,11 +1,11 @@
-import { Response, Request } from "express";
+import { Response, Request, NextFunction } from "express";
 import { StatusCodes } from "http-status-codes";
 import teamModel from "../../models/team.model";
 import userModel from "../../models/user.model";
 import validateCreateTeam from "./validateCreateTeam";
 
 // Function for creating a new user
-export default async (req: Request, res: Response) => {
+export default async (req: Request, res: Response, next: NextFunction) => {
   const user = await userModel.findById(req.userInfo._id);
 
   const teamData = {
@@ -26,5 +26,8 @@ export default async (req: Request, res: Response) => {
   await team.save();
   await user!.save();
 
+  res.locals.createdTeam = team;
+
   return res.status(StatusCodes.OK).send("Team Created Succesfully!");
+  next();
 };

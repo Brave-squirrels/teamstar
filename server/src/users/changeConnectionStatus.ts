@@ -1,5 +1,3 @@
-import { Request, Response } from "express";
-import { StatusCodes } from "http-status-codes";
 import _ from "lodash";
 import userModel from "../../models/user.model";
 import jwt from 'jsonwebtoken';

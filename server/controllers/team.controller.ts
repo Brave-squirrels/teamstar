@@ -1,13 +1,15 @@
-import express, { Request, Response } from "express";
+import express, { NextFunction, Request, Response } from "express";
 import auth from "../middleware/auth";
 import createTeam from "../src/teams/createTeam";
 import deleteInvite from "../src/teams/deleteInvite";
 import deleteTeam from "../src/teams/deleteTeam";
 import sendInvite from "../src/teams/sendInvite";
+import createCalendar from "../middleware/createCalendar";
+
 
 /**
- * raport Class,
- * responsible for managing CRUD operations inside of raports
+ * team Class,
+ * responsible for managing CRUD operations inside of teams
  */
 export default class TeamController {
   public path = "/teams";
@@ -18,14 +20,14 @@ export default class TeamController {
   }
 
   public initializeRoutes() {
-    this.router.post(this.path, auth, this.createTeam);
+    this.router.post(this.path, auth, this.createTeam, createCalendar);
     this.router.put(`${this.path}/:teamId`, auth, this.sendInvite);
     this.router.put(`${this.path}/:teamId`, auth, this.deleteInvite);
     this.router.delete(`${this.path}/:teamId`, auth, this.deleteTeam);
   }
 
-  createTeam(req: Request, res: Response) {
-    createTeam(req, res);
+  createTeam(req: Request, res: Response, next: NextFunction) {
+    createTeam(req, res, next);
   }
 
   sendInvite(req: Request, res: Response) {
@@ -39,4 +41,5 @@ export default class TeamController {
   deleteTeam(req: Request, res: Response) {
     deleteTeam(req, res);
   }
+
 }
