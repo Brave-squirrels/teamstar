@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 import { Button } from "react-bootstrap";
 import { RootState } from "reduxState/store";
 
 import MyVerticallyCenteredModal from "containers/user/settings/MyVerticallyCenteredModal";
 import FormStructure from "containers/form/formStructure";
+import { Team, TeamInvitation } from "utils/types";
 
 import styles from "./dashboard.module.scss";
 
@@ -39,13 +41,13 @@ const Dashboard = () => {
       placeholder: "Description",
       label: "Description",
       validation: {
-        required: true,
-        minLength: 1,
+        required: false,
+        minLength: 0,
         maxLength: 255,
       },
-      error: "Description should be between 1 and 255 characters long",
-      touched: false,
-      valid: false,
+      error: "Description should can't be longer than 255 characters",
+      touched: true,
+      valid: true,
     },
     formValid: false,
   });
@@ -78,60 +80,31 @@ const Dashboard = () => {
         <div className={styles.innerWrapper}>
           <div className={styles.title}>MY TEAMS</div>
           <div className={styles.cardsCon}>
-            <div className={styles.card}>
-              <div className={styles.cardTitle}>Team name</div>
-              <div className={styles.cardBody}>Description</div>
-              <div className={styles.cardFooter}>
-                <Button>GO TO</Button>
+            {userData?.teams.map((team: Team) => (
+              <div className={styles.card}>
+                <div className={styles.cardTitle}>{team.teamName}</div>
+                <div className={styles.cardBody}></div>
+                <div className={styles.cardFooter}>
+                  <Link to={`/team/${team.teamId}`}>
+                    <Button>GO TO</Button>
+                  </Link>
+                </div>
               </div>
-            </div>
+            ))}
           </div>
         </div>
         <div className={styles.innerWrapper}>
           <div className={styles.title}>MY INVITES</div>
           <div className={styles.cardsCon}>
-            <div className={styles.card}>
-              <div className={styles.cardInvitesTitle}>Team name</div>
-              <div className={styles.cardInvitesBody}>
-                <Button variant="success">ACCEPT</Button>
-                <Button variant="danger">REJECT</Button>
+            {userData?.teamInvitation.map((invite: TeamInvitation) => (
+              <div className={styles.card}>
+                <div className={styles.cardInvitesTitle}>{invite.teamName}</div>
+                <div className={styles.cardInvitesBody}>
+                  <Button variant="success">ACCEPT</Button>
+                  <Button variant="danger">REJECT</Button>
+                </div>
               </div>
-            </div>
-            <div className={styles.card}>
-              <div className={styles.cardInvitesTitle}>Team name</div>
-              <div className={styles.cardInvitesBody}>
-                <Button variant="success">ACCEPT</Button>
-                <Button variant="danger">REJECT</Button>
-              </div>
-            </div>
-            <div className={styles.card}>
-              <div className={styles.cardInvitesTitle}>Team name</div>
-              <div className={styles.cardInvitesBody}>
-                <Button variant="success">ACCEPT</Button>
-                <Button variant="danger">REJECT</Button>
-              </div>
-            </div>
-            <div className={styles.card}>
-              <div className={styles.cardInvitesTitle}>Team name</div>
-              <div className={styles.cardInvitesBody}>
-                <Button variant="success">ACCEPT</Button>
-                <Button variant="danger">REJECT</Button>
-              </div>
-            </div>
-            <div className={styles.card}>
-              <div className={styles.cardInvitesTitle}>Team name</div>
-              <div className={styles.cardInvitesBody}>
-                <Button variant="success">ACCEPT</Button>
-                <Button variant="danger">REJECT</Button>
-              </div>
-            </div>
-            <div className={styles.card}>
-              <div className={styles.cardInvitesTitle}>Team name</div>
-              <div className={styles.cardInvitesBody}>
-                <Button variant="success">ACCEPT</Button>
-                <Button variant="danger">REJECT</Button>
-              </div>
-            </div>
+            ))}
           </div>
         </div>
       </div>

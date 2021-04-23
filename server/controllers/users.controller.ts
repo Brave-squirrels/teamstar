@@ -35,7 +35,6 @@ export default class UserController {
     this.router.post(`${this.path}/sendreset`, this.sendResetMail);
     this.router.post(`${this.path}/email`, this.sendEmailToUser);
     this.router.get(this.path, this.getAllUsers);
-    this.router.get(`${this.path}/:id`, findUser, this.getUser);
     this.router.get(`${this.path}/me`, auth, this.getUserMe);
     this.router.get(`${this.path}/confirmation/:token`, this.confirmation);
     this.router.get(`${this.path}/search/:email?`, this.searchUser);
