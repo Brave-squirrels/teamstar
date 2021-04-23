@@ -16,7 +16,6 @@ const chatSchema = new mongoose.Schema<Chat>({
   messages: {
     type: [
       {
-        messageName: String,
         authorName: String,
         authorId: mongoose.Schema.Types.ObjectId,
         content: String,
