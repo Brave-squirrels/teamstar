@@ -9,13 +9,13 @@ export default async (req: Request, res: Response) => {
   if (!team)
     return res.status(StatusCodes.NOT_FOUND).send("Team was not found!");
 
-  if (req.userInfo._id != team.owner.id && req.userInfo._id != req.body.id)
+  const user = await userModel.findById(req.body.id);
+  if (!user) return res.status(StatusCodes.NOT_FOUND).send("User not found!");
+
+  if (req.userInfo._id != team.owner.id && req.userInfo._id != user._id)
     return res
       .status(StatusCodes.UNAUTHORIZED)
       .send("You are not allowed to do that!");
-
-  const user = await userModel.findById(req.body.id);
-  if (!user) return res.status(StatusCodes.NOT_FOUND).send("User not found!");
 
   user.teamInvitation?.forEach((invite: any, i: number) => {
     if (invite.teamId === team.id) user.teamInvitation?.splice(i, 1);

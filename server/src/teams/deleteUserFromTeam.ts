@@ -8,7 +8,7 @@ export default async (req: Request, res: Response) => {
   const team = await teamModel.findById(req.params.teamId);
   if (!team) return res.status(StatusCodes.BAD_REQUEST).send("Team not found!");
 
-  if (req.userInfo._id != team.owner.id)
+  if (req.userInfo._id != team.owner.id && req.userInfo._id != req.body.id)
     return res
       .status(StatusCodes.UNAUTHORIZED)
       .send("You are not allowed to do that!");
