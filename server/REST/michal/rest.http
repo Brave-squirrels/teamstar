@@ -25,7 +25,7 @@ Content-Type: application/json
 
 ###
 POST http://localhost:5000/teams HTTP/1.1
-x-auth-token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MDgyZGJjMTEyNTc0NzBiNjBkYzFmYzgiLCJuYW1lIjoibmV3bmFtZTEiLCJpYXQiOjE2MTkyMTQxNjZ9.GsAZN4LzxwIEHT0hn6lqPMxhv-tuk0iXtFeFWO1dFGE    "name":"None""
+x-auth-token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MDgyZGJjMTEyNTc0NzBiNjBkYzFmYzgiLCJuYW1lIjoibmV3bmFtZTEiLCJpYXQiOjE2MTkyMTQzNjF9.2GWXGa9Nsin8Ody5kYpe_6fQ7hiTW_UVADftrQRbVEk"
 Content-Type: application/json
 
 {
