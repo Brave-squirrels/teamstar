@@ -6,12 +6,13 @@ import userModel from "../../models/user.model";
 
 // Function for creating a new user
 export default async (req: Request, res: Response) => {
-  const team = await teamModel.findById(req.params.teamId);
+  const teamFromInvitation = req.body.invitation;
+
+  const team = await teamModel.findById(teamFromInvitation.teamId);
   if (!team) return res.status(StatusCodes.BAD_REQUEST).send("TEam not found!");
 
   const user = await userModel.findById(req.userInfo._id);
 
-  const teamFromInvitation = req.body.invitation;
   if (teamFromInvitation.teamId !== team._id)
     return res.status(StatusCodes.BAD_REQUEST).send("Sometthin went wrong!");
 
