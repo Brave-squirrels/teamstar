@@ -2,12 +2,12 @@ import { Response, Request } from "express";
 import _ from "lodash";
 import "dotenv/config";
 import { StatusCodes } from "http-status-codes";
-import validateEmail from "./validateEmail";
+import validateNewEmail from "./validateNewEmail";
 import sendEmail from "../utils/emailEmailChange";
 import userModel from "../../models/user.model";
 
 export default async function sendChangeEmail(req: Request, res: Response) {
-  const { error } = validateEmail(req.body);
+  const { error } = validateNewEmail(req.body);
   if (error)
     return res.status(StatusCodes.BAD_REQUEST).send(error.details[0].message);
 
