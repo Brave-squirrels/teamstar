@@ -18,7 +18,7 @@ export default async (req: Request, res: Response) => {
   if (!user) return res.status(StatusCodes.NOT_FOUND).send("User not found!");
 
   user.teamInvitation?.push({ teamId: team._id, teamName: team.name });
-  team.invitations.push({ id: user._id, name: user.name });
+  team.invitations.push({ userId: user._id, userName: user.name });
 
   await team.save();
   await user.save();
