@@ -17,7 +17,7 @@ export default async (req: Request, res: Response) => {
   const user = await userModel.findById(req.body.id);
   if (!user) return res.status(StatusCodes.NOT_FOUND).send("User not found!");
 
-  user.teamInvitation.push({ teamId: team._id, teamName: team.name });
+  user.teamInvitation?.push({ teamId: team._id, teamName: team.name });
   team.invitations.push({ id: user._id, name: user.name });
 
   await team.save();

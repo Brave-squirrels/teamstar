@@ -15,41 +15,41 @@ export default async (req: Request, res: Response) => {
       .send("You are not allowed to do that!");
 
   // For every user in team
-  await team.users.forEach(async (teamUser) => {
+  team.users.forEach(async (teamUser) => {
     const currentUser = await userModel.findById(teamUser.id);
 
-    await currentUser!.teams.forEach(async (userTeam: any, i: number) => {
+    await currentUser?.teams?.forEach(async (userTeam: any, i: number) => {
       if (userTeam.id === team!._id) {
         // delete all user raports from this team
-        currentUser!.reports.forEach((report: any, i: number) => {
-          if (report.teamId === userTeam.id) currentUser!.reports.splice(i, 1);
+        currentUser.reports?.forEach((report: any, i: number) => {
+          if (report.teamId === userTeam.id) currentUser.reports?.splice(i, 1);
         });
 
         // delete all user tasks from this team
-        currentUser!.tasks.forEach((task: any, i: number) => {
-          if (task.teamId === userTeam.id) currentUser!.tasks.splice(i, 1);
+        currentUser.tasks?.forEach((task: any, i: number) => {
+          if (task.teamId === userTeam.id) currentUser.tasks?.splice(i, 1);
         });
 
         //delete all user chats from this team
-        currentUser!.chats.forEach((chat: any, i: number) => {
-          if (chat.teamId === userTeam.id) currentUser!.chats.splice(i, 1);
+        currentUser.chats?.forEach((chat: any, i: number) => {
+          if (chat.teamId === userTeam.id) currentUser.chats?.splice(i, 1);
         });
 
         // delete invite is is from team that is about to be deleted
-        currentUser!.teamInvitation.forEach((invitation: any, i: number) => {
+        currentUser.teamInvitation?.forEach((invitation: any, i: number) => {
           if (invitation.teamId === userTeam.id)
-            currentUser!.teamInvitation.splice(i, 1);
+            currentUser.teamInvitation?.splice(i, 1);
         });
 
         // delete team from user teams
-        currentUser!.teams.splice(i, 1);
+        currentUser.teams?.splice(i, 1);
 
         await currentUser!.save();
       }
     });
   });
 
-  await taskModel.deleteMany({ team: { id: team.id } });
+  // await taskModel.deleteMany({ team: { id: team.id } });
 
   await team.delete();
 

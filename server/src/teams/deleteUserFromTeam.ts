@@ -34,29 +34,29 @@ export default async (req: Request, res: Response) => {
   });
 
   // deleting raports from user
-  user.raports.forEach((raport: any, i: number) => {
-    if (raport.teamId === team._id) user.raports.splice(i, 1);
+  user.reports?.forEach((raport: any, i: number) => {
+    if (raport.teamId === team._id) user.reports?.splice(i, 1);
   });
 
   // deleting team from user teams
-  user.teams.forEach((userTeam: any, i: number) => {
-    if (userTeam.id === team._id) user.teams.splice(i, 1);
+  user.teams?.forEach((userTeam: any, i: number) => {
+    if (userTeam.id === team._id) user.teams?.splice(i, 1);
   });
 
   // deleting user tasks from team
-  user.tasks.forEach((task: any, i: number) => {
-    if (task.userId === user._id) user.tasks.splice(i, 1);
+  user.tasks?.forEach((task: any, i: number) => {
+    if (task.userId === user._id) user.tasks?.splice(i, 1);
   });
 
   // deleting user from team tasks
-  await team.tasks.forEach(async (teamTask) => {
-    if (teamTask.userId === user._id) {
-      const task = await taskModel.findById(teamTask.id);
-      await task.users.forEach(async (taskUser: any, i: number) => {
-        if (taskUser.id === user._id) task.users.splice(i, 1);
-      });
-    }
-  });
+  // await team.tasks.forEach(async (teamTask) => {
+  //   if (teamTask.userId === user._id) {
+  //     const task = await taskModel.findById(teamTask.id);
+  //     await task.users.forEach(async (taskUser: any, i: number) => {
+  //       if (taskUser.id === user._id) task.users.splice(i, 1);
+  //     });
+  //   }
+  // });
 
   await user.save();
   await team.save();

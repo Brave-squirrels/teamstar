@@ -21,8 +21,7 @@ export default async (req: Request, res: Response) => {
     return res.status(StatusCodes.BAD_REQUEST).send(error.details[0].message);
 
   const team = new teamModel(teamData);
-
-  user!.teams.push({ id: team._id, name: team.name });
+  user?.teams?.push({ teamId: team._id, teamName: team.name });
 
   await team.save();
   await user!.save();

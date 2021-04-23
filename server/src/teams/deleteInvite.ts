@@ -17,9 +17,10 @@ export default async (req: Request, res: Response) => {
   const user = await userModel.findById(req.body.id);
   if (!user) return res.status(StatusCodes.NOT_FOUND).send("User not found!");
 
-  user.teamInvitations.forEach((invite: any, i: number) => {
-    if (invite.teamId === team.id) user.teamInvitation.splice(i, 1);
+  user.teamInvitation?.forEach((invite: any, i: number) => {
+    if (invite.teamId === team.id) user.teamInvitation?.splice(i, 1);
   });
+
   team.invitations.forEach((invite: any, i: number) => {
     if (invite.userId === user.id) team.invitations.splice(i, 1);
   });

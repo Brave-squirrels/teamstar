@@ -18,8 +18,8 @@ export default async (req: Request, res: Response) => {
     if (raport.id === req.body.raportId) team!.raports.splice(i, 1);
   });
 
-  user!.raports.forEach((raport: any, i: number) => {
-    if (raport.id === req.body.raportId) user!.raports.splice(i, 1);
+  user?.reports?.forEach((raport: any, i: number) => {
+    if (raport.raportId === req.body.raportId) user.reports?.splice(i, 1);
   });
 
   await raport.delete();
