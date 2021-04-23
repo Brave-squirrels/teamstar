@@ -73,17 +73,37 @@ select:-webkit-autofill:focus {
   font-size: 1.3em;
 }
 
+.dropdown-menu {
+  background: $backgroundDropdown;
+  .dropdown-item {
+    color: $fontWhite;
+    &.active {
+      background: $buttonBackground;
+    }
+    &:hover {
+      background: $backgroundDropdownHover;
+    }
+  }
+}
+.dropdown-toggle::after {
+  display: none;
+}
+
 // ___________________ MODAL ___________________________
 
-.modal-content{
-  background: linear-gradient(70deg, rgba(75,120,139,0.8) 0%, rgba(100,128,156,0.8) 100%);
+.modal-content {
+  background: linear-gradient(
+    70deg,
+    rgba(75, 120, 139, 0.8) 0%,
+    rgba(100, 128, 156, 0.8) 100%
+  );
   color: whitesmoke;
 }
 
-.modal-header{
+.modal-header {
   border-color: rgb(105, 142, 177);
 }
 
-.modal-footer{
+.modal-footer {
   border-color: rgb(105, 142, 177);
 }
