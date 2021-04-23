@@ -36,11 +36,11 @@ const Settings = () => {
   );
 
   useEffect(() => {
-    email &&
+    /*  email &&
       setHiddenEmail(
         email.split("@")[0].replace(/./g, "*") + "@" + email.split("@")[1]
       );
-    setUserEmail(hiddenEmail);
+    setUserEmail(hiddenEmail); */
     setChangeNameForm((prevState) => {
       return {
         ...prevState,
@@ -50,6 +50,16 @@ const Settings = () => {
         },
       };
     });
+    setHiddenEmail(
+      userInfo.userData!.email.split("@")[0].replace(/./g, "*") +
+        "@" +
+        email.split("@")[1]
+    );
+    setUserEmail(
+      userInfo.userData!.email.split("@")[0].replace(/./g, "*") +
+        "@" +
+        email.split("@")[1]
+    );
     setName(userInfo.userData!.name);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [userInfo.userData!.email, userInfo.userData]);
@@ -83,8 +93,8 @@ const Settings = () => {
       val: "",
       type: "text",
       inputType: "input",
-      placeholder: "Email",
-      label: "Email",
+      placeholder: "New email",
+      label: "New email",
       validation: {
         required: true,
         minLength: 4,
