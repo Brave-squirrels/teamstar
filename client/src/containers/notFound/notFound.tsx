@@ -44,9 +44,9 @@ const NotFound = () => {
           ))}
         </p>
         <animated.span style={buttonAnimation}>
-          <Link to="/">
+          <a href="/">
             <Button className={styles.notFoundButton}> Go back </Button>
-          </Link>
+          </a>
         </animated.span>
       </div>
     </div>
