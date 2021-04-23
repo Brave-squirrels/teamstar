@@ -4,6 +4,7 @@ import acceptInvitation from "../src/teams/acceptInvitation";
 import createTeam from "../src/teams/createTeam";
 import deleteInvite from "../src/teams/deleteInvite";
 import deleteTeam from "../src/teams/deleteTeam";
+import getTeam from "../src/teams/getTeam";
 import leaveTeam from "../src/teams/leaveTeam";
 import sendInvite from "../src/teams/sendInvite";
 
@@ -42,7 +43,7 @@ export default class TeamController {
   }
 
   getTeam(req: Request, res: Response) {
-    this.getTeam(req, res);
+    getTeam(req, res);
   }
 
   sendInvite(req: Request, res: Response) {
