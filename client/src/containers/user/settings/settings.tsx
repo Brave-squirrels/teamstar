@@ -269,14 +269,18 @@ const Settings = () => {
         user={userInfo}
         title="Change your email address"
       >
-        <FormStructure
-          state={changeEmailForm}
-          setState={setChangeEmailForm}
-          btnText="Change"
-          title=""
-          submitted={handleChangeEmail}
-          spinner={changeEmail.loading}
-        />
+        {changeEmail.success ? (
+          <span>Check email bro</span>
+        ) : (
+          <FormStructure
+            state={changeEmailForm}
+            setState={setChangeEmailForm}
+            btnText="Change"
+            title=""
+            submitted={handleChangeEmail}
+            spinner={changeEmail.loading}
+          />
+        )}
       </MyVerticallyCenteredModal>
 
       <MyVerticallyCenteredModal
