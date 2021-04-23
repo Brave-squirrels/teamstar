@@ -9,6 +9,7 @@ $fontWhite: #f3f9f6;
 $fontPlaceholder: #f3f9f6aa;
 $fontSmoke: whitesmoke;
 $fontBlue: #64afff;
+$fontGrey: #cdc6c6;
 
 $invalid: #f56e69;
 
@@ -37,6 +38,9 @@ $backgroundJumbotron: linear-gradient(
   rgba(75, 120, 139, 0.8) 0%,
   rgba(100, 128, 156, 0.8) 100%
 );
+
+$backgroundCard: #5f7e99;
+$borderCard: rgba(233, 229, 229, 0.53);
 
 $inputActiveBackground: #576075;
 $inputFilter: drop-shadow(4px 4px 14px rgba(0, 0, 0, 0.2));
