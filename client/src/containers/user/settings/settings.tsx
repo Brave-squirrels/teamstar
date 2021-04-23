@@ -227,10 +227,6 @@ const Settings = () => {
                 Edit
               </Button>
             </div>
-            <span className="text-info small">
-              Check your inbox and follow the instructions to finish chagne your
-              email address
-            </span>
           </Jumbotron>
         </Row>
 
@@ -274,7 +270,10 @@ const Settings = () => {
         title="Change your email address"
       >
         {changeEmail.success ? (
-          <span>Check email bro</span>
+          <span>
+            Please check your inbox and follow the instructions to finish chagne
+            your email address
+          </span>
         ) : (
           <FormStructure
             state={changeEmailForm}
