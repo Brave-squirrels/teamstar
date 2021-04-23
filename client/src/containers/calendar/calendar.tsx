@@ -17,6 +17,7 @@ const events: any = [
     title: "Today",
     start: new Date(new Date().setHours(new Date().getHours() - 3)),
     end: new Date(new Date().setHours(new Date().getHours() + 3)),
+    author: "twojstary",
   },
 ];
 
@@ -32,6 +33,7 @@ const ColoredDateCellWrapper = ({ children, value }: any) =>
 
 const CalendarComponent = () => {
   const [showNewEvent, setShowNewEvent] = useState(false);
+  const [showCurrentEvent, setShowCurrentEvent] = useState(false);
   const [newEvent, setNewEvent] = useState({
     title: {
       val: "",
@@ -90,11 +92,44 @@ const CalendarComponent = () => {
       touched: false,
       valid: false,
     },
+    fromHour: {
+      val: "",
+      inputType: "input",
+      type: "text",
+      placeholder: "Start",
+      label: "Start",
+      validation: {
+        required: true,
+        minDate: Date.now(),
+      },
+      error: `You can't pick previous date`,
+      touched: false,
+      valid: false,
+    },
+    toHour: {
+      val: "",
+      inputType: "input",
+      type: "text",
+      placeholder: "End",
+      label: "End",
+      validation: {
+        required: true,
+        minDate: Date.now(),
+      },
+      error: `You can't pick previous date`,
+      touched: false,
+      valid: false,
+    },
     formValid: false,
   });
 
   const handleCreateEvent = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+  };
+
+  const handleSingleEventCLick = (e: any) => {
+    setShowCurrentEvent(true);
+    console.log(e);
   };
 
   return (
@@ -112,11 +147,27 @@ const CalendarComponent = () => {
           submitted={handleCreateEvent}
         />
       </MyVerticallyCenteredModal>
+      <MyVerticallyCenteredModal
+        show={showCurrentEvent}
+        onHide={() => setShowCurrentEvent(false)}
+        title={"Add new event"}
+      >
+        {/* Form if owner, info is user */}
+        <FormStructure
+          state={newEvent}
+          setState={setNewEvent}
+          btnText="ADD"
+          title=""
+          submitted={handleCreateEvent}
+        />
+      </MyVerticallyCenteredModal>
       <Button className={styles.addBtn} onClick={() => setShowNewEvent(true)}>
         New event
       </Button>
       <div className={styles.wrapper}>
         <Calendar
+          selectable
+          onSelectEvent={(event) => handleSingleEventCLick(event)}
           localizer={localizer}
           startAccessor="start"
           endAccessor="end"
