@@ -2,11 +2,19 @@ import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
 import FormStructure from "containers/form/formStructure";
-import { Button, Container, Jumbotron, Nav, Row } from "react-bootstrap";
+import {
+  Button,
+  Container,
+  Jumbotron,
+  Nav,
+  Row,
+  Spinner,
+} from "react-bootstrap";
 
 import { changeNameFetch } from "reduxState/user/changeName";
 import { changeEmailFetch } from "reduxState/user/changeEmail";
 import { changePasswordFetch } from "reduxState/user/changePassword";
+import { deleteUserFetch } from "reduxState/user/deleteUser";
 import { RootState } from "reduxState/store";
 import { mutateToAxios } from "utils/onChangeForm";
 
@@ -29,6 +37,7 @@ const Settings = () => {
   const changeName = useSelector((state: RootState) => state.changeName);
   const changeEmail = useSelector((state: RootState) => state.changeEmail);
   const userInfo = useSelector((state: RootState) => state.loginUser);
+  const deleteState = useSelector((state: RootState) => state.deleteUser);
   let { email } = userInfo.userData!;
 
   const changePassword = useSelector(
@@ -36,11 +45,6 @@ const Settings = () => {
   );
 
   useEffect(() => {
-    /*  email &&
-      setHiddenEmail(
-        email.split("@")[0].replace(/./g, "*") + "@" + email.split("@")[1]
-      );
-    setUserEmail(hiddenEmail); */
     setChangeNameForm((prevState) => {
       return {
         ...prevState,
@@ -195,6 +199,10 @@ const Settings = () => {
     setModalDeleteShow(false);
   };
 
+  const handleDeleteAccount = () => {
+    dispatch(deleteUserFetch());
+  };
+
   return (
     <>
       <Container className="mt-5">
@@ -296,9 +304,15 @@ const Settings = () => {
       >
         <div className="d-flex justify-content-around">
           <Button variant="primary" onClick={handleDeleteCancelBtn}>
-            Candel
+            Cancel
           </Button>
-          <Button variant="danger">Delete</Button>
+          {deleteState.loading ? (
+            <Spinner animation="border" style={{ color: "#02ADDB" }} />
+          ) : (
+            <Button variant="danger" onClick={handleDeleteAccount}>
+              Delete
+            </Button>
+          )}
         </div>
       </MyVerticallyCenteredModal>
     </>

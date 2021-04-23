@@ -15,6 +15,7 @@ import resetPassword from 'reduxState/user/resetPassword';
 import changeName from 'reduxState/user/changeName';
 import changePassword from 'reduxState/user/changePassword';
 import changeEmail from 'reduxState/user/changeEmail';
+import deleteUser from 'reduxState/user/deleteUser';
 
 export const store = configureStore({
   reducer: {
@@ -26,6 +27,7 @@ export const store = configureStore({
     changeName,
     changePassword,
     changeEmail,
+    deleteUser,
   },
   middleware: [
     ...getDefaultMiddleware({
