@@ -2,11 +2,19 @@ import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
 import FormStructure from "containers/form/formStructure";
-import { Button, Container, Jumbotron, Nav, Row } from "react-bootstrap";
+import {
+  Button,
+  Container,
+  Jumbotron,
+  Nav,
+  Row,
+  Spinner,
+} from "react-bootstrap";
 
 import { changeNameFetch } from "reduxState/user/changeName";
 import { changeEmailFetch } from "reduxState/user/changeEmail";
 import { changePasswordFetch } from "reduxState/user/changePassword";
+import { deleteUserFetch } from "reduxState/user/deleteUser";
 import { RootState } from "reduxState/store";
 import { mutateToAxios } from "utils/onChangeForm";
 
@@ -19,6 +27,7 @@ const Settings = () => {
   const [modalEmailShow, setModalEmailShow] = useState(false);
   const [modalPasswordShow, setModalPasswordShow] = useState(false);
   const [modalDeleteShow, setModalDeleteShow] = useState(false);
+  const [name, setName] = useState("");
 
   const [userEmail, setUserEmail] = useState("");
   const [hiddenEmail, setHiddenEmail] = useState("");
@@ -28,19 +37,14 @@ const Settings = () => {
   const changeName = useSelector((state: RootState) => state.changeName);
   const changeEmail = useSelector((state: RootState) => state.changeEmail);
   const userInfo = useSelector((state: RootState) => state.loginUser);
-  let { name, email } = userInfo.userData!;
+  const deleteState = useSelector((state: RootState) => state.deleteUser);
+  let { email } = userInfo.userData!;
 
   const changePassword = useSelector(
     (state: RootState) => state.changePassword
   );
 
   useEffect(() => {
-    email &&
-      setHiddenEmail(
-        email.split("@")[0].replace(/./g, "*") + "@" + email.split("@")[1]
-      );
-    setUserEmail(hiddenEmail);
-
     setChangeNameForm((prevState) => {
       return {
         ...prevState,
@@ -50,8 +54,24 @@ const Settings = () => {
         },
       };
     });
+    setHiddenEmail(
+      userInfo.userData!.email.split("@")[0].replace(/./g, "*") +
+        "@" +
+        email.split("@")[1]
+    );
+    setUserEmail(
+      userInfo.userData!.email.split("@")[0].replace(/./g, "*") +
+        "@" +
+        email.split("@")[1]
+    );
+    setName(userInfo.userData!.name);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [changeName.success, userInfo.userData!.email, userInfo.userData]);
+  }, [userInfo.userData!.email, userInfo.userData]);
+
+  useEffect(() => {
+    setName(changeNameForm.name.val);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [changeName.success]);
 
   const [changeNameForm, setChangeNameForm] = useState({
     name: {
@@ -77,8 +97,8 @@ const Settings = () => {
       val: "",
       type: "text",
       inputType: "input",
-      placeholder: "Email",
-      label: "Email",
+      placeholder: "New email",
+      label: "New email",
       validation: {
         required: true,
         minLength: 4,
@@ -177,6 +197,10 @@ const Settings = () => {
 
   const handleDeleteCancelBtn = () => {
     setModalDeleteShow(false);
+  };
+
+  const handleDeleteAccount = () => {
+    dispatch(deleteUserFetch());
   };
 
   return (
@@ -280,9 +304,15 @@ const Settings = () => {
       >
         <div className="d-flex justify-content-around">
           <Button variant="primary" onClick={handleDeleteCancelBtn}>
-            Candel
+            Cancel
           </Button>
-          <Button variant="danger">Delete</Button>
+          {deleteState.loading ? (
+            <Spinner animation="border" style={{ color: "#02ADDB" }} />
+          ) : (
+            <Button variant="danger" onClick={handleDeleteAccount}>
+              Delete
+            </Button>
+          )}
         </div>
       </MyVerticallyCenteredModal>
     </>
