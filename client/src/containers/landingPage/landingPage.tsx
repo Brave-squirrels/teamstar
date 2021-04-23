@@ -203,7 +203,7 @@ const LandingPage = () => {
 
       <div className={styles.panelsContainer}>
         <div className={styles.panelLeft}>
-          <div className={styles.content}>
+          <div className={`${styles.content} ${styles.contentLeft}`}>
             <span className={styles.goNext}>Don't have an account?</span>
             <Button className="primary" onClick={() => changeView(false)}>
               Sign Up
@@ -213,7 +213,7 @@ const LandingPage = () => {
           <img src={signUpTmp} alt="SignUp" className={styles.image} />
         </div>
         <div className={styles.panelRight} id={styles.rightId}>
-          <div className={styles.content}>
+          <div className={`${styles.content} ${styles.contentRight}`}>
             <span className={styles.goNext}>One of us?</span>
             <Button
               className="primary"

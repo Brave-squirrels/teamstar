@@ -4,6 +4,7 @@ import { animated, useSpring } from "react-spring";
 import styles from "./notfound.module.scss";
 
 import { Particle } from "components/particle/particle";
+import { Button } from "react-bootstrap";
 
 const NotFound = () => {
   const fof = "404";
@@ -34,6 +35,10 @@ const NotFound = () => {
             </animated.span>
           ))}
         </p>
+        <a href="/">
+          <Button> Go back </Button>
+        </a>
+        
       </div>
     </div>
   );
