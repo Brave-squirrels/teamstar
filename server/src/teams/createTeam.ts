@@ -22,6 +22,7 @@ export default async (req: Request, res: Response) => {
 
   const team = new teamModel(teamData);
   user?.teams?.push({ teamId: team._id, teamName: team.name });
+  team.users.push({ name: user.name, id: user._id });
 
   await team.save();
   await user!.save();
