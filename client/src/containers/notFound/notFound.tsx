@@ -5,6 +5,7 @@ import styles from "./notfound.module.scss";
 
 import { Particle } from "components/particle/particle";
 import { Button } from "react-bootstrap";
+import { Link } from "react-router-dom";
 
 const NotFound = () => {
   const fof = "404";
@@ -16,6 +17,13 @@ const NotFound = () => {
       from: { opacity: 0 },
       delay: Math.random() * 3000,
     });
+
+  const buttonAnimation = useSpring({
+    opacity: 1,
+    from: {
+      opacity: 0,
+    },
+  });
 
   return (
     <div className={styles.notfound}>
@@ -35,10 +43,11 @@ const NotFound = () => {
             </animated.span>
           ))}
         </p>
-        <a href="/">
-          <Button> Go back </Button>
-        </a>
-        
+        <animated.span style={buttonAnimation}>
+          <Link to="/">
+            <Button className={styles.notFoundButton}> Go back </Button>
+          </Link>
+        </animated.span>
       </div>
     </div>
   );

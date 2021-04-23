@@ -153,22 +153,29 @@ const LandingPage = () => {
           <div className={styles.signUpForm}>
             {registerState.success ? (
               <>
-                {sendAgainState.loading ? (
-                  <Spinner animation="border" style={{ color: "#02ADDB" }} />
-                ) : (
+                {
                   <Jumbotron className={styles.verifyJumbotron}>
                     <h1>Verification email has been sent!</h1>
                     <p>Would you like to send it again?</p>
                     <p>
-                      <Button
-                        className="btn btn-dark"
-                        onClick={handleSendAgain}
-                      >
-                        Send again
-                      </Button>
+                      {sendAgainState.loading ? (
+                        <Spinner
+                          animation="border"
+                          style={{
+                            color: "rgba(126, 203, 207, 1)",
+                          }}
+                        />
+                      ) : (
+                        <Button
+                          className="btn btn-dark"
+                          onClick={handleSendAgain}
+                        >
+                          Send again
+                        </Button>
+                      )}
                     </p>
                   </Jumbotron>
-                )}
+                }
               </>
             ) : (
               <>
