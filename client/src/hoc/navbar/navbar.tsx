@@ -41,9 +41,7 @@ const Navigation = () => {
               Sample separator link
             </NavDropdown.Item>
           </NavDropdown>
-          <Nav.Link to="/settings" as={NavLink}>
-            Settings
-          </Nav.Link>
+          <Nav.Link href="/settings">Settings</Nav.Link>
           <Nav.Link href="/" onClick={() => dispatch(logout())}>
             Logout
           </Nav.Link>
