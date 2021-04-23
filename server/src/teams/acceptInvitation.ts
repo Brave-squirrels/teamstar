@@ -9,7 +9,7 @@ export default async (req: Request, res: Response) => {
   const team = await teamModel.findById(req.params.teamId);
   if (!team) return res.status(StatusCodes.BAD_REQUEST).send("TEam not found!");
 
-  const user = await userModel.findById(req.userInfo.id);
+  const user = await userModel.findById(req.userInfo._id);
 
   const teamFromInvitation = req.body.invitation;
   if (teamFromInvitation.teamId !== team._id)
