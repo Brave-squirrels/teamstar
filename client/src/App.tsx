@@ -56,7 +56,6 @@ const App = () => {
           <Main>
             <NavBar />
             <MainParticles />
-
             <Switch>
               <ProtectedRoute path="/dnd" component={Dnd} />
               <ProtectedRoute path="/home" component={Dashboard} />

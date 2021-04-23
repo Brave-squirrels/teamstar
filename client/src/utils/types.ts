@@ -11,6 +11,8 @@ export interface UserData {
     teamInvitation: TeamInvitation[];
     teams: Team[];
     tasks: Task[];
+    reports: Report[];
+    chats: Chat[];
 }
 
 export interface TeamInvitation {
@@ -29,12 +31,25 @@ export interface Task {
     taskName: string;
 }
 
+export interface Report {
+    reportId: string;
+    reportName: string;
+}
+
+export interface Chat {
+    teamId: string;
+    chatId: string;
+    chatName: string;
+}
+
 export const UserBasic: UserData = {
     name: '',
     email: '',
     workTime: '',
     isActive: true,
-    teamInvitation: [{ teamId: '', teamName: '' }],
-    teams: [{ teamId: '', teamName: '' }],
-    tasks: [{ teamId: '', taskName: '', taskId: '' }],
+    teamInvitation: [],
+    teams: [],
+    tasks: [],
+    reports: [],
+    chats: [],
 }
