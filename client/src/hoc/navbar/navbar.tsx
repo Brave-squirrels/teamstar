@@ -5,6 +5,8 @@ import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
 import NavDropdown from "react-bootstrap/NavDropdown";
 
+import Logo from "assets/logo.png";
+
 import { logout } from "reduxState/user/loginUser";
 
 const Navigation = () => {
@@ -12,11 +14,21 @@ const Navigation = () => {
   return (
     <Navbar collapseOnSelect expand="lg" bg="secondary" variant="dark">
       <Navbar.Brand to="/home" as={NavLink}>
-        Hackathon
+        <div
+          style={{
+            display: "flex",
+            gap: "0.5em",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <img src={Logo} alt="Logo" style={{ height: "2em" }} />
+          Hackathon
+        </div>
       </Navbar.Brand>
       <Navbar.Toggle aria-controls="responsive-navbar-nav" />
       <Navbar.Collapse id="responsive-navbar-nav">
-        <Nav className="mr-auto">
+        <Nav className="ml-auto">
           <NavDropdown title="Sample dropdown" id="collasible-nav-dropdown">
             <NavDropdown.Item to="/home" as={NavLink}>
               Sample dropdown link
@@ -29,8 +41,6 @@ const Navigation = () => {
               Sample separator link
             </NavDropdown.Item>
           </NavDropdown>
-        </Nav>
-        <Nav>
           <Nav.Link to="/settings" as={NavLink}>
             Settings
           </Nav.Link>
