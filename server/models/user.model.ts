@@ -22,10 +22,9 @@ const userSchema = new mongoose.Schema<User>({
     minlength: 5,
     maxLength: 50,
   },
-  // TODO to verify after merge
   workTime: {
-    type: Number,
-    default: 0,
+    type: String,
+    default: "",
   },
   isActive: {
     type: Boolean,
@@ -63,16 +62,22 @@ const userSchema = new mongoose.Schema<User>({
     default: [],
   },
   reports: {
-    type: JSON,
-    default: "",
-  },
-  chats: {
     type: [
       {
         _id: false,
         teamId: mongoose.Schema.Types.ObjectId,
         chatId: mongoose.Schema.Types.ObjectId,
         chatName: String,
+      },
+    ],
+    default: [],
+  },
+  chats: {
+    type: [
+      {
+        _id: false,
+        reportId: mongoose.Schema.Types.ObjectId,
+        reportName: String,
       },
     ],
     default: [],
