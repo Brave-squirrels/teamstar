@@ -9,7 +9,7 @@ export default async (req: Request, res: Response) => {
   if (!team)
     return res.status(StatusCodes.NOT_FOUND).send("Team was not found!");
 
-  if (req.userInfo._id != team.owner.id)
+  if (req.userInfo._id != team.owner.id && req.userInfo._id != req.body.id)
     return res
       .status(StatusCodes.UNAUTHORIZED)
       .send("You are not allowed to do that!");
@@ -28,5 +28,5 @@ export default async (req: Request, res: Response) => {
   await team.save();
   await user.save();
 
-  return res.status(StatusCodes.OK).send("Team Created Succesfully!");
+  return res.status(StatusCodes.OK).send("Invite deleted Succesfully!");
 };

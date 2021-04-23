@@ -1,7 +1,11 @@
 import React from "react";
+import { useHistory } from "react-router-dom";
 import styles from "./sidebar.module.scss";
 
 const Sidebar = () => {
+  
+  const history = useHistory();
+
   const user = {
     name: "asdsas",
     teams: [
@@ -11,15 +15,24 @@ const Sidebar = () => {
     ],
   };
 
-  return <div className={styles.sidebar}>
+  const changeTeam = (e: any) => {
+    history.push(`/team/${e.target.id}`);
+  };
+
+  return (
+    <div className={styles.sidebar}>
       <h3>Przerwa</h3>
-      <div>od 12:45:12</div>
-      <div>do 20:20:30</div>
+      <div className={styles.break}>
+        <div>od 12:45:12</div>
+        <div>do 20:20:30</div>
+      </div>
       <ul className={styles.menu}>
-      {user.teams.map(((team : any) => <li key={team.teamId}>{team.teamName}</li>))}
+        {user.teams.map((team: any) => (
+          <li id={team.teamId} key={team.teamId} onClick={changeTeam}>{team.teamName}</li>
+        ))}
       </ul>
-      
-  </div>;
+    </div>
+  );
 };
 
-export default Sidebar
+export default Sidebar;

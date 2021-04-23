@@ -8,12 +8,14 @@ export default async (req: Request, res: Response) => {
   const team = await teamModel.findById(req.params.teamId);
   if (!team) return res.status(StatusCodes.BAD_REQUEST).send("Team not found!");
 
-  if (req.userInfo._id != team.owner.id)
+  if (req.userInfo._id == team.owner.id && team.users.length > 1)
     return res
       .status(StatusCodes.UNAUTHORIZED)
-      .send("You are not allowed to do that!");
+      .send(
+        "You can't leave them as it's owner, while there are still other users!"
+      );
 
-  const user = await userModel.findById(req.body.id);
+  const user = await userModel.findById(req.userInfo._id);
   if (!user) return res.status(StatusCodes.BAD_REQUEST).send("User not found!");
 
   // deleting user from team users
