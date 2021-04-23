@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Children } from "react";
 import { Calendar, momentLocalizer } from "react-big-calendar";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import moment from "moment";
@@ -16,6 +16,16 @@ const events: any = [
   },
 ];
 
+const CURRENT_DATE = moment().toDate();
+
+const ColoredDateCellWrapper = ({ children, value }: any) =>
+  React.cloneElement(Children.only(children), {
+    style: {
+      ...children.style,
+      backgroundColor: value < CURRENT_DATE ? "#f3f9f6aa" : "#f3f9f6",
+    },
+  });
+
 const calendar = () => {
   return (
     <div className={styles.wrapper}>
@@ -24,6 +34,9 @@ const calendar = () => {
         startAccessor="start"
         endAccessor="end"
         events={events}
+        components={{
+          dateCellWrapper: ColoredDateCellWrapper,
+        }}
       />
     </div>
   );
