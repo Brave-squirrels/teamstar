@@ -19,6 +19,7 @@ const Settings = () => {
   const [modalEmailShow, setModalEmailShow] = useState(false);
   const [modalPasswordShow, setModalPasswordShow] = useState(false);
   const [modalDeleteShow, setModalDeleteShow] = useState(false);
+  const [name, setName] = useState("");
 
   const [userEmail, setUserEmail] = useState("");
   const [hiddenEmail, setHiddenEmail] = useState("");
@@ -28,7 +29,7 @@ const Settings = () => {
   const changeName = useSelector((state: RootState) => state.changeName);
   const changeEmail = useSelector((state: RootState) => state.changeEmail);
   const userInfo = useSelector((state: RootState) => state.loginUser);
-  let { name, email } = userInfo.userData!;
+  let { email } = userInfo.userData!;
 
   const changePassword = useSelector(
     (state: RootState) => state.changePassword
@@ -40,7 +41,6 @@ const Settings = () => {
         email.split("@")[0].replace(/./g, "*") + "@" + email.split("@")[1]
       );
     setUserEmail(hiddenEmail);
-
     setChangeNameForm((prevState) => {
       return {
         ...prevState,
@@ -50,8 +50,14 @@ const Settings = () => {
         },
       };
     });
+    setName(userInfo.userData!.name);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [changeName.success, userInfo.userData!.email, userInfo.userData]);
+  }, [userInfo.userData!.email, userInfo.userData]);
+
+  useEffect(() => {
+    setName(changeNameForm.name.val);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [changeName.success]);
 
   const [changeNameForm, setChangeNameForm] = useState({
     name: {
