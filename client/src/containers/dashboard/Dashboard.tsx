@@ -15,7 +15,6 @@ import styles from "./dashboard.module.scss";
 import { createTeamFetch } from "reduxState/team/createTeam";
 import { acceptInviteFetch } from "reduxState/team/acceptInvite";
 import { declineInviteFetch } from "reduxState/team/declineInvite";
-import { changeEndTimeFetch } from "reduxState/user/changeEndTime";
 import { changeStartTimeFetch } from "reduxState/user/changeStartTime";
 import { mutateToAxios } from "utils/onChangeForm";
 import { authUser } from "reduxState/user/loginUser";
@@ -25,7 +24,6 @@ const Dashboard = () => {
   const createState = useSelector((state: RootState) => state.createTeam);
   const acceptState = useSelector((state: RootState) => state.acceptInvite);
   const declineState = useSelector((state: RootState) => state.declineInvite);
-  const editEndState = useSelector((state: RootState) => state.changeEndTime);
   const editStartState = useSelector(
     (state: RootState) => state.changeStartTime
   );
@@ -47,27 +45,8 @@ const Dashboard = () => {
     createState.success,
     acceptState.success,
     declineState.success,
-    editEndState.success,
     editStartState.success,
   ]);
-
-  const [endTime, setEndTime] = useState({
-    endTime: {
-      val: "",
-      type: "text",
-      inputType: "input",
-      placeholder: "End time",
-      label: "End time",
-      validation: {
-        required: true,
-        minLength: 8,
-      },
-      error: "Time should be in format 00:00:00",
-      touched: false,
-      valid: false,
-    },
-    formValid: false,
-  });
 
   const [startTime, setStartTime] = useState({
     startTime: {
@@ -76,6 +55,20 @@ const Dashboard = () => {
       inputType: "input",
       placeholder: "Start time",
       label: "Start time",
+      validation: {
+        required: true,
+        minLength: 8,
+      },
+      error: "Time should be in format 00:00:00",
+      touched: false,
+      valid: false,
+    },
+    endTime: {
+      val: "",
+      type: "text",
+      inputType: "input",
+      placeholder: "End time",
+      label: "End time",
       validation: {
         required: true,
         minLength: 8,
@@ -144,11 +137,6 @@ const Dashboard = () => {
     dispatch(declineInviteFetch({ id: userData!._id }, id));
   };
 
-  const handleEndTime = (e: any) => {
-    e.preventDefault();
-    dispatch(changeEndTimeFetch(mutateToAxios(endTime)));
-  };
-
   const handleStartTime = (e: any) => {
     e.preventDefault();
     dispatch(changeStartTimeFetch(mutateToAxios(startTime)));
@@ -169,14 +157,6 @@ const Dashboard = () => {
           btnText="Change"
           submitted={handleStartTime}
           spinner={editStartState.loading}
-        />
-        <FormStructure
-          state={endTime}
-          setState={setEndTime}
-          title={""}
-          btnText="Change"
-          submitted={handleEndTime}
-          spinner={editEndState.loading}
         />
       </MyVerticallyCenteredModal>
       <MyVerticallyCenteredModal
@@ -203,11 +183,13 @@ const Dashboard = () => {
           <div className={styles.timeTextCon}>
             <div>
               From:
-              <span className={styles.timeText}>{userData!.startTime}</span>
+              <span className={styles.timeText}>
+                {userData!.times.startTime}
+              </span>
             </div>
             <div>
               To:
-              <span className={styles.timeText}>{userData!.endTime}</span>
+              <span className={styles.timeText}>{userData!.times.endTime}</span>
             </div>
           </div>
           <div className={styles.changeTimeWrapper}>
