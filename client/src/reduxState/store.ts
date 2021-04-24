@@ -28,6 +28,7 @@ import changeTeamDescription from 'reduxState/team/changeDescription';
 
 import createTask from 'reduxState/tasks/createTask';
 import editTask from 'reduxState/tasks/editTask';
+import getTasks from 'reduxState/tasks/getTasks';
 
 export const store = configureStore({
   reducer: {
@@ -50,6 +51,7 @@ export const store = configureStore({
     changeTeamDescription,
     createTask,
     editTask,
+    getTasks,
   },
   middleware: [
     ...getDefaultMiddleware({

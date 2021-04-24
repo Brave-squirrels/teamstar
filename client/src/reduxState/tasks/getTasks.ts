@@ -3,55 +3,50 @@ import axios from "axios/axiosMain";
 import { AppThunk, RootState } from "reduxState/store";
 import toastNofity from "utils/toastNotify";
 
+import * as types from 'utils/types';
 interface State {
     loading: boolean;
-    success: boolean;
-}
-
-interface Data {
-    name: string;
-    description: string;
+    taskData: types.TaskSchema[];
 }
 
 const initialState: State = {
     loading: false,
-    success: false,
+    taskData: [{ ...types.basicTask }]
 };
 
-const createTask = createSlice({
-    name: "createTask",
+const getTasks = createSlice({
+    name: "getTasks",
     initialState,
     reducers: {
         start: (state) => {
             state.loading = true;
-            state.success = false;
+            state.taskData = [{ ...types.basicTask }]
         },
-        success: (state) => {
+        success: (state, action) => {
             state.loading = false;
-            state.success = true;
+            state.taskData = action.payload;
         },
         failed: (state) => {
             state.loading = false;
-            state.success = false;
+            state.taskData = [{ ...types.basicTask }]
         },
     },
 });
 
-export const { start, success, failed } = createTask.actions;
+export const { start, success, failed } = getTasks.actions;
 
-export const createTaskFetch = (data: Data, teamId: string): AppThunk => async (
+export const getTasksFetch = (teamId: string): AppThunk => async (
     dispatch
 ) => {
     dispatch(start());
     await axios
-        .post(`/teams/${teamId}/tasks`, data, {
+        .get(`/teams/${teamId}/tasks`, {
             headers: {
                 "x-auth-token": localStorage.getItem("token"),
             },
         })
         .then((res) => {
-            dispatch(success());
-            toastNofity(res.status);
+            dispatch(success(res.data));
         })
         .catch((err) => {
             dispatch(failed());
@@ -59,7 +54,7 @@ export const createTaskFetch = (data: Data, teamId: string): AppThunk => async (
         });
 };
 
-export const selectLoading = (state: RootState) => state.createTask.loading;
-export const selectSuccess = (state: RootState) => state.createTask.success;
+export const selectLoading = (state: RootState) => state.getTasks.loading;
+export const selectData = (state: RootState) => state.getTasks.taskData;
 
-export default createTask.reducer;
+export default getTasks.reducer;
