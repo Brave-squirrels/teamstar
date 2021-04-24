@@ -3,7 +3,7 @@ import { StatusCodes } from "http-status-codes";
 import _ from "lodash";
 
 import userModel from "../../models/user.model";
-import validateTime from "./validateStartTime";
+import validateTime from "./validateBreakTime";
 
 export default async (req: Request, res: Response) => {
   const { error } = validateTime(req.body);
@@ -12,7 +12,7 @@ export default async (req: Request, res: Response) => {
 
   const user = await userModel.findByIdAndUpdate(
     req.userInfo._id,
-    { startTime: req.body.startTime },
+    { breakTime: req.body.breakTime },
     { new: true }
   );
   if (!user) return res.status(StatusCodes.NOT_FOUND).send("User not found");

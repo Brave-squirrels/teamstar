@@ -23,6 +23,8 @@ interface User extends mongoose.Document {
   isOnline?: boolean;
   startTime?: string;
   endTime?: string;
+  breakTime?: string;
+  periodTime?: string;
   generateAuthToken(): string;
 }
 
