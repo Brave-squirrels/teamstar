@@ -9,6 +9,7 @@ import Raports from "./raports/raports";
 import { useSelector, useDispatch } from "react-redux";
 import Dnd from "./dnd/Dnd";
 import InviteModal from "components/inviteModal/inviteModal";
+import RaportsModal from "components/raportsModal/raportsModal";
 import FormStructure from "containers/form/formStructure";
 import { declineInviteFetch } from "reduxState/team/declineInvite";
 import { sendInviteFetch } from "reduxState/team/sendInvite";
@@ -186,7 +187,7 @@ const Team = () => {
 
   return (
     <div className={styles.container}>
-      <InviteModal
+      <RaportsModal
         
         show={showAllRaport}
         onHide={() => setShowAllRaport(false)}
@@ -194,7 +195,7 @@ const Team = () => {
         title="Raport"
       >
         <Raports / >
-      </InviteModal>
+      </RaportsModal>
       <InviteModal
         show={showRaport}
         onHide={() => setShowRaport(false)}
