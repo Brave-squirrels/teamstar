@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { useLocation } from 'react-router-dom';
+import { useLocation } from "react-router-dom";
 import { RootState } from "reduxState/store";
 import { Button } from "react-bootstrap";
 
@@ -34,12 +34,13 @@ const Chat = () => {
 
   const sendState = useSelector((state: RootState) => state.sendMessage);
 
-  useEffect(() => {
-    
+  useEffect(
+    () => {
       dispatch(getChatFetch(teamId));
     },
     // eslint-disable-next-line
-   [dispatch, teamId, msg, sendState.success]);
+    [dispatch, teamId, msg, sendState.success]
+  );
 
   const renderMessages = () => {
     return chatMessages.map((message: any) => {
@@ -53,13 +54,14 @@ const Chat = () => {
         hours = "0" + hours;
       }
       return (
-        <>
-          <h3>{message.authorName}</h3>
+        <div className={styles.messageWrapper}>
+          <div className={styles.littleWrapper}><h3 className={styles.author}>{message.authorName}</h3>
           <p>
             {hours} : {minutes}
           </p>
-          <div>{message.content}</div>
-        </>
+          </div>
+          <div className= { styles.message}>{message.content}</div>
+        </div>
       );
     });
   };
@@ -86,23 +88,27 @@ const Chat = () => {
   };
 
   return (
-    <div className={styles.flex}>
-      <div className={styles.formBox} id="flex">
-        {renderMessages()}
+    <div className={styles.container}>
+      <div className={styles.flex}>
+        <div className={styles.formBox} id="flex">
+          {renderMessages()}
+        </div>
+        <div className={styles.typeArea}>
+          <input
+            className={styles.inpucik}
+            onChange={(event) => setMessage(event.target.value)}
+            name="message"
+            value={message}
+          />
+          <Button
+            onClick={(event) => {
+              handleSendMessage(event);
+            }}
+          >
+            SEND
+          </Button>
+        </div>
       </div>
-      <input
-        className={styles.inpucik}
-        onChange={(event) => setMessage(event.target.value)}
-        name="message"
-        value={message}
-      />
-      <Button
-        onClick={(event) => {
-          handleSendMessage(event);
-        }}
-      >
-        SEND
-      </Button>
     </div>
   );
 };

@@ -1,17 +1,73 @@
 @import "styles/variables.scss";
 
-.flex {
+.container {
   display: flex;
-  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 70%;
+}
+
+.flex {
+  background-color: #5f7e99;
+  display: grid;
+  grid-template-rows: 5fr 1fr;
+  height: 90%;
+  width: 60%;
+}
+
+input {
+  box-sizing: border-box;
+  width: 90%;
+  height: 100%;
+  padding: 0 3em;
+  background-color: #4d6981;
+  border: none;
+  color: $fontWhite;
+  
+}
+
+.typeArea {
+  display: flex;
+  align-items: center;
+  margin: 0 2em;
+  margin-bottom: 1em;
+  border-radius: 5px;
+  background-color: #4d6981;
+  
 }
 
 .formBox {
-  width: 500px;
-  height: 400px;
-  background-color: gray;
-  overflow: scroll;
+  padding: 1em;
+  margin: 2em;
+  color: $fontWhite;
+  border-radius: 5px;
+  background-color: #4d6981;
+  @include scrollbar;
+  overflow-y: auto;
 }
 
-.inpucik {
-  height: 50px;
+.author {
+  color: #04b6e5;
+  font-size: 1.2em;
+  margin: 0 10px 0 0;
+  font-style: italic;
+  padding: 0 !important;
+}
+
+.messageWrapper {
+  padding: 0.5em 0;
+  border-top: 1px solid $lightBorder;
+  border-bottom: 1px solid $lightBorder;
+
+  p {
+    color: #a3afba;
+  }
+}
+
+.message {
+  margin: 0;
+}
+
+.littleWrapper {
+  display: flex;
 }
