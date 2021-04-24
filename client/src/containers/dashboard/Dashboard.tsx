@@ -38,6 +38,7 @@ const Dashboard = () => {
   setInterval(() => {
     setDate({ date: new Date() });
   }, 1000);
+
   useEffect(() => {
     dispatch(authUser());
   }, [
@@ -47,7 +48,6 @@ const Dashboard = () => {
     declineState.success,
     editStartState.success,
   ]);
-
   const [startTime, setStartTime] = useState({
     startTime: {
       val: "",
@@ -92,7 +92,7 @@ const Dashboard = () => {
         minLength: 3,
         maxLength: 24,
       },
-      error: "Team name should be between 3 and 24 characters long",
+      error: "Time should be in format 00:00:00",
       touched: false,
       valid: false,
     },
@@ -106,7 +106,7 @@ const Dashboard = () => {
         minLength: 0,
         maxLength: 255,
       },
-      error: "Description should can't be longer than 255 characters",
+      error: "Time should be in format 00:00:00",
       touched: true,
       valid: true,
     },
@@ -116,6 +116,7 @@ const Dashboard = () => {
   const handleCreateTeam = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     dispatch(createTeamFetch(mutateToAxios(form)));
+    setShow(false);
   };
 
   const handleAcceptInvite = (id: string, teamName: string) => {

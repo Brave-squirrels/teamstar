@@ -5,9 +5,11 @@ import { Button } from "react-bootstrap";
 import settingsLogo from "../../assets/settingsLogo.svg";
 import trash from "../../assets/trash.svg";
 import Sidebar from "./sidebar/sidebar";
+import Raports from "./raports/raports";
 import { useSelector, useDispatch } from "react-redux";
 import Dnd from "./dnd/Dnd";
 import InviteModal from "components/inviteModal/inviteModal";
+import RaportsModal from "components/raportsModal/raportsModal";
 import FormStructure from "containers/form/formStructure";
 import { declineInviteFetch } from "reduxState/team/declineInvite";
 import { sendInviteFetch } from "reduxState/team/sendInvite";
@@ -20,6 +22,7 @@ import { deleteUserTeamFetch } from "reduxState/team/deleteUser";
 import EmptyNotification from "components/emptyNotification/emptyNotification";
 import { leaveTeamFetch } from "reduxState/team/leaveTeam";
 import { createRaportFetch } from "reduxState/raport/createRaport";
+import { getRaportsFetch } from "reduxState/raport/getRaports";
 
 const Team = () => {
   const [modalInvite, setModalInvite] = useState(false);
@@ -37,7 +40,12 @@ const Team = () => {
   );
   const removeUser = useSelector((state: RootState) => state.deleteUserTeam);
   const leaveTeamState = useSelector((state: RootState) => state.leaveTeam);
-  const handleShowRaport = () => {};
+  const createRaportState = useSelector(
+    (state: RootState) => state.createRaport
+  );
+  const deleteRaportState = useSelector(
+    (state: RootState) => state.deleteRaport
+  );
 
   const changeDescription = useSelector(
     (state: RootState) => state.changeTeamDescription
@@ -60,6 +68,7 @@ const Team = () => {
 
   useEffect(() => {
     dispatch(teamDataFetch(teamId));
+    dispatch(getRaportsFetch(teamId));
   }, [
     dispatch,
     teamId,
@@ -67,6 +76,8 @@ const Team = () => {
     inviteSendState.success,
     declineInviteState.success,
     removeUser.success,
+    createRaportState.success,
+    deleteRaportState.success,
   ]);
 
   useEffect(() => {
@@ -123,6 +134,8 @@ const Team = () => {
     },
     formValid: true,
   });
+
+  const [showAllRaport, setShowAllRaport] = useState(false);
 
   const [showRaport, setShowRaport] = useState(false);
   const [raportForm, setRaportForm] = useState({
@@ -185,6 +198,15 @@ const Team = () => {
 
   return (
     <div className={styles.container}>
+      <RaportsModal
+        show={showAllRaport}
+        onHide={() => setShowAllRaport(false)}
+        user={"as"}
+        title="Raport"
+        className={styles.raportsModal}
+      >
+        <Raports />
+      </RaportsModal>
       <InviteModal
         show={showRaport}
         onHide={() => setShowRaport(false)}
@@ -231,7 +253,10 @@ const Team = () => {
               ))}
             </>
           ) : (
-            <EmptyNotification>There is no invites</EmptyNotification>
+            <div className={styles.notFound}>
+              {" "}
+              <div>There is no invites</div>{" "}
+            </div>
           )}
         </div>
         <FormStructure
@@ -264,7 +289,10 @@ const Team = () => {
               ))}
             </>
           ) : (
-            <EmptyNotification>Team has no members</EmptyNotification>
+            <div className={styles.notFound}>
+              {" "}
+              <div> Team has no members</div>
+            </div>
           )}
         </div>
         <div className={styles.removeWrapper}>
@@ -299,7 +327,10 @@ const Team = () => {
 
       <div className={styles.buttonsPanel}>
         <div className={styles.buttonsContainer}>
-          <div className={styles.showRaportButton} onClick={handleShowRaport}>
+          <div
+            className={styles.showRaportButton}
+            onClick={() => setShowAllRaport(true)}
+          >
             Show Raports
           </div>
           <div

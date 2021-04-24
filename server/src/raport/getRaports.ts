@@ -5,7 +5,7 @@ import teamModel from "../../models/team.model";
 
 // Function for creating a new user
 export default async (req: Request, res: Response) => {
-  const team = await teamModel.findById(req.params.id);
+  const team = await teamModel.findById(req.params.teamId);
   if (!team) return res.status(StatusCodes.BAD_REQUEST).send("Team not found!");
 
   if (req.userInfo._id != team.owner.id)
@@ -16,7 +16,12 @@ export default async (req: Request, res: Response) => {
   let raports = await raportModel.find();
   if (!raports)
     return res.status(StatusCodes.BAD_REQUEST).send("Raports not found");
-  const newRaports = raports.map((raport) => raport.team.id === team._id);
+  const newRaports: any = [];
+  raports.forEach((raport) => {
+    if (raport.team.id == team.id) {
+      newRaports.push(raport);
+    }
+  })
 
   return res.status(StatusCodes.OK).send(newRaports);
 };

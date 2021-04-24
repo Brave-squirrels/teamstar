@@ -1,5 +1,8 @@
 import { Response, Request } from "express";
 import { StatusCodes } from "http-status-codes";
+import calendarModel from "../../models/calendar.model";
+import raportModel from "../../models/raport.model";
+import taskModel from "../../models/task.model";
 import teamModel from "../../models/team.model";
 import userModel from "../../models/user.model";
 
@@ -22,7 +25,8 @@ export default async (req: Request, res: Response) => {
       if (userTeam.teamId == team!.id) {
         // delete all user raports from this team
         currentUser.reports?.forEach((report: any, i: number) => {
-          if (report.teamId === userTeam.teamId) currentUser.reports?.splice(i, 1);
+          if (report.teamId === userTeam.teamId)
+            currentUser.reports?.splice(i, 1);
         });
 
         // delete all user tasks from this team
@@ -49,7 +53,9 @@ export default async (req: Request, res: Response) => {
     });
   });
 
-  // await taskModel.deleteMany({ team: { id: team.id } });
+  await calendarModel.findByIdAndDelete(team.calendarId);
+  await raportModel.deleteMany({ team: { id: team.id } });
+  await taskModel.deleteMany({ team: { id: team.id } });
 
   await team.delete();
 

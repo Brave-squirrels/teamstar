@@ -92,7 +92,7 @@ export interface TeamInvite {
 export interface TeamData {
     name: string;
     description: string;
-    owner: Owner | {};
+    owner: Owner | {} | any;
     date: Date | string;
     users: User[],
     tasks: TeamTask[],
@@ -180,4 +180,36 @@ export const basicChat = {
     name: '',
     teamId: '',
     messages: []
+}
+
+export interface RaportAuthor {
+    id: any,
+    name: string,
+}
+
+export interface RaportTeam {
+    id: any;
+    name: string;
+}
+
+export interface Raport {
+    name: string,
+    description: string,
+    author: RaportAuthor,
+    date: any,
+    team: RaportTeam,
+}
+
+export const basicRaport = {
+    name: '',
+    description: '',
+    author: {
+        id: '',
+        name: '',
+    },
+    date: '',
+    team: {
+        id: '',
+        name: '',
+    },
 }

@@ -53,6 +53,7 @@ const Sidebar = () => {
   }, [dispatch, teamId]);
   useEffect(() => {
     checkBreak();
+    // eslint-disable-next-line
   }, [loginState.userData]);
 
   const toggle = () => setReveal(!reveal);
@@ -64,6 +65,7 @@ const Sidebar = () => {
         <div className={styles.break}>
           <div>at {currentBreak}</div>
         </div>
+
         <h3 className={styles.descriptionTitle}>Description</h3>
         <div className={styles.description}>
           <div>{teamInfo.description}</div>

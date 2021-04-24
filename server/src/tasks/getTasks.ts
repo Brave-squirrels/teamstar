@@ -1,6 +1,5 @@
 import { Response, Request } from "express";
 import { StatusCodes } from "http-status-codes";
-import taskModel from "../../models/task.model";
 import teamModel from "../../models/team.model";
 import userModel from "../../models/user.model";
 
@@ -13,12 +12,10 @@ export default async (req: Request, res: Response) => {
 
   let exists = false;
   team.users.forEach((teamUser) => {
-    if (teamUser.id === user.id) exists = true;
+    if (teamUser.id == user.id) exists = true;
   });
   if (!exists)
     return res.status(StatusCodes.BAD_REQUEST).send("Its not your team!");
 
-  const task = taskModel.findById(req.params.taskId);
-
-  return res.status(StatusCodes.OK).send(task);
+  return res.status(StatusCodes.OK).send(team.tasks);
 };

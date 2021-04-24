@@ -11,7 +11,6 @@ import {
   Spinner,
 } from "react-bootstrap";
 
-import { changeNameFetch } from "reduxState/user/changeName";
 import { changeEmailFetch } from "reduxState/user/changeEmail";
 import { changePasswordFetch } from "reduxState/user/changePassword";
 import { deleteUserFetch } from "reduxState/user/deleteUser";
@@ -23,18 +22,15 @@ import MyVerticallyCenteredModal from "./MyVerticallyCenteredModal";
 type ShowType = "Show" | "Hide";
 
 const Settings = () => {
-  const [modalNameShow, setModalNameShow] = useState(false);
   const [modalEmailShow, setModalEmailShow] = useState(false);
   const [modalPasswordShow, setModalPasswordShow] = useState(false);
   const [modalDeleteShow, setModalDeleteShow] = useState(false);
-  const [name, setName] = useState("");
 
   const [userEmail, setUserEmail] = useState("");
   const [hiddenEmail, setHiddenEmail] = useState("");
   const [showToggle, setShowToggle] = useState<ShowType>("Show");
 
   const dispatch = useDispatch();
-  const changeName = useSelector((state: RootState) => state.changeName);
   const changeEmail = useSelector((state: RootState) => state.changeEmail);
   const userInfo = useSelector((state: RootState) => state.loginUser);
   const deleteState = useSelector((state: RootState) => state.deleteUser);
@@ -45,15 +41,6 @@ const Settings = () => {
   );
 
   useEffect(() => {
-    setChangeNameForm((prevState) => {
-      return {
-        ...prevState,
-        name: {
-          ...prevState.name,
-          val: userInfo.userData!.name,
-        },
-      };
-    });
     setHiddenEmail(
       userInfo.userData!.email.split("@")[0].replace(/./g, "*") +
         "@" +
@@ -64,33 +51,8 @@ const Settings = () => {
         "@" +
         email.split("@")[1]
     );
-    setName(userInfo.userData!.name);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [userInfo.userData!.email, userInfo.userData]);
-
-  useEffect(() => {
-    setName(changeNameForm.name.val);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [changeName.success]);
-
-  const [changeNameForm, setChangeNameForm] = useState({
-    name: {
-      val: "",
-      type: "text",
-      inputType: "input",
-      placeholder: "Name",
-      label: "Name",
-      validation: {
-        required: true,
-        minLength: 4,
-        maxLength: 50,
-      },
-      error: "Name should be between 4 and 50 characters long",
-      touched: false,
-      valid: false,
-    },
-    formValid: false,
-  });
 
   const [changeEmailForm, setChangeEmailForm] = useState({
     email: {
@@ -165,11 +127,6 @@ const Settings = () => {
     formValid: false,
   });
 
-  const handleChangeName = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    dispatch(changeNameFetch(mutateToAxios(changeNameForm)));
-  };
-
   const handleChangeEmail = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     dispatch(
@@ -209,14 +166,6 @@ const Settings = () => {
         <h2 className="text-light">MY ACCOUNT</h2>
         <Row xs="1" md="2" className="mr-1 ml-1">
           <Jumbotron className="position-relative pt-4 pb-4">
-            <h6>USER NAME</h6>
-            <div className="d-flex justify-content-between align-items-center">
-              <p className="m-0">{name}</p>
-              <Button size="sm" onClick={() => setModalNameShow(true)}>
-                Edit
-              </Button>
-            </div>
-
             <h6 className="mt-4">EMAIL ADDRESS</h6>
             <div className="d-flex justify-content-between align-items-center">
               <div className="d-flex align-items-center">
@@ -246,22 +195,6 @@ const Settings = () => {
           </div>
         </Row>
       </Container>
-
-      <MyVerticallyCenteredModal
-        show={modalNameShow}
-        onHide={() => setModalNameShow(false)}
-        user={userInfo}
-        title="Change your user name"
-      >
-        <FormStructure
-          state={changeNameForm}
-          setState={setChangeNameForm}
-          btnText="Change"
-          title=""
-          submitted={handleChangeName}
-          spinner={changeName.loading}
-        />
-      </MyVerticallyCenteredModal>
 
       <MyVerticallyCenteredModal
         show={modalEmailShow}

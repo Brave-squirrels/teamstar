@@ -12,7 +12,6 @@ import createUser from 'reduxState/user/registerUser';
 import sendReset from 'reduxState/user/sendResetPassword';
 import sendAgain from 'reduxState/user/sendAgain';
 import resetPassword from 'reduxState/user/resetPassword';
-import changeName from 'reduxState/user/changeName';
 import changePassword from 'reduxState/user/changePassword';
 import changeEmail from 'reduxState/user/changeEmail';
 import deleteUser from 'reduxState/user/deleteUser';
@@ -45,6 +44,8 @@ import getChat from 'reduxState/chat/getChat';
 import sendMessage from 'reduxState/chat/sendMessage';
 
 import createRaport from 'reduxState/raport/createRaport';
+import getRaports from 'reduxState/raport/getRaports';
+import deleteRaport from 'reduxState/raport/deleteRaport';
 
 export const store = configureStore({
   reducer: {
@@ -53,7 +54,6 @@ export const store = configureStore({
     sendReset,
     sendAgain,
     resetPassword,
-    changeName,
     changePassword,
     changeEmail,
     deleteUser,
@@ -80,7 +80,9 @@ export const store = configureStore({
     deleteUserTeam,
     createRaport,
     getChat,
-    sendMessage
+    sendMessage,
+    getRaports,
+    deleteRaport,
   },
   middleware: [
     ...getDefaultMiddleware({
