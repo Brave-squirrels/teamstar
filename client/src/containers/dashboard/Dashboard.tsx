@@ -40,7 +40,6 @@ const Dashboard = () => {
   setInterval(() => {
     setDate({ date: new Date() });
   }, 1000);
-
   useEffect(() => {
     dispatch(authUser());
   }, [

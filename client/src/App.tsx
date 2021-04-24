@@ -21,6 +21,7 @@ import Team from "containers/team/team";
 import Tasks from "containers/tasks/tasks";
 import Raports from "containers/raports/raports";
 import Calendar from "containers/calendar/calendar";
+import Break from "components/break/break";
 
 import { authUser, logout } from "reduxState/user/loginUser";
 import { RootState } from "reduxState/store";
@@ -33,6 +34,14 @@ const App = () => {
   const loginState = useSelector((state: RootState) => state.loginUser);
   const [response, setResponse] = useState("");
   const token: string = localStorage.getItem("token") || "null";
+
+  const checkBreak = (): boolean => {
+    const start = loginState.userData?.breakTime * 60;
+    const end = 10 * 60 + 15;
+    const now = new Date();
+    const time = now.getHours() * 60 + now.getMinutes();
+    return time >= start && time <= end;
+  };
 
   useEffect(() => {
     const socket = socketIOClient(ENDPOINT, {
@@ -75,6 +84,7 @@ const App = () => {
           <Main>
             <NavBar />
             <MainParticles />
+            {checkBreak() && <Break />}
             <Switch>
               <ProtectedRoute path="/dnd" component={Dnd} />
               <ProtectedRoute path="/home" component={Dashboard} />
