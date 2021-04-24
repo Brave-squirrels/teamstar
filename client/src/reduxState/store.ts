@@ -27,6 +27,7 @@ import sendInvite from 'reduxState/team/sendInvite';
 import leaveTeam from 'reduxState/team/leaveTeam';
 import deleteTeam from 'reduxState/team/deleteTeam';
 import changeTeamDescription from 'reduxState/team/changeDescription';
+import deleteUserTeam from 'reduxState/team/deleteUser';
 
 import createTask from 'reduxState/tasks/createTask';
 import editTask from 'reduxState/tasks/editTask';
@@ -73,6 +74,7 @@ export const store = configureStore({
     changeStatus,
     addUser,
     removeUser,
+    deleteUserTeam,
   },
   middleware: [
     ...getDefaultMiddleware({

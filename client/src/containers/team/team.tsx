@@ -16,6 +16,8 @@ import { RootState } from "reduxState/store";
 import { mutateToAxios } from "utils/onChangeForm";
 import { teamDataFetch } from "reduxState/team/getTeamInfo";
 import { deleteTeamFetch } from "reduxState/team/deleteTeam";
+import { deleteUserTeamFetch } from "reduxState/team/deleteUser";
+import EmptyNotification from "components/emptyNotification/emptyNotification";
 
 const Team = () => {
   const [modalInvite, setModalInvite] = useState(false);
@@ -29,6 +31,7 @@ const Team = () => {
   const declineInviteState = useSelector(
     (state: RootState) => state.declineInvite
   );
+  const removeUser = useSelector((state: RootState) => state.deleteUserTeam);
 
   const handleSendRaport = () => {};
 
@@ -59,6 +62,7 @@ const Team = () => {
     changeDescription.success,
     inviteSendState.success,
     declineInviteState.success,
+    removeUser.success,
   ]);
 
   useEffect(() => {
@@ -124,6 +128,10 @@ const Team = () => {
     history.push("/home");
   };
 
+  const handleRemoveUser = (id: string) => {
+    dispatch(deleteUserTeamFetch(teamId, { id: id }));
+  };
+
   return (
     <div className={styles.container}>
       <InviteModal
@@ -142,18 +150,24 @@ const Team = () => {
         />
         <div className={styles.invitedUsers}>
           <h4>Invited users</h4>
-          {teamInfo.invitations.map((user: any) => (
-            <div key={user.userId}>
-              {user.userName}
-              <img
-                id={user.userId}
-                src={trash}
-                alt="Remove invite"
-                className={styles.trashImg}
-                onClick={handleRejectInvite}
-              />
-            </div>
-          ))}
+          {teamInfo.invitations.length > 0 ? (
+            <>
+              {teamInfo.invitations.map((user: any) => (
+                <div key={user.userId}>
+                  {user.userName}
+                  <img
+                    id={user.userId}
+                    src={trash}
+                    alt="Remove invite"
+                    className={styles.trashImg}
+                    onClick={handleRejectInvite}
+                  />
+                </div>
+              ))}
+            </>
+          ) : (
+            <EmptyNotification>There is no invites</EmptyNotification>
+          )}
         </div>
         <FormStructure
           state={description}
@@ -163,7 +177,36 @@ const Team = () => {
           spinner={changeDescription.loading}
           submitted={handleChangeDescription}
         />
-        <Button variant="danger" onClick={handleDeleteTeam}>
+        <div className={styles.invitedUsers}>
+          <h4>Team members</h4>
+          {teamInfo.users.length > 1 ? (
+            <>
+              {teamInfo.users.map((user: any) => (
+                <>
+                  {user.id !== teamInfo.owner.id && (
+                    <div key={user.id}>
+                      {user.name}
+                      <img
+                        id={user.id}
+                        src={trash}
+                        alt="Remove invite"
+                        className={styles.trashImg}
+                        onClick={() => handleRemoveUser(user.id)}
+                      />
+                    </div>
+                  )}
+                </>
+              ))}
+            </>
+          ) : (
+            <EmptyNotification>Team has no members</EmptyNotification>
+          )}
+        </div>
+        <Button
+          variant="danger"
+          onClick={handleDeleteTeam}
+          style={{ marginTop: "1em" }}
+        >
           Remove team
         </Button>
       </InviteModal>
