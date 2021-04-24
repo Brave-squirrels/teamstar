@@ -34,6 +34,7 @@ Project is created with:
 * Redux
 * Redux-Thunk
 * MongoDB
+* Socket.io
 
 ### Requirements
 -----------------
