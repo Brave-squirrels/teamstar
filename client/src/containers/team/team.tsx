@@ -31,7 +31,10 @@ const Team = () => {
   const teamId = location.pathname.split("/")[2];
 
   const teamInfo = useSelector((state: any) => state.teamData.teamData);
+<<<<<<< HEAD
+=======
   console.log(teamInfo);
+>>>>>>> 261766b411a82409b679ccbc292a93dc4501c7c1
   const inviteSendState = useSelector((state: RootState) => state.sendInvite);
   const declineInviteState = useSelector(
     (state: RootState) => state.declineInvite
@@ -66,7 +69,6 @@ const Team = () => {
 
   useEffect(() => {
     dispatch(teamDataFetch(teamId));
-    dispatch(getRaportsFetch(teamId));
   }, [
     dispatch,
     teamId,
@@ -74,9 +76,11 @@ const Team = () => {
     inviteSendState.success,
     declineInviteState.success,
     removeUser.success,
-    createRaportState.success,
-    deleteRaportState.success,
   ]);
+  useEffect(() => {
+    setShowAllRaport(false);
+    dispatch(getRaportsFetch(teamId));
+  }, [createRaportState, deleteRaportState]);
 
   useEffect(() => {
     setDescription((prevState) => {
@@ -192,6 +196,7 @@ const Team = () => {
   };
   const handleCreateRaport = (e: any) => {
     e.preventDefault();
+    setShowRaport(false);
     dispatch(createRaportFetch(mutateToAxios(raportForm), teamId));
   };
 
