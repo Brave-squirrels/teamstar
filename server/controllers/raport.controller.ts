@@ -20,7 +20,7 @@ export default class RaportController {
   public initializeRoutes() {
     this.router.get(this.path, auth, this.getRaport);
     this.router.post(this.path, auth, this.createRaport);
-    this.router.delete(this.path, auth, this.deleteRaport);
+    this.router.delete(`${this.path}/:raportId`, auth, this.deleteRaport);
   }
 
   getRaport(req: Request, res: Response) {
