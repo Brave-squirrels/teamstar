@@ -1,0 +1,8 @@
+POST http://localhost:5000/teams/6083cd148d15605e1c590659/tasks HTTP/1.1
+x-auth-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MDgzY2NiMDhkMTU2MDVlMWM1OTA2NTUiLCJuYW1lIjoidGVzdCIsImlhdCI6MTYxOTI1MTYzM30.4-whRUcBXTVo0vvXJVn--kmkSpYapgrqX3LtVSXj9Ag
+Content-Type: application/json
+
+{
+    "email": "test5@user.pl",
+    "password": "Password1!"
+}
