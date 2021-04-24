@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { useHistory, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import styles from "./sidebar.module.scss";
 import { teamDataFetch } from "reduxState/team/getTeamInfo";
 import { RootState } from "reduxState/store";

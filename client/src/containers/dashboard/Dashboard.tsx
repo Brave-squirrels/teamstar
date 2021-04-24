@@ -184,12 +184,14 @@ const Dashboard = () => {
             <div>
               From:
               <span className={styles.timeText}>
-                {userData!.times.startTime}
+                {userData!.times && userData!.times.startTime}
               </span>
             </div>
             <div>
               To:
-              <span className={styles.timeText}>{userData!.times.endTime}</span>
+              <span className={styles.timeText}>
+                {userData!.times && userData!.times.endTime}
+              </span>
             </div>
           </div>
           <div className={styles.changeTimeWrapper}>
