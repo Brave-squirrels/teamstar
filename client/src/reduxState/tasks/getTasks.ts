@@ -4,45 +4,46 @@ import { AppThunk, RootState } from "reduxState/store";
 import toastNofity from "utils/toastNotify";
 
 import * as types from 'utils/types';
-
-interface Team {
-    teamData: types.TeamData | null;
+interface State {
     loading: boolean;
+    taskData: types.TaskSchema[];
 }
 
-const initialState: Team = {
-    teamData: { ...types.basicTeam },
+const initialState: State = {
     loading: false,
+    taskData: [{ ...types.basicTask }]
 };
 
-const teamData = createSlice({
-    name: "teamData",
+const getTasks = createSlice({
+    name: "getTasks",
     initialState,
     reducers: {
         start: (state) => {
-            state.teamData = { ...types.basicTeam };
             state.loading = true;
+            state.taskData = [{ ...types.basicTask }]
         },
         success: (state, action) => {
-            state.teamData = action.payload;
             state.loading = false;
+            state.taskData = action.payload;
         },
         failed: (state) => {
-            state.teamData = { ...types.basicTeam };
             state.loading = false;
+            state.taskData = [{ ...types.basicTask }]
         },
     },
 });
 
-export const { start, success, failed } = teamData.actions;
+export const { start, success, failed } = getTasks.actions;
 
-export const teamDataFetch = (teamId: string): AppThunk => async (dispatch) => {
+export const getTasksFetch = (teamId: string): AppThunk => async (
+    dispatch
+) => {
     dispatch(start());
     await axios
-        .get(`/teams/${teamId}`, {
+        .get(`/teams/${teamId}/tasks`, {
             headers: {
-                'x-auth-token': localStorage.getItem('token')
-            }
+                "x-auth-token": localStorage.getItem("token"),
+            },
         })
         .then((res) => {
             dispatch(success(res.data));
@@ -53,8 +54,7 @@ export const teamDataFetch = (teamId: string): AppThunk => async (dispatch) => {
         });
 };
 
+export const selectLoading = (state: RootState) => state.getTasks.loading;
+export const selectData = (state: RootState) => state.getTasks.taskData;
 
-export const selectLoading = (state: RootState) => state.teamData.loading;
-export const selectData = (state: RootState) => state.teamData.teamData;
-
-export default teamData.reducer;
+export default getTasks.reducer;

@@ -20,6 +20,7 @@
     width: calc(100% - 4rem);
     text-align: center;
     padding-bottom: 5px;
+    font-size: 1.3em;
   }
   .toggleContainer {
     text-align: end;
@@ -45,6 +46,7 @@
 
 .break {
   padding: 0.4em 0 0.5em 0;
+  color: $invalid;
 }
 .menu {
   padding: 0 2rem;
@@ -57,6 +59,11 @@
     border-top: 1px solid $fontWhite;
     list-style: none;
     cursor: pointer;
+  }
+  & > :first-child {
+    padding: 0.2em;
+    font-size: 1.3em;
+    font-weight: 500;
   }
   & > :last-child {
     border-bottom: 1px solid $fontWhite;

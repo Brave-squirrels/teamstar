@@ -20,7 +20,11 @@ interface User extends mongoose.Document {
   isVerified?: boolean;
   chats?: ChatArr[];
   date?: Date;
-  isOnline?: Boolean;
+  isOnline?: boolean;
+  startTime?: string;
+  endTime?: string;
+  breakTime?: string;
+  periodTime?: string;
   generateAuthToken(): string;
 }
 

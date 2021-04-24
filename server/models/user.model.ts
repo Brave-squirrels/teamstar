@@ -82,7 +82,6 @@ const userSchema = new mongoose.Schema<User>({
     ],
     default: [],
   },
-
   isVerified: {
     type: Boolean,
     default: true, // TODO change to false if done
@@ -93,8 +92,24 @@ const userSchema = new mongoose.Schema<User>({
   },
   isOnline: {
     type: Boolean,
-    default: false
-  }
+    default: false,
+  },
+  startTime: {
+    type: String,
+    default: "07:00:00",
+  },
+  endTime: {
+    type: String,
+    default: "15:00:00",
+  },
+  breakTime: {
+    type: String,
+    default: "10",
+  },
+  periodTime: {
+    type: String,
+    default: "01:50:00",
+  },
 });
 
 userSchema.methods.generateAuthToken = function () {
