@@ -8,15 +8,18 @@ const Task = (props: any) => {
     <Draggable draggableId={props.task.id} index={props.index}>
       {(provided, snapshot) => (
         <Card
-          body
-          className="m-1 mt-2 mb-2"
+          className="m-3 "
           {...provided.draggableProps}
           {...provided.dragHandleProps}
           ref={provided.innerRef}
           draggable={snapshot.isDragging}
         >
-          {props.task.content}{" "}
-          <Badge variant="secondary">{props.task.status}</Badge>
+          <Card.Body className=" d-flex align-items-center justify-content-between">
+            {props.task.content}{" "}
+            <Badge variant="secondary" className="ml-1">
+              {props.task.status}
+            </Badge>
+          </Card.Body>
         </Card>
       )}
     </Draggable>
