@@ -19,25 +19,25 @@ export default async (req: Request, res: Response) => {
     const currentUser = await userModel.findById(teamUser.id);
 
     await currentUser?.teams?.forEach(async (userTeam: any, i: number) => {
-      if (userTeam.id === team!._id) {
+      if (userTeam.teamId == team!.id) {
         // delete all user raports from this team
         currentUser.reports?.forEach((report: any, i: number) => {
-          if (report.teamId === userTeam.id) currentUser.reports?.splice(i, 1);
+          if (report.teamId === userTeam.teamId) currentUser.reports?.splice(i, 1);
         });
 
         // delete all user tasks from this team
         currentUser.tasks?.forEach((task: any, i: number) => {
-          if (task.teamId === userTeam.id) currentUser.tasks?.splice(i, 1);
+          if (task.teamId === userTeam.teamId) currentUser.tasks?.splice(i, 1);
         });
 
         //delete all user chats from this team
         currentUser.chats?.forEach((chat: any, i: number) => {
-          if (chat.teamId === userTeam.id) currentUser.chats?.splice(i, 1);
+          if (chat.teamId === userTeam.teamId) currentUser.chats?.splice(i, 1);
         });
 
         // delete invite is is from team that is about to be deleted
         currentUser.teamInvitation?.forEach((invitation: any, i: number) => {
-          if (invitation.teamId === userTeam.id)
+          if (invitation.teamId === userTeam.teamId)
             currentUser.teamInvitation?.splice(i, 1);
         });
 

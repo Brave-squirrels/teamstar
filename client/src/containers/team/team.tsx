@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styles from "./team.module.scss";
-import { useLocation } from "react-router-dom";
+import { useLocation, useHistory } from "react-router-dom";
+import { Button } from "react-bootstrap";
 import settingsLogo from "../../assets/settingsLogo.svg";
 import trash from "../../assets/trash.svg";
 import Sidebar from "./sidebar/sidebar";
@@ -14,11 +15,13 @@ import { changeTeamDescriptionFetch } from "reduxState/team/changeDescription";
 import { RootState } from "reduxState/store";
 import { mutateToAxios } from "utils/onChangeForm";
 import { teamDataFetch } from "reduxState/team/getTeamInfo";
+import { deleteTeamFetch } from "reduxState/team/deleteTeam";
 
 const Team = () => {
   const [modalInvite, setModalInvite] = useState(false);
 
   const location = useLocation();
+  const history = useHistory();
   const teamId = location.pathname.split("/")[2];
 
   const teamInfo = useSelector((state: any) => state.teamData.teamData);
@@ -116,6 +119,11 @@ const Team = () => {
 
   const [sendInviteToUser, setSendInviteToUser] = useState(initialEmail);
 
+  const handleDeleteTeam = () => {
+    dispatch(deleteTeamFetch(teamInfo._id));
+    history.push("/home");
+  };
+
   return (
     <div className={styles.container}>
       <InviteModal
@@ -155,6 +163,9 @@ const Team = () => {
           spinner={changeDescription.loading}
           submitted={handleChangeDescription}
         />
+        <Button variant="danger" onClick={handleDeleteTeam}>
+          Remove team
+        </Button>
       </InviteModal>
       <div className={styles.mainPanel}>
         <div className={styles.leftSidePanel}>
