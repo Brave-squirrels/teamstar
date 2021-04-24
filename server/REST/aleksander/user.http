@@ -53,7 +53,7 @@ GET http://localhost:5000/users/60832736be37ba2584bf00cb HTTP/1.1
 ###
 # get me
 GET http://localhost:5000/users/me HTTP/1.1
-x-auth-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MDgzMjczNmJlMzdiYTI1ODRiZjAwY2IiLCJuYW1lIjoidGVzdCIsImlhdCI6MTYxOTIxNjM5MH0.4tijBMnqHsJwzZ7uZUZg1r5RIDhHI-zbTxP8HiOfOSo
+x-auth-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MDgzMjczNmJlMzdiYTI1ODRiZjAwY2IiLCJuYW1lIjoidGVzdCIsImlhdCI6MTYxOTIyNjgxMn0.f_TXWKZY3j-DpCbrwj98QNfIAXzPzL0zsRLHuRYcWRA
 
 ###
 # confirm user
@@ -133,7 +133,7 @@ x-auth-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MDgzMjczNmJlMzdiY
 Content-Type: application/json
 
 {
-    "endTime": "11:45:00"
+    "endTime": "17:45:00"
 }
 
 ###

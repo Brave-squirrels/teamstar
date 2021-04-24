@@ -17,8 +17,8 @@ export default async (req: Request, res: Response) => {
       .status(StatusCodes.INTERNAL_SERVER_ERROR)
       .send("Can not read the user.");
 
-  user.workTime = calculateTime(user.startTime, user.endTime);
   user.endTime = req.body.endTime;
+  user.workTime = calculateTime(user.startTime, user.endTime);
   await user.save();
 
   res
