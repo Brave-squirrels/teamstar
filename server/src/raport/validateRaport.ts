@@ -12,7 +12,7 @@ export default function validateRaport(data: object) {
     }).required(),
     team: Joi.object({
       name: Joi.string().required(),
-      id: Joi.string().required(),
+      id: Joi.required(),
     }).required(),
   });
 
