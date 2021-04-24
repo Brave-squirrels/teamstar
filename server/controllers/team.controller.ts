@@ -9,6 +9,7 @@ import leaveTeam from "../src/teams/leaveTeam";
 import sendInvite from "../src/teams/sendInvite";
 import createCalendar from "../middleware/createCalendar";
 import changeDescription from '../src/teams/changeTeamDescription';
+import deleteUser from '../src/teams/deleteUserFromTeam';
 
 /**
  * team Class,
@@ -40,6 +41,7 @@ export default class TeamController {
     this.router.put(`${this.path}/:teamId/leaveTeam`, auth, this.leaveTeam);
     this.router.delete(`${this.path}/:teamId`, auth, this.deleteTeam);
     this.router.put(`${this.path}/:teamId/changeDescription`, auth, this.changeDescription);
+    this.router.put(`${this.path}/:teamId/deleteUser`, auth, this.deleteUser)
   }
 
   createTeam(req: Request, res: Response) {
@@ -71,5 +73,8 @@ export default class TeamController {
   }
   changeDescription(req: Request, res: Response) {
     changeDescription(req, res);
+  }
+  deleteUser(req: Request, res: Response) {
+    deleteUser(req, res);
   }
 }
