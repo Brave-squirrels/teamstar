@@ -1,4 +1,4 @@
-const statusArr = ["", "To do", "In progress", "Done"];
+const statusArr = ["To do", "In progress", "Done"];
 
 export function dataModel(data: any) {
   const columns = [
@@ -20,9 +20,9 @@ export function dataModel(data: any) {
   ];
 
   const tasks = data.map((d: any) => {
-    if (d.status === 1) columns[0].taskIds.push(d.id);
-    if (d.status === 2) columns[1].taskIds.push(d.id);
-    if (d.status === 3) columns[2].taskIds.push(d.id);
+    if (d.status === 0) columns[0].taskIds.push(d.id);
+    if (d.status === 1) columns[1].taskIds.push(d.id);
+    if (d.status === 2) columns[2].taskIds.push(d.id);
     return { id: d.id, content: d.name, status: statusArr[d.status] };
   });
 
