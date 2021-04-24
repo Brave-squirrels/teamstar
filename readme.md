@@ -90,3 +90,5 @@ PASSWORD=\<your email's password></br></br>
 ![](githubImg/calendar.jpg)
 * Break time!
 * ![](githubImg/break.jpg)
+* #### Workflow :)
+* ![](githubImg/workflow.jpg)
