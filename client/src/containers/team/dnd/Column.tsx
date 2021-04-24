@@ -55,12 +55,13 @@ const Column = (props: any) => {
     e.preventDefault();
     dispatch(createTaskFetch(mutateToAxios(form), teamId));
   };
+
   return (
     <Card className={`mt-5 mr-3 w-100 ${styles.dndCard}`}>
       <Card.Header className={styles.headerWrapper}>
-        <div>{props.column.title}</div>
+        <div>{props.column[0].title}</div>
 
-        {props.column.title === "To do" ? (
+        {props.column[0].title === "To do" ? (
           <>
             <InviteModal
               show={showCreate}
@@ -83,7 +84,7 @@ const Column = (props: any) => {
         ) : null}
       </Card.Header>
       <div>
-        <Droppable droppableId={props.column.id} type="task">
+        <Droppable droppableId={props.column[0].id} type="task">
           {(provided, snapshot) => (
             <div
               className={styles.dndTaskContainer}
@@ -92,7 +93,7 @@ const Column = (props: any) => {
               draggable={snapshot.isDraggingOver}
             >
               {props.tasks.map((task: any, index: any) => {
-                return <Task key={task.id} task={task} index={index} />;
+                return <Task key={task[0].id} task={task[0]} index={index} />;
               })}
               {provided.placeholder}
             </div>

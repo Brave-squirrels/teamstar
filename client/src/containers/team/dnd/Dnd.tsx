@@ -23,7 +23,8 @@ const Dnd = () => {
 
   useEffect(() => {
     dispatch(getTasksFetch(teamId));
-    console.log(tasks);
+
+    // console.log(tasks);
   }, [teamData!.tasks]);
 
   const onDragEnd = (result: any) => {
@@ -40,8 +41,12 @@ const Dnd = () => {
       return;
     }
 
-    const start = data.columns[source.droppableId];
-    const finish = data.columns[destination.droppableId];
+    const start = data.columns.filter(
+      (e: any) => e.id === source.droppableId
+    )[0];
+    const finish = data.columns.filter(
+      (e: any) => e.id === destination.droppableId
+    )[0];
 
     if (start === finish) {
       const newTaskIds = Array.from(start.taskIds);
@@ -53,21 +58,28 @@ const Dnd = () => {
         taskIds: newTaskIds,
       };
 
+      let index = 0;
+      data.columns.forEach((e: any, i: number) => {
+        if (e.id === newColumn.id) index = i;
+      });
+
       const newState = {
         ...data,
-        columns: {
-          ...data.columns,
-          [newColumn.id]: newColumn,
-        },
+        columns: [...data.columns],
       };
+
+      newState.columns.splice(index, 1);
+      newState.columns.splice(index, 0, newColumn);
 
       setData(newState);
       return;
     }
 
     // change task status
-    const currentTask = data.tasks[draggableId];
+    // const currentTask = data.tasks[draggableId];
     const newStatus = finish.title;
+
+    const currentTask = data.tasks.filter((e: any) => e.id === draggableId)[0];
 
     const newTask = {
       ...currentTask,
@@ -89,18 +101,43 @@ const Dnd = () => {
       taskIds: finishTaskIds,
     };
 
+    let indexT = 0;
+    data.tasks.forEach((e: any, i: number) => {
+      if (e.id === newTask.id) indexT = i;
+    });
+
+    let indexCS = 0;
+    data.columns.forEach((e: any, i: number) => {
+      if (e.id === newStart.id) indexCS = i;
+    });
+
+    let indexCF = 0;
+    data.columns.forEach((e: any, i: number) => {
+      if (e.id === newFinish.id) indexCF = i;
+    });
+
     const newState = {
       ...data,
-      tasks: {
+      tasks: [
         ...data.tasks,
-        [newTask.id]: newTask,
-      },
-      columns: {
+        // [newTask.id]: newTask,
+      ],
+      columns: [
         ...data.columns,
-        [newStart.id]: newStart,
-        [newFinish.id]: newFinish,
-      },
+        //     [newStart.id]: newStart,
+        //     [newFinish.id]: newFinish,
+      ],
     };
+
+    newState.tasks.splice(indexT, 1);
+    newState.tasks.splice(indexT, 0, newTask);
+
+    newState.columns.splice(indexCS, 1);
+    newState.columns.splice(indexCS, 0, newStart);
+
+    newState.columns.splice(indexCF, 1);
+    newState.columns.splice(indexCF, 0, newFinish);
+
     setData(newState);
   };
 
@@ -108,12 +145,13 @@ const Dnd = () => {
     <DragDropContext onDragEnd={onDragEnd}>
       <Container className={styles.dndContainer}>
         {data.columnOrder.map((columnId: string) => {
-          const column = data.columns[columnId];
-          const tasks = column.taskIds.map(
-            (taskId: string) => data.tasks[taskId]
+          const column = data.columns.filter((e: any) => e.id === columnId);
+
+          const tasks = column[0].taskIds.map((taskId: string) =>
+            data.tasks.filter((e: any) => e.id === taskId)
           );
 
-          return <Column key={column.id} column={column} tasks={tasks} />;
+          return <Column key={column[0].id} column={column} tasks={tasks} />;
         })}
       </Container>
     </DragDropContext>
