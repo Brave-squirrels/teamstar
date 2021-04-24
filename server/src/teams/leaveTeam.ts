@@ -20,7 +20,7 @@ export default async (req: Request, res: Response) => {
 
   // deleting user from team users
   team.users.forEach((teamUser: any, i: number) => {
-    if (teamUser === user._id) {
+    if (teamUser.id == user.id) {
       team.users.splice(i, 1);
       return;
     }
@@ -28,7 +28,7 @@ export default async (req: Request, res: Response) => {
 
   // deleting raports from team
   await team.raports.forEach(async (raport: any, i: number) => {
-    if (raport.userId === user._id) {
+    if (raport.userId == user.id) {
       team.raports.splice(i, 1);
       // deleting user raports
       await raportModel.findByIdAndDelete(raport.id);
@@ -37,17 +37,17 @@ export default async (req: Request, res: Response) => {
 
   // deleting raports from user
   user.reports?.forEach((raport: any, i: number) => {
-    if (raport.teamId === team._id) user.reports?.splice(i, 1);
+    if (raport.teamId == team.id) user.reports?.splice(i, 1);
   });
 
   // deleting team from user teams
   user.teams?.forEach((userTeam: any, i: number) => {
-    if (userTeam.id === team._id) user.teams?.splice(i, 1);
+    if (userTeam.id == team.id) user.teams?.splice(i, 1);
   });
 
   // deleting user tasks from team
   user.tasks?.forEach((task: any, i: number) => {
-    if (task.userId === user._id) user.tasks?.splice(i, 1);
+    if (task.userId == user.id) user.tasks?.splice(i, 1);
   });
 
   // deleting user from team tasks

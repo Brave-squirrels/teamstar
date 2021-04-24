@@ -9,7 +9,7 @@ interface State {
 }
 
 interface Data {
-    email: string;
+    endTime: string;
 }
 
 const initialState: State = {
@@ -17,8 +17,8 @@ const initialState: State = {
     success: false,
 }
 
-const sendInvite = createSlice({
-    name: 'sendInvite',
+const changeEndTime = createSlice({
+    name: 'changeEndTime',
     initialState,
     reducers: {
         start: (state) => {
@@ -36,24 +36,25 @@ const sendInvite = createSlice({
     }
 })
 
-export const { start, success, failed } = sendInvite.actions;
+export const { start, success, failed } = changeEndTime.actions;
 
-export const sendInviteFetch = (data: Data, teamId: string): AppThunk => async (dispatch) => {
+export const changeEndTimeFetch = (data: Data): AppThunk => async (dispatch) => {
     dispatch(start());
-    await axios.put(`/teams/${teamId}/sendInvite`, data, {
+    await axios.put('/users/endTime', data, {
         headers: {
             'x-auth-token': localStorage.getItem('token')
         }
-    }).then(res => {
-        dispatch(success());
-        toastNofity(res.status);
-    }).catch((err) => {
-        dispatch(failed());
-        toastNofity(err.response.status, err.response.data);
     })
+        .then(res => {
+            dispatch(success());
+            toastNofity(res.status);
+        }).catch((err) => {
+            dispatch(failed());
+            toastNofity(err.response.status, err.response.data);
+        })
 }
 
-export const selectLoading = (state: RootState) => state.sendInvite.loading;
-export const selectSuccess = (state: RootState) => state.sendInvite.success;
+export const selectLoading = (state: RootState) => state.changeEndTime.loading;
+export const selectSuccess = (state: RootState) => state.changeEndTime.success;
 
-export default sendInvite.reducer;
+export default changeEndTime.reducer;

@@ -13,6 +13,10 @@ export interface UserData {
     tasks: Task[];
     reports: Report[];
     chats: Chat[];
+    breakTime: any;
+    endTime: any;
+    periodTime: any;
+    startTime: any
 }
 
 export interface TeamInvitation {
@@ -52,6 +56,10 @@ export const UserBasic: UserData = {
     tasks: [],
     reports: [],
     chats: [],
+    breakTime: '',
+    endTime: '',
+    periodTime: '',
+    startTime: ''
 }
 
 export interface Owner {
