@@ -77,10 +77,13 @@ PASSWORD=\<your email's password></br></br>
 #### Registration
 * In order to use our application, you need to create an account, don't worry, we are not collecting any personal data :)
 [register pic]
-#### Afther that, you can create your own team, or join you friends!
+#### Afther that, you can create your own team, or join your friends!
 [create team pic]
 [join team]
 #### Core benefits of our app are:
 * Live chat with coworkers in team!
+* [chat screen]
 * Live monitoring of work time!
+* [livetime screen]
 * Live meetings callendar!
+* [calendar screen]
