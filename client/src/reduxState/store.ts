@@ -17,6 +17,15 @@ import changePassword from 'reduxState/user/changePassword';
 import changeEmail from 'reduxState/user/changeEmail';
 import deleteUser from 'reduxState/user/deleteUser';
 
+import createTeam from 'reduxState/team/createTeam';
+import declineInvite from 'reduxState/team/declineInvite';
+import acceptInvite from 'reduxState/team/acceptInvite';
+import teamData from 'reduxState/team/getTeamInfo';
+import sendInvite from 'reduxState/team/sendInvite';
+import leaveTeam from 'reduxState/team/leaveTeam';
+import deleteTeam from 'reduxState/team/deleteTeam';
+import changeTeamDescription from 'reduxState/team/changeDescription';
+
 export const store = configureStore({
   reducer: {
     loginUser,
@@ -28,6 +37,14 @@ export const store = configureStore({
     changePassword,
     changeEmail,
     deleteUser,
+    createTeam,
+    declineInvite,
+    acceptInvite,
+    teamData,
+    sendInvite,
+    leaveTeam,
+    deleteTeam,
+    changeTeamDescription,
   },
   middleware: [
     ...getDefaultMiddleware({
