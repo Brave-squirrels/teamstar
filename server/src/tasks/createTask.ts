@@ -28,8 +28,14 @@ export default async (req: Request, res: Response) => {
   if (error)
     return res.status(StatusCodes.BAD_REQUEST).send(error.details[0].message);
 
+
+
+
   const task = new taskModel(taskData);
 
+  team.tasks.push({ name: req.body.name, userName: req.userInfo.name, userId: req.userInfo._id, id: task._id });
+
+  await team.save();
   await task.save();
 
   return res.status(StatusCodes.OK).send("Task created Succesfully!!");
