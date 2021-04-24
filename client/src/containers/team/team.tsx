@@ -1,8 +1,11 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./team.module.scss";
 import settingsLogo from "../../assets/settingsLogo.svg";
 import Sidebar from "./sidebar/sidebar";
-const team = () => {
+import { useSelector, useDispatch } from "react-redux";
+
+const Team = () => {
+  const teamInfo = useSelector((state: any) => state.teamData.teamData);
   const handleSendRaport = () => {};
 
   return (
@@ -13,7 +16,7 @@ const team = () => {
         </div>
         <div className={styles.rightSidePanel}>
           <div className={styles.headerPanel}>
-            <h1 className={styles.teamName}>Team Name</h1>
+            <h1 className={styles.teamName}>{teamInfo.name}</h1>
             <img
               src={settingsLogo}
               alt="User settings"
@@ -36,4 +39,4 @@ const team = () => {
   );
 };
 
-export default team;
+export default Team;

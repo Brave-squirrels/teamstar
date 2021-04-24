@@ -134,6 +134,7 @@ select:-webkit-autofill:focus {
   color: $fontWhite;
   font-family: $Roboto;
   letter-spacing: 0.1em;
+  font-size: 1.2em;
 }
 
 span.rbc-btn-group {
@@ -160,4 +161,16 @@ div.rbc-row.rbc-month-header {
 
 span.rbc-btn-group:nth-child(3) {
   display: none;
+}
+
+div.rbc-date-cell.rbc-off-range {
+  a {
+    pointer-events: none;
+  }
+}
+
+div.rbc-date-cell {
+  a {
+    pointer-events: none;
+  }
 }
