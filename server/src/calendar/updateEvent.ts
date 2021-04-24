@@ -8,18 +8,18 @@ import validateEvent from "./validateEvent";
 export default async (req: Request, res: Response) => {
 
     const calendar = await calendarModel.findById(req.params.calendarId);
-    if(!calendar) { return res.status(StatusCodes.BAD_REQUEST).send("Calendar not found")};
+    if (!calendar) { return res.status(StatusCodes.BAD_REQUEST).send("Calendar not found") };
 
     const user = await userModel.findById(req.userInfo._id);
-    if(!user) { return res.status(StatusCodes.BAD_REQUEST).send("User not found")};
+    if (!user) { return res.status(StatusCodes.BAD_REQUEST).send("User not found") };
 
-    const team = await teamModel.findOne({calendarId: req.params.calendarId});
+    const team = await teamModel.findOne({ calendarId: req.params.calendarId });
 
-    const users = await userModel.find({"teams": {"$elemMatch": {"teamId": team._id}}}).select("-password");
+    const users = await userModel.find({ "teams": { "$elemMatch": { "teamId": team._id } } }).select("-password");
 
-    const isFromTeam = users.filter(user => user._id==req.userInfo._id)
+    const isFromTeam = users.filter(user => user._id == req.userInfo._id)
 
-    if(isFromTeam.length === 0 ) { return res.status(StatusCodes.UNAUTHORIZED).send("You are not allowed to do that!")};
+    if (isFromTeam.length === 0) { return res.status(StatusCodes.UNAUTHORIZED).send("You are not allowed to do that!") };
 
 
     const author = {
@@ -33,14 +33,17 @@ export default async (req: Request, res: Response) => {
     }
 
     const { error } = validateEvent(eventData);
-        if (error) { return res.status(StatusCodes.BAD_REQUEST).send(error.details[0].message); 
+    if (error) {
+        return res.status(StatusCodes.BAD_REQUEST).send(error.details[0].message);
     }
 
     let events = calendar.events.map(event => {
-        if(event._id==req.params.eventId) {
+        if (event._id == req.params.eventId) {
             return {
                 _id: event._id,
-                ...event.author,
+                author: {
+                    ...event.author
+                },
                 title: req.body.title,
                 start: req.body.start,
                 end: req.body.end,
@@ -52,8 +55,6 @@ export default async (req: Request, res: Response) => {
             return event;
         }
     });
-
-    console.log(events);
 
     calendar.set({
         events: events
