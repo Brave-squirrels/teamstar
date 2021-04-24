@@ -2,7 +2,6 @@ import { createSlice } from "@reduxjs/toolkit";
 import axios from "axios/axiosMain";
 import { AppThunk, RootState } from "reduxState/store";
 import toastNofity from "utils/toastNotify";
-
 interface State {
   loading: boolean;
   success: boolean;

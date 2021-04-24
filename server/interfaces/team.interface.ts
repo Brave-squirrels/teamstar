@@ -22,7 +22,7 @@ interface Task {
   name: string;
   id: string;
   userId: string;
-  status: string;
+  status: any;
 }
 
 interface Team extends mongoose.Document {
