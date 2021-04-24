@@ -19,6 +19,7 @@ import { deleteTeamFetch } from "reduxState/team/deleteTeam";
 import { deleteUserTeamFetch } from "reduxState/team/deleteUser";
 import EmptyNotification from "components/emptyNotification/emptyNotification";
 import { leaveTeamFetch } from "reduxState/team/leaveTeam";
+import { createRaportFetch } from "reduxState/raport/createRaport";
 
 const Team = () => {
   const [modalInvite, setModalInvite] = useState(false);
@@ -34,7 +35,6 @@ const Team = () => {
   );
   const removeUser = useSelector((state: RootState) => state.deleteUserTeam);
   const leaveTeamState = useSelector((state: RootState) => state.leaveTeam);
-  const handleSendRaport = () => {};
   const handleShowRaport = () => {};
 
   const changeDescription = useSelector(
@@ -122,6 +122,40 @@ const Team = () => {
     formValid: true,
   });
 
+  const [showRaport, setShowRaport] = useState(false);
+  const [raportForm, setRaportForm] = useState({
+    name: {
+      val: "",
+      inputType: "input",
+      type: "text",
+      placeholder: "Title",
+      label: "Title",
+      validation: {
+        required: true,
+        minLength: 3,
+        maxLength: 24,
+      },
+      error: "Title should be between 3 and 24 characters long",
+      valid: false,
+      touched: false,
+    },
+    description: {
+      val: "",
+      inputType: "textarea",
+      placeholder: "Description",
+      label: "Description",
+      validation: {
+        required: true,
+        minLength: 0,
+        maxLength: 254,
+      },
+      error: "Description should be max 255 characters long",
+      valid: false,
+      touched: false,
+    },
+    formValid: false,
+  });
+
   const handleChangeDescription = (e: any) => {
     e.preventDefault();
     dispatch(
@@ -142,9 +176,27 @@ const Team = () => {
   const handleLeaveTeam = () => {
     dispatch(leaveTeamFetch(teamId));
   };
+  const handleCreateRaport = (e: any) => {
+    e.preventDefault();
+    dispatch(createRaportFetch(mutateToAxios(raportForm), teamId));
+  };
 
   return (
     <div className={styles.container}>
+      <InviteModal
+        show={showRaport}
+        onHide={() => setShowRaport(false)}
+        user={"as"}
+        title="Create raport"
+      >
+        <FormStructure
+          state={raportForm}
+          setState={setRaportForm}
+          btnText="Create"
+          title=""
+          submitted={handleCreateRaport}
+        />
+      </InviteModal>
       <InviteModal
         show={modalInvite}
         onHide={() => setModalInvite(false)}
@@ -248,7 +300,10 @@ const Team = () => {
           <div className={styles.showRaportButton} onClick={handleShowRaport}>
             Show Raports
           </div>
-          <div className={styles.raportButton} onClick={handleSendRaport}>
+          <div
+            className={styles.raportButton}
+            onClick={() => setShowRaport(true)}
+          >
             Send Raport
           </div>
           <div className={styles.leaveButton} onClick={handleLeaveTeam}>
