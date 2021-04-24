@@ -18,20 +18,13 @@ export default async (req: Request, res: Response) => {
       .send("Can not read the user.");
 
   user.times = req.body;
-  user.workTime = calculateTime(user.times.startTime, user.times.endTime);
+  const result = calculateTime(user.times.startTime, user.times.endTime);
+  if (!result)
+    return res
+      .status(StatusCodes.BAD_REQUEST)
+      .send("End time is earlier than start time");
+
   await user.save();
 
-  res
-    .status(StatusCodes.OK)
-    .send(
-      _.pick(user, [
-        "_id",
-        "name",
-        "email",
-        "workTime",
-        "times",
-        "breakTime",
-        "periodTime",
-      ])
-    );
+  res.status(StatusCodes.OK).send(result);
 };
