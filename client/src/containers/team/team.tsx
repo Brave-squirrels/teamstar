@@ -20,7 +20,6 @@ const Team = () => {
               src={settingsLogo}
               alt="User settings"
               className={styles.settingsImg}
-              onClick={dupa}
             />
           </div>
           <div className={styles.taskPanel}></div>
