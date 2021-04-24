@@ -11,6 +11,10 @@ Content-Type: application/json
 }
 
 ###
+# Get all chats
+GET http://localhost:5000/chat HTTP/1.1
+
+###
 # Add Message
 PUT http://localhost:5000/chat/message/add/6083511576943550d083c548 HTTP/1.1
 x-auth-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MDgzMjczNmJlMzdiYTI1ODRiZjAwY2IiLCJuYW1lIjoidGVzdCIsImlhdCI6MTYxOTIxNjM5MH0.4tijBMnqHsJwzZ7uZUZg1r5RIDhHI-zbTxP8HiOfOSo
@@ -27,5 +31,10 @@ x-auth-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MDgzMjczNmJlMzdiY
 Content-Type: application/json
 
 {
-    "content": "suma kwadratów 123"
+    "content": "hackathon"
 }
+
+###
+# Delete Message
+DELETE  http://localhost:5000/chat/message/delete/6083512d76943550d083c549 HTTP/1.1
+x-auth-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MDgzMjczNmJlMzdiYTI1ODRiZjAwY2IiLCJuYW1lIjoidGVzdCIsImlhdCI6MTYxOTIxNjM5MH0.4tijBMnqHsJwzZ7uZUZg1r5RIDhHI-zbTxP8HiOfOSo
