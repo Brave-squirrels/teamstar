@@ -88,9 +88,9 @@ const Dnd = () => {
       )[0];
 
       const st =
-        newStatus === "To do" ? " 1" : newStatus === "In progress" ? "2" : " 3";
+        newStatus === "To do" ? 1 : newStatus === "In progress" ? 2 : 3;
 
-      // dispatch(changeStatusFetch(teamId, currentTask.id, 1));
+      dispatch(changeStatusFetch(teamId, currentTask.id, { status: st }));
 
       const newTask = {
         ...currentTask,

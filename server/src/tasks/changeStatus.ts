@@ -9,7 +9,7 @@ export default async (req: Request, res: Response) => {
   const team = await teamModel.findById(req.params.teamId);
   if (!team)
     return res.status(StatusCodes.NOT_FOUND).send("Team was not found!");
-  const { error } = validateStatus(req.body.status);
+  const { error } = validateStatus(req.body);
   if (error)
     return res.status(StatusCodes.BAD_REQUEST).send(error.details[0].message);
 
