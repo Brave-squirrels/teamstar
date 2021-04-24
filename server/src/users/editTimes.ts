@@ -3,19 +3,23 @@ import { StatusCodes } from "http-status-codes";
 import _ from "lodash";
 
 import userModel from "../../models/user.model";
-import validateTime from "./validateStartTime";
+import validateTime from "./validateTime";
+import calculateTime from "../utils/calculateTime";
 
 export default async (req: Request, res: Response) => {
   const { error } = validateTime(req.body);
   if (error)
     return res.status(StatusCodes.BAD_REQUEST).send(error.details[0].message);
 
-  const user = await userModel.findByIdAndUpdate(
-    req.userInfo._id,
-    { startTime: req.body.startTime },
-    { new: true }
-  );
-  if (!user) return res.status(StatusCodes.NOT_FOUND).send("User not found");
+  let user = await userModel.findById(req.userInfo._id);
+  if (!user)
+    return res
+      .status(StatusCodes.INTERNAL_SERVER_ERROR)
+      .send("Can not read the user.");
+
+  user.times = req.body;
+  user.workTime = calculateTime(user.times.startTime, user.times.endTime);
+  await user.save();
 
   res
     .status(StatusCodes.OK)
@@ -24,8 +28,8 @@ export default async (req: Request, res: Response) => {
         "_id",
         "name",
         "email",
-        "startTime",
-        "endTime",
+        "workTime",
+        "times",
         "breakTime",
         "periodTime",
       ])

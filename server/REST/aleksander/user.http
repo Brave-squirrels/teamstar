@@ -127,12 +127,13 @@ Content-Type: application/json
 }
 
 ###
-# change end time
-PUT http://localhost:5000/users/endTime HTTP/1.1
+# change times
+PUT http://localhost:5000/users/times HTTP/1.1
 x-auth-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MDgzMjczNmJlMzdiYTI1ODRiZjAwY2IiLCJuYW1lIjoidGVzdCIsImlhdCI6MTYxOTIyNjgxMn0.f_TXWKZY3j-DpCbrwj98QNfIAXzPzL0zsRLHuRYcWRA
 Content-Type: application/json
 
 {
+    "startTime": "12:45:00",
     "endTime": "15:45:00"
 }
 

@@ -5,6 +5,7 @@ import InviteArr from "./inviteArr.interface";
 import TaskArr from "./taskArr.interface";
 import ChatArr from "./chatArr.interface";
 import ReportArr from "./reportArr.interface";
+import TimeArr from "./timeArr.interface";
 
 // User interface
 interface User extends mongoose.Document {
@@ -21,9 +22,8 @@ interface User extends mongoose.Document {
   chats?: ChatArr[];
   date?: Date;
   isOnline?: boolean;
-  startTime?: string;
-  endTime?: string;
-  breakTime?: string;
+  times?: TimeArr;
+  breakTime?: string[];
   periodTime?: string;
   generateAuthToken(): string;
 }

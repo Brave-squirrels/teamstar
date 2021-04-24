@@ -94,16 +94,15 @@ const userSchema = new mongoose.Schema<User>({
     type: Boolean,
     default: false,
   },
-  startTime: {
-    type: String,
-    default: "07:00:00",
-  },
-  endTime: {
-    type: String,
-    default: "15:00:00",
+  times: {
+    type: {
+      startTime: String,
+      endTime: String,
+    },
+    default: { startTime: "07:00:00", endTime: "15:00:00" },
   },
   breakTime: {
-    type: String,
+    type: [String],
     default: "10",
   },
   periodTime: {
