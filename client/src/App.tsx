@@ -25,8 +25,7 @@ import LateHour from "components/lateHour/lateHour";
 
 import { authUser, logout } from "reduxState/user/loginUser";
 import { RootState } from "reduxState/store";
-
-const ENDPOINT = "http://localhost:5000";
+import { ENDPOINT } from "./axios/axiosMain";
 
 const App = () => {
   const dispatch = useDispatch();
