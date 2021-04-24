@@ -9,13 +9,15 @@ export default async (req: Request, res: Response) => {
 
   let exists = false;
   team.users.forEach((user) => {
-    if (user.id.toString() === req.userInfo._id.toString()) { exists = true; }
+    if (user.id.toString() === req.userInfo._id.toString()) {
+      exists = true;
+    }
   });
-  /* if (team.owner.id == req.userInfo._id) {
+  if (team.owner.id == req.userInfo._id) {
     exists = true;
   }
   if (!exists)
-    return res.status(StatusCodes.BAD_REQUEST).send("Its not your team!"); */
+    return res.status(StatusCodes.BAD_REQUEST).send("Its not your team!");
 
   return res.status(StatusCodes.OK).send(team);
 };
