@@ -20,10 +20,12 @@ const events: any = [
   {
     id: 14,
     title: "Today",
-    start: new Date(new Date().setHours(new Date().getHours() - 3)),
-    end: new Date(new Date().setHours(new Date().getHours() + 3)),
+    start: Date.now(),
+    end: Date.now(),
     author: "Sample author",
     description: "xD",
+    fromHour: "18:00",
+    toHour: "22:00",
   },
 ];
 
@@ -258,6 +260,14 @@ const CalendarComponent = () => {
           ...prevState.end,
           val: e.end,
         },
+        fromHour: {
+          ...prevState.fromHour,
+          val: e.fromHour,
+        },
+        toHour: {
+          ...prevState.toHour,
+          val: e.toHour,
+        },
       };
     });
     console.log(e);
@@ -289,7 +299,38 @@ const CalendarComponent = () => {
         onHide={() => setShowCurrentEvent(false)}
         title={"Current event"}
       >
-        {/* Form if owner or creator - info if normal guy */}
+        <div className={styles.containerUser}>
+          <div>
+            <span className={styles.authInnerCon}>
+              Author: <span className={styles.author}>{author} </span>
+            </span>
+          </div>
+          <div>
+            <span className={styles.title}>Title</span>
+            <span className={styles.content}>{editEvent.title.val}</span>
+          </div>
+          <div>
+            <span className={styles.title}>Description</span>
+            <span className={styles.content}>{editEvent.description.val}</span>
+          </div>
+          <div>
+            <span className={styles.title}>Start date</span>
+            <span className={styles.content}>{editEvent.start.val}</span>
+          </div>
+          <div>
+            <span className={styles.title}>End date</span>
+            <span className={styles.content}>{editEvent.end.val}</span>
+          </div>
+          <div>
+            <span className={styles.title}>From</span>
+            <span className={styles.content}>{editEvent.fromHour.val}</span>
+          </div>
+          <div>
+            <span className={styles.title}>To</span>
+            <span className={styles.content}>{editEvent.toHour.val}</span>
+          </div>
+        </div>
+        {/* Form if owner or creator - info if normal guy
         <div className={styles.authorContainer}>
           <span className={styles.authInnerCon}>
             Author: <span className={styles.author}>{author} </span>
@@ -298,14 +339,13 @@ const CalendarComponent = () => {
             Delete
           </span>
         </div>
-
         <FormStructure
           state={editEvent}
           setState={setEditEvent}
           btnText="EDIT"
           title=""
           submitted={handleEditEvent}
-        />
+        /> */}
       </MyVerticallyCenteredModal>
       <Button className={styles.addBtn} onClick={() => setShowNewEvent(true)}>
         New event

@@ -25,3 +25,20 @@
   font-weight: 500;
   color: $fontLightGreen;
 }
+
+.containerUser {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3em;
+  div {
+    display: flex;
+    flex-direction: column;
+    gap: 0.1em;
+  }
+  .title {
+    color: $fontLightGreen;
+  }
+  .content {
+    font-weight: 500;
+  }
+}
