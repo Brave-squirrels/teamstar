@@ -26,5 +26,5 @@ export default async (req: Request, res: Response) => {
   await user!.save();
   await team!.save();
 
-  return res.status(StatusCodes.OK).send("Protocol deleted succesfully!");
+  return res.status(StatusCodes.OK).send("Protocol deleted successfully!");
 };

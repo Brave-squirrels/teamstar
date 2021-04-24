@@ -46,7 +46,6 @@ export const getRaportsFetch = (teamId: string): AppThunk => async (
             },
         })
         .then((res) => {
-            console.log(res.data);
             dispatch(success(res.data));
         })
         .catch((err) => {

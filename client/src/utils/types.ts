@@ -92,7 +92,7 @@ export interface TeamInvite {
 export interface TeamData {
     name: string;
     description: string;
-    owner: Owner | {};
+    owner: Owner | {} | any;
     date: Date | string;
     users: User[],
     tasks: TeamTask[],
