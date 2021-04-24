@@ -40,6 +40,9 @@ import addEvent from 'reduxState/calendar/addEvent';
 import deleteEvent from 'reduxState/calendar/deleteEvent';
 import editEvent from 'reduxState/calendar/editEvent'
 
+import getChat from 'reduxState/chat/getChat';
+import sendMessage from 'reduxState/chat/sendMessage';
+
 import createRaport from 'reduxState/raport/createRaport';
 import getRaports from 'reduxState/raport/getRaports';
 import deleteRaport from 'reduxState/raport/deleteRaport';
@@ -76,6 +79,8 @@ export const store = configureStore({
     removeUser,
     deleteUserTeam,
     createRaport,
+    getChat,
+    sendMessage,
     getRaports,
     deleteRaport,
   },

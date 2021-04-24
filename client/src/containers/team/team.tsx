@@ -32,6 +32,8 @@ const Team = () => {
   const teamId = location.pathname.split("/")[2];
 
   const teamInfo = useSelector((state: any) => state.teamData.teamData);
+  console.log(teamInfo)
+  const handleSendRaport = () => {};
   const inviteSendState = useSelector((state: RootState) => state.sendInvite);
   const declineInviteState = useSelector(
     (state: RootState) => state.declineInvite

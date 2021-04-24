@@ -19,6 +19,7 @@ import Dashboard from "containers/dashboard/Dashboard";
 import Team from "containers/team/team";
 import Tasks from "containers/tasks/tasks";
 import Calendar from "containers/calendar/calendar";
+import Chat from "containers/chat/chat";
 import Break from "components/break/break";
 
 import { authUser, logout } from "reduxState/user/loginUser";
@@ -141,6 +142,8 @@ const App = () => {
               />
               <ProtectedRoute path="/team/:teamId/tasks" component={Tasks} />
               <ProtectedRoute path="/team/:teamId" component={Team} />
+              <ProtectedRoute path="/calendar" component={Calendar} />
+              <ProtectedRoute path="/chat/:chatId" component={Chat} />
               <Route render={() => <Redirect to="/not-found" />} />
             </Switch>
           </Main>
