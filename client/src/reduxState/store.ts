@@ -30,6 +30,10 @@ import createTask from 'reduxState/tasks/createTask';
 import editTask from 'reduxState/tasks/editTask';
 import getTasks from 'reduxState/tasks/getTasks';
 
+import getCalendar from 'reduxState/calendar/getCalendar';
+import addEvent from 'reduxState/calendar/addEvent';
+import deleteEvent from 'reduxState/calendar/deleteEvent';
+
 export const store = configureStore({
   reducer: {
     loginUser,
@@ -52,6 +56,9 @@ export const store = configureStore({
     createTask,
     editTask,
     getTasks,
+    getCalendar,
+    addEvent,
+    deleteEvent,
   },
   middleware: [
     ...getDefaultMiddleware({

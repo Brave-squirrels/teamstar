@@ -60,6 +60,7 @@ export const loginUserFetch = (data: Data): AppThunk => async (dispatch) => {
       dispatch(loginSuccess(res.data));
       console.log(res.data);
       localStorage.setItem("token", res.data.token);
+      localStorage.setItem('id', res.data.id);
       toastNofity(res.status, "Logged in succesfully!");
     })
     .catch((err) => {

@@ -90,7 +90,7 @@ export interface TeamData {
     users: User[],
     tasks: TeamTask[],
     raports: TeamRaport[],
-    calendar: string,
+    calendarId: string,
     invitations: TeamInvite[],
 }
 
@@ -102,7 +102,7 @@ export const basicTeam: TeamData = {
     users: [],
     tasks: [],
     raports: [],
-    calendar: '',
+    calendarId: '',
     invitations: [],
 }
 
@@ -129,4 +129,26 @@ export const basicTask: TaskSchema = {
     description: '',
     status: '',
     team: {}
+}
+
+export interface CalendarAuthor {
+    id: string;
+    name: string;
+}
+export interface CalendarEvent {
+    author: CalendarAuthor;
+    title: string;
+    start: any;
+    end: any;
+    desc: string;
+    fromHour: string;
+    toHour: string;
+}
+
+export interface CalenderSchema {
+    events: CalendarEvent[]
+}
+
+export const basicCalendar = {
+    events: [],
 }

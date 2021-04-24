@@ -1,5 +1,6 @@
 import React, { Children, useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { Spinner } from "react-bootstrap";
 import { useLocation } from "react-router-dom";
 import { Calendar, momentLocalizer } from "react-big-calendar";
 import "react-big-calendar/lib/css/react-big-calendar.css";
@@ -10,27 +11,16 @@ import FormStructure from "containers/form/formStructure";
 import MyVerticallyCenteredModal from "containers/user/settings/MyVerticallyCenteredModal";
 
 import { teamDataFetch } from "reduxState/team/getTeamInfo";
+import { getCalendarFetch } from "reduxState/calendar/getCalendar";
+import { addEventFetch } from "reduxState/calendar/addEvent";
+import { deleteEventFetch } from "reduxState/calendar/deleteEvent";
+
+import { mutateToAxios } from "utils/onChangeForm";
 
 import styles from "./calendar.module.scss";
 import { RootState } from "reduxState/store";
 
 const localizer = momentLocalizer(moment);
-
-const events: any = [
-  {
-    id: 14,
-    title: "Today",
-    start: Date.now(),
-    end: Date.now(),
-    author: {
-      name: "author",
-      id: "1234",
-    },
-    description: "xD",
-    fromHour: "18:00",
-    toHour: "22:00",
-  },
-];
 
 const CURRENT_DATE = moment().toDate();
 
@@ -44,15 +34,28 @@ const ColoredDateCellWrapper = ({ children, value }: any) =>
 
 const CalendarComponent = () => {
   const [author, setAuthor] = useState("");
-  const [currentEvent, setCurrentEvent] = useState("");
+  const [currentEvent, setCurrentEvent] = useState({
+    author: { id: "", name: "" },
+    _id: "",
+  });
   const dispatch = useDispatch();
   const location = useLocation();
-  /* const teamData = useSelector((state: RootState) => state.teamData); */
+  const teamData = useSelector((state: RootState) => state.teamData);
+  const calendarEvents = useSelector(
+    (state: RootState) => state.getCalendar.calendarData.events
+  );
+  const createState = useSelector((state: RootState) => state.addEvent);
+  const deleteState = useSelector((state: RootState) => state.deleteEvent);
   const teamId = location.pathname.split("/")[2];
 
   useEffect(() => {
     dispatch(teamDataFetch(teamId));
-  }, [dispatch, teamId]);
+  }, [dispatch, teamId, createState.success]);
+  useEffect(() => {
+    if (teamData.teamData!.calendarId) {
+      dispatch(getCalendarFetch(teamData!.teamData!.calendarId));
+    }
+  }, [teamData]);
 
   const [showNewEvent, setShowNewEvent] = useState(false);
   const [showCurrentEvent, setShowCurrentEvent] = useState(false);
@@ -72,7 +75,7 @@ const CalendarComponent = () => {
       touched: false,
       valid: false,
     },
-    description: {
+    desc: {
       val: "",
       inputType: "textarea",
       placeholder: "Description",
@@ -163,7 +166,7 @@ const CalendarComponent = () => {
       touched: false,
       valid: false,
     },
-    description: {
+    desc: {
       val: "",
       inputType: "textarea",
       placeholder: "Description",
@@ -238,11 +241,15 @@ const CalendarComponent = () => {
 
   const handleCreateEvent = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    dispatch(
+      addEventFetch(mutateToAxios(newEvent), teamData!.teamData?.calendarId)
+    );
   };
 
   const handleSingleEventCLick = (e: any) => {
+    console.log(e);
     setShowCurrentEvent(true);
-    setCurrentEvent(e.id);
+    setCurrentEvent(e);
     setAuthor(e.author.name);
     setEditEvent((prevState) => {
       return {
@@ -251,9 +258,9 @@ const CalendarComponent = () => {
           ...prevState.title,
           val: e.title,
         },
-        description: {
-          ...prevState.description,
-          val: e.description,
+        desc: {
+          ...prevState.desc,
+          val: e.desc,
         },
         start: {
           ...prevState.start,
@@ -280,7 +287,9 @@ const CalendarComponent = () => {
     e.preventDefault();
   };
 
-  const handleDeleteEvent = (e: any) => {};
+  const handleDeleteEvent = (e: any) => {
+    dispatch(deleteEventFetch(teamData.teamData?.calendarId, currentEvent._id));
+  };
 
   return (
     <>
@@ -295,6 +304,7 @@ const CalendarComponent = () => {
           btnText="ADD"
           title=""
           submitted={handleCreateEvent}
+          spinner={createState.loading}
         />
       </MyVerticallyCenteredModal>
       <MyVerticallyCenteredModal
@@ -302,37 +312,71 @@ const CalendarComponent = () => {
         onHide={() => setShowCurrentEvent(false)}
         title={"Current event"}
       >
-        <div className={styles.containerUser}>
-          <div>
-            <span className={styles.authInnerCon}>
-              Author: <span className={styles.author}>{author} </span>
-            </span>
+        {currentEvent.author.id === localStorage.getItem("id") ? (
+          <>
+            <div className={styles.authorContainer}>
+              <span className={styles.authInnerCon}>
+                Author: <span className={styles.author}>{author} </span>
+              </span>
+              {deleteState.loading ? (
+                <Spinner
+                  animation="border"
+                  style={{
+                    color: "rgba(126, 203, 207, 1)",
+                  }}
+                />
+              ) : (
+                <span className={styles.delete} onClick={handleDeleteEvent}>
+                  Delete
+                </span>
+              )}
+            </div>
+            <FormStructure
+              state={editEvent}
+              setState={setEditEvent}
+              btnText="EDIT"
+              title=""
+              submitted={handleEditEvent}
+            />
+          </>
+        ) : (
+          <div className={styles.containerUser}>
+            <div>
+              <span className={styles.authInnerCon}>
+                Author: <span className={styles.author}>{author} </span>
+              </span>
+            </div>
+            <div>
+              <span className={styles.title}>Title</span>
+              <span className={styles.content}>{editEvent.title.val}</span>
+            </div>
+            <div>
+              <span className={styles.title}>Description</span>
+              <span className={styles.content}>{editEvent.desc.val}</span>
+            </div>
+            <div>
+              <span className={styles.title}>Start date</span>
+              <span className={styles.content}>
+                {editEvent.start.val.match(/[0-9]{4}-[0-9]{2}-[0-9]{2}/)}
+              </span>
+            </div>
+            <div>
+              <span className={styles.title}>End date</span>
+              <span className={styles.content}>
+                {editEvent.end.val.match(/[0-9]{4}-[0-9]{2}-[0-9]{2}/)}
+              </span>
+            </div>
+            <div>
+              <span className={styles.title}>From</span>
+              <span className={styles.content}>{editEvent.fromHour.val}</span>
+            </div>
+            <div>
+              <span className={styles.title}>To</span>
+              <span className={styles.content}>{editEvent.toHour.val}</span>
+            </div>
           </div>
-          <div>
-            <span className={styles.title}>Title</span>
-            <span className={styles.content}>{editEvent.title.val}</span>
-          </div>
-          <div>
-            <span className={styles.title}>Description</span>
-            <span className={styles.content}>{editEvent.description.val}</span>
-          </div>
-          <div>
-            <span className={styles.title}>Start date</span>
-            <span className={styles.content}>{editEvent.start.val}</span>
-          </div>
-          <div>
-            <span className={styles.title}>End date</span>
-            <span className={styles.content}>{editEvent.end.val}</span>
-          </div>
-          <div>
-            <span className={styles.title}>From</span>
-            <span className={styles.content}>{editEvent.fromHour.val}</span>
-          </div>
-          <div>
-            <span className={styles.title}>To</span>
-            <span className={styles.content}>{editEvent.toHour.val}</span>
-          </div>
-        </div>
+        )}
+
         {/* Form if owner or creator - info if normal guy
         <div className={styles.authorContainer}>
           <span className={styles.authInnerCon}>
@@ -360,7 +404,7 @@ const CalendarComponent = () => {
           localizer={localizer}
           startAccessor="start"
           endAccessor="end"
-          events={events}
+          events={calendarEvents}
           components={{
             dateCellWrapper: ColoredDateCellWrapper,
           }}
