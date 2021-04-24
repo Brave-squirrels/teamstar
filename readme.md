@@ -76,14 +76,14 @@ PASSWORD=\<your email's password></br></br>
 ### Documentation
 #### Registration
 * In order to use our application, you need to create an account, don't worry, we are not collecting any personal data :)
-![](images_for_github/register.png)
+![](githubImg/register.png)
 #### Afther that, you can create your own team, or join your friends!
-![](images_for_github/createTeam.png)
-![](images_for_github/joinTeam.png)
+![](githubImg/createTeam.png)
+![](githubImg/mainTeams.png)
 #### Core benefits of our app are:
 * Live chat with coworkers in team!
-![](images_for_github/chatScreem.png)
+![](githubImg/chat.png)
 * Live monitoring of work time!
-![](images_for_github/liveTimeScreen.png)
+![](githubImg/users.png)
 * Live meetings callendar!
-![](images_for_github/calendarScreen.png)
+![](githubImg/calendarScreen.png)
