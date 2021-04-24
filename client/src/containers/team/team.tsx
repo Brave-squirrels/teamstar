@@ -41,6 +41,9 @@ const Team = () => {
   const createRaportState = useSelector(
     (state: RootState) => state.createRaport
   );
+  const deleteRaportState = useSelector(
+    (state: RootState) => state.deleteRaport
+  );
 
   const changeDescription = useSelector(
     (state: RootState) => state.changeTeamDescription
@@ -72,6 +75,7 @@ const Team = () => {
     declineInviteState.success,
     removeUser.success,
     createRaportState.success,
+    deleteRaportState.success,
   ]);
 
   useEffect(() => {
@@ -193,13 +197,12 @@ const Team = () => {
   return (
     <div className={styles.container}>
       <RaportsModal
-        
         show={showAllRaport}
         onHide={() => setShowAllRaport(false)}
         user={"as"}
         title="Raport"
       >
-        <Raports / >
+        <Raports />
       </RaportsModal>
       <InviteModal
         show={showRaport}
