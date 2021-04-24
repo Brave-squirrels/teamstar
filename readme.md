@@ -19,7 +19,7 @@ to make your every day work-life even more organised! We took care both of emplo
 Be our guest, fasten your seatbelts, and see what we've got for you!
 
 **Check it out on youtube!**<br></br>
-[![TeamStart by BraveSquirrels](http://img.youtube.com/vi/sxfl5vBYFOk/0.jpg)](http://www.youtube.com/watch?v=sxfl5vBYFOk)
+[![TeamStart by BraveSquirrels](http://img.youtube.com/vi/eAz72VeyCZc/0.jpg)](https://www.youtube.com/watch?v=eAz72VeyCZc)
 
 **If you don't want to run our project locally, you do not have to read anything more, be our guest, and visit our <a href="https://teamstar2021.herokuapp.com/">site!</a>**
 We although suggest you to read the documentation first, so you can get as much as possible!
