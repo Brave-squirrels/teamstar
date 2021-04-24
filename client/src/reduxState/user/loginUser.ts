@@ -3,9 +3,11 @@ import axios from "axios/axiosMain";
 import { AppThunk, RootState } from "reduxState/store";
 import toastNofity from "utils/toastNotify";
 
+import * as types from 'utils/types';
+
 interface User {
   authenticated: boolean;
-  userData: any;
+  userData: types.UserData | null;
   loading: boolean;
 }
 
@@ -16,7 +18,7 @@ interface Data {
 
 const initialState: User = {
   authenticated: false,
-  userData: {},
+  userData: { ...types.UserBasic },
   loading: false,
 };
 
@@ -26,7 +28,7 @@ const loginUser = createSlice({
   reducers: {
     login: (state) => {
       state.authenticated = false;
-      state.userData = null;
+      state.userData = { ...types.UserBasic };
       state.loading = true;
     },
     loginSuccess: (state, action) => {
@@ -36,13 +38,13 @@ const loginUser = createSlice({
     },
     loginFailed: (state) => {
       state.authenticated = false;
-      state.userData = null;
+      state.userData = { ...types.UserBasic };
       state.loading = false;
     },
     logout: (state) => {
       localStorage.clear();
       state.authenticated = false;
-      state.userData = null;
+      state.userData = { ...types.UserBasic };
       state.loading = false;
     },
   },
@@ -55,10 +57,9 @@ export const loginUserFetch = (data: Data): AppThunk => async (dispatch) => {
   await axios
     .post("/login", data)
     .then((res) => {
-      dispatch(loginSuccess(res.data));
-      console.log(res.data);
+      dispatch(loginSuccess({ ...res.data, isOnline: true }));
       localStorage.setItem("token", res.data.token);
-      toastNofity(res.status, "Logged in succesfully!");
+      localStorage.setItem('id', res.data.id);
     })
     .catch((err) => {
       localStorage.clear();
@@ -74,7 +75,7 @@ export const authUser = (): AppThunk => async (dispatch) => {
       headers: { "x-auth-token": localStorage.getItem("token") },
     })
     .then((res) => {
-      dispatch(loginSuccess(res.data));
+      dispatch(loginSuccess({ ...res.data, isOnline: true }));
     })
     .catch((err) => {
       dispatch(logout());

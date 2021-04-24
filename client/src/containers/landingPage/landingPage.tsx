@@ -153,22 +153,29 @@ const LandingPage = () => {
           <div className={styles.signUpForm}>
             {registerState.success ? (
               <>
-                {sendAgainState.loading ? (
-                  <Spinner animation="border" style={{ color: "#02ADDB" }} />
-                ) : (
+                {
                   <Jumbotron className={styles.verifyJumbotron}>
                     <h1>Verification email has been sent!</h1>
                     <p>Would you like to send it again?</p>
                     <p>
-                      <Button
-                        className="btn btn-dark"
-                        onClick={handleSendAgain}
-                      >
-                        Send again
-                      </Button>
+                      {sendAgainState.loading ? (
+                        <Spinner
+                          animation="border"
+                          style={{
+                            color: "rgba(126, 203, 207, 1)",
+                          }}
+                        />
+                      ) : (
+                        <Button
+                          className="btn btn-dark"
+                          onClick={handleSendAgain}
+                        >
+                          Send again
+                        </Button>
+                      )}
                     </p>
                   </Jumbotron>
-                )}
+                }
               </>
             ) : (
               <>
@@ -203,7 +210,7 @@ const LandingPage = () => {
 
       <div className={styles.panelsContainer}>
         <div className={styles.panelLeft}>
-          <div className={styles.content}>
+          <div className={`${styles.content} ${styles.contentLeft}`}>
             <span className={styles.goNext}>Don't have an account?</span>
             <Button className="primary" onClick={() => changeView(false)}>
               Sign Up
@@ -213,7 +220,7 @@ const LandingPage = () => {
           <img src={signUpTmp} alt="SignUp" className={styles.image} />
         </div>
         <div className={styles.panelRight} id={styles.rightId}>
-          <div className={styles.content}>
+          <div className={`${styles.content} ${styles.contentRight}`}>
             <span className={styles.goNext}>One of us?</span>
             <Button
               className="primary"

@@ -1,0 +1,9 @@
+@import "styles/variables.scss";
+
+.wrapper {
+  background: $backgroundLanding;
+  position: absolute;
+  height: 90%;
+  width: 100%;
+  z-index: -1;
+}

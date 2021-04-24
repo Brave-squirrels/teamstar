@@ -1,0 +1,42 @@
+@import "styles/variables.scss";
+
+.wrapper {
+  padding: 2em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  & > :first-child {
+    border-top: 1px solid $fontWhite;
+  }
+}
+.deleteRaport {
+  margin-top: 20px;
+  color: $invalid;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.raportTitle {
+  font-weight: 500;
+}
+
+.reportAuthor {
+  font-style: italic;
+}
+
+.container {
+  width: 100%;
+  padding-top: 1em;
+  border-bottom: 1px solid $fontWhite;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  word-break: break-all;
+  .raportColumn {
+    display: flex;
+    padding-bottom: 1em;
+    height: 100%;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+}

@@ -12,8 +12,40 @@ import createUser from 'reduxState/user/registerUser';
 import sendReset from 'reduxState/user/sendResetPassword';
 import sendAgain from 'reduxState/user/sendAgain';
 import resetPassword from 'reduxState/user/resetPassword';
-import changeName from 'reduxState/user/changeName';
 import changePassword from 'reduxState/user/changePassword';
+import changeEmail from 'reduxState/user/changeEmail';
+import deleteUser from 'reduxState/user/deleteUser';
+import changeStartTime from 'reduxState/user/changeStartTime';
+
+import createTeam from 'reduxState/team/createTeam';
+import declineInvite from 'reduxState/team/declineInvite';
+import acceptInvite from 'reduxState/team/acceptInvite';
+import teamData from 'reduxState/team/getTeamInfo';
+import sendInvite from 'reduxState/team/sendInvite';
+import leaveTeam from 'reduxState/team/leaveTeam';
+import deleteTeam from 'reduxState/team/deleteTeam';
+import changeTeamDescription from 'reduxState/team/changeDescription';
+import deleteUserTeam from 'reduxState/team/deleteUser';
+
+import createTask from 'reduxState/tasks/createTask';
+import editTask from 'reduxState/tasks/editTask';
+import getTasks from 'reduxState/tasks/getTasks';
+import deleteTask from 'reduxState/tasks/deleteTask';
+import changeStatus from 'reduxState/tasks/changeStatus';
+import addUser from 'reduxState/tasks/addUser';
+import removeUser from 'reduxState/tasks/removeUser';
+
+import getCalendar from 'reduxState/calendar/getCalendar';
+import addEvent from 'reduxState/calendar/addEvent';
+import deleteEvent from 'reduxState/calendar/deleteEvent';
+import editEvent from 'reduxState/calendar/editEvent'
+
+import getChat from 'reduxState/chat/getChat';
+import sendMessage from 'reduxState/chat/sendMessage';
+
+import createRaport from 'reduxState/raport/createRaport';
+import getRaports from 'reduxState/raport/getRaports';
+import deleteRaport from 'reduxState/raport/deleteRaport';
 
 export const store = configureStore({
   reducer: {
@@ -22,8 +54,35 @@ export const store = configureStore({
     sendReset,
     sendAgain,
     resetPassword,
-    changeName,
     changePassword,
+    changeEmail,
+    deleteUser,
+    createTeam,
+    declineInvite,
+    acceptInvite,
+    teamData,
+    sendInvite,
+    leaveTeam,
+    deleteTeam,
+    changeTeamDescription,
+    createTask,
+    editTask,
+    getTasks,
+    getCalendar,
+    addEvent,
+    deleteEvent,
+    editEvent,
+    changeStartTime,
+    deleteTask,
+    changeStatus,
+    addUser,
+    removeUser,
+    deleteUserTeam,
+    createRaport,
+    getChat,
+    sendMessage,
+    getRaports,
+    deleteRaport,
   },
   middleware: [
     ...getDefaultMiddleware({

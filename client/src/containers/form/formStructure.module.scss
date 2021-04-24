@@ -4,12 +4,12 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 1em;
+  gap: 1.2em;
   width: 100%;
   max-width: 320px;
 }
 
-.formRow {
+.row {
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -17,6 +17,9 @@
   gap: 1em;
   width: 100%;
   max-width: 320px;
+  @media (max-width: 980px) {
+    flex-wrap: wrap;
+  }
 }
 
 .formTitle {
@@ -32,4 +35,5 @@
   justify-content: center;
   flex-direction: column;
   align-items: center;
+  gap: 0.6em;
 }

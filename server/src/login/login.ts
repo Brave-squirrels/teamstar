@@ -29,7 +29,24 @@ export default async (req: Request, res: Response) => {
       .send("You must first confirm the registration.");
 
   const id = user._id;
-  const name = user.name;
+  const data = _.pick(user, [
+    "name",
+    "email",
+    "workTime",
+    "isActive",
+    "reports",
+    "isVerified",
+    "teamInvitation",
+    "teams",
+    "tasks",
+    "chats",
+    "date",
+    "isOnline",
+    "startTime",
+    "endTime",
+    "breakTime",
+    "periodTime",
+  ]);
   const token = user.generateAuthToken();
-  res.status(StatusCodes.OK).send({ name, token, id });
+  res.status(StatusCodes.OK).send({ id, token, ...data });
 };

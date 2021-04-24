@@ -5,16 +5,47 @@ $Montserrat: "Montserrat", sans-serif;
 $Roboto: "Roboto", sans-serif;
 
 $fontLightGreen: #acf7d0;
+$fontGreen: #38e78d;
 $fontWhite: #f3f9f6;
 $fontPlaceholder: #f3f9f6aa;
+$fontSmoke: whitesmoke;
+$fontBlue: #64afff;
+$fontGrey: #cdc6c6;
+
+$lightBorder: rgba(144, 191, 204, 0.342);
+$darkBorder: rgba(9, 29, 36, 0.212);
 
 $invalid: #f56e69;
 
-$backgroundLanding: #070E30;
-$backgroundCircle: radial-gradient(circle , #49A3D1 0%, rgba(255, 0, 0, 0) 70%);
-$backgroundLight: linear-gradient(45deg, #36b3c8 0%, #0679A2 99.9%);
+$backgroundLanding: #070e30;
+$backgroundCircle: radial-gradient(circle, #49a3d1 0%, rgba(255, 0, 0, 0) 70%);
+$backgroundLight: linear-gradient(45deg, #36b3c8 0%, #0679a2 99.9%);
 
-$buttonBackground: #02ADDB;
+$backgroundDropdown: linear-gradient(
+  70deg,
+  rgba(75, 120, 139, 1) 0%,
+  rgba(100, 128, 156, 1) 100%
+);
+$backgroundDropdownHover: rgba(0, 0, 0, 0.2);
+
+$buttonBackground: #02addb;
+$buttonBackgroundHover: #02addbaa;
+
+$backgroundModal: linear-gradient(
+  70deg,
+  rgba(75, 120, 139, 1) 0%,
+  rgba(100, 128, 156, 1) 100%
+);
+$borderModal: rgb(105, 142, 177);
+
+$backgroundJumbotron: linear-gradient(
+  70deg,
+  rgba(75, 120, 139, 0.8) 0%,
+  rgba(100, 128, 156, 0.8) 100%
+);
+
+$backgroundCard: #5f7e99;
+$borderCard: rgba(233, 229, 229, 0.53);
 
 $inputActiveBackground: #576075;
 $inputFilter: drop-shadow(4px 4px 14px rgba(0, 0, 0, 0.2));

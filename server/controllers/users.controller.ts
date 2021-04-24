@@ -1,16 +1,22 @@
 import express, { Request, Response } from "express";
 
 import auth from "../middleware/auth";
+import findUser from "../middleware/findUser";
 import createUser from "../src/users/createUser";
 import sendEmailToUser from "../src/users/sendEmail";
 import getAllUsers from "../src/users/getAllUsers";
+import getUser from "../src/users/getUser";
 import getUserMe from "../src/users/getUserMe";
 import changePassword from "../src/users/changePassword";
 import newPassword from "../src/users/newPassword";
 import confirmation from "../src/users/confirmation";
 import searchUser from "../src/users/searchUser";
 import sendResetMail from "../src/users/changePasswordMail";
-import changeName from "../src/users/changeName";
+import sendChangeEmail from "../src/users/changeEmailMail";
+import changeEmail from "../src/users/changeEmail";
+import deleteUser from "../src/users/deleteUser";
+import userActivity from "../src/users/userActivity";
+import editTimes from "../src/users/editTimes";
 
 /**
  * UserControll Class,
@@ -30,11 +36,16 @@ export default class UserController {
     this.router.post(`${this.path}/email`, this.sendEmailToUser);
     this.router.get(this.path, this.getAllUsers);
     this.router.get(`${this.path}/me`, auth, this.getUserMe);
+    this.router.get(`${this.path}/:id`, findUser, this.getUser);
     this.router.get(`${this.path}/confirmation/:token`, this.confirmation);
     this.router.get(`${this.path}/search/:email?`, this.searchUser);
     this.router.put(`${this.path}/password`, auth, this.newPassword);
     this.router.put(`${this.path}/changepassword`, auth, this.changePassword);
-    this.router.put(`${this.path}/changeName`, auth, this.changeName);
+    this.router.put(`${this.path}/changeEmail`, auth, this.sendChangeEmail);
+    this.router.put(`${this.path}/active`, auth, this.userActivity);
+    this.router.put(`${this.path}/times`, auth, this.editTimes);
+    this.router.get(`${this.path}/email/:token/:newEmail`, this.changeEmail);
+    this.router.delete(`${this.path}/`, auth, this.deleteUser);
   }
 
   createUser(req: Request, res: Response) {
@@ -57,6 +68,10 @@ export default class UserController {
     getUserMe(req, res);
   }
 
+  getUser(req: Request, res: Response) {
+    getUser(req, res);
+  }
+
   confirmation(req: Request, res: Response) {
     confirmation(req, res);
   }
@@ -73,7 +88,23 @@ export default class UserController {
     changePassword(req, res);
   }
 
-  changeName(req: Request, res: Response) {
-    changeName(req, res);
+  sendChangeEmail(req: Request, res: Response) {
+    sendChangeEmail(req, res);
+  }
+
+  userActivity(req: Request, res: Response) {
+    userActivity(req, res);
+  }
+
+  editTimes(req: Request, res: Response) {
+    editTimes(req, res);
+  }
+
+  changeEmail(req: Request, res: Response) {
+    changeEmail(req, res);
+  }
+
+  deleteUser(req: Request, res: Response) {
+    deleteUser(req, res);
   }
 }

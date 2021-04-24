@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 
 import { Button } from "react-bootstrap";
-import { Link } from "react-router-dom";
 import FormStructure from "containers/form/formStructure";
 import { Layout } from "hoc/layout/layout";
 
@@ -57,16 +56,15 @@ const ResetPassword = () => {
 
   const handleResetPassword = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log(token);
     dispatch(resetPasswordFetch(mutateToAxios(form), token));
   };
 
   return (
     <Layout>
       <div className={styles.btnWrapper}>
-        <Link to="/">
+        <a href="/">
           <Button> Main page </Button>
-        </Link>
+        </a>
       </div>
       <div className={styles.innerWrapper}>
         <FormStructure

@@ -1,0 +1,44 @@
+@import "styles/variables.scss";
+
+.dndContainer {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 1rem;
+  overflow-x: auto;
+  @include scrollbar;
+}
+
+.headerWrapper {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+}
+
+.addTask {
+  cursor: pointer;
+  background-color: #007bff;
+  border-radius: 4px;
+  padding: 0 7px;
+}
+.dndCard {
+  min-width: 280px;
+  max-width: 320px !important;
+  max-height: 540px;
+  overflow-y: auto;
+  @include scrollbar;
+}
+
+.dndTaskContainer {
+  width: 100%;
+  height: 100%;
+  height: 460px;
+}
+
+.dndTask {
+  margin: 0.5rem;
+  padding: 1rem;
+  background-color: #ffffffe5;
+  border: 1px solid rgba(0, 0, 0, 0.125);
+  border-radius: 0.25rem;
+  color: #333;
+}

@@ -1,0 +1,10 @@
+@import "styles/variables.scss";
+.wrapper {
+  position: fixed;
+  left: 1em;
+  bottom: 5%;
+  background: $placeholderColor;
+  padding: 1.5em 1em;
+  font-weight: 500;
+  color: $inputFilter;
+}

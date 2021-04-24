@@ -1,0 +1,10 @@
+@import "styles/variables.scss";
+
+/* Main container */
+.container {
+  height: 100vh;
+  width: 100%;
+  overflow-y: auto;
+  position: relative;
+  @include scrollbar;
+}

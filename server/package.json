@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@types/express-rate-limit": "^5.1.1",
+    "@types/node-schedule": "^1.3.1",
     "bcrypt": "^5.0.0",
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
@@ -18,6 +19,7 @@
     "express-rate-limit": "^5.2.6",
     "fawn": "^2.1.5",
     "global": "^4.4.0",
+    "http": "^0.0.1-security",
     "http-status-codes": "^2.1.4",
     "joi": "^17.4.0",
     "joi-objectid": "^3.0.1",
@@ -26,8 +28,10 @@
     "jsonwebtoken": "^8.5.1",
     "lodash": "^4.17.20",
     "mongoose": "5.11.15",
+    "node-schedule": "^2.0.0",
     "nodemailer": "^6.4.18",
     "nodemon": "^2.0.7",
+    "socket.io": "^4.0.1",
     "ts-node": "^9.1.1",
     "typescript": "^4.1.5",
     "yup": "^0.32.9"
