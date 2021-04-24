@@ -35,6 +35,7 @@ const Team = () => {
   const removeUser = useSelector((state: RootState) => state.deleteUserTeam);
   const leaveTeamState = useSelector((state: RootState) => state.leaveTeam);
   const handleSendRaport = () => {};
+  const handleShowRaport = () => {};
 
   const changeDescription = useSelector(
     (state: RootState) => state.changeTeamDescription
@@ -244,6 +245,9 @@ const Team = () => {
 
       <div className={styles.buttonsPanel}>
         <div className={styles.buttonsContainer}>
+          <div className={styles.showRaportButton} onClick={handleShowRaport}>
+            Show Raports
+          </div>
           <div className={styles.raportButton} onClick={handleSendRaport}>
             Send Raport
           </div>
