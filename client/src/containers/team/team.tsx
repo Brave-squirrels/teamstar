@@ -98,12 +98,8 @@ const Team = () => {
     if (leaveTeamState.success) {
       history.push("/home");
     }
-<<<<<<< HEAD
-  }, [history, leaveTeamState.success]);
-=======
     // eslint-disable-next-line
   }, [leaveTeamState.success]);
->>>>>>> 261766b411a82409b679ccbc292a93dc4501c7c1
 
   const initialEmail = {
     userEmail: {
