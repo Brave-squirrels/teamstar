@@ -35,6 +35,9 @@ const Team = () => {
   );
   const removeUser = useSelector((state: RootState) => state.deleteUserTeam);
   const leaveTeamState = useSelector((state: RootState) => state.leaveTeam);
+  const createRaportState = useSelector(
+    (state: RootState) => state.createRaport
+  );
   const handleShowRaport = () => {};
 
   const changeDescription = useSelector(
@@ -65,6 +68,7 @@ const Team = () => {
     inviteSendState.success,
     declineInviteState.success,
     removeUser.success,
+    createRaportState.success,
   ]);
 
   useEffect(() => {
