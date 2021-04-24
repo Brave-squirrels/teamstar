@@ -1,3 +1,42 @@
+const statusArr = ["", "To do", "In progress", "Done"];
+
+export function dataModel(data: any) {
+  const columns = [
+    {
+      id: "todo",
+      title: "To do",
+      taskIds: [] as any,
+    },
+    {
+      id: "inProgress",
+      title: "In progress",
+      taskIds: [] as any,
+    },
+    {
+      id: "done",
+      title: "Done",
+      taskIds: [] as any,
+    },
+  ];
+
+  const tasks = data.map((d: any) => {
+    console.log(columns[0].taskIds);
+    if (d.status === 1) columns[0].taskIds.push(d.id);
+    if (d.status === 2) columns[1].taskIds.push(d.id);
+    if (d.status === 3) columns[2].taskIds.push(d.id);
+    console.log(d);
+    return { id: d.id, content: d.name, status: statusArr[d.status] };
+  });
+
+  const columnOrder = ["todo", "inProgress", "done"];
+
+  const initialData = { tasks, columns, columnOrder };
+
+  console.log(initialData);
+
+  return initialData;
+}
+
 const initialData = {
   tasks: [
     { id: "task-1", content: "Take out the garbage", status: "todo" },

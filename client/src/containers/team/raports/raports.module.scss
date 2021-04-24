@@ -31,6 +31,7 @@
   border-bottom: 1px solid $fontWhite;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
+  word-break: break-all;
   .raportColumn {
     display: flex;
     padding-bottom: 1em;

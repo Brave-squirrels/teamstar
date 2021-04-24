@@ -19,7 +19,6 @@ import { mutateToAxios } from "utils/onChangeForm";
 import { teamDataFetch } from "reduxState/team/getTeamInfo";
 import { deleteTeamFetch } from "reduxState/team/deleteTeam";
 import { deleteUserTeamFetch } from "reduxState/team/deleteUser";
-import EmptyNotification from "components/emptyNotification/emptyNotification";
 import { leaveTeamFetch } from "reduxState/team/leaveTeam";
 import { createRaportFetch } from "reduxState/raport/createRaport";
 import { getRaportsFetch } from "reduxState/raport/getRaports";
@@ -32,6 +31,10 @@ const Team = () => {
   const teamId = location.pathname.split("/")[2];
 
   const teamInfo = useSelector((state: any) => state.teamData.teamData);
+<<<<<<< HEAD
+=======
+  console.log(teamInfo);
+>>>>>>> 261766b411a82409b679ccbc292a93dc4501c7c1
   const inviteSendState = useSelector((state: RootState) => state.sendInvite);
   const declineInviteState = useSelector(
     (state: RootState) => state.declineInvite
@@ -95,7 +98,12 @@ const Team = () => {
     if (leaveTeamState.success) {
       history.push("/home");
     }
+<<<<<<< HEAD
   }, [history, leaveTeamState.success]);
+=======
+    // eslint-disable-next-line
+  }, [leaveTeamState.success]);
+>>>>>>> 261766b411a82409b679ccbc292a93dc4501c7c1
 
   const initialEmail = {
     userEmail: {
