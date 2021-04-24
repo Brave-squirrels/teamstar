@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import styles from "./team.module.scss";
+import { useLocation } from "react-router-dom";
 import settingsLogo from "../../assets/settingsLogo.svg";
 import trash from "../../assets/trash.svg";
 import Sidebar from "./sidebar/sidebar";
@@ -11,15 +12,22 @@ import { sendInviteFetch } from "reduxState/team/sendInvite";
 import { changeTeamDescriptionFetch } from "reduxState/team/changeDescription";
 import { RootState } from "reduxState/store";
 import { mutateToAxios } from "utils/onChangeForm";
+import { teamDataFetch } from "reduxState/team/getTeamInfo";
 
 const Team = () => {
   const [modalInvite, setModalInvite] = useState(false);
 
+  const location = useLocation();
+  const teamId = location.pathname.split("/")[2];
+
   const teamInfo = useSelector((state: any) => state.teamData.teamData);
+  const inviteSendState = useSelector((state: RootState) => state.sendInvite);
+  const declineInviteState = useSelector(
+    (state: RootState) => state.declineInvite
+  );
 
   const handleSendRaport = () => {};
 
-  const changePassword = useSelector((state: any) => state.changePassword);
   const changeDescription = useSelector(
     (state: RootState) => state.changeTeamDescription
   );
@@ -36,9 +44,29 @@ const Team = () => {
     dispatch(
       sendInviteFetch({ email: sendInviteToUser.userEmail.val }, teamInfo._id)
     );
+    setSendInviteToUser(initialEmail);
   };
 
-  const [sendInviteToUser, setSendInviteToUser] = useState({
+  useEffect(() => {
+    setDescription((prevState) => {
+      return {
+        ...prevState,
+        description: {
+          ...prevState.description,
+          val: teamInfo.description,
+        },
+      };
+    });
+    dispatch(teamDataFetch(teamId));
+  }, [
+    dispatch,
+    teamId,
+    changeDescription.success,
+    inviteSendState.success,
+    declineInviteState.success,
+  ]);
+
+  const initialEmail = {
     userEmail: {
       val: "",
       type: "email",
@@ -56,7 +84,7 @@ const Team = () => {
       valid: false,
     },
     formValid: false,
-  });
+  };
   const [description, setDescription] = useState({
     description: {
       val: "",
@@ -82,6 +110,8 @@ const Team = () => {
     );
   };
 
+  const [sendInviteToUser, setSendInviteToUser] = useState(initialEmail);
+
   return (
     <div className={styles.container}>
       <InviteModal
@@ -96,7 +126,7 @@ const Team = () => {
           btnText="Send"
           title=""
           submitted={handleSendInvite}
-          spinner={changePassword.loading}
+          spinner={inviteSendState.loading}
         />
         <div className={styles.invitedUsers}>
           <h4>Invited users</h4>
