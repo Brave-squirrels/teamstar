@@ -44,7 +44,7 @@ export default async (req: Request, res: Response) => {
     console.log(raport.teamId == team.id)
     console.log(3)
     if (raport.teamId == team.id) user.reports?.splice(i, 1);
-    
+
   });
 
   // deleting team from user teams
@@ -52,7 +52,7 @@ export default async (req: Request, res: Response) => {
     console.log(userTeam.teamId == team.id)
     console.log(4)
     if (userTeam.teamId == team.id) user.teams.splice(i, 1)
-    
+
   });
 
   // deleting user tasks from team
@@ -60,7 +60,7 @@ export default async (req: Request, res: Response) => {
     console.log(task.userId == user.id)
     console.log(5)
     if (task.userId == user.id) user.tasks?.splice(i, 1);
-    
+
   });
 
   // deleting user from team tasks

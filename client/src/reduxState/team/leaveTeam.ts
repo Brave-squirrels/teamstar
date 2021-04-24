@@ -37,7 +37,7 @@ export const { start, success, failed } = leaveTeam.actions;
 export const leaveTeamFetch = (teamId: string): AppThunk => async (dispatch) => {
     dispatch(start());
     await axios
-        .put(`/teams/${teamId}/leaveTeam`, {
+        .put(`/teams/${teamId}/leaveTeam`, {}, {
             headers: {
                 'x-auth-token': localStorage.getItem('token')
             }

@@ -18,6 +18,7 @@ import { teamDataFetch } from "reduxState/team/getTeamInfo";
 import { deleteTeamFetch } from "reduxState/team/deleteTeam";
 import { deleteUserTeamFetch } from "reduxState/team/deleteUser";
 import EmptyNotification from "components/emptyNotification/emptyNotification";
+import { leaveTeamFetch } from "reduxState/team/leaveTeam";
 
 const Team = () => {
   const [modalInvite, setModalInvite] = useState(false);
@@ -32,7 +33,7 @@ const Team = () => {
     (state: RootState) => state.declineInvite
   );
   const removeUser = useSelector((state: RootState) => state.deleteUserTeam);
-
+  const leaveTeamState = useSelector((state: RootState) => state.leaveTeam);
   const handleSendRaport = () => {};
 
   const changeDescription = useSelector(
@@ -76,6 +77,12 @@ const Team = () => {
       };
     });
   }, [teamInfo.description]);
+
+  useEffect(() => {
+    if (leaveTeamState.success) {
+      history.push("/home");
+    }
+  }, [leaveTeamState.success]);
 
   const initialEmail = {
     userEmail: {
@@ -130,6 +137,9 @@ const Team = () => {
 
   const handleRemoveUser = (id: string) => {
     dispatch(deleteUserTeamFetch(teamId, { id: id }));
+  };
+  const handleLeaveTeam = () => {
+    dispatch(leaveTeamFetch(teamId));
   };
 
   return (
@@ -217,12 +227,14 @@ const Team = () => {
         <div className={styles.rightSidePanel}>
           <div className={styles.headerPanel}>
             <h1 className={styles.teamName}>{teamInfo.name}</h1>
-            <img
-              src={settingsLogo}
-              alt="User settings"
-              className={styles.settingsImg}
-              onClick={() => setModalInvite(true)}
-            />
+            {localStorage.getItem("id") === teamInfo.owner.id && (
+              <img
+                src={settingsLogo}
+                alt="User settings"
+                className={styles.settingsImg}
+                onClick={() => setModalInvite(true)}
+              />
+            )}
           </div>
           <Dnd />
         </div>
@@ -233,7 +245,9 @@ const Team = () => {
           <div className={styles.raportButton} onClick={handleSendRaport}>
             Send Raport
           </div>
-          <div className={styles.leaveButton}>Leave Team</div>
+          <div className={styles.leaveButton} onClick={handleLeaveTeam}>
+            Leave Team
+          </div>
         </div>
       </div>
     </div>
