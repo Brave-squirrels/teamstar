@@ -1,7 +1,9 @@
+@import "styles/variables.scss";
 .dndContainer {
   display: flex;
   padding: 0 1rem;
   overflow-x: auto;
+  @include scrollbar;
 }
 
 .dndCard {

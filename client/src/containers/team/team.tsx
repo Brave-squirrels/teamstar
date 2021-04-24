@@ -56,7 +56,6 @@ const Team = () => {
     changeDescription.success,
     inviteSendState.success,
     declineInviteState.success,
-    teamInfo.description,
   ]);
 
   useEffect(() => {
