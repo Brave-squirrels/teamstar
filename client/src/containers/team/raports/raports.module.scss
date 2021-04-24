@@ -10,8 +10,23 @@
     border-top: 1px solid $fontWhite;
   }
 }
+.deleteRaport {
+  margin-top: 20px;
+  color: $invalid;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.raportTitle {
+  font-weight: 500;
+}
+
+.reportAuthor {
+  font-style: italic;
+}
 
 .container {
+  width: 100%;
   padding-top: 1em;
   border-bottom: 1px solid $fontWhite;
   display: grid;
