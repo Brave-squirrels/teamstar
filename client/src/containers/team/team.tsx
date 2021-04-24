@@ -214,13 +214,13 @@ const Team = () => {
           )}
         </div>
         <div className={styles.removeWrapper}>
-        <Button
-          variant="danger"
-          onClick={handleDeleteTeam}
-          style={{ marginTop: "1em" }}
-        >
-          Remove team
-        </Button>
+          <Button
+            variant="danger"
+            onClick={handleDeleteTeam}
+            style={{ marginTop: "1em" }}
+          >
+            Remove team
+          </Button>
         </div>
       </InviteModal>
       <div className={styles.mainPanel}>
