@@ -28,9 +28,10 @@ const Team = () => {
   const handleSendInvite = (e:any) => {
     e.preventDefault()
     dispatch(sendInviteFetch({ email: sendInviteToUser.userEmail.val }, teamInfo._id));
+    setSendInviteToUser(initialEmail)
   };
 
-  const [sendInviteToUser, setSendInviteToUser] = useState({
+  const initialEmail = {
     userEmail: {
       val: "",
       type: "email",
@@ -48,7 +49,9 @@ const Team = () => {
       valid: false,
     },
     formValid: false,
-  });
+  }
+
+  const [sendInviteToUser, setSendInviteToUser] = useState(initialEmail);
 
   return (
     <div className={styles.container}>
