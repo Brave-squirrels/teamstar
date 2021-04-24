@@ -1,8 +1,6 @@
 import { Response, Request } from "express";
 import { StatusCodes } from "http-status-codes";
 import teamModel from "../../models/team.model";
-import userModel from "../../models/user.model";
-import validateCreateTeam from "./validateCreateTeam";
 
 // Function for creating a new user
 export default async (req: Request, res: Response) => {
