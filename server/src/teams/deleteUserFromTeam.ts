@@ -52,15 +52,21 @@ export default async (req: Request, res: Response) => {
     if (chat.teamId == team.id) user.chats?.splice(i, 1);
   });
 
+  user.chats.forEach((chat: any, i: number) => {
+    if (chat.teamId == team.id) {
+      user.chats.splice(i, 1);
+    }
+  })
+
   // deleting user from team tasks
-  // await team.tasks.forEach(async (teamTask) => {
-  //   if (teamTask.userId === user._id) {
-  //     const task = await taskModel.findById(teamTask.id);
-  //     await task.users.forEach(async (taskUser: any, i: number) => {
-  //       if (taskUser.id === user._id) task.users.splice(i, 1);
-  //     });
-  //   }
-  // });
+  await team.tasks.forEach(async (teamTask) => {
+    if (teamTask.userId.toString() === user.id.toString()) {
+      const task = await taskModel.findById(teamTask.id);
+      await task.users.forEach(async (taskUser: any, i: number) => {
+        if (taskUser.id.toString() === user.id.toString()) task.users.splice(i, 1);
+      });
+    }
+  });
 
 
   await user.save();
