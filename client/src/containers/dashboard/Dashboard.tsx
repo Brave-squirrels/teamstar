@@ -116,6 +116,7 @@ const Dashboard = () => {
   const handleCreateTeam = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     dispatch(createTeamFetch(mutateToAxios(form)));
+    setShow(false);
   };
 
   const handleAcceptInvite = (id: string, teamName: string) => {
