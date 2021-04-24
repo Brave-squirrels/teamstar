@@ -13,7 +13,7 @@ export default async (req: Request, res: Response) => {
 
   let exists = false;
   team.users.forEach((teamUser) => {
-    if (teamUser.id.toString() === user.id.toString()) exists = true;
+    if (teamUser.id == user.id) exists = true;
   });
   if (!exists)
     return res.status(StatusCodes.BAD_REQUEST).send("Its not your team!");
