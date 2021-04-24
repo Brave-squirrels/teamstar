@@ -43,7 +43,6 @@ export const { start, success, failed } = acceptInvite.actions;
 
 export const acceptInviteFetch = (data: Data, teamId: string): AppThunk => async (dispatch) => {
     dispatch(start());
-    console.log(data);
     await axios.put(`/teams/${teamId}/acceptInvite`, data, {
         headers: {
             'x-auth-token': localStorage.getItem('token')

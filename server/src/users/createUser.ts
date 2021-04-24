@@ -30,7 +30,6 @@ export default async (req: Request, res: Response) => {
   const token = user.generateAuthToken();
   const url = `http://${process.env.BACKEND_ADDRESS}/users/confirmation/${token}`;
   const message = await sendEmail(req.body.email, url);
-  console.log(message);
 
   res.header("x-auth-token", token).send(_.pick(user, ["id", "name", "email"]));
 };

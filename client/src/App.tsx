@@ -17,7 +17,6 @@ import NotFound from "containers/notFound/notFound";
 import ConfirmedEmailChange from "containers/confirmedEmailChange/confirmedEmailChange";
 import Dashboard from "containers/dashboard/Dashboard";
 import Team from "containers/team/team";
-import Tasks from "containers/tasks/tasks";
 import Calendar from "containers/calendar/calendar";
 import Chat from "containers/chat/chat";
 import Break from "components/break/break";
@@ -128,8 +127,6 @@ const App = () => {
     });
     socket.on("connected", (data) => {
       setResponse(data);
-      console.log(data);
-      console.log(response);
     });
   });
 
@@ -172,7 +169,6 @@ const App = () => {
                 path="/team/:teamId/calendar"
                 component={Calendar}
               />
-              <ProtectedRoute path="/team/:teamId/tasks" component={Tasks} />
               <ProtectedRoute path="/team/:teamId" component={Team} />
               <ProtectedRoute path="/calendar" component={Calendar} />
               <ProtectedRoute path="/chat/:chatId" component={Chat} />

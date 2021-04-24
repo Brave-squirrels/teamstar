@@ -55,20 +55,17 @@ export default class App {
     io.on("connection", async (socket: Socket) => {
       if (socket.handshake.headers.token !== "null") {
         let online = await changeConnectionStatus(socket.handshake.headers.token, true);
-        console.log(online)
       }
 
-      
+
 
       socket.on("chat-message", data => {
-        console.log(data + " message")
         io.emit('message', data)
-});
+      });
 
       socket.on("disconnect", async (reason) => {
         if (socket.handshake.headers.token !== "null") {
           let offline = await changeConnectionStatus(socket.handshake.headers.token, false);
-          console.log(offline);
         }
       })
 

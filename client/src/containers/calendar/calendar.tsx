@@ -253,7 +253,6 @@ const CalendarComponent = () => {
   };
 
   const handleSingleEventCLick = (e: any) => {
-    console.log(e);
     setShowCurrentEvent(true);
     setCurrentEvent(e);
     setAuthor(e.author.name);
@@ -286,7 +285,6 @@ const CalendarComponent = () => {
         },
       };
     });
-    console.log(e);
   };
 
   const handleEditEvent = (e: any) => {

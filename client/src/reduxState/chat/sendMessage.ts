@@ -42,8 +42,6 @@ export const sendMessageFetch = (data: Data, chatId: any): AppThunk => async (
     dispatch
 ) => {
     dispatch(start());
-        console.log(data)
-
     await axios
         .put(`/chat/message/add/${chatId}`, data, {
             headers: {
