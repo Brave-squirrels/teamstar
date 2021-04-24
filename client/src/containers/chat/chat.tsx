@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { useLocation } from "react-router-dom";
 import { RootState } from "reduxState/store";
 import { Button } from "react-bootstrap";
 
@@ -13,7 +14,8 @@ const ENDPOINT = "http://localhost:5000";
 
 const Chat = () => {
   const dispatch = useDispatch();
-  const teamId = "6083e2c3de7b7644d83d369e";
+  const location = useLocation();
+  const teamId = location.pathname.split("/")[2];
   const token: string = localStorage.getItem("token") || "null";
 
   const socket = socketIOClient(ENDPOINT, {
