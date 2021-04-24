@@ -41,6 +41,9 @@ export default async (req: Request, res: Response) => {
     "tasks",
     "chats",
     "date",
+    "isOnline",
+    "startTime",
+    "endTime",
   ]);
   const token = user.generateAuthToken();
   res.status(StatusCodes.OK).send({ id, token, ...data });
