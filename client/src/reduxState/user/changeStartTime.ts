@@ -10,6 +10,7 @@ interface State {
 
 interface Data {
     startTime: string;
+    endTime: string;
 }
 
 const initialState: State = {
@@ -40,7 +41,7 @@ export const { start, success, failed } = changeStartTime.actions;
 
 export const changeStartTimeFetch = (data: Data): AppThunk => async (dispatch) => {
     dispatch(start());
-    await axios.put('/users/startTime', data, {
+    await axios.put('/users/times', data, {
         headers: {
             'x-auth-token': localStorage.getItem('token')
         }
