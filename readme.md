@@ -1,4 +1,4 @@
-# ManagmentSystem by BraveSquirrels
+# TeamStart by BraveSquirrels!
 
 
 
@@ -88,7 +88,7 @@ PASSWORD=\<your email's password></br></br>
 ![](githubImg/users.png)
 * Live meetings callendar!
 ![](githubImg/calendar.jpg)
-* Break time!
+ Break time!
 * ![](githubImg/break.jpg)
 * #### Workflow :)
-* ![](githubImg/workflow.jpg)
+ ![](githubImg/workflow.jpg)
