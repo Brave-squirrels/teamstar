@@ -212,6 +212,7 @@ const Team = () => {
             <EmptyNotification>Team has no members</EmptyNotification>
           )}
         </div>
+        <div className={styles.removeWrapper}>
         <Button
           variant="danger"
           onClick={handleDeleteTeam}
@@ -219,6 +220,7 @@ const Team = () => {
         >
           Remove team
         </Button>
+        </div>
       </InviteModal>
       <div className={styles.mainPanel}>
         <div className={styles.leftSidePanel}>
