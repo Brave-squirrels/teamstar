@@ -103,7 +103,16 @@ const userSchema = new mongoose.Schema<User>({
   },
   breakTime: {
     type: {},
-    default: "10",
+    default: {
+      b1: {
+        start: "09:00:00",
+        end: "09:15:00",
+      },
+      b2: {
+        start: "11:15:00",
+        end: "11:30:00",
+      },
+    },
   },
 });
 

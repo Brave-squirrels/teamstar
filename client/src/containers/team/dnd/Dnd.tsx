@@ -1,13 +1,29 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
 import initialData from "./initialData";
 import { DragDropContext } from "react-beautiful-dnd";
-import styles from "./dnd.module.scss";
 
+import { getTasksFetch } from "../../../reduxState/tasks/getTasks";
+
+import styles from "./dnd.module.scss";
 import Column from "./Column";
 import { Container } from "react-bootstrap";
+import { RootState } from "reduxState/store";
 
 const Dnd = () => {
   const [data, setData] = useState<any>(initialData);
+
+  const location = useLocation();
+  const teamId = location.pathname.split("/")[2];
+
+  const tasks = useSelector((state: RootState) => state.getTasks);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getTasksFetch(teamId));
+    console.log(tasks);
+  }, []);
 
   const onDragEnd = (result: any) => {
     const { destination, source, draggableId } = result;
