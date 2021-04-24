@@ -88,3 +88,15 @@
     margin-top: 0.5em;
   }
 }
+
+.active {
+  color: $fontBlue;
+  font-weight: 500;
+  padding-left: 1em;
+}
+
+.inactive {
+  color: $invalid;
+  font-weight: 500;
+  padding-left: 1em;
+}
