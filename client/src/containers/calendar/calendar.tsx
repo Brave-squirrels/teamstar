@@ -1,4 +1,6 @@
-import React, { Children, useState } from "react";
+import React, { Children, useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { useLocation } from "react-router-dom";
 import { Calendar, momentLocalizer } from "react-big-calendar";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import moment from "moment";
@@ -7,7 +9,10 @@ import { Button } from "react-bootstrap";
 import FormStructure from "containers/form/formStructure";
 import MyVerticallyCenteredModal from "containers/user/settings/MyVerticallyCenteredModal";
 
+import { teamDataFetch } from "reduxState/team/getTeamInfo";
+
 import styles from "./calendar.module.scss";
+import { RootState } from "reduxState/store";
 
 const localizer = momentLocalizer(moment);
 
@@ -32,6 +37,15 @@ const ColoredDateCellWrapper = ({ children, value }: any) =>
   });
 
 const CalendarComponent = () => {
+  const dispatch = useDispatch();
+  const location = useLocation();
+  /* const teamData = useSelector((state: RootState) => state.teamData); */
+  const teamId = location.pathname.split("/")[2];
+
+  useEffect(() => {
+    dispatch(teamDataFetch(teamId));
+  }, [dispatch, teamId]);
+
   const [showNewEvent, setShowNewEvent] = useState(false);
   const [showCurrentEvent, setShowCurrentEvent] = useState(false);
   const [newEvent, setNewEvent] = useState({
