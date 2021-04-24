@@ -21,7 +21,7 @@ const deleteTeam = createSlice({
             state.success = false;
             state.loading = true;
         },
-        success: (state, action) => {
+        success: (state) => {
             state.success = true;
             state.loading = false;
         },
@@ -43,7 +43,7 @@ export const deleteTeamFetch = (teamId: string): AppThunk => async (dispatch) =>
             }
         })
         .then((res) => {
-            dispatch(success(res.data));
+            dispatch(success());
             toastNofity(res.status);
         })
         .catch((err) => {

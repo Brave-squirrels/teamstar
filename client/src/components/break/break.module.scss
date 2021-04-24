@@ -1,5 +1,6 @@
+@import "styles/variables.scss";
 .wrapper {
-  background: rgba(0, 0, 0, 0.2);
+  background: rgba(0, 0, 0, 0.3);
   position: fixed;
   top: 0;
   left: 0;
@@ -7,4 +8,13 @@
   width: 100vw;
   z-index: 1;
   color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.text {
+  font-size: 1.6em;
+  letter-spacing: 0.2em;
+  font-weight: 500;
 }
