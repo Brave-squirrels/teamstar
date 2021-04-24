@@ -58,9 +58,12 @@ export default class App {
         console.log(online)
       }
 
-      socket.on("message", (message) => {
-        socket.emit("message", message);
-      });
+      
+
+      socket.on("chat-message", data => {
+        console.log(data + " message")
+        io.emit('message', data)
+});
 
       socket.on("disconnect", async (reason) => {
         if (socket.handshake.headers.token !== "null") {

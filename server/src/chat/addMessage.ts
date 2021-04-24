@@ -15,11 +15,13 @@ export default async (req: Request, res: Response) => {
   const user = req.userInfo;
 
   const chat = res.locals.chat;
+  const now = new Date();
 
   chat.messages.push({
     authorName: user.name,
     authorId: user._id,
     ...req.body,
+    date: now
   });
 
   await chat.save();
