@@ -11,6 +11,7 @@ const Team = () => {
   const [modalInvite, setModalInvite] = useState(false)
 
   const teamInfo = useSelector((state: any) => state.teamData.teamData);
+  const handleSendRaport = () => {};
 
   const changePassword = useSelector(
     (state: any) => state.changePassword
@@ -96,7 +97,9 @@ const Team = () => {
 
       <div className={styles.buttonsPanel}>
         <div className={styles.buttonsContainer}>
-          <div onClick = {dupa} className={styles.raportButton}>Send Raport</div>
+          <div className={styles.raportButton} onClick={handleSendRaport}>
+            Send Raport
+          </div>
           <div className={styles.leaveButton}>Leave Team</div>
         </div>
       </div>

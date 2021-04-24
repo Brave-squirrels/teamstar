@@ -5,6 +5,7 @@ import changeStatus from "../src/tasks/changeStatus";
 import createTask from "../src/tasks/createTask";
 import deleteTask from "../src/tasks/deleteTask";
 import editTask from "../src/tasks/editTask";
+import getTasks from "../src/tasks/getTasks";
 import deleteUser from "../src/users/deleteUser";
 
 /**
@@ -20,6 +21,7 @@ export default class TaskController {
   }
 
   public initializeRoutes() {
+    this.router.get(this.path, auth, this.getTasks);
     this.router.post(this.path, auth, this.createTask);
     this.router.put(`${this.path}/:taskId/addUser`, auth, this.addUser);
     this.router.put(`${this.path}/:taskId/deleteUser`, auth, this.deleteUser);
@@ -30,6 +32,10 @@ export default class TaskController {
     );
     this.router.put(`${this.path}/:taskId/editTask`, auth, this.editTask);
     this.router.delete(`${this.path}/:taskId`, auth, this.deleteTask);
+  }
+
+  getTasks(req: Request, res: Response) {
+    getTasks(req, res);
   }
 
   createTask(req: Request, res: Response) {

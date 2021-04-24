@@ -63,8 +63,9 @@ const teamSchema = new mongoose.Schema<Team>({
       },
     ],
   },
-  calendar: {
-    id: mongoose.Schema.Types.ObjectId,
+  calendarId: {
+    type: mongoose.Schema.Types.ObjectId,
+    required: true
   },
   invitations: {
     type: [

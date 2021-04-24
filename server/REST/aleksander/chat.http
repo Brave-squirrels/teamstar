@@ -1,11 +1,40 @@
 # __________________________________ CHAT __________________________________
 ###
-# Create Account
+# Create Chat
 POST http://localhost:5000/chat/create HTTP/1.1
+x-auth-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MDgzMjczNmJlMzdiYTI1ODRiZjAwY2IiLCJuYW1lIjoidGVzdCIsImlhdCI6MTYxOTIxNjM5MH0.4tijBMnqHsJwzZ7uZUZg1r5RIDhHI-zbTxP8HiOfOSo
 Content-Type: application/json
 
 {
     "name": "test",
-    "teamId": "",
-    "messages": ""
+    "teamId": "6083427b59c42b0680908181"
 }
+
+###
+# Get all chats
+GET http://localhost:5000/chat HTTP/1.1
+
+###
+# Add Message
+PUT http://localhost:5000/chat/message/add/6083511576943550d083c548 HTTP/1.1
+x-auth-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MDgzMjczNmJlMzdiYTI1ODRiZjAwY2IiLCJuYW1lIjoidGVzdCIsImlhdCI6MTYxOTIxNjM5MH0.4tijBMnqHsJwzZ7uZUZg1r5RIDhHI-zbTxP8HiOfOSo
+Content-Type: application/json
+
+{
+    "content": "lubię placki"
+}
+
+###
+# Edit Message
+PUT http://localhost:5000/chat/message/edit/6083512d76943550d083c549 HTTP/1.1
+x-auth-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MDgzMjczNmJlMzdiYTI1ODRiZjAwY2IiLCJuYW1lIjoidGVzdCIsImlhdCI6MTYxOTIxNjM5MH0.4tijBMnqHsJwzZ7uZUZg1r5RIDhHI-zbTxP8HiOfOSo
+Content-Type: application/json
+
+{
+    "content": "hackathon"
+}
+
+###
+# Delete Message
+DELETE  http://localhost:5000/chat/message/delete/6083512d76943550d083c549 HTTP/1.1
+x-auth-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MDgzMjczNmJlMzdiYTI1ODRiZjAwY2IiLCJuYW1lIjoidGVzdCIsImlhdCI6MTYxOTIxNjM5MH0.4tijBMnqHsJwzZ7uZUZg1r5RIDhHI-zbTxP8HiOfOSo
