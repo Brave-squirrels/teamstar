@@ -18,7 +18,7 @@ export default async (req: Request, res: Response) => {
   if (!exists)
     return res.status(StatusCodes.BAD_REQUEST).send("Its not your team!");
 
-  const task = taskModel.findById(req.params.taskId);
+  const task = await taskModel.find(req.params.taskId);
 
   return res.status(StatusCodes.OK).send(task);
 };
