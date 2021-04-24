@@ -8,6 +8,9 @@ import { createServer } from "http";
 import { Server, Socket } from "socket.io";
 import changeConnectionStatus from '../../src/users/changeConnectionStatus';
 
+import userModel from "../../models/user.model";
+
+
 /**
  * Main App class, responsible for initializing middlewares,
  * connecting to database, running local server

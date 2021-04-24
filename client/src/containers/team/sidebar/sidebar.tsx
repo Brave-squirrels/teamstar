@@ -55,9 +55,8 @@ const Sidebar = () => {
     checkBreak();
     // eslint-disable-next-line
   }, [loginState.userData]);
-
+  console.log(teamInfo.users);
   const toggle = () => setReveal(!reveal);
-  const dupa = () => console.log(teamMembers);
   return (
     <div className={sideClasses.join(" ")}>
       <div className={styles.menuContainer}>
@@ -71,10 +70,17 @@ const Sidebar = () => {
           <div>{teamInfo.description}</div>
         </div>
         <ul className={styles.menu}>
-          <li onClick={dupa}>Users</li>
-          {teamMembers.map((member: any) => (
+          <li>Users</li>
+          {teamInfo.users.map((member: any) => (
             <li id={member.id} key={member.id}>
               {member.name}
+              <span>
+                {member.status ? (
+                  <span className={styles.active}>Active </span>
+                ) : (
+                  <span className={styles.inactive}>Inactive</span>
+                )}
+              </span>
             </li>
           ))}
         </ul>

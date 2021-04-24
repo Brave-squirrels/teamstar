@@ -57,7 +57,7 @@ export const loginUserFetch = (data: Data): AppThunk => async (dispatch) => {
   await axios
     .post("/login", data)
     .then((res) => {
-      dispatch(loginSuccess(res.data));
+      dispatch(loginSuccess({ ...res.data, isOnline: true }));
       localStorage.setItem("token", res.data.token);
       localStorage.setItem('id', res.data.id);
     })
@@ -75,7 +75,7 @@ export const authUser = (): AppThunk => async (dispatch) => {
       headers: { "x-auth-token": localStorage.getItem("token") },
     })
     .then((res) => {
-      dispatch(loginSuccess(res.data));
+      dispatch(loginSuccess({ ...res.data, isOnline: true }));
     })
     .catch((err) => {
       dispatch(logout());
