@@ -71,6 +71,12 @@ export interface User {
     id: string
 }
 
+export interface TeamUser {
+    name: string,
+    id: string,
+    status: any,
+}
+
 export interface TeamTask {
     name: string;
     userName: string;
@@ -94,7 +100,7 @@ export interface TeamData {
     description: string;
     owner: Owner | {} | any;
     date: Date | string;
-    users: User[],
+    users: TeamUser[],
     tasks: TeamTask[],
     raports: TeamRaport[],
     calendarId: string,

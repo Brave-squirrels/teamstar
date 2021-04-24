@@ -37,6 +37,10 @@ const teamSchema = new mongoose.Schema<Team>({
           type: String,
         },
         id: mongoose.Schema.Types.ObjectId,
+        status: {
+          type: Boolean,
+          default: false
+        }
       },
     ],
   },
