@@ -6,6 +6,7 @@ import { useSelector, useDispatch } from "react-redux";
 
 const Team = () => {
   const teamInfo = useSelector((state: any) => state.teamData.teamData);
+  const handleSendRaport = () => {};
 
   return (
     <div className={styles.container}>
@@ -28,7 +29,9 @@ const Team = () => {
 
       <div className={styles.buttonsPanel}>
         <div className={styles.buttonsContainer}>
-          <div className={styles.raportButton}>Send Raport</div>
+          <div className={styles.raportButton} onClick={handleSendRaport}>
+            Send Raport
+          </div>
           <div className={styles.leaveButton}>Leave Team</div>
         </div>
       </div>

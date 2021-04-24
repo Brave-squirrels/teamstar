@@ -105,3 +105,28 @@ export const basicTeam: TeamData = {
     calendar: '',
     invitations: [],
 }
+
+export interface TaskUser {
+    userId: string,
+    userName: string,
+}
+
+export interface TaskTeam {
+    teamName: string,
+    teamId: string,
+}
+export interface TaskSchema {
+    users: TaskUser[],
+    name: string,
+    description: string,
+    status: string,
+    team: TaskTeam | {}
+}
+
+export const basicTask: TaskSchema = {
+    users: [],
+    name: '',
+    description: '',
+    status: '',
+    team: {}
+}

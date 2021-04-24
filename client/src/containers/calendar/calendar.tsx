@@ -22,7 +22,10 @@ const events: any = [
     title: "Today",
     start: Date.now(),
     end: Date.now(),
-    author: "Sample author",
+    author: {
+      name: "author",
+      id: "1234",
+    },
     description: "xD",
     fromHour: "18:00",
     toHour: "22:00",
@@ -240,7 +243,7 @@ const CalendarComponent = () => {
   const handleSingleEventCLick = (e: any) => {
     setShowCurrentEvent(true);
     setCurrentEvent(e.id);
-    setAuthor(e.author);
+    setAuthor(e.author.name);
     setEditEvent((prevState) => {
       return {
         ...prevState,
