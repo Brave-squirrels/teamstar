@@ -5,8 +5,10 @@ import styles from "./chat.module.scss";
 
 const chat = () => {
 
+
+
     return(
-        <div>Chat</div>
+        <div className={styles.flex}>Chat</div>
     )
 }
 

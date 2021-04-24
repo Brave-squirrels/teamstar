@@ -40,7 +40,10 @@ export default async (req: Request, res: Response) => {
         if(event._id==req.params.eventId) {
             return {
                 _id: event._id,
-                ...event.author,
+                author: {
+                    id: event.author.id,
+                    name: event.author.name
+                },
                 title: req.body.title,
                 start: req.body.start,
                 end: req.body.end,

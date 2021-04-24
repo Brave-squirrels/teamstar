@@ -6,6 +6,7 @@ import { useSelector, useDispatch } from "react-redux";
 
 const Team = () => {
   const teamInfo = useSelector((state: any) => state.teamData.teamData);
+  console.log(teamInfo)
   const handleSendRaport = () => {};
 
   return (
