@@ -7,6 +7,7 @@ import deleteTeam from "../src/teams/deleteTeam";
 import getTeam from "../src/teams/getTeam";
 import leaveTeam from "../src/teams/leaveTeam";
 import sendInvite from "../src/teams/sendInvite";
+import changeDescription from '../src/teams/changeTeamDescription';
 
 /**
  * raport Class,
@@ -36,6 +37,7 @@ export default class TeamController {
     );
     this.router.put(`${this.path}/:teamId/leaveTeam`, auth, this.leaveTeam);
     this.router.delete(`${this.path}/:teamId`, auth, this.deleteTeam);
+    this.router.put(`${this.path}/:teamId/changeDescription`, auth, this.changeDescription);
   }
 
   createTeam(req: Request, res: Response) {
@@ -64,5 +66,8 @@ export default class TeamController {
 
   deleteTeam(req: Request, res: Response) {
     deleteTeam(req, res);
+  }
+  changeDescription(req: Request, res: Response) {
+    changeDescription(req, res);
   }
 }
