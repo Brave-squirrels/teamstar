@@ -89,7 +89,6 @@ const App = () => {
                 component={Raports}
               />
               <ProtectedRoute path="/team/:teamId" component={Team} />
-              <ProtectedRoute path="/calendar" component={Calendar} />
               <Route render={() => <Redirect to="/not-found" />} />
             </Switch>
           </Main>

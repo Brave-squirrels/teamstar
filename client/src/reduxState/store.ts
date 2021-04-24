@@ -26,6 +26,15 @@ import leaveTeam from 'reduxState/team/leaveTeam';
 import deleteTeam from 'reduxState/team/deleteTeam';
 import changeTeamDescription from 'reduxState/team/changeDescription';
 
+import createTask from 'reduxState/tasks/createTask';
+import editTask from 'reduxState/tasks/editTask';
+import getTasks from 'reduxState/tasks/getTasks';
+
+import getCalendar from 'reduxState/calendar/getCalendar';
+import addEvent from 'reduxState/calendar/addEvent';
+import deleteEvent from 'reduxState/calendar/deleteEvent';
+import editEvent from 'reduxState/calendar/editEvent'
+
 export const store = configureStore({
   reducer: {
     loginUser,
@@ -45,6 +54,13 @@ export const store = configureStore({
     leaveTeam,
     deleteTeam,
     changeTeamDescription,
+    createTask,
+    editTask,
+    getTasks,
+    getCalendar,
+    addEvent,
+    deleteEvent,
+    editEvent,
   },
   middleware: [
     ...getDefaultMiddleware({

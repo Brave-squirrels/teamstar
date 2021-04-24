@@ -3,7 +3,6 @@ import { StatusCodes } from "http-status-codes";
 import taskModel from "../../models/task.model";
 import teamModel from "../../models/team.model";
 import userModel from "../../models/user.model";
-import validateCreateTask from "./validateCreateTask";
 
 // Function for creating a new user
 export default async (req: Request, res: Response) => {
@@ -19,18 +18,7 @@ export default async (req: Request, res: Response) => {
   if (!exists)
     return res.status(StatusCodes.BAD_REQUEST).send("Its not your team!");
 
-  const taskData = {
-    ...req.body,
-    team: { teamName: team.name, teamId: team._id },
-  };
+  const task = taskModel.findById(req.params.taskId);
 
-  const { error } = validateCreateTask(taskData);
-  if (error)
-    return res.status(StatusCodes.BAD_REQUEST).send(error.details[0].message);
-
-  const task = new taskModel(taskData);
-
-  await task.save();
-
-  return res.status(StatusCodes.OK).send("Task created Succesfully!!");
+  return res.status(StatusCodes.OK).send(task);
 };

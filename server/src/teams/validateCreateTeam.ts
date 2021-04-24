@@ -1,4 +1,4 @@
-import Joi from "joi";
+import Joi from "joi-oid";
 import User from "../../interfaces/user.interface";
 
 export default function validateCreateTeam(data: object) {
@@ -10,6 +10,7 @@ export default function validateCreateTeam(data: object) {
       name: Joi.string().required(),
       id: Joi.required(),
     }).required(),
+    calendarId: Joi.objectId().required()
   });
 
   return schema.validate(data);

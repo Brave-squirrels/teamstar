@@ -4,45 +4,46 @@ import { AppThunk, RootState } from "reduxState/store";
 import toastNofity from "utils/toastNotify";
 
 import * as types from 'utils/types';
-
-interface Team {
-    teamData: types.TeamData | null;
+interface State {
     loading: boolean;
+    calendarData: types.CalenderSchema;
 }
 
-const initialState: Team = {
-    teamData: { ...types.basicTeam },
+const initialState: State = {
     loading: false,
+    calendarData: types.basicCalendar
 };
 
-const teamData = createSlice({
-    name: "teamData",
+const getCalendar = createSlice({
+    name: "getCalendar",
     initialState,
     reducers: {
         start: (state) => {
-            state.teamData = { ...types.basicTeam };
             state.loading = true;
+            state.calendarData = types.basicCalendar
         },
         success: (state, action) => {
-            state.teamData = action.payload;
             state.loading = false;
+            state.calendarData = action.payload;
         },
         failed: (state) => {
-            state.teamData = { ...types.basicTeam };
             state.loading = false;
+            state.calendarData = types.basicCalendar
         },
     },
 });
 
-export const { start, success, failed } = teamData.actions;
+export const { start, success, failed } = getCalendar.actions;
 
-export const teamDataFetch = (teamId: string): AppThunk => async (dispatch) => {
+export const getCalendarFetch = (calendarId: any): AppThunk => async (
+    dispatch
+) => {
     dispatch(start());
     await axios
-        .get(`/teams/${teamId}`, {
+        .get(`/calendar/${calendarId}`, {
             headers: {
-                'x-auth-token': localStorage.getItem('token')
-            }
+                "x-auth-token": localStorage.getItem("token"),
+            },
         })
         .then((res) => {
             dispatch(success(res.data));
@@ -53,8 +54,7 @@ export const teamDataFetch = (teamId: string): AppThunk => async (dispatch) => {
         });
 };
 
+export const selectLoading = (state: RootState) => state.getCalendar.loading;
+export const selectData = (state: RootState) => state.getCalendar.calendarData;
 
-export const selectLoading = (state: RootState) => state.teamData.loading;
-export const selectData = (state: RootState) => state.teamData.teamData;
-
-export default teamData.reducer;
+export default getCalendar.reducer;

@@ -14,6 +14,7 @@ export default async (req: Request, res: Response) => {
       name: user!.name,
       id: user!._id,
     },
+    calendarId: res.locals.calendar._id
   };
 
   const { error } = validateCreateTeam(teamData);
@@ -26,6 +27,8 @@ export default async (req: Request, res: Response) => {
 
   await team.save();
   await user!.save();
+
+  
 
   return res.status(StatusCodes.OK).send("Team Created Succesfully!");
 };
