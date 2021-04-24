@@ -28,6 +28,7 @@ const Dnd = () => {
   }, [teamId, createState.success]);
 
   useEffect(() => {
+    console.log(tasks.taskData);
     setData(dataModel(tasks.taskData));
   }, [tasks]);
 
@@ -89,7 +90,7 @@ const Dnd = () => {
       const st =
         newStatus === "To do" ? " 1" : newStatus === "In progress" ? "2" : " 3";
 
-      dispatch(changeStatusFetch(teamId, currentTask.id, st));
+      // dispatch(changeStatusFetch(teamId, currentTask.id, 1));
 
       const newTask = {
         ...currentTask,

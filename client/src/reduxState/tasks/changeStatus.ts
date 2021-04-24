@@ -41,7 +41,7 @@ export const { start, success, failed } = changeStatus.actions;
 export const changeStatusFetch = (
   teamId: string,
   taskId: string,
-  data: string
+  data: Data
 ): AppThunk => async (dispatch) => {
   dispatch(start());
   await axios
