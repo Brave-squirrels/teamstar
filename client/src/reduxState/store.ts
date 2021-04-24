@@ -16,6 +16,8 @@ import changeName from 'reduxState/user/changeName';
 import changePassword from 'reduxState/user/changePassword';
 import changeEmail from 'reduxState/user/changeEmail';
 import deleteUser from 'reduxState/user/deleteUser';
+import changeEndTime from 'reduxState/user/changeEndTime';
+import changeStartTime from 'reduxState/user/changeStartTime';
 
 import createTeam from 'reduxState/team/createTeam';
 import declineInvite from 'reduxState/team/declineInvite';
@@ -61,6 +63,8 @@ export const store = configureStore({
     addEvent,
     deleteEvent,
     editEvent,
+    changeEndTime,
+    changeStartTime,
   },
   middleware: [
     ...getDefaultMiddleware({
