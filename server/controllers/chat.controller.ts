@@ -2,8 +2,10 @@ import express, { Request, Response } from "express";
 
 import auth from "../middleware/auth";
 import findChat from "../middleware/findChat";
+import findMessage from "../middleware/findMessage";
 import createChat from "../src/chat/createChat";
 import addMessage from "../src/chat/addMessage";
+import editMessage from "../src/chat/editMessage";
 
 /**
  * Chat Class,
@@ -25,6 +27,12 @@ export default class ChatController {
       findChat,
       this.addMessage
     );
+    this.router.put(
+      `${this.path}/message/edit/:id`,
+      auth,
+      findMessage,
+      this.editMessage
+    );
   }
 
   createChat(req: Request, res: Response) {
@@ -33,5 +41,9 @@ export default class ChatController {
 
   addMessage(req: Request, res: Response) {
     addMessage(req, res);
+  }
+
+  editMessage(req: Request, res: Response) {
+    editMessage(req, res);
   }
 }
