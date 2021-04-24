@@ -9,6 +9,7 @@ import LoginController from "../controllers/login.controller";
 import ChatController from "../controllers/chat.controller";
 import TeamController from "../controllers/team.controller";
 import RaportController from "../controllers/raport.controller";
+import TaskController from "../controllers/task.controller";
 
 // Check if private key exist
 if (!process.env.JWT_PRIVATE_KEY) {
@@ -27,6 +28,7 @@ const app = new App([
   new ChatController(),
   new TeamController(),
   new RaportController(),
+  new TaskController(),
 ]);
 
 // Express app listen
