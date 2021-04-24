@@ -164,7 +164,7 @@ const CalendarComponent = () => {
       },
       error: "Title should be between 3 and 24 characters long",
       touched: false,
-      valid: false,
+      valid: true,
     },
     desc: {
       val: "",
@@ -178,7 +178,7 @@ const CalendarComponent = () => {
       },
       error: "Description should can't be longer than 255 characters",
       touched: false,
-      valid: false,
+      valid: true,
     },
     start: {
       val: "",
@@ -192,7 +192,7 @@ const CalendarComponent = () => {
       },
       error: `You can't pick previous date`,
       touched: false,
-      valid: false,
+      valid: true,
     },
     end: {
       val: "",
@@ -206,7 +206,7 @@ const CalendarComponent = () => {
       },
       error: `You can't pick previous date`,
       touched: false,
-      valid: false,
+      valid: true,
     },
     fromHour: {
       val: "",
@@ -220,7 +220,7 @@ const CalendarComponent = () => {
       },
       error: `You can't pick previous date`,
       touched: false,
-      valid: false,
+      valid: true,
     },
     toHour: {
       val: "",
@@ -234,9 +234,9 @@ const CalendarComponent = () => {
       },
       error: `You can't pick previous date`,
       touched: false,
-      valid: false,
+      valid: true,
     },
-    formValid: false,
+    formValid: true,
   });
 
   const handleCreateEvent = (e: React.FormEvent<HTMLFormElement>) => {
@@ -264,11 +264,11 @@ const CalendarComponent = () => {
         },
         start: {
           ...prevState.start,
-          val: e.start,
+          val: e.start.match(/[0-9]{4}-[0-9]{2}-[0-9]{2}/),
         },
         end: {
           ...prevState.end,
-          val: e.end,
+          val: e.end.match(/[0-9]{4}-[0-9]{2}-[0-9]{2}/),
         },
         fromHour: {
           ...prevState.fromHour,

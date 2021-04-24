@@ -33,6 +33,7 @@ import getTasks from 'reduxState/tasks/getTasks';
 import getCalendar from 'reduxState/calendar/getCalendar';
 import addEvent from 'reduxState/calendar/addEvent';
 import deleteEvent from 'reduxState/calendar/deleteEvent';
+import editEvent from 'reduxState/calendar/editEvent'
 
 export const store = configureStore({
   reducer: {
@@ -59,6 +60,7 @@ export const store = configureStore({
     getCalendar,
     addEvent,
     deleteEvent,
+    editEvent,
   },
   middleware: [
     ...getDefaultMiddleware({
