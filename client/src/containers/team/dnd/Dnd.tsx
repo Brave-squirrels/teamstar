@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import initialData, { dataModel } from "./initialData";
 import { DragDropContext } from "react-beautiful-dnd";
 
+import { changeStatusFetch } from "reduxState/tasks/changeStatus";
 import { getTasksFetch } from "../../../reduxState/tasks/getTasks";
 
 import styles from "./dnd.module.scss";
@@ -81,10 +82,14 @@ const Dnd = () => {
 
       // change task status
       const newStatus = finish.title;
-
       const currentTask = data.tasks.filter(
         (e: any) => e.id === draggableId
       )[0];
+
+      const st =
+        newStatus === "To do" ? " 1" : newStatus === "In progress" ? "2" : " 3";
+
+      dispatch(changeStatusFetch(teamId, currentTask.id, st));
 
       const newTask = {
         ...currentTask,

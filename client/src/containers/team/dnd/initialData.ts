@@ -20,19 +20,15 @@ export function dataModel(data: any) {
   ];
 
   const tasks = data.map((d: any) => {
-    console.log(columns[0].taskIds);
     if (d.status === 1) columns[0].taskIds.push(d.id);
     if (d.status === 2) columns[1].taskIds.push(d.id);
     if (d.status === 3) columns[2].taskIds.push(d.id);
-    console.log(d);
     return { id: d.id, content: d.name, status: statusArr[d.status] };
   });
 
   const columnOrder = ["todo", "inProgress", "done"];
 
   const initialData = { tasks, columns, columnOrder };
-
-  console.log(initialData);
 
   return initialData;
 }
