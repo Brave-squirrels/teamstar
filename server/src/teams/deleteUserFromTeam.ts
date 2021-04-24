@@ -18,7 +18,7 @@ export default async (req: Request, res: Response) => {
 
   // deleting user from team users
   team.users.forEach((teamUser: any, i: number) => {
-    if (teamUser === user._id) {
+    if (teamUser.id == user.id) {
       team.users.splice(i, 1);
       return;
     }
@@ -35,12 +35,12 @@ export default async (req: Request, res: Response) => {
 
   // deleting raports from user
   user.reports?.forEach((raport: any, i: number) => {
-    if (raport.teamId === team._id) user.reports?.splice(i, 1);
+    if (raport.teamId == team.id) user.reports?.splice(i, 1);
   });
 
   // deleting team from user teams
   user.teams?.forEach((userTeam: any, i: number) => {
-    if (userTeam.id === team._id) user.teams?.splice(i, 1);
+    if (userTeam.teamId == team.id) user.teams?.splice(i, 1);
   });
 
   // deleting user tasks from team

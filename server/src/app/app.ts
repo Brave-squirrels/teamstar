@@ -5,7 +5,7 @@ import mongoose from "mongoose";
 import rateLimit from "express-rate-limit";
 const cors = require("cors");
 import { createServer } from "http";
-import { Server, Socket } from "socket.io"; 
+import { Server, Socket } from "socket.io";
 import changeConnectionStatus from '../../src/users/changeConnectionStatus';
 
 /**
@@ -16,11 +16,11 @@ import changeConnectionStatus from '../../src/users/changeConnectionStatus';
 export default class App {
   public app: Application;
   private port = process.env.PORT;
-  private limiter = rateLimit({
+  /* private limiter = rateLimit({
     windowMs: 15 * 60 * 1000,
     max: 100,
-  });
-  private httpServer:any;
+  }); */
+  private httpServer: any;
 
 
   constructor(controllers: Controller[]) {
@@ -37,22 +37,22 @@ export default class App {
     this.app.use(loggerMiddleware);
     this.app.use(express.urlencoded({ extended: true }));
     this.app.use(cors());
-    this.app.use(this.limiter);
+    /*  this.app.use(this.limiter); */
   }
 
   private initializeSocket() {
     this.httpServer = createServer(this.app);
-    const io = new Server(this.httpServer,{
+    const io = new Server(this.httpServer, {
       cors: {
         origin: "*",
         methods: ["GET", "POST"]
       }
     });
-  
+
     io.on("connection", async (socket: Socket) => {
-      if(socket.handshake.headers.token!=="null") {
-      let online = await changeConnectionStatus(socket.handshake.headers.token, true);
-      console.log(online)
+      if (socket.handshake.headers.token !== "null") {
+        let online = await changeConnectionStatus(socket.handshake.headers.token, true);
+        console.log(online)
       }
 
       socket.on("message", (message) => {
@@ -60,9 +60,9 @@ export default class App {
       });
 
       socket.on("disconnect", async (reason) => {
-        if(socket.handshake.headers.token!=="null") {
-        let offline = await changeConnectionStatus(socket.handshake.headers.token, false);
-        console.log(offline);
+        if (socket.handshake.headers.token !== "null") {
+          let offline = await changeConnectionStatus(socket.handshake.headers.token, false);
+          console.log(offline);
         }
       })
 
@@ -96,7 +96,7 @@ export default class App {
       .catch((err) => console.log(err.message));
   }
 
-  
+
 
   public listen() {
     return this.httpServer.listen(this.port, () => {
