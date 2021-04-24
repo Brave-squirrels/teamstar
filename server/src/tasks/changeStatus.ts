@@ -2,8 +2,6 @@ import { Response, Request } from "express";
 import { StatusCodes } from "http-status-codes";
 import taskModel from "../../models/task.model";
 import teamModel from "../../models/team.model";
-import userModel from "../../models/user.model";
-import validateCreateTask from "./validateCreateTask";
 import validateStatus from "./validateStatus";
 
 // Function for creating a new user
@@ -19,6 +17,13 @@ export default async (req: Request, res: Response) => {
 
   task.status = req.body.status;
 
+  team.tasks.forEach((task, i: number) => {
+    if (task.id == req.params.taskId) {
+      team.tasks[i].status = req.body.status;
+    }
+  })
+
+  await team.save();
   await task.save();
 
   return res.status(StatusCodes.OK).send("Task created Succesfully!!");
