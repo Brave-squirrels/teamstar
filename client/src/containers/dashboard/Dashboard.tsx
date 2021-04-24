@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
-import { Button } from "react-bootstrap";
+import { Button, Spinner } from "react-bootstrap";
 import { RootState } from "reduxState/store";
 
 import MyVerticallyCenteredModal from "containers/user/settings/MyVerticallyCenteredModal";
@@ -13,12 +13,16 @@ import { Team, TeamInvitation } from "utils/types";
 import styles from "./dashboard.module.scss";
 
 import { createTeamFetch } from "reduxState/team/createTeam";
+import { acceptInviteFetch } from "reduxState/team/acceptInvite";
+import { declineInviteFetch } from "reduxState/team/declineInvite";
 import { mutateToAxios } from "utils/onChangeForm";
 import { authUser } from "reduxState/user/loginUser";
 
 const Dashboard = () => {
   const userData = useSelector((state: RootState) => state.loginUser.userData);
   const createState = useSelector((state: RootState) => state.createTeam);
+  const acceptState = useSelector((state: RootState) => state.acceptInvite);
+  const declineState = useSelector((state: RootState) => state.declineInvite);
 
   const [show, setShow] = useState(false);
   const [date, setDate] = useState({ date: new Date() });
@@ -32,7 +36,12 @@ const Dashboard = () => {
 
   useEffect(() => {
     dispatch(authUser());
-  }, [dispatch, createState.success]);
+  }, [
+    dispatch,
+    createState.success,
+    acceptState.success,
+    declineState.success,
+  ]);
 
   const [form, setForm] = useState({
     name: {
@@ -72,11 +81,23 @@ const Dashboard = () => {
     dispatch(createTeamFetch(mutateToAxios(form)));
   };
 
-  const handleAcceptInvite = (id: string) => {
+  const handleAcceptInvite = (id: string, teamName: string) => {
     setCurrentButton(id);
+    dispatch(
+      acceptInviteFetch(
+        {
+          invitation: {
+            teamId: id,
+            teamName: teamName,
+          },
+        },
+        id
+      )
+    );
   };
   const handleRejectInvite = (id: string) => {
     setCurrentButton(id);
+    dispatch(declineInviteFetch({ id: userData!._id }, id));
   };
 
   // Display invites and teams
@@ -136,18 +157,34 @@ const Dashboard = () => {
                       {invite.teamName}
                     </div>
                     <div className={styles.cardInvitesBody}>
-                      <Button
-                        variant="success"
-                        onClick={() => handleAcceptInvite(invite.teamId)}
-                      >
-                        ACCEPT
-                      </Button>
-                      <Button
-                        variant="danger"
-                        onClick={() => handleRejectInvite(invite.teamId)}
-                      >
-                        REJECT
-                      </Button>
+                      {(acceptState.loading &&
+                        currentButton === invite.teamId) ||
+                      (declineState.loading &&
+                        currentButton === invite.teamId) ? (
+                        <Spinner
+                          animation="border"
+                          style={{
+                            color: "rgba(126, 203, 207, 1)",
+                          }}
+                        />
+                      ) : (
+                        <>
+                          <Button
+                            variant="success"
+                            onClick={() =>
+                              handleAcceptInvite(invite.teamId, invite.teamName)
+                            }
+                          >
+                            ACCEPT
+                          </Button>
+                          <Button
+                            variant="danger"
+                            onClick={() => handleRejectInvite(invite.teamId)}
+                          >
+                            REJECT
+                          </Button>
+                        </>
+                      )}
                     </div>
                   </div>
                 ))}

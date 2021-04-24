@@ -25,28 +25,27 @@ import Calendar from "containers/calendar/calendar";
 import { authUser, logout } from "reduxState/user/loginUser";
 import { RootState } from "reduxState/store";
 
-const ENDPOINT = "http://localhost:5000"
-
+const ENDPOINT = "http://localhost:5000";
 
 const App = () => {
   const dispatch = useDispatch();
   const history = useHistory();
   const loginState = useSelector((state: RootState) => state.loginUser);
   const [response, setResponse] = useState("");
-  const token:string = localStorage.getItem('token') || "null";
-  
+  const token: string = localStorage.getItem("token") || "null";
+
   useEffect(() => {
     const socket = socketIOClient(ENDPOINT, {
       extraHeaders: {
         "Access-Control-Allow-Origin": "*",
-        "token": token
-      }      
+        token: token,
+      },
     });
-    socket.on("connected", data => {
-      setResponse(data)
+    socket.on("connected", (data) => {
+      setResponse(data);
       console.log(data);
       console.log(response);
-    })
+    });
   });
 
   useEffect(() => {
@@ -80,16 +79,16 @@ const App = () => {
               <ProtectedRoute path="/dnd" component={Dnd} />
               <ProtectedRoute path="/home" component={Dashboard} />
               <ProtectedRoute path="/settings" component={Settings} />
-              <ProtectedRoute path="/team/:teamId" component={Team} />
-              <ProtectedRoute path="/team/:teamId/tasks" component={Tasks} />
               <ProtectedRoute
                 path="/team/:teamId/calendar"
                 component={Calendar}
               />
+              <ProtectedRoute path="/team/:teamId/tasks" component={Tasks} />
               <ProtectedRoute
                 path="/team/:teamId/raports"
                 component={Raports}
               />
+              <ProtectedRoute path="/team/:teamId" component={Team} />
               <ProtectedRoute path="/calendar" component={Calendar} />
               <Route render={() => <Redirect to="/not-found" />} />
             </Switch>

@@ -12,6 +12,7 @@
 }
 .leftSidePanel {
   width: 100%;
+  z-index: 3;
 }
 
 .rightSidePanel {
@@ -19,6 +20,11 @@
   grid-template-rows: 0.5fr 5fr;
   width: 100%;
 }
+
+.taskPanel {
+  border: 1px red solid;
+}
+
 .teamName {
     font-size: 2rem;
     font-weight: 400;
@@ -33,7 +39,7 @@
 }
 
 .settingsImg {
-    height:3em;
+    height: 3em;
     cursor: pointer;
 }
 
@@ -48,13 +54,13 @@
   display: flex;
   justify-content: space-between;
   width: 35%;
+  min-width: 450px;
   & > div {
     font-size: 1.3rem;
     cursor: pointer;
     display: flex;
     justify-content: center;
     align-items: center;
-    border: 2px green solid;
     width: 10em;
     height: 2.5em;
     border-radius: 5px;
@@ -62,15 +68,22 @@
   .raportButton {
     border: 2px $buttonBackground solid;
     color: $buttonBackground;
+    margin-right: 5px;
   }
 
   .leaveButton {
     border: 2px $invalid solid;
     color: $invalid;
+    margin-left: 5px;
   }
 }
 
 @media only screen and (max-width: 950px) {
+  .mainPanel {
+    grid-template-columns: 90px auto;
+  }
+  
+
   .buttonsPanel {
     display: flex;
     justify-content: center;
@@ -86,8 +99,12 @@
     display: flex;
     justify-content: center;
     margin-right: 0;
+    & > div {   
+    width: 16em;
+    }
   }
   .buttonsContainer {
     width: 100%;
+    min-width: 0;
   }
 }

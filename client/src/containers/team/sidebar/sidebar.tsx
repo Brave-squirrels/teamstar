@@ -1,11 +1,8 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import styles from "./sidebar.module.scss";
 
 const Sidebar = () => {
-  
-  const history = useHistory();
-
   const user = {
     name: "asdsas",
     teams: [
@@ -15,22 +12,44 @@ const Sidebar = () => {
     ],
   };
 
+  const history = useHistory();
+
+  const [reveal, setReveal] = useState(true);
+  const [sideClasses, setSideClasses] = useState([styles.sidebar]);
+
+  useEffect(() => {
+    reveal
+      ? setSideClasses([styles.sidebar])
+      : setSideClasses([styles.sidebar, styles.closed]);
+  }, [reveal]);  
+
   const changeTeam = (e: any) => {
     history.push(`/team/${e.target.id}`);
   };
 
+  const toggle = () => setReveal(!reveal);
+
   return (
-    <div className={styles.sidebar}>
-      <h3>Przerwa</h3>
-      <div className={styles.break}>
-        <div>od 12:45:12</div>
-        <div>do 20:20:30</div>
+    <div className={sideClasses.join(" ")}>
+      <div className={styles.menuContainer}>
+        <h3>Timebreak</h3>
+        <div className={styles.break}>
+          <div>from 12:45:12</div>
+          <div>to 20:20:30</div>
+        </div>
+        <ul className={styles.menu}>
+          {user.teams.map((team: any) => (
+            <li id={team.teamId} key={team.teamId} onClick={changeTeam}>
+              {team.teamName}
+            </li>
+          ))}
+        </ul>
       </div>
-      <ul className={styles.menu}>
-        {user.teams.map((team: any) => (
-          <li id={team.teamId} key={team.teamId} onClick={changeTeam}>{team.teamName}</li>
-        ))}
-      </ul>
+      <div className={styles.toggleContainer}>
+        <span className={styles.toggle} onClick={toggle}>
+          ↩
+        </span>
+      </div>
     </div>
   );
 };
