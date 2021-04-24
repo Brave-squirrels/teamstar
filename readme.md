@@ -86,4 +86,4 @@ PASSWORD=\<your email's password></br></br>
 * Live monitoring of work time!
 ![](githubImg/users.png)
 * Live meetings callendar!
-![](githubImg/calendar.png)
+![](githubImg/calendar.jpg)
