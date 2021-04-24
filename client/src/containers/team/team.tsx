@@ -184,6 +184,9 @@ const Team = () => {
   const handleDeleteTeam = () => {
     dispatch(deleteTeamFetch(teamInfo._id));
     history.push("/home");
+    setTimeout(() => {
+      window.location.reload(false);
+    }, 300);
   };
 
   const handleRemoveUser = (id: string) => {
@@ -191,6 +194,9 @@ const Team = () => {
   };
   const handleLeaveTeam = () => {
     dispatch(leaveTeamFetch(teamId));
+    setTimeout(() => {
+      window.location.reload(false);
+    }, 300);
   };
   const handleCreateRaport = (e: any) => {
     e.preventDefault();
