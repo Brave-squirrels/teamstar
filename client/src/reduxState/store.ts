@@ -31,6 +31,10 @@ import changeTeamDescription from 'reduxState/team/changeDescription';
 import createTask from 'reduxState/tasks/createTask';
 import editTask from 'reduxState/tasks/editTask';
 import getTasks from 'reduxState/tasks/getTasks';
+import deleteTask from 'reduxState/tasks/deleteTask';
+import changeStatus from 'reduxState/tasks/changeStatus';
+import addUser from 'reduxState/tasks/addUser';
+import removeUser from 'reduxState/tasks/removeUser';
 
 import getCalendar from 'reduxState/calendar/getCalendar';
 import addEvent from 'reduxState/calendar/addEvent';
@@ -65,6 +69,10 @@ export const store = configureStore({
     editEvent,
     changeEndTime,
     changeStartTime,
+    deleteTask,
+    changeStatus,
+    addUser,
+    removeUser,
   },
   middleware: [
     ...getDefaultMiddleware({
