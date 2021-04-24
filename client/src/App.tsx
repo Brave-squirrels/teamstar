@@ -136,6 +136,7 @@ const App = () => {
             <Switch>
               <ProtectedRoute path="/home" component={Dashboard} />
               <ProtectedRoute path="/settings" component={Settings} />
+              <ProtectedRoute path="/team/:teamId/chat" component={Chat} />
               <ProtectedRoute
                 path="/team/:teamId/calendar"
                 component={Calendar}
@@ -143,7 +144,6 @@ const App = () => {
               <ProtectedRoute path="/team/:teamId/tasks" component={Tasks} />
               <ProtectedRoute path="/team/:teamId" component={Team} />
               <ProtectedRoute path="/calendar" component={Calendar} />
-              <ProtectedRoute path="/chat/:chatId" component={Chat} />
               <Route render={() => <Redirect to="/not-found" />} />
             </Switch>
           </Main>
