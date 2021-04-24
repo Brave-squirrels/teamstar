@@ -3,6 +3,7 @@ import { StatusCodes } from "http-status-codes";
 import raportModel from "../../models/raport.model";
 import teamModel from "../../models/team.model";
 import userModel from "../../models/user.model";
+import taskModel from '../../models/task.model';
 
 export default async (req: Request, res: Response) => {
   const team = await teamModel.findById(req.params.teamId);
