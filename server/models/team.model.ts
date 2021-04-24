@@ -1,6 +1,7 @@
 import mongoose, { MongooseDocument } from "mongoose";
 import { string } from "joi";
 import Team from "../interfaces/team.interface";
+import { STATUS } from "../interfaces/task.interface";
 
 // Creating raportSchema
 const teamSchema = new mongoose.Schema<Team>({
@@ -49,6 +50,10 @@ const teamSchema = new mongoose.Schema<Team>({
         userName: { type: String },
         userId: mongoose.Schema.Types.ObjectId,
         id: mongoose.Schema.Types.ObjectId,
+        status: {
+          type: STATUS,
+          default: STATUS.TODO,
+        },
       },
     ],
   },

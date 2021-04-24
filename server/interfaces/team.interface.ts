@@ -17,12 +17,20 @@ interface Raport {
   userId: string;
 }
 
+interface Task {
+  userName: string;
+  name: string;
+  id: string;
+  userId: string;
+  status: any;
+}
+
 interface Team extends mongoose.Document {
   description: string;
   users: NameAndId[];
   name: string;
   date: string;
-  tasks: Raport[];
+  tasks: Task[];
   raports: Raport[];
   calendarId: string;
   owner: NameAndId;
