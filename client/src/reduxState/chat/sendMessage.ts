@@ -3,50 +3,56 @@ import axios from "axios/axiosMain";
 import { AppThunk, RootState } from "reduxState/store";
 import toastNofity from "utils/toastNotify";
 
-import * as types from 'utils/types';
 interface State {
     loading: boolean;
-    raportData: types.Raport[];
+    success: boolean;
+}
+
+interface Data {
+    content: string
 }
 
 const initialState: State = {
     loading: false,
-    raportData: [{ ...types.basicRaport }]
+    success: false,
 };
 
-const getRaports = createSlice({
-    name: "getRaports",
+const sendMessage = createSlice({
+    name: "sendMessage",
     initialState,
     reducers: {
         start: (state) => {
             state.loading = true;
-            state.raportData = [{ ...types.basicRaport }]
+            state.success = false;
         },
-        success: (state, action) => {
+        success: (state) => {
             state.loading = false;
-            state.raportData = action.payload;
+            state.success = true;
         },
         failed: (state) => {
             state.loading = false;
-            state.raportData = [{ ...types.basicRaport }]
+            state.success = false;
         },
     },
 });
 
-export const { start, success, failed } = getRaports.actions;
+export const { start, success, failed } = sendMessage.actions;
 
-export const getRaportsFetch = (teamId: string): AppThunk => async (
+export const sendMessageFetch = (data: Data, chatId: any): AppThunk => async (
     dispatch
 ) => {
     dispatch(start());
+        console.log(data)
+
     await axios
-        .get(`/teams/${teamId}/raports`, {
+        .put(`/chat/message/add/${chatId}`, data, {
             headers: {
                 "x-auth-token": localStorage.getItem("token"),
             },
         })
         .then((res) => {
-            dispatch(success(res.data));
+            dispatch(success());
+            toastNofity(res.status);
         })
         .catch((err) => {
             dispatch(failed());
@@ -54,7 +60,7 @@ export const getRaportsFetch = (teamId: string): AppThunk => async (
         });
 };
 
-export const selectLoading = (state: RootState) => state.getRaports.loading;
-export const selectData = (state: RootState) => state.getRaports.raportData;
+export const selectLoading = (state: RootState) => state.sendMessage.loading;
+export const selectSuccess = (state: RootState) => state.sendMessage.success;
 
-export default getRaports.reducer;
+export default sendMessage.reducer;

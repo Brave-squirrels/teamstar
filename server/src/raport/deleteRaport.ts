@@ -19,12 +19,12 @@ export default async (req: Request, res: Response) => {
   });
 
   user?.reports?.forEach((raport: any, i: number) => {
-    if (raport.raportId == req.params.raportId) user.reports?.splice(i, 1);
+    if (raport.reportId == req.params.raportId) user.reports?.splice(i, 1);
   });
 
   await raport.delete();
   await user!.save();
   await team!.save();
 
-  return res.status(StatusCodes.OK).send("Protocol deleted succesfully!");
+  return res.status(StatusCodes.OK).send("Protocol deleted successfully!");
 };

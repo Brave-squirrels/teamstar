@@ -32,6 +32,8 @@ const Team = () => {
   const teamId = location.pathname.split("/")[2];
 
   const teamInfo = useSelector((state: any) => state.teamData.teamData);
+  console.log(teamInfo)
+  const handleSendRaport = () => {};
   const inviteSendState = useSelector((state: RootState) => state.sendInvite);
   const declineInviteState = useSelector(
     (state: RootState) => state.declineInvite
@@ -40,6 +42,9 @@ const Team = () => {
   const leaveTeamState = useSelector((state: RootState) => state.leaveTeam);
   const createRaportState = useSelector(
     (state: RootState) => state.createRaport
+  );
+  const deleteRaportState = useSelector(
+    (state: RootState) => state.deleteRaport
   );
 
   const changeDescription = useSelector(
@@ -72,6 +77,7 @@ const Team = () => {
     declineInviteState.success,
     removeUser.success,
     createRaportState.success,
+    deleteRaportState.success,
   ]);
 
   useEffect(() => {
@@ -193,13 +199,13 @@ const Team = () => {
   return (
     <div className={styles.container}>
       <RaportsModal
-        
         show={showAllRaport}
         onHide={() => setShowAllRaport(false)}
         user={"as"}
         title="Raport"
+        className={styles.raportsModal}
       >
-        <Raports / >
+        <Raports />
       </RaportsModal>
       <InviteModal
         show={showRaport}
@@ -247,7 +253,10 @@ const Team = () => {
               ))}
             </>
           ) : (
-            <EmptyNotification>There is no invites</EmptyNotification>
+            <div className={styles.notFound}>
+              {" "}
+              <div>There is no invites</div>{" "}
+            </div>
           )}
         </div>
         <FormStructure
@@ -280,7 +289,10 @@ const Team = () => {
               ))}
             </>
           ) : (
-            <EmptyNotification>Team has no members</EmptyNotification>
+            <div className={styles.notFound}>
+              {" "}
+              <div> Team has no members</div>
+            </div>
           )}
         </div>
         <div className={styles.removeWrapper}>

@@ -71,6 +71,12 @@ export interface User {
     id: string
 }
 
+export interface TeamUser {
+    name: string,
+    id: string,
+    status: any,
+}
+
 export interface TeamTask {
     name: string;
     userName: string;
@@ -92,9 +98,9 @@ export interface TeamInvite {
 export interface TeamData {
     name: string;
     description: string;
-    owner: Owner | {};
+    owner: Owner | {} | any;
     date: Date | string;
-    users: User[],
+    users: TeamUser[],
     tasks: TeamTask[],
     raports: TeamRaport[],
     calendarId: string,
@@ -160,6 +166,27 @@ export const basicCalendar = {
     events: [],
 }
 
+export interface MessageInterface {
+    _id: string,
+    authorName: string,
+    authorId: string,
+    content: string,
+    date: Date
+}
+
+export interface ChatSchema {
+    _id: string,
+    name: string,
+    teamId: string,
+    messages: MessageInterface[]
+}
+
+export const basicChat = {
+    _id: '',
+    name: '',
+    teamId: '',
+    messages: []
+}
 
 export interface RaportAuthor {
     id: any,

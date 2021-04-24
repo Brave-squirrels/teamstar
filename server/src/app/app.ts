@@ -8,6 +8,9 @@ import { createServer } from "http";
 import { Server, Socket } from "socket.io";
 import changeConnectionStatus from '../../src/users/changeConnectionStatus';
 
+import userModel from "../../models/user.model";
+
+
 /**
  * Main App class, responsible for initializing middlewares,
  * connecting to database, running local server
@@ -16,10 +19,10 @@ import changeConnectionStatus from '../../src/users/changeConnectionStatus';
 export default class App {
   public app: Application;
   private port = process.env.PORT;
-  private limiter = rateLimit({
-    windowMs: 15 * 60 * 1000,
-    max: 100,
-  });
+  /*  private limiter = rateLimit({
+     windowMs: 15 * 60 * 1000,
+     max: 100,
+   }); */
   private httpServer: any;
 
 
@@ -37,7 +40,7 @@ export default class App {
     this.app.use(loggerMiddleware);
     this.app.use(express.urlencoded({ extended: true }));
     this.app.use(cors());
-    this.app.use(this.limiter);
+    /* this.app.use(this.limiter); */
   }
 
   private initializeSocket() {
@@ -55,9 +58,12 @@ export default class App {
         console.log(online)
       }
 
-      socket.on("message", (message) => {
-        socket.emit("message", message);
-      });
+      
+
+      socket.on("chat-message", data => {
+        console.log(data + " message")
+        io.emit('message', data)
+});
 
       socket.on("disconnect", async (reason) => {
         if (socket.handshake.headers.token !== "null") {

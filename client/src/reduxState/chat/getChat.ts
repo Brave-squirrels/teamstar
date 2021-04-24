@@ -6,41 +6,41 @@ import toastNofity from "utils/toastNotify";
 import * as types from 'utils/types';
 interface State {
     loading: boolean;
-    raportData: types.Raport[];
+    chatData: types.ChatSchema;
 }
 
 const initialState: State = {
     loading: false,
-    raportData: [{ ...types.basicRaport }]
+    chatData: types.basicChat
 };
 
-const getRaports = createSlice({
-    name: "getRaports",
+const getChat = createSlice({
+    name: "getChat",
     initialState,
     reducers: {
         start: (state) => {
             state.loading = true;
-            state.raportData = [{ ...types.basicRaport }]
+            state.chatData = types.basicChat
         },
         success: (state, action) => {
             state.loading = false;
-            state.raportData = action.payload;
+            state.chatData = action.payload;
         },
         failed: (state) => {
             state.loading = false;
-            state.raportData = [{ ...types.basicRaport }]
+            state.chatData = types.basicChat
         },
     },
 });
 
-export const { start, success, failed } = getRaports.actions;
+export const { start, success, failed } = getChat.actions;
 
-export const getRaportsFetch = (teamId: string): AppThunk => async (
+export const getChatFetch = (chatId: any): AppThunk => async (
     dispatch
 ) => {
     dispatch(start());
     await axios
-        .get(`/teams/${teamId}/raports`, {
+        .get(`/chat/${chatId}`, {
             headers: {
                 "x-auth-token": localStorage.getItem("token"),
             },
@@ -54,7 +54,7 @@ export const getRaportsFetch = (teamId: string): AppThunk => async (
         });
 };
 
-export const selectLoading = (state: RootState) => state.getRaports.loading;
-export const selectData = (state: RootState) => state.getRaports.raportData;
+export const selectLoading = (state: RootState) => state.getChat.loading;
+export const selectData = (state: RootState) => state.getChat.chatData;
 
-export default getRaports.reducer;
+export default getChat.reducer;
