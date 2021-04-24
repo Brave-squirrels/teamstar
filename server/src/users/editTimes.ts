@@ -17,12 +17,14 @@ export default async (req: Request, res: Response) => {
       .status(StatusCodes.INTERNAL_SERVER_ERROR)
       .send("Can not read the user.");
 
-  user.times = req.body;
   const result = calculateTime(user.times.startTime, user.times.endTime);
   if (!result)
     return res
       .status(StatusCodes.BAD_REQUEST)
       .send("End time is earlier than start time");
+
+  user.times = req.body;
+  user.breakTime = result;
 
   await user.save();
 

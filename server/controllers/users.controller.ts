@@ -17,8 +17,6 @@ import changeName from "../src/users/changeName";
 import changeEmail from "../src/users/changeEmail";
 import deleteUser from "../src/users/deleteUser";
 import userActivity from "../src/users/userActivity";
-// import editStartTime from "../src/users/editStartTime";
-// import editEndTime from "../src/users/editEndTime";
 import editTimes from "../src/users/editTimes";
 
 /**

@@ -123,7 +123,7 @@ x-auth-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MDgzMjczNmJlMzdiY
 Content-Type: application/json
 
 {
-    "startTime": "18:00:00",
+    "startTime": "07:00:00",
     "endTime": "15:00:00"
 }
 
