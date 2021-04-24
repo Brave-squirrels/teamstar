@@ -128,6 +128,13 @@ select:-webkit-autofill:focus {
   color: $fontWhite;
 }
 
+// ___________________ Card _______________________
+
+.card {
+  background: $backgroundJumbotron;
+  color: $fontWhite;
+}
+
 // ____________________ Calendar _________________________
 
 .rbc-toolbar-label {

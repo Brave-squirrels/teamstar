@@ -133,7 +133,7 @@ x-auth-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MDgzMjczNmJlMzdiY
 Content-Type: application/json
 
 {
-    "endTime": "17:45:00"
+    "endTime": "15:45:00"
 }
 
 ###

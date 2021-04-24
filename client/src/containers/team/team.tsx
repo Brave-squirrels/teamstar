@@ -3,6 +3,7 @@ import styles from "./team.module.scss";
 import settingsLogo from "../../assets/settingsLogo.svg";
 import Sidebar from "./sidebar/sidebar";
 import { useSelector, useDispatch } from "react-redux";
+import Dnd from "./dnd/Dnd";
 
 const Team = () => {
   const teamInfo = useSelector((state: any) => state.teamData.teamData);
@@ -23,7 +24,7 @@ const Team = () => {
               className={styles.settingsImg}
             />
           </div>
-          <div className={styles.taskPanel}></div>
+          <Dnd />
         </div>
       </div>
 

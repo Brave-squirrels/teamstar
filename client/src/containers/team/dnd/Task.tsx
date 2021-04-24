@@ -1,14 +1,14 @@
 import React from "react";
 import { Draggable } from "react-beautiful-dnd";
 import { Card, Badge } from "react-bootstrap";
+import styles from "./dnd.module.scss";
 
 const Task = (props: any) => {
   return (
     <Draggable draggableId={props.task.id} index={props.index}>
       {(provided, snapshot) => (
-        <Card
-          body
-          className="m-2"
+        <div
+          className={styles.dndTask}
           {...provided.draggableProps}
           {...provided.dragHandleProps}
           ref={provided.innerRef}
@@ -16,7 +16,7 @@ const Task = (props: any) => {
         >
           {props.task.content}{" "}
           <Badge variant="secondary">{props.task.status}</Badge>
-        </Card>
+        </div>
       )}
     </Draggable>
   );

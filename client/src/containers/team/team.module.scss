@@ -23,24 +23,25 @@
 
 .taskPanel {
   border: 1px red solid;
+  // overflow-x: auto;
 }
 
 .teamName {
-    font-size: 2rem;
-    font-weight: 400;
-    color: $fontWhite;
+  font-size: 2rem;
+  font-weight: 400;
+  color: $fontWhite;
 }
 
 .headerPanel {
-    padding: 0 2em;
-    align-items: center;
-    display: flex;
-    justify-content: space-between;
+  padding: 0 2em;
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
 }
 
 .settingsImg {
-    height: 3em;
-    cursor: pointer;
+  height: 3em;
+  cursor: pointer;
 }
 
 .buttonsPanel {
@@ -90,7 +91,6 @@
   .mainPanel {
     grid-template-columns: 90px auto;
   }
-  
 
   .buttonsPanel {
     display: flex;
@@ -107,8 +107,8 @@
     display: flex;
     justify-content: center;
     margin-right: 0;
-    & > div {   
-    width: 16em;
+    & > div {
+      width: 16em;
     }
   }
   .buttonsContainer {
