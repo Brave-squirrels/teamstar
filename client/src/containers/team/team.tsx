@@ -201,6 +201,7 @@ const Team = () => {
         onHide={() => setShowAllRaport(false)}
         user={"as"}
         title="Raport"
+        className={styles.raportsModal}
       >
         <Raports />
       </RaportsModal>

@@ -70,7 +70,6 @@
     border: 2px $buttonBackground solid;
     color: $buttonBackground;
     margin: 0 5px;
-    
 
     &:hover {
       box-shadow: 0 0 7px $buttonBackground;
@@ -95,6 +94,10 @@
       box-shadow: 0 0 10px $invalid;
     }
   }
+}
+
+.raportsModal {
+  @include scrollbar;
 }
 
 //Modals
@@ -148,13 +151,12 @@
     display: flex;
     justify-content: center;
     margin-right: 0;
-   
   }
   .buttonsContainer {
     width: 100%;
     min-width: 0;
     & > div {
-      font-size:1em;
+      font-size: 1em;
       width: 31%;
     }
   }
