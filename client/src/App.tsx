@@ -21,6 +21,7 @@ import Team from "containers/team/team";
 import Tasks from "containers/tasks/tasks";
 import Raports from "containers/raports/raports";
 import Calendar from "containers/calendar/calendar";
+import Chat from "containers/chat/chat";
 
 import { authUser, logout } from "reduxState/user/loginUser";
 import { RootState } from "reduxState/store";
@@ -90,6 +91,7 @@ const App = () => {
               />
               <ProtectedRoute path="/team/:teamId" component={Team} />
               <ProtectedRoute path="/calendar" component={Calendar} />
+              <ProtectedRoute path="/chat/:chatId" component={Chat} />
               <Route render={() => <Redirect to="/not-found" />} />
             </Switch>
           </Main>
