@@ -31,10 +31,7 @@ const Team = () => {
   const teamId = location.pathname.split("/")[2];
 
   const teamInfo = useSelector((state: any) => state.teamData.teamData);
-<<<<<<< HEAD
-=======
   console.log(teamInfo);
->>>>>>> 261766b411a82409b679ccbc292a93dc4501c7c1
   const inviteSendState = useSelector((state: RootState) => state.sendInvite);
   const declineInviteState = useSelector(
     (state: RootState) => state.declineInvite
@@ -139,6 +136,7 @@ const Team = () => {
   });
 
   const [showAllRaport, setShowAllRaport] = useState(false);
+  const [showModalLeave, setShowModalLeave] = useState(false);
 
   const [showRaport, setShowRaport] = useState(false);
   const [raportForm, setRaportForm] = useState({
@@ -224,6 +222,29 @@ const Team = () => {
           title=""
           submitted={handleCreateRaport}
         />
+      </InviteModal>
+      <InviteModal
+        show={showModalLeave}
+        onHide={() => setShowModalLeave(false)}
+        user={"as"}
+        title="Are you sure?"
+      >
+        <div className={styles.leaveButtonsContainer}>
+        <Button
+        style={{width:"120px", margin:"0 10px"}}
+          variant="danger"
+          onClick={handleLeaveTeam}
+        >
+          Yes
+        </Button>
+        <Button
+        style={{width:"120px"}}
+          variant="success"
+          onClick={() => setShowModalLeave(false)}
+        >
+          Cancel
+        </Button>
+        </div>
       </InviteModal>
       <InviteModal
         show={modalInvite}
@@ -343,7 +364,7 @@ const Team = () => {
           >
             Send Raport
           </div>
-          <div className={styles.leaveButton} onClick={handleLeaveTeam}>
+          <div className={styles.leaveButton} onClick={() => setShowModalLeave(true)}>
             Leave Team
           </div>
         </div>
