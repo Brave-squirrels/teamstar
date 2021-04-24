@@ -53,10 +53,6 @@ const Navigation = () => {
                 You don't belong to any teams
               </NavDropdown.Item>
             )}
-
-            <NavDropdown.Item to="/dnd" as={NavLink}>
-              Drag&Drop
-            </NavDropdown.Item>
           </NavDropdown>
           {teamId && (
             <Nav.Link href={`/team/${teamId}/calendar`}>Calendar</Nav.Link>

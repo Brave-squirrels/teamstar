@@ -11,7 +11,6 @@ import NavBar from "hoc/navbar/navbar";
 import ProtectedRoute from "containers/protectedRoute/protectedRoute";
 import SendResetPassword from "containers/sendResetPassword/sendResetPassword";
 import ResetPassword from "containers/resetPassword/resetPassword";
-import Dnd from "containers/dnd/Dnd";
 import Confirmed from "containers/confirmed/confirmed";
 import Settings from "containers/user/settings/settings";
 import NotFound from "containers/notFound/notFound";
@@ -86,7 +85,6 @@ const App = () => {
             <MainParticles />
             {checkBreak() && <Break />}
             <Switch>
-              <ProtectedRoute path="/dnd" component={Dnd} />
               <ProtectedRoute path="/home" component={Dashboard} />
               <ProtectedRoute path="/settings" component={Settings} />
               <ProtectedRoute

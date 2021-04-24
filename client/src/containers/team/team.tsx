@@ -5,6 +5,7 @@ import settingsLogo from "../../assets/settingsLogo.svg";
 import trash from "../../assets/trash.svg";
 import Sidebar from "./sidebar/sidebar";
 import { useSelector, useDispatch } from "react-redux";
+import Dnd from "./dnd/Dnd";
 import InviteModal from "components/inviteModal/inviteModal";
 import FormStructure from "containers/form/formStructure";
 import { declineInviteFetch } from "reduxState/team/declineInvite";
@@ -48,6 +49,17 @@ const Team = () => {
   };
 
   useEffect(() => {
+    dispatch(teamDataFetch(teamId));
+  }, [
+    dispatch,
+    teamId,
+    changeDescription.success,
+    inviteSendState.success,
+    declineInviteState.success,
+    teamInfo.description,
+  ]);
+
+  useEffect(() => {
     setDescription((prevState) => {
       return {
         ...prevState,
@@ -57,14 +69,7 @@ const Team = () => {
         },
       };
     });
-    dispatch(teamDataFetch(teamId));
-  }, [
-    dispatch,
-    teamId,
-    changeDescription.success,
-    inviteSendState.success,
-    declineInviteState.success,
-  ]);
+  }, [teamInfo.description]);
 
   const initialEmail = {
     userEmail: {
@@ -166,7 +171,7 @@ const Team = () => {
               onClick={() => setModalInvite(true)}
             />
           </div>
-          <div className={styles.taskPanel}></div>
+          <Dnd />
         </div>
       </div>
 
