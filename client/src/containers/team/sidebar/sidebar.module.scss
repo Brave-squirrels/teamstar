@@ -1,6 +1,8 @@
 @import "styles/variables.scss";
 
 .sidebar {
+  overflow-y: auto;
+  @include scrollbar;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -16,7 +18,7 @@
   transition: transform 0.3s ease-out;
 
   h3 {
-    color:  $buttonBackground;
+    color: $buttonBackground;
     border-bottom: 1px solid $fontWhite;
     width: calc(100% - 4rem);
     text-align: center;
@@ -42,8 +44,8 @@
   }
 }
 .closed {
-    transform: translateX(-240px);
-  }
+  transform: translateX(-240px);
+}
 
 .menuContainer {
   display: flex;
@@ -71,7 +73,7 @@
     list-style: none;
   }
   & > :first-child {
-    color:  $buttonBackground;
+    color: $buttonBackground;
     padding: 0.2em;
     font-size: 1.3em;
     font-weight: 500;
