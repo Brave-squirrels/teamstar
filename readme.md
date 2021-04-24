@@ -87,3 +87,5 @@ PASSWORD=\<your email's password></br></br>
 ![](githubImg/users.png)
 * Live meetings callendar!
 ![](githubImg/calendar.jpg)
+* Break time!
+* ![](githubImg/break.jpg)
