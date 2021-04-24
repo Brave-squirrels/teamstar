@@ -8,7 +8,12 @@ import Task from "./Task";
 const Column = (props: any) => {
   return (
     <Card className={`mt-5 mr-3 w-100 ${styles.dndCard}`}>
-      <Card.Header>{props.column.title}</Card.Header>
+      <Card.Header className={styles.headerWrapper}>
+        <div>{props.column.title}</div>
+        
+          {props.column.title == "To do" ? <div className={styles.addTask}>New Task</div>: null}
+        
+      </Card.Header>
       <div>
         <Droppable droppableId={props.column.id} type="task">
           {(provided, snapshot) => (
