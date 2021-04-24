@@ -18,11 +18,11 @@ export default async (req: Request, res: Response) => {
       .send("You are not allowed to do that!");
 
   user.teamInvitation?.forEach((invite: any, i: number) => {
-    if (invite.teamId === team.id) user.teamInvitation?.splice(i, 1);
+    if (invite.teamId == team.id) user.teamInvitation?.splice(i, 1);
   });
 
   team.invitations.forEach((invite: any, i: number) => {
-    if (invite.userId === user.id) team.invitations.splice(i, 1);
+    if (invite.userId == user.id) team.invitations.splice(i, 1);
   });
 
   await team.save();

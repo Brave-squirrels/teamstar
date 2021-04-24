@@ -9,10 +9,7 @@ interface State {
 }
 
 interface Data {
-    invitation: {
-        teamId: string;
-        teamName: string;
-    }
+    email: string;
 }
 
 const initialState: State = {
@@ -20,8 +17,8 @@ const initialState: State = {
     success: false,
 }
 
-const acceptInvite = createSlice({
-    name: 'acceptInvite',
+const sendInvite = createSlice({
+    name: 'sendInvite',
     initialState,
     reducers: {
         start: (state) => {
@@ -39,12 +36,11 @@ const acceptInvite = createSlice({
     }
 })
 
-export const { start, success, failed } = acceptInvite.actions;
+export const { start, success, failed } = sendInvite.actions;
 
 export const acceptInviteFetch = (data: Data, teamId: string): AppThunk => async (dispatch) => {
     dispatch(start());
-    console.log(data);
-    await axios.put(`/teams/${teamId}/acceptInvite`, data, {
+    await axios.put(`/teams/${teamId}/sendInvite`, data, {
         headers: {
             'x-auth-token': localStorage.getItem('token')
         }
@@ -57,7 +53,7 @@ export const acceptInviteFetch = (data: Data, teamId: string): AppThunk => async
     })
 }
 
-export const selectLoading = (state: RootState) => state.acceptInvite.loading;
-export const selectSuccess = (state: RootState) => state.acceptInvite.success;
+export const selectLoading = (state: RootState) => state.sendInvite.loading;
+export const selectSuccess = (state: RootState) => state.sendInvite.success;
 
-export default acceptInvite.reducer;
+export default sendInvite.reducer;
