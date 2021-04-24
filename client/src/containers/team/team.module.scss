@@ -101,6 +101,12 @@
   }
 }
 
+.leaveButtonsContainer{
+  display: flex;
+  justify-content: center
+
+}
+
 .raportsModal {
   @include scrollbar;
 }
