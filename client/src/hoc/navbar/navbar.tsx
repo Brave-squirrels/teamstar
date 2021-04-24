@@ -29,14 +29,14 @@ const Navigation = () => {
           }}
         >
           <img src={Logo} alt="Logo" style={{ height: "2em" }} />
-          Hackathon
+          TeamStar
         </div>
       </Navbar.Brand>
       <Navbar.Toggle aria-controls="responsive-navbar-nav" />
       <Navbar.Collapse id="responsive-navbar-nav">
         <Nav className="ml-auto" style={{ gap: "1.5em" }}>
-        <NavDropdown title="Chats" id="collasible-nav-dropdown">
-        {userData!.chats && userData!.chats.length > 0 ? (
+          <NavDropdown title="Chats" id="collasible-nav-dropdown">
+            {userData!.chats && userData!.chats.length > 0 ? (
               <>
                 {userData!.chats.map((chat: Chat) => (
                   <NavDropdown.Item
@@ -53,7 +53,7 @@ const Navigation = () => {
                 You don't have any chats
               </NavDropdown.Item>
             )}
-        </NavDropdown>
+          </NavDropdown>
           <NavDropdown title="Teams" id="collasible-nav-dropdown">
             {userData!.teams && userData!.teams.length > 0 ? (
               <>
