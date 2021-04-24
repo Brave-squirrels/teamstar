@@ -18,7 +18,6 @@ import ConfirmedEmailChange from "containers/confirmedEmailChange/confirmedEmail
 import Dashboard from "containers/dashboard/Dashboard";
 import Team from "containers/team/team";
 import Tasks from "containers/tasks/tasks";
-import Raports from "containers/raports/raports";
 import Calendar from "containers/calendar/calendar";
 import Break from "components/break/break";
 
@@ -141,10 +140,6 @@ const App = () => {
                 component={Calendar}
               />
               <ProtectedRoute path="/team/:teamId/tasks" component={Tasks} />
-              <ProtectedRoute
-                path="/team/:teamId/raports"
-                component={Raports}
-              />
               <ProtectedRoute path="/team/:teamId" component={Team} />
               <Route render={() => <Redirect to="/not-found" />} />
             </Switch>
