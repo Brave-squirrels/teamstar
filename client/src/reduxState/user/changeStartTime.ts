@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import axios from "axios/axiosMain";
-import { AppThunk, RootState } from "reduxState/store";
+import { AppThunk, RootState } from 'reduxState/store';
 import toastNofity from "utils/toastNotify";
 
 interface State {
@@ -8,13 +8,18 @@ interface State {
     success: boolean;
 }
 
+interface Data {
+    startTime: string;
+    endTime: string;
+}
+
 const initialState: State = {
     loading: false,
     success: false,
-};
+}
 
-const deleteEvent = createSlice({
-    name: "deleteEvent",
+const changeStartTime = createSlice({
+    name: 'changeStartTime',
     initialState,
     reducers: {
         start: (state) => {
@@ -28,33 +33,29 @@ const deleteEvent = createSlice({
         failed: (state) => {
             state.loading = false;
             state.success = false;
-        },
-    },
-});
+        }
+    }
+})
 
-export const { start, success, failed } = deleteEvent.actions;
+export const { start, success, failed } = changeStartTime.actions;
 
-export const deleteEventFetch = (calendarId: any, eventId: any): AppThunk => async (
-    dispatch
-) => {
+export const changeStartTimeFetch = (data: Data): AppThunk => async (dispatch) => {
     dispatch(start());
-    await axios
-        .put(`/calendar/${calendarId}/event/${eventId}/delete`, {}, {
-            headers: {
-                "x-auth-token": localStorage.getItem("token"),
-            },
-        })
-        .then((res) => {
+    await axios.put('/users/times', data, {
+        headers: {
+            'x-auth-token': localStorage.getItem('token')
+        }
+    })
+        .then(res => {
             dispatch(success());
             toastNofity(res.status);
-        })
-        .catch((err) => {
+        }).catch((err) => {
             dispatch(failed());
             toastNofity(err.response.status, err.response.data);
-        });
-};
+        })
+}
 
-export const selectLoading = (state: RootState) => state.deleteEvent.loading;
-export const selectSuccess = (state: RootState) => state.deleteEvent.success;
+export const selectLoading = (state: RootState) => state.changeStartTime.loading;
+export const selectSuccess = (state: RootState) => state.changeStartTime.success;
 
-export default deleteEvent.reducer;
+export default changeStartTime.reducer;

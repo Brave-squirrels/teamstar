@@ -13,8 +13,12 @@ const initialState: State = {
     loading: false,
 };
 
-const leaveTeam = createSlice({
-    name: "leaveTeam",
+interface Data {
+    id: any;
+}
+
+const deleteUserTeam = createSlice({
+    name: "deleteUserTeam",
     initialState,
     reducers: {
         start: (state) => {
@@ -32,12 +36,12 @@ const leaveTeam = createSlice({
     },
 });
 
-export const { start, success, failed } = leaveTeam.actions;
+export const { start, success, failed } = deleteUserTeam.actions;
 
-export const leaveTeamFetch = (teamId: string): AppThunk => async (dispatch) => {
+export const deleteUserTeamFetch = (teamId: string, data: Data): AppThunk => async (dispatch) => {
     dispatch(start());
     await axios
-        .put(`/teams/${teamId}/leaveTeam`, {}, {
+        .put(`/teams/${teamId}/deleteUser`, data, {
             headers: {
                 'x-auth-token': localStorage.getItem('token')
             }
@@ -53,7 +57,7 @@ export const leaveTeamFetch = (teamId: string): AppThunk => async (dispatch) => 
 };
 
 
-export const selectLoading = (state: RootState) => state.leaveTeam.loading;
-export const selectSuccess = (state: RootState) => state.leaveTeam.success;
+export const selectLoading = (state: RootState) => state.deleteUserTeam.loading;
+export const selectSuccess = (state: RootState) => state.deleteUserTeam.success;
 
-export default leaveTeam.reducer;
+export default deleteUserTeam.reducer;

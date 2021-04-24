@@ -1,6 +1,7 @@
 import React from "react";
 import { Draggable } from "react-beautiful-dnd";
 import { Card, Badge } from "react-bootstrap";
+import styles from "./dnd.module.scss";
 
 const Task = (props: any) => {
   return (
@@ -8,7 +9,7 @@ const Task = (props: any) => {
       {(provided, snapshot) => (
         <Card
           body
-          className="m-2"
+          className="m-1 mt-2 mb-2"
           {...provided.draggableProps}
           {...provided.dragHandleProps}
           ref={provided.innerRef}

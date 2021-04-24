@@ -16,12 +16,19 @@
   transition: transform 0.3s ease-out;
 
   h3 {
+    color:  $buttonBackground;
     border-bottom: 1px solid $fontWhite;
     width: calc(100% - 4rem);
     text-align: center;
     padding-bottom: 5px;
     font-size: 1.3em;
   }
+
+  .descriptionTitle {
+    border-top: 1px solid $fontWhite;
+    padding-top: 0.3em;
+  }
+
   .toggleContainer {
     text-align: end;
     padding-right: 1em;
@@ -48,6 +55,10 @@
   padding: 0.4em 0 0.5em 0;
   color: $invalid;
 }
+.description {
+  font-size: 0.92em;
+  padding: 0.4em 2rem 0.5em 2rem;
+}
 .menu {
   padding: 0 2rem;
   width: 100%;
@@ -58,9 +69,9 @@
     padding: 0.5em;
     border-top: 1px solid $fontWhite;
     list-style: none;
-    cursor: pointer;
   }
   & > :first-child {
+    color:  $buttonBackground;
     padding: 0.2em;
     font-size: 1.3em;
     font-weight: 500;

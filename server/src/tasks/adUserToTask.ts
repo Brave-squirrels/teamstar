@@ -18,7 +18,7 @@ export default async (req: Request, res: Response) => {
   if (!exists)
     return res.status(StatusCodes.BAD_REQUEST).send("Its not your team!");
 
-  user = await userModel.findOne({ email: req.body.email });
+  user = await userModel.findById(req.body.id);
   exists = false;
   team.users.forEach((teamUser) => {
     if (teamUser.id === user.id) exists = true;

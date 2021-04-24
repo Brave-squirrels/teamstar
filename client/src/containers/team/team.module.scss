@@ -23,24 +23,25 @@
 
 .taskPanel {
   border: 1px red solid;
+  // overflow-x: auto;
 }
 
 .teamName {
-    font-size: 2rem;
-    font-weight: 400;
-    color: $fontWhite;
+  font-size: 2rem;
+  font-weight: 400;
+  color: $fontWhite;
 }
 
 .headerPanel {
-    padding: 0 2em;
-    align-items: center;
-    display: flex;
-    justify-content: space-between;
+  padding: 0 2em;
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
 }
 
 .settingsImg {
-    height: 3em;
-    cursor: pointer;
+  height: 3em;
+  cursor: pointer;
 }
 
 .buttonsPanel {
@@ -68,10 +69,20 @@
   .raportButton {
     border: 2px $buttonBackground solid;
     color: $buttonBackground;
-    margin-right: 5px;
+    margin: 0 5px;
+    
 
     &:hover {
       box-shadow: 0 0 7px $buttonBackground;
+    }
+  }
+  .showRaportButton {
+    border: 2px $fontGreen solid;
+    color: $fontGreen;
+    margin-right: 5px;
+
+    &:hover {
+      box-shadow: 0 0 7px $fontGreen;
     }
   }
 
@@ -86,11 +97,41 @@
   }
 }
 
+//Modals
+.invitedUsers {
+  border-top: 1px $lightBorder solid;
+  margin-top: 1.2em;
+  padding: 0.4em 2em 0 2em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  & > div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    border-bottom: 1px $lightBorder solid;
+    padding: 0.2em 1.3em;
+    font-size: 1.2em;
+  }
+  & > :nth-child(2) {
+    border-top: 1px $lightBorder solid;
+  }
+}
+
+.removeWrapper {
+  display: flex;
+  justify-content: center;
+}
+.trashImg {
+  height: 1em;
+  cursor: pointer;
+}
+
 @media only screen and (max-width: 950px) {
   .mainPanel {
     grid-template-columns: 90px auto;
   }
-  
 
   .buttonsPanel {
     display: flex;
@@ -107,12 +148,14 @@
     display: flex;
     justify-content: center;
     margin-right: 0;
-    & > div {   
-    width: 16em;
-    }
+   
   }
   .buttonsContainer {
     width: 100%;
     min-width: 0;
+    & > div {
+      font-size:1em;
+      width: 31%;
+    }
   }
 }

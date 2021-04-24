@@ -38,7 +38,7 @@ const sendInvite = createSlice({
 
 export const { start, success, failed } = sendInvite.actions;
 
-export const acceptInviteFetch = (data: Data, teamId: string): AppThunk => async (dispatch) => {
+export const sendInviteFetch = (data: Data, teamId: string): AppThunk => async (dispatch) => {
     dispatch(start());
     await axios.put(`/teams/${teamId}/sendInvite`, data, {
         headers: {

@@ -4,43 +4,51 @@ import { AppThunk, RootState } from "reduxState/store";
 import toastNofity from "utils/toastNotify";
 
 interface State {
-    success: boolean;
     loading: boolean;
+    success: boolean;
 }
 
 const initialState: State = {
-    success: false,
     loading: false,
+    success: false,
 };
 
-const leaveTeam = createSlice({
-    name: "leaveTeam",
+interface Data {
+    status: string;
+}
+
+const changeStatus = createSlice({
+    name: "changeStatus",
     initialState,
     reducers: {
         start: (state) => {
-            state.success = false;
             state.loading = true;
+            state.success = false;
         },
         success: (state) => {
-            state.success = true;
             state.loading = false;
+            state.success = true;
         },
         failed: (state) => {
-            state.success = false;
             state.loading = false;
+            state.success = false;
         },
     },
 });
 
-export const { start, success, failed } = leaveTeam.actions;
+export const { start, success, failed } = changeStatus.actions;
 
-export const leaveTeamFetch = (teamId: string): AppThunk => async (dispatch) => {
+export const changeStatusFetch = (
+    teamId: string,
+    taskId: string,
+    data: Data
+): AppThunk => async (dispatch) => {
     dispatch(start());
     await axios
-        .put(`/teams/${teamId}/leaveTeam`, {}, {
+        .put(`/teams/${teamId}/tasks/${taskId}/changeStatus`, data, {
             headers: {
-                'x-auth-token': localStorage.getItem('token')
-            }
+                "x-auth-token": localStorage.getItem("token"),
+            },
         })
         .then((res) => {
             dispatch(success());
@@ -52,8 +60,7 @@ export const leaveTeamFetch = (teamId: string): AppThunk => async (dispatch) => 
         });
 };
 
+export const selectLoading = (state: RootState) => state.changeStatus.loading;
+export const selectSuccess = (state: RootState) => state.changeStatus.success;
 
-export const selectLoading = (state: RootState) => state.leaveTeam.loading;
-export const selectSuccess = (state: RootState) => state.leaveTeam.success;
-
-export default leaveTeam.reducer;
+export default changeStatus.reducer;

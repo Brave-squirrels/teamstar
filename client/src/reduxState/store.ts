@@ -16,6 +16,7 @@ import changeName from 'reduxState/user/changeName';
 import changePassword from 'reduxState/user/changePassword';
 import changeEmail from 'reduxState/user/changeEmail';
 import deleteUser from 'reduxState/user/deleteUser';
+import changeStartTime from 'reduxState/user/changeStartTime';
 
 import createTeam from 'reduxState/team/createTeam';
 import declineInvite from 'reduxState/team/declineInvite';
@@ -25,15 +26,22 @@ import sendInvite from 'reduxState/team/sendInvite';
 import leaveTeam from 'reduxState/team/leaveTeam';
 import deleteTeam from 'reduxState/team/deleteTeam';
 import changeTeamDescription from 'reduxState/team/changeDescription';
+import deleteUserTeam from 'reduxState/team/deleteUser';
 
 import createTask from 'reduxState/tasks/createTask';
 import editTask from 'reduxState/tasks/editTask';
 import getTasks from 'reduxState/tasks/getTasks';
+import deleteTask from 'reduxState/tasks/deleteTask';
+import changeStatus from 'reduxState/tasks/changeStatus';
+import addUser from 'reduxState/tasks/addUser';
+import removeUser from 'reduxState/tasks/removeUser';
 
 import getCalendar from 'reduxState/calendar/getCalendar';
 import addEvent from 'reduxState/calendar/addEvent';
 import deleteEvent from 'reduxState/calendar/deleteEvent';
 import editEvent from 'reduxState/calendar/editEvent'
+
+import createRaport from 'reduxState/raport/createRaport';
 
 export const store = configureStore({
   reducer: {
@@ -61,6 +69,13 @@ export const store = configureStore({
     addEvent,
     deleteEvent,
     editEvent,
+    changeStartTime,
+    deleteTask,
+    changeStatus,
+    addUser,
+    removeUser,
+    deleteUserTeam,
+    createRaport,
   },
   middleware: [
     ...getDefaultMiddleware({

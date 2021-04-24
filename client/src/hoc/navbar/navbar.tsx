@@ -36,7 +36,7 @@ const Navigation = () => {
       <Navbar.Collapse id="responsive-navbar-nav">
         <Nav className="ml-auto" style={{ gap: "1.5em" }}>
           <NavDropdown title="Teams" id="collasible-nav-dropdown">
-            {userData!.teams.length > 0 ? (
+            {userData!.teams && userData!.teams.length > 0 ? (
               <>
                 {userData!.teams.map((team: Team) => (
                   <NavDropdown.Item
@@ -53,10 +53,6 @@ const Navigation = () => {
                 You don't belong to any teams
               </NavDropdown.Item>
             )}
-
-            <NavDropdown.Item to="/dnd" as={NavLink}>
-              Drag&Drop
-            </NavDropdown.Item>
           </NavDropdown>
           {teamId && (
             <Nav.Link href={`/team/${teamId}/calendar`}>Calendar</Nav.Link>

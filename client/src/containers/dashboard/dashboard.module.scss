@@ -94,3 +94,38 @@
     }
   }
 }
+
+.secondTopWrapper {
+  width: 70%;
+  margin: 0 auto;
+  padding: 1.5em;
+  .timeTitle {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: $fontWhite;
+    font-weight: 500;
+    font-size: 1.2em;
+  }
+  .timeCon {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    .timeTextCon {
+      display: flex;
+      width: 100%;
+      justify-content: space-between;
+      align-items: center;
+      color: $fontWhite;
+      font-size: 1.1em;
+      div {
+        display: flex;
+        gap: 0.3em;
+      }
+      .timeText {
+        color: $fontBlue;
+      }
+    }
+  }
+}

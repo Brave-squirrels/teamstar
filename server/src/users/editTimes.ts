@@ -3,7 +3,7 @@ import { StatusCodes } from "http-status-codes";
 import _ from "lodash";
 
 import userModel from "../../models/user.model";
-import validateTime from "./validateEndTime";
+import validateTime from "./validateTime";
 import calculateTime from "../utils/calculateTime";
 
 export default async (req: Request, res: Response) => {
@@ -17,22 +17,16 @@ export default async (req: Request, res: Response) => {
       .status(StatusCodes.INTERNAL_SERVER_ERROR)
       .send("Can not read the user.");
 
-  user.endTime = req.body.endTime;
-  user.workTime = calculateTime(user.startTime, user.endTime);
+  const result = calculateTime(req.body.startTime, req.body.endTime);
+  if (!result)
+    return res
+      .status(StatusCodes.BAD_REQUEST)
+      .send("End time is earlier than start time");
+
+  user.times = req.body;
+  user.breakTime = result;
+
   await user.save();
 
-  res
-    .status(StatusCodes.OK)
-    .send(
-      _.pick(user, [
-        "_id",
-        "name",
-        "email",
-        "workTime",
-        "startTime",
-        "endTime",
-        "breakTime",
-        "periodTime",
-      ])
-    );
+  res.status(StatusCodes.OK).send(result);
 };

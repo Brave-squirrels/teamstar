@@ -15,7 +15,7 @@ export default async (req: Request, res: Response) => {
   let team: any;
 
   user.teams?.forEach((userTeam, i) => {
-    if (userTeam.teamId === req.body.teamId) {
+    if (userTeam.teamId == req.params.teamId) {
       exists = true;
       team = userTeam;
     }
@@ -28,7 +28,7 @@ export default async (req: Request, res: Response) => {
   const raportData: Raport = {
     ...req.body,
     author: { name: req.userInfo.name, id: req.userInfo._id },
-    team: { name: team.name, id: team._id },
+    team: { name: team.teamName, id: team.teamId },
   };
 
   const { error } = validateRaport(raportData);

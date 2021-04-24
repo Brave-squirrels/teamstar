@@ -43,12 +43,12 @@ const editEvent = createSlice({
 
 export const { start, success, failed } = editEvent.actions;
 
-export const editEventFetch = (data: Data, calendarId: any): AppThunk => async (
+export const editEventFetch = (data: Data, calendarId: any, eventId: any): AppThunk => async (
     dispatch
 ) => {
     dispatch(start());
     await axios
-        .put(`/calendar/${calendarId}`, data, {
+        .put(`/calendar/${calendarId}/event/${eventId}/update`, data, {
             headers: {
                 "x-auth-token": localStorage.getItem("token"),
             },

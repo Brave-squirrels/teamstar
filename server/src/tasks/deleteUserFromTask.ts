@@ -13,7 +13,7 @@ export default async (req: Request, res: Response) => {
   if (req.userInfo.id !== team.owner.id)
     return res.status(StatusCodes.BAD_REQUEST).send("You cant do that!");
 
-  const user = await userModel.findOne({ email: req.body.email });
+  const user = await userModel.findById(req.body.id);
 
   const task = await taskModel.findById(req.params.taskId);
 

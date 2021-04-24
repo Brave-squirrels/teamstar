@@ -14,6 +14,7 @@ import { teamDataFetch } from "reduxState/team/getTeamInfo";
 import { getCalendarFetch } from "reduxState/calendar/getCalendar";
 import { addEventFetch } from "reduxState/calendar/addEvent";
 import { deleteEventFetch } from "reduxState/calendar/deleteEvent";
+import { editEventFetch } from "reduxState/calendar/editEvent";
 
 import { mutateToAxios } from "utils/onChangeForm";
 
@@ -46,16 +47,17 @@ const CalendarComponent = () => {
   );
   const createState = useSelector((state: RootState) => state.addEvent);
   const deleteState = useSelector((state: RootState) => state.deleteEvent);
+  const editState = useSelector((state: RootState) => state.editEvent);
   const teamId = location.pathname.split("/")[2];
 
   useEffect(() => {
     dispatch(teamDataFetch(teamId));
-  }, [dispatch, teamId, createState.success]);
+  }, [dispatch, teamId, createState.success, editState.success]);
   useEffect(() => {
     if (teamData.teamData!.calendarId) {
       dispatch(getCalendarFetch(teamData!.teamData!.calendarId));
     }
-  }, [teamData]);
+  }, [teamData, editState.success, dispatch]);
 
   const [showNewEvent, setShowNewEvent] = useState(false);
   const [showCurrentEvent, setShowCurrentEvent] = useState(false);
@@ -216,9 +218,8 @@ const CalendarComponent = () => {
       label: "Start",
       validation: {
         required: true,
-        minDate: Date.now(),
       },
-      error: `You can't pick previous date`,
+      error: `Should be between 2 and 5 characters long`,
       touched: false,
       valid: true,
     },
@@ -230,9 +231,8 @@ const CalendarComponent = () => {
       label: "End",
       validation: {
         required: true,
-        minDate: Date.now(),
       },
-      error: `You can't pick previous date`,
+      error: `Should be between 2 and 5 characters long`,
       touched: false,
       valid: true,
     },
@@ -264,11 +264,11 @@ const CalendarComponent = () => {
         },
         start: {
           ...prevState.start,
-          val: e.start.match(/[0-9]{4}-[0-9]{2}-[0-9]{2}/),
+          val: e.start.match(/[0-9]{4}-[0-9]{2}-[0-9]{2}/)[0],
         },
         end: {
           ...prevState.end,
-          val: e.end.match(/[0-9]{4}-[0-9]{2}-[0-9]{2}/),
+          val: e.end.match(/[0-9]{4}-[0-9]{2}-[0-9]{2}/)[0],
         },
         fromHour: {
           ...prevState.fromHour,
@@ -285,6 +285,13 @@ const CalendarComponent = () => {
 
   const handleEditEvent = (e: any) => {
     e.preventDefault();
+    dispatch(
+      editEventFetch(
+        mutateToAxios(editEvent),
+        teamData!.teamData?.calendarId,
+        currentEvent._id
+      )
+    );
   };
 
   const handleDeleteEvent = (e: any) => {
@@ -337,6 +344,7 @@ const CalendarComponent = () => {
               btnText="EDIT"
               title=""
               submitted={handleEditEvent}
+              spinner={editState.loading}
             />
           </>
         ) : (
@@ -376,23 +384,6 @@ const CalendarComponent = () => {
             </div>
           </div>
         )}
-
-        {/* Form if owner or creator - info if normal guy
-        <div className={styles.authorContainer}>
-          <span className={styles.authInnerCon}>
-            Author: <span className={styles.author}>{author} </span>
-          </span>
-          <span className={styles.delete} onClick={handleDeleteEvent}>
-            Delete
-          </span>
-        </div>
-        <FormStructure
-          state={editEvent}
-          setState={setEditEvent}
-          btnText="EDIT"
-          title=""
-          submitted={handleEditEvent}
-        /> */}
       </MyVerticallyCenteredModal>
       <Button className={styles.addBtn} onClick={() => setShowNewEvent(true)}>
         New event

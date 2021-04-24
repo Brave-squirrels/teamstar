@@ -17,8 +17,7 @@ import changeName from "../src/users/changeName";
 import changeEmail from "../src/users/changeEmail";
 import deleteUser from "../src/users/deleteUser";
 import userActivity from "../src/users/userActivity";
-import editStartTime from "../src/users/editStartTime";
-import editEndTime from "../src/users/editEndTime";
+import editTimes from "../src/users/editTimes";
 
 /**
  * UserControll Class,
@@ -46,8 +45,7 @@ export default class UserController {
     this.router.put(`${this.path}/changeEmail`, auth, this.sendChangeEmail);
     this.router.put(`${this.path}/changeName`, auth, this.changeName);
     this.router.put(`${this.path}/active`, auth, this.userActivity);
-    this.router.put(`${this.path}/startTime`, auth, this.editStartTime);
-    this.router.put(`${this.path}/endTime`, auth, this.editEndTime);
+    this.router.put(`${this.path}/times`, auth, this.editTimes);
     this.router.get(`${this.path}/email/:token/:newEmail`, this.changeEmail);
     this.router.delete(`${this.path}/`, auth, this.deleteUser);
   }
@@ -104,12 +102,8 @@ export default class UserController {
     userActivity(req, res);
   }
 
-  editStartTime(req: Request, res: Response) {
-    editStartTime(req, res);
-  }
-
-  editEndTime(req: Request, res: Response) {
-    editEndTime(req, res);
+  editTimes(req: Request, res: Response) {
+    editTimes(req, res);
   }
 
   changeEmail(req: Request, res: Response) {
