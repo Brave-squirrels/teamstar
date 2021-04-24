@@ -75,6 +75,9 @@ const Chat = () => {
     if (message === msg) {
       return;
     }
+    if(message==="") {
+      return;
+    }
     let data = {
       content: message,
     };
@@ -83,6 +86,7 @@ const Chat = () => {
       data,
     });
     dispatch(sendMessageFetch(data, teamId));
+    setMessage("");
   };
 
   return (
