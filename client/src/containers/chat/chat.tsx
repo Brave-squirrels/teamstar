@@ -1,4 +1,6 @@
 import React from "react";
+import styles from "./chat.module.scss";
+
 
 
 const chat = () => {
