@@ -9,12 +9,7 @@ interface State {
 }
 
 interface Data {
-    title: string;
-    start: any;
-    end: any;
-    desc: string;
-    fromHour: string;
-    toHour: string;
+    id: string;
 }
 
 const initialState: State = {
@@ -22,8 +17,8 @@ const initialState: State = {
     success: false,
 };
 
-const editEvent = createSlice({
-    name: "editEvent",
+const removeUser = createSlice({
+    name: "removeUser",
     initialState,
     reducers: {
         start: (state) => {
@@ -41,14 +36,14 @@ const editEvent = createSlice({
     },
 });
 
-export const { start, success, failed } = editEvent.actions;
+export const { start, success, failed } = removeUser.actions;
 
-export const editEventFetch = (data: Data, calendarId: any, eventId: any): AppThunk => async (
+export const removeUserFetch = (data: Data, teamId: string): AppThunk => async (
     dispatch
 ) => {
     dispatch(start());
     await axios
-        .put(`/calendar/${calendarId}/event/${eventId}/update`, data, {
+        .put(`/teams/${teamId}/deleteUser`, data, {
             headers: {
                 "x-auth-token": localStorage.getItem("token"),
             },
@@ -63,7 +58,7 @@ export const editEventFetch = (data: Data, calendarId: any, eventId: any): AppTh
         });
 };
 
-export const selectLoading = (state: RootState) => state.editEvent.loading;
-export const selectSuccess = (state: RootState) => state.editEvent.success;
+export const selectLoading = (state: RootState) => state.removeUser.loading;
+export const selectSuccess = (state: RootState) => state.removeUser.success;
 
-export default editEvent.reducer;
+export default removeUser.reducer;

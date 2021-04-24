@@ -8,22 +8,17 @@ interface State {
     success: boolean;
 }
 
-interface Data {
-    title: string;
-    start: any;
-    end: any;
-    desc: string;
-    fromHour: string;
-    toHour: string;
-}
-
 const initialState: State = {
     loading: false,
     success: false,
 };
 
-const editEvent = createSlice({
-    name: "editEvent",
+interface Data {
+    status: string;
+}
+
+const changeStatus = createSlice({
+    name: "changeStatus",
     initialState,
     reducers: {
         start: (state) => {
@@ -41,14 +36,16 @@ const editEvent = createSlice({
     },
 });
 
-export const { start, success, failed } = editEvent.actions;
+export const { start, success, failed } = changeStatus.actions;
 
-export const editEventFetch = (data: Data, calendarId: any, eventId: any): AppThunk => async (
-    dispatch
-) => {
+export const changeStatusFetch = (
+    teamId: string,
+    taskId: string,
+    data: Data
+): AppThunk => async (dispatch) => {
     dispatch(start());
     await axios
-        .put(`/calendar/${calendarId}/event/${eventId}/update`, data, {
+        .put(`/teams/${teamId}/tasks/${taskId}/changeStatus`, data, {
             headers: {
                 "x-auth-token": localStorage.getItem("token"),
             },
@@ -63,7 +60,7 @@ export const editEventFetch = (data: Data, calendarId: any, eventId: any): AppTh
         });
 };
 
-export const selectLoading = (state: RootState) => state.editEvent.loading;
-export const selectSuccess = (state: RootState) => state.editEvent.success;
+export const selectLoading = (state: RootState) => state.changeStatus.loading;
+export const selectSuccess = (state: RootState) => state.changeStatus.success;
 
-export default editEvent.reducer;
+export default changeStatus.reducer;

@@ -8,6 +8,7 @@ import addMessage from "../src/chat/addMessage";
 import editMessage from "../src/chat/editMessage";
 import getAllChats from "../src/chat/getAllChats";
 import deleteMessage from "../src/chat/deleteMessage";
+import getChat from "../src/chat/getChat";
 
 /**
  * Chat Class,
@@ -22,6 +23,7 @@ export default class ChatController {
   }
 
   public initializeRoutes() {
+    this.router.get(`${this.path}/:chatId`, auth, this.getChat);
     this.router.post(`${this.path}/create`, auth, this.createChat);
 
     this.router.get(`${this.path}`, this.getAllChats);
@@ -49,6 +51,10 @@ export default class ChatController {
 
   createChat(req: Request, res: Response) {
     createChat(req, res);
+  }
+
+  getChat(req: Request, res: Response) {
+    getChat(req, res);
   }
 
   getAllChats(req: Request, res: Response) {

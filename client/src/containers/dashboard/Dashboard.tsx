@@ -15,6 +15,8 @@ import styles from "./dashboard.module.scss";
 import { createTeamFetch } from "reduxState/team/createTeam";
 import { acceptInviteFetch } from "reduxState/team/acceptInvite";
 import { declineInviteFetch } from "reduxState/team/declineInvite";
+import { changeEndTimeFetch } from "reduxState/user/changeEndTime";
+import { changeStartTimeFetch } from "reduxState/user/changeStartTime";
 import { mutateToAxios } from "utils/onChangeForm";
 import { authUser } from "reduxState/user/loginUser";
 
@@ -23,8 +25,13 @@ const Dashboard = () => {
   const createState = useSelector((state: RootState) => state.createTeam);
   const acceptState = useSelector((state: RootState) => state.acceptInvite);
   const declineState = useSelector((state: RootState) => state.declineInvite);
+  const editEndState = useSelector((state: RootState) => state.changeEndTime);
+  const editStartState = useSelector(
+    (state: RootState) => state.changeStartTime
+  );
 
   const [show, setShow] = useState(false);
+  const [changeTime, setChangeTime] = useState(false);
   const [date, setDate] = useState({ date: new Date() });
   const [currentButton, setCurrentButton] = useState("");
 
@@ -33,7 +40,6 @@ const Dashboard = () => {
   setInterval(() => {
     setDate({ date: new Date() });
   }, 1000);
-
   useEffect(() => {
     dispatch(authUser());
   }, [
@@ -41,7 +47,45 @@ const Dashboard = () => {
     createState.success,
     acceptState.success,
     declineState.success,
+    editEndState.success,
+    editStartState.success,
   ]);
+
+  const [endTime, setEndTime] = useState({
+    endTime: {
+      val: "",
+      type: "text",
+      inputType: "input",
+      placeholder: "End time",
+      label: "End time",
+      validation: {
+        required: true,
+        minLength: 8,
+      },
+      error: "Time should be in format 00:00:00",
+      touched: false,
+      valid: false,
+    },
+    formValid: false,
+  });
+
+  const [startTime, setStartTime] = useState({
+    startTime: {
+      val: "",
+      type: "text",
+      inputType: "input",
+      placeholder: "Start time",
+      label: "Start time",
+      validation: {
+        required: true,
+        minLength: 8,
+      },
+      error: "Time should be in format 00:00:00",
+      touched: false,
+      valid: false,
+    },
+    formValid: false,
+  });
 
   const [form, setForm] = useState({
     name: {
@@ -100,9 +144,41 @@ const Dashboard = () => {
     dispatch(declineInviteFetch({ id: userData!._id }, id));
   };
 
+  const handleEndTime = (e: any) => {
+    e.preventDefault();
+    dispatch(changeEndTimeFetch(mutateToAxios(endTime)));
+  };
+
+  const handleStartTime = (e: any) => {
+    e.preventDefault();
+    dispatch(changeStartTimeFetch(mutateToAxios(startTime)));
+  };
+
   // Display invites and teams
   return (
     <>
+      <MyVerticallyCenteredModal
+        show={changeTime}
+        onHide={() => setChangeTime(false)}
+        title={"Change work time"}
+      >
+        <FormStructure
+          state={startTime}
+          setState={setStartTime}
+          title={""}
+          btnText="Change"
+          submitted={handleStartTime}
+          spinner={editStartState.loading}
+        />
+        <FormStructure
+          state={endTime}
+          setState={setEndTime}
+          title={""}
+          btnText="Change"
+          submitted={handleEndTime}
+          spinner={editEndState.loading}
+        />
+      </MyVerticallyCenteredModal>
       <MyVerticallyCenteredModal
         show={show}
         onHide={() => setShow(false)}
@@ -120,6 +196,24 @@ const Dashboard = () => {
       <div className={styles.topWrapper}>
         {date.date.toLocaleString()}
         <Button onClick={() => setShow(true)}>New team</Button>
+      </div>
+      <div className={styles.secondTopWrapper}>
+        <div className={styles.timeTitle}>Work time period</div>
+        <div className={styles.timeCon}>
+          <div className={styles.timeTextCon}>
+            <div>
+              From:
+              <span className={styles.timeText}>{userData!.startTime}</span>
+            </div>
+            <div>
+              To:
+              <span className={styles.timeText}>{userData!.endTime}</span>
+            </div>
+          </div>
+          <div className={styles.changeTimeWrapper}>
+            <Button onClick={() => setChangeTime(true)}>Change</Button>
+          </div>
+        </div>
       </div>
       <div className={styles.container}>
         <div className={styles.innerWrapper}>

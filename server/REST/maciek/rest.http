@@ -5,8 +5,8 @@ POST http://localhost:5000/users/create HTTP/1.1
 Content-Type: application/json
 
 {
-    "name": "maciek",
-    "email": "maciek@email.com",
+    "name": "drugi maciek",
+    "email": "maciek2@email.com",
     "password": "Password1!",
     "confirmPassword": "Password1!"
 }
@@ -17,7 +17,7 @@ POST http://localhost:5000/login HTTP/1.1
 Content-Type: application/json
 
 {
-    "email": "maciek@email.com",
+    "email": "maciek2@email.com",
     "password": "Password1!"
 }
 
@@ -26,11 +26,11 @@ Content-Type: application/json
 
 ###
 POST http://localhost:5000/teams HTTP/1.1
-x-auth-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MDgzNWFkNmU3Yjk1NjNlZThkZTliYjQiLCJuYW1lIjoibWFjaWVrIiwiaWF0IjoxNjE5MjIxMjI3fQ.6hbPv1hEKumtS6FIGULfopHsA2s88JZE25Cfka-ArOw
+x-auth-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MDgzOTFiODUxNTY0ODViOTRkODY3ZDciLCJuYW1lIjoiZHJ1Z2kgbWFjaWVrIiwiaWF0IjoxNjE5MjM1MjY2fQ.lKBApT-Cx7yMZm7RM3lviRnROLtvRHtiLa-Hkn2nQa0
 Content-Type: application/json
 
 {
-    "name":"testowy macka",
+    "name":"nowy team",
     "description": "sample description"
 }
 
@@ -38,10 +38,9 @@ Content-Type: application/json
 #_______________________SEND INVITE________________
 
 ###
-PUT http://localhost:5000/teams/60835b1ce7b9563ee8de9bb5/sendInvite HTTP/1.1
-x-auth-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MDgzNWFkNmU3Yjk1NjNlZThkZTliYjQiLCJuYW1lIjoibWFjaWVrIiwiaWF0IjoxNjE5MjIxMjI3fQ.6hbPv1hEKumtS6FIGULfopHsA2s88JZE25Cfka-ArOw
+PUT http://localhost:5000/teams/608391d55156485b94d867d9/sendInvite HTTP/1.1
+x-auth-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MDgzOTFiODUxNTY0ODViOTRkODY3ZDciLCJuYW1lIjoiZHJ1Z2kgbWFjaWVrIiwiaWF0IjoxNjE5MjM1MjY2fQ.lKBApT-Cx7yMZm7RM3lviRnROLtvRHtiLa-Hkn2nQa0
 Content-Type: application/json
-
 
 {
     "email":"veryyapeee@gmail.com"
@@ -49,8 +48,8 @@ Content-Type: application/json
 
 
 ###
-GET http://localhost:5000/teams/60835b1ce7b9563ee8de9bb5 HTTP/1.1
-x-auth-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MDgzNWFkNmU3Yjk1NjNlZThkZTliYjQiLCJuYW1lIjoibWFjaWVrIiwiaWF0IjoxNjE5MjIxMjI3fQ.6hbPv1hEKumtS6FIGULfopHsA2s88JZE25Cfka-ArOw
+GET http://localhost:5000/teams/608391d55156485b94d867d9 HTTP/1.1
+x-auth-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MDgzOTFiODUxNTY0ODViOTRkODY3ZDciLCJuYW1lIjoiZHJ1Z2kgbWFjaWVrIiwiaWF0IjoxNjE5MjM1MjY2fQ.lKBApT-Cx7yMZm7RM3lviRnROLtvRHtiLa-Hkn2nQa0
 Content-Type: application/json
 
 
