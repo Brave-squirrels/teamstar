@@ -28,6 +28,12 @@ export interface Team {
     teamName: string;
 }
 
+export interface Chat {
+    teamId: string,
+    chatId: string,
+    chatName: string
+}
+
 export interface Task {
     teamId: string;
     taskId: string;

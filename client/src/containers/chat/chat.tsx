@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { useLocation } from "react-router-dom";
+import { useLocation } from 'react-router-dom';
 import { RootState } from "reduxState/store";
 import { Button } from "react-bootstrap";
 
@@ -13,8 +13,8 @@ import styles from "./chat.module.scss";
 const ENDPOINT = "http://localhost:5000";
 
 const Chat = () => {
-  const dispatch = useDispatch();
   const location = useLocation();
+  const dispatch = useDispatch();
   const teamId = location.pathname.split("/")[2];
   const token: string = localStorage.getItem("token") || "null";
 
@@ -28,17 +28,18 @@ const Chat = () => {
   const [message, setMessage] = useState("");
   const [msg, setMsg] = useState("");
 
-  let chatMessages = useSelector(
+  const chatMessages = useSelector(
     (state: RootState) => state.getChat.chatData.messages
   );
+
   const sendState = useSelector((state: RootState) => state.sendMessage);
 
   useEffect(() => {
-    if (message !== msg) {
+    
       dispatch(getChatFetch(teamId));
-    }
+    },
     // eslint-disable-next-line
-  }, [dispatch, teamId, msg, sendState.success]);
+   [dispatch, teamId, msg, sendState.success]);
 
   const renderMessages = () => {
     return chatMessages.map((message: any) => {
