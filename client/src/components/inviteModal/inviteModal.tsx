@@ -3,7 +3,7 @@ import { Modal } from "react-bootstrap";
 
 const InviteModal = (props: any) => {
   return (
-    <Modal {...props} aria-labelledby="contained-modal-title-vcenter" centered>
+    <Modal style={{border: "1px red solid !important"}} {...props} aria-labelledby="contained-modal-title-vcenter" centered>
       <Modal.Header closeButton className="text-center">
         <Modal.Title className="w-100 text-center ml-4">
           {props.title}

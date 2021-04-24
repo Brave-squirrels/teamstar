@@ -1,0 +1,18 @@
+@import "styles/variables.scss";
+
+.wrapper {
+  padding: 2em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  & > div {
+    border-top: 1px solid $fontWhite;
+  }
+}
+
+.container {
+  border-bottom: 1px solid $fontWhite;
+  display: grid;
+  width: 30vw;
+  grid-template-columns: 1fr 1fr 1fr;
+}
