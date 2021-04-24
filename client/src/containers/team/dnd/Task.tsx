@@ -7,8 +7,9 @@ const Task = (props: any) => {
   return (
     <Draggable draggableId={props.task.id} index={props.index}>
       {(provided, snapshot) => (
-        <div
-          className={styles.dndTask}
+        <Card
+          body
+          className="m-1 mt-2 mb-2"
           {...provided.draggableProps}
           {...provided.dragHandleProps}
           ref={provided.innerRef}
@@ -16,7 +17,7 @@ const Task = (props: any) => {
         >
           {props.task.content}{" "}
           <Badge variant="secondary">{props.task.status}</Badge>
-        </div>
+        </Card>
       )}
     </Draggable>
   );

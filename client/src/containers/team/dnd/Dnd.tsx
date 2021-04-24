@@ -10,7 +10,7 @@ const Dnd = () => {
   const [data, setData] = useState<any>(initialData);
 
   const onDragEnd = (result: any) => {
-    const { destination, source, draggableId, type } = result;
+    const { destination, source, draggableId } = result;
 
     if (!destination) {
       return;
