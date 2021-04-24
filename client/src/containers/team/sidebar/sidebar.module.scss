@@ -1,42 +1,70 @@
 @import "styles/variables.scss";
 
 .sidebar {
-    font-size: 1.2em;
-    padding: 1em 0;
-    margin-top: 1em;
-    border: 2px solid $fontWhite;
-    border-left: none;
-    height: 70vh;
-    width: 300px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    color: $fontWhite;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: $backgroundLanding;
+  font-size: 1.2em;
+  padding: 1em 0;
+  margin-top: 2em;
+  border: 2px solid $fontWhite;
+  border-left: none;
+  height: 70vh;
+  width: 300px;
+  color: $fontWhite;
+  transition: transform 0.3s ease-out;
 
-    h3 {
-        border-bottom: 1px solid $fontWhite;
-        width: calc(100% - 4rem);
-        text-align: center;
-        padding-bottom: 5px;
-    }
+  h3 {
+    border-bottom: 1px solid $fontWhite;
+    width: calc(100% - 4rem);
+    text-align: center;
+    padding-bottom: 5px;
+  }
+  .toggleContainer {
+    text-align: end;
+    padding-right: 1em;
+    height: 1.6em;
+  }
+
+  .toggle {
+    cursor: pointer;
+    font-size: 1.3em;
+    padding: 0 0.2em;
+  }
+}
+.closed {
+    transform: translateX(-240px);
+  }
+
+.menuContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .break {
-    padding: 0.4em 0 0.5em 0;
+  padding: 0.4em 0 0.5em 0;
 }
 .menu {
-    padding: 0 2rem; 
-    width: 100%;
-    box-sizing: border-box;
-    & > li {
-        text-align: center;
-        margin: 0;
-        padding: 0.5em;
-        border-top: 1px solid $fontWhite;
-        list-style: none;
-        cursor: pointer;
-    }
-    & > :last-child {
-        border-bottom: 1px solid $fontWhite;
-    }
+  padding: 0 2rem;
+  width: 100%;
+  box-sizing: border-box;
+  & > li {
+    text-align: center;
+    margin: 0;
+    padding: 0.5em;
+    border-top: 1px solid $fontWhite;
+    list-style: none;
+    cursor: pointer;
+  }
+  & > :last-child {
+    border-bottom: 1px solid $fontWhite;
+  }
+}
+
+@media only screen and (max-width: 950px) {
+  .sidebar {
+    margin-top: 0.5em;
+  }
 }

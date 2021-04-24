@@ -7,15 +7,12 @@ export default async (req: Request, res: Response) => {
   const team = await teamModel.findById(req.params.teamId);
   if (!team) return res.status(StatusCodes.BAD_REQUEST).send("Team not found!");
 
-  let exists = false;
-  team.users.forEach((user) => {
-    if (user.id.toString() === req.userInfo._id.toString()) { exists = true; }
-  });
-  if (team.owner.id == req.userInfo._id) {
-    exists = true;
-  }
-  if (!exists)
-    return res.status(StatusCodes.BAD_REQUEST).send("Its not your team!");
+  if (req.userInfo._id !== team.owner.id)
+    return res.status(StatusCodes.BAD_REQUEST).send("You cant do that!");
+
+  team.description = req.body.description;
+
+  await team.save();
 
   return res.status(StatusCodes.OK).send(team);
 };

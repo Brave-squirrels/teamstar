@@ -13,7 +13,10 @@ export default async (req: Request, res: Response) => {
       .status(StatusCodes.BAD_REQUEST)
       .send("You are not allowed to do that!");
 
-  const raports = await raportModel.find();
+  let raports = await raportModel.find();
+  if (!raports)
+    return res.status(StatusCodes.BAD_REQUEST).send("Raports not found");
+  const newRaports = raports.map((raport) => raport.team.id === team._id);
 
-  return res.status(StatusCodes.OK).send(team);
+  return res.status(StatusCodes.OK).send(newRaports);
 };

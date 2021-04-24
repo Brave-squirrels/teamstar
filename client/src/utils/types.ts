@@ -53,3 +53,55 @@ export const UserBasic: UserData = {
     reports: [],
     chats: [],
 }
+
+export interface Owner {
+    id: string;
+    name: string;
+}
+
+export interface User {
+    name: string,
+    id: string
+}
+
+export interface TeamTask {
+    name: string;
+    userName: string;
+    userId: string;
+    id: string;
+}
+
+export interface TeamRaport {
+    name: string;
+    userId: string;
+    userName: string;
+    id: string;
+}
+
+export interface TeamInvite {
+    userId: string;
+    userName: string;
+}
+export interface TeamData {
+    name: string;
+    description: string;
+    owner: Owner | {};
+    date: Date | string;
+    users: User[],
+    tasks: TeamTask[],
+    raports: TeamRaport[],
+    calendar: string,
+    invitations: TeamInvite[],
+}
+
+export const basicTeam: TeamData = {
+    name: '',
+    description: '',
+    owner: {},
+    date: '',
+    users: [],
+    tasks: [],
+    raports: [],
+    calendar: '',
+    invitations: [],
+}
