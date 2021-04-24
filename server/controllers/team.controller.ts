@@ -7,11 +7,12 @@ import deleteTeam from "../src/teams/deleteTeam";
 import getTeam from "../src/teams/getTeam";
 import leaveTeam from "../src/teams/leaveTeam";
 import sendInvite from "../src/teams/sendInvite";
+import createCalendar from "../middleware/createCalendar";
 import changeDescription from '../src/teams/changeTeamDescription';
 
 /**
- * raport Class,
- * responsible for managing CRUD operations inside of raports
+ * team Class,
+ * responsible for managing CRUD operations inside of teams
  */
 export default class TeamController {
   public path = "/teams";
@@ -22,7 +23,8 @@ export default class TeamController {
   }
 
   public initializeRoutes() {
-    this.router.post(this.path, auth, this.createTeam);
+
+    this.router.post(this.path, auth, createCalendar, this.createTeam);
     this.router.get(`${this.path}/:teamId`, auth, this.getTeam);
     this.router.put(`${this.path}/:teamId/sendInvite`, auth, this.sendInvite);
     this.router.put(

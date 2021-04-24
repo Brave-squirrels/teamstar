@@ -19,7 +19,7 @@ Content-Type: application/json
 
 {
     "name": "test",
-    "email": "test3@user.pl",
+    "email": "test4@user.pl",
     "password": "Password1!",
     "confirmPassword": "Password1!"
 }
@@ -53,7 +53,7 @@ GET http://localhost:5000/users/60832736be37ba2584bf00cb HTTP/1.1
 ###
 # get me
 GET http://localhost:5000/users/me HTTP/1.1
-x-auth-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MDgzMjczNmJlMzdiYTI1ODRiZjAwY2IiLCJuYW1lIjoidGVzdCIsImlhdCI6MTYxOTIwNzk5NH0.dHPaFM9smnHmH5_5VeX2J4NB4tMqVLoqlsxfGc1Wfy8
+x-auth-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MDgzMjczNmJlMzdiYTI1ODRiZjAwY2IiLCJuYW1lIjoidGVzdCIsImlhdCI6MTYxOTIxNjM5MH0.4tijBMnqHsJwzZ7uZUZg1r5RIDhHI-zbTxP8HiOfOSo
 
 ###
 # confirm user
