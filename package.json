@@ -17,7 +17,5 @@
   "devDependencies": {
     "concurrently": "^6.0.2"
   },
-  "dependencies": {
-    "joi-password-complexity": "^5.1.0"
-  }
+  "dependencies": {}
 }
