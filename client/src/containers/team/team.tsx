@@ -5,6 +5,7 @@ import { Button } from "react-bootstrap";
 import settingsLogo from "../../assets/settingsLogo.svg";
 import trash from "../../assets/trash.svg";
 import Sidebar from "./sidebar/sidebar";
+import Raports from "./raports/raports";
 import { useSelector, useDispatch } from "react-redux";
 import Dnd from "./dnd/Dnd";
 import InviteModal from "components/inviteModal/inviteModal";
@@ -122,6 +123,8 @@ const Team = () => {
     formValid: true,
   });
 
+  const [showAllRaport, setShowAllRaport] = useState(false);
+
   const [showRaport, setShowRaport] = useState(false);
   const [raportForm, setRaportForm] = useState({
     name: {
@@ -183,6 +186,15 @@ const Team = () => {
 
   return (
     <div className={styles.container}>
+      <InviteModal
+        
+        show={showAllRaport}
+        onHide={() => setShowAllRaport(false)}
+        user={"as"}
+        title="Raport"
+      >
+        <Raports / >
+      </InviteModal>
       <InviteModal
         show={showRaport}
         onHide={() => setShowRaport(false)}
@@ -297,7 +309,7 @@ const Team = () => {
 
       <div className={styles.buttonsPanel}>
         <div className={styles.buttonsContainer}>
-          <div className={styles.showRaportButton} onClick={handleShowRaport}>
+          <div className={styles.showRaportButton} onClick={() => setShowAllRaport(true)}>
             Show Raports
           </div>
           <div
