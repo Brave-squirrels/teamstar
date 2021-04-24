@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import styles from "./team.module.scss";
+import { useLocation } from "react-router-dom";
 import settingsLogo from "../../assets/settingsLogo.svg";
 import trash from "../../assets/trash.svg";
 import Sidebar from "./sidebar/sidebar";
@@ -9,15 +10,28 @@ import InviteModal from "components/inviteModal/inviteModal";
 import FormStructure from "containers/form/formStructure";
 import { declineInviteFetch } from "reduxState/team/declineInvite";
 import { sendInviteFetch } from "reduxState/team/sendInvite";
+import { changeTeamDescriptionFetch } from "reduxState/team/changeDescription";
+import { RootState } from "reduxState/store";
+import { mutateToAxios } from "utils/onChangeForm";
+import { teamDataFetch } from "reduxState/team/getTeamInfo";
 
 const Team = () => {
   const [modalInvite, setModalInvite] = useState(false);
 
+  const location = useLocation();
+  const teamId = location.pathname.split("/")[2];
+
   const teamInfo = useSelector((state: any) => state.teamData.teamData);
+  const inviteSendState = useSelector((state: RootState) => state.sendInvite);
+  const declineInviteState = useSelector(
+    (state: RootState) => state.declineInvite
+  );
 
   const handleSendRaport = () => {};
 
-  const changePassword = useSelector((state: any) => state.changePassword);
+  const changeDescription = useSelector(
+    (state: RootState) => state.changeTeamDescription
+  );
 
   const dispatch = useDispatch();
 
@@ -31,9 +45,33 @@ const Team = () => {
     dispatch(
       sendInviteFetch({ email: sendInviteToUser.userEmail.val }, teamInfo._id)
     );
+    setSendInviteToUser(initialEmail);
   };
 
-  const [sendInviteToUser, setSendInviteToUser] = useState({
+  useEffect(() => {
+    dispatch(teamDataFetch(teamId));
+  }, [
+    dispatch,
+    teamId,
+    changeDescription.success,
+    inviteSendState.success,
+    declineInviteState.success,
+    teamInfo.description,
+  ]);
+
+  useEffect(() => {
+    setDescription((prevState) => {
+      return {
+        ...prevState,
+        description: {
+          ...prevState.description,
+          val: teamInfo.description,
+        },
+      };
+    });
+  }, [teamInfo.description]);
+
+  const initialEmail = {
     userEmail: {
       val: "",
       type: "email",
@@ -51,7 +89,33 @@ const Team = () => {
       valid: false,
     },
     formValid: false,
+  };
+  const [description, setDescription] = useState({
+    description: {
+      val: "",
+      inputType: "textarea",
+      placeholder: "Description",
+      label: "Description",
+      validation: {
+        required: true,
+        minLength: 0,
+        maxLength: 254,
+      },
+      error: "Description should be max 255 characters long",
+      valid: true,
+      touched: true,
+    },
+    formValid: true,
   });
+
+  const handleChangeDescription = (e: any) => {
+    e.preventDefault();
+    dispatch(
+      changeTeamDescriptionFetch(mutateToAxios(description), teamInfo._id)
+    );
+  };
+
+  const [sendInviteToUser, setSendInviteToUser] = useState(initialEmail);
 
   return (
     <div className={styles.container}>
@@ -67,8 +131,7 @@ const Team = () => {
           btnText="Send"
           title=""
           submitted={handleSendInvite}
-          spinner={changePassword.loading}
-          checkPass={true}
+          spinner={inviteSendState.loading}
         />
         <div className={styles.invitedUsers}>
           <h4>Invited users</h4>
@@ -85,6 +148,14 @@ const Team = () => {
             </div>
           ))}
         </div>
+        <FormStructure
+          state={description}
+          setState={setDescription}
+          btnText="EDIT"
+          title="Change description"
+          spinner={changeDescription.loading}
+          submitted={handleChangeDescription}
+        />
       </InviteModal>
       <div className={styles.mainPanel}>
         <div className={styles.leftSidePanel}>

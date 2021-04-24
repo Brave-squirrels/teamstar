@@ -6,11 +6,10 @@ import { teamDataFetch } from "reduxState/team/getTeamInfo";
 
 const Sidebar = () => {
   const location = useLocation();
-  const userTeams = useSelector((state: any) => state.loginUser.userData.teams);
+  const teamMembers = useSelector((state: any) => state.teamData.teamData.users);
   const teamId = location.pathname.split("/")[2];
 
   const dispatch = useDispatch();
-  const history = useHistory();
 
   const [reveal, setReveal] = useState(true);
   const [sideClasses, setSideClasses] = useState([styles.sidebar]);
@@ -21,16 +20,13 @@ const Sidebar = () => {
       : setSideClasses([styles.sidebar, styles.closed]);
   }, [reveal]);
 
-  const changeTeam = (e: any) => {
-    history.push(`/team/${e.target.id}`)
-  };
 
   useEffect(() => {
     dispatch(teamDataFetch(teamId));
   }, [dispatch, teamId]);
 
   const toggle = () => setReveal(!reveal);
-
+  const dupa = () => console.log(teamMembers)
   return (
     <div className={sideClasses.join(" ")}>
       <div className={styles.menuContainer}>
@@ -39,10 +35,10 @@ const Sidebar = () => {
           <div>at 12:45:12</div>
         </div>
         <ul className={styles.menu}>
-          <li>Teams</li>
-          {userTeams.map((team: any) => (
-            <li id={team.teamId} key={team.teamId} onClick={changeTeam}>
-              {team.teamName}
+          <li onClick = {dupa}>Users</li>
+          {teamMembers.map((member: any) => (
+            <li id={member.id} key={member.id}>
+              {member.name}
             </li>
           ))}
         </ul>
