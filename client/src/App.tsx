@@ -21,6 +21,7 @@ import Tasks from "containers/tasks/tasks";
 import Calendar from "containers/calendar/calendar";
 import Chat from "containers/chat/chat";
 import Break from "components/break/break";
+import LateHour from "components/lateHour/lateHour";
 
 import { authUser, logout } from "reduxState/user/loginUser";
 import { RootState } from "reduxState/store";
@@ -91,6 +92,34 @@ const App = () => {
     return false;
   };
 
+  const checkTime = () => {
+    if (loginState.userData!.times) {
+      const maxHours = parseInt(
+        loginState.userData?.times.endTime[0] +
+          loginState.userData?.times.endTime[1]
+      );
+      const maxMins = parseInt(
+        loginState.userData?.times.endTime[3] +
+          loginState.userData?.times.endTime[4]
+      );
+
+      const minHours = parseInt(
+        loginState.userData?.times.startTime[0] +
+          loginState.userData?.times.startTime[1]
+      );
+      const minMins = parseInt(
+        loginState.userData?.times.startTime[3] +
+          loginState.userData?.times.startTime[4]
+      );
+      const min = minHours * 60 + minMins;
+      const max = maxHours * 60 + maxMins;
+
+      const now = new Date();
+      const time = now.getHours() * 60 + now.getMinutes();
+      return time >= max || time <= min;
+    }
+  };
+
   useEffect(() => {
     const socket = socketIOClient(ENDPOINT, {
       extraHeaders: {
@@ -133,6 +162,9 @@ const App = () => {
             <NavBar />
             <MainParticles />
             {checkBreak() && <Break break={currentBreak} />}
+            {checkTime() && (
+              <LateHour time={loginState.userData?.times.startTime} />
+            )}
             <Switch>
               <ProtectedRoute path="/home" component={Dashboard} />
               <ProtectedRoute path="/settings" component={Settings} />

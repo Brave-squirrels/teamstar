@@ -22,7 +22,6 @@ import { deleteUserTeamFetch } from "reduxState/team/deleteUser";
 import { leaveTeamFetch } from "reduxState/team/leaveTeam";
 import { createRaportFetch } from "reduxState/raport/createRaport";
 import { getRaportsFetch } from "reduxState/raport/getRaports";
-import { StartValueType } from "tsparticles/dist/Enums";
 
 const Team = () => {
   const [modalInvite, setModalInvite] = useState(false);
