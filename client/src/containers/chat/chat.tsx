@@ -37,8 +37,9 @@ const Chat = () => {
   useEffect(() => {
     
       dispatch(getChatFetch(teamId));
-    
-  }, [dispatch, teamId, msg, sendState.success]);
+    },
+    // eslint-disable-next-line
+   [dispatch, teamId, msg, sendState.success]);
 
   const renderMessages = () => {
     return chatMessages.map((message: any) => {

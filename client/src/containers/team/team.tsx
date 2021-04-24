@@ -19,10 +19,10 @@ import { mutateToAxios } from "utils/onChangeForm";
 import { teamDataFetch } from "reduxState/team/getTeamInfo";
 import { deleteTeamFetch } from "reduxState/team/deleteTeam";
 import { deleteUserTeamFetch } from "reduxState/team/deleteUser";
-import EmptyNotification from "components/emptyNotification/emptyNotification";
 import { leaveTeamFetch } from "reduxState/team/leaveTeam";
 import { createRaportFetch } from "reduxState/raport/createRaport";
 import { getRaportsFetch } from "reduxState/raport/getRaports";
+import { StartValueType } from "tsparticles/dist/Enums";
 
 const Team = () => {
   const [modalInvite, setModalInvite] = useState(false);
@@ -32,12 +32,11 @@ const Team = () => {
   const teamId = location.pathname.split("/")[2];
 
   const teamInfo = useSelector((state: any) => state.teamData.teamData);
-  console.log(teamInfo)
-  const handleSendRaport = () => {};
   const inviteSendState = useSelector((state: RootState) => state.sendInvite);
   const declineInviteState = useSelector(
     (state: RootState) => state.declineInvite
   );
+  const deleteTeam = useSelector((state: RootState) => state.deleteTeam);
   const removeUser = useSelector((state: RootState) => state.deleteUserTeam);
   const leaveTeamState = useSelector((state: RootState) => state.leaveTeam);
   const createRaportState = useSelector(
@@ -68,7 +67,6 @@ const Team = () => {
 
   useEffect(() => {
     dispatch(teamDataFetch(teamId));
-    dispatch(getRaportsFetch(teamId));
   }, [
     dispatch,
     teamId,
@@ -76,9 +74,11 @@ const Team = () => {
     inviteSendState.success,
     declineInviteState.success,
     removeUser.success,
-    createRaportState.success,
-    deleteRaportState.success,
   ]);
+  useEffect(() => {
+    setShowAllRaport(false);
+    dispatch(getRaportsFetch(teamId));
+  }, [createRaportState, deleteRaportState]);
 
   useEffect(() => {
     setDescription((prevState) => {
@@ -96,7 +96,8 @@ const Team = () => {
     if (leaveTeamState.success) {
       history.push("/home");
     }
-  }, [leaveTeamState.success]);
+    // eslint-disable-next-line
+  }, [leaveTeamState.success, deleteTeam.success]);
 
   const initialEmail = {
     userEmail: {
@@ -136,6 +137,7 @@ const Team = () => {
   });
 
   const [showAllRaport, setShowAllRaport] = useState(false);
+  const [showModalLeave, setShowModalLeave] = useState(false);
 
   const [showRaport, setShowRaport] = useState(false);
   const [raportForm, setRaportForm] = useState({
@@ -193,6 +195,7 @@ const Team = () => {
   };
   const handleCreateRaport = (e: any) => {
     e.preventDefault();
+    setShowRaport(false);
     dispatch(createRaportFetch(mutateToAxios(raportForm), teamId));
   };
 
@@ -220,6 +223,29 @@ const Team = () => {
           title=""
           submitted={handleCreateRaport}
         />
+      </InviteModal>
+      <InviteModal
+        show={showModalLeave}
+        onHide={() => setShowModalLeave(false)}
+        user={"as"}
+        title="Are you sure?"
+      >
+        <div className={styles.leaveButtonsContainer}>
+          <Button
+            style={{ width: "120px", margin: "0 10px" }}
+            variant="danger"
+            onClick={handleLeaveTeam}
+          >
+            Yes
+          </Button>
+          <Button
+            style={{ width: "120px" }}
+            variant="success"
+            onClick={() => setShowModalLeave(false)}
+          >
+            Cancel
+          </Button>
+        </div>
       </InviteModal>
       <InviteModal
         show={modalInvite}
@@ -339,7 +365,10 @@ const Team = () => {
           >
             Send Raport
           </div>
-          <div className={styles.leaveButton} onClick={handleLeaveTeam}>
+          <div
+            className={styles.leaveButton}
+            onClick={() => setShowModalLeave(true)}
+          >
             Leave Team
           </div>
         </div>
