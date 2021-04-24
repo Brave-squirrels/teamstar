@@ -36,10 +36,10 @@ const Sidebar = () => {
       <div className={styles.menuContainer}>
         <h3>Timebreak</h3>
         <div className={styles.break}>
-          <div>from 12:45:12</div>
-          <div>to 20:20:30</div>
+          <div>at 12:45:12</div>
         </div>
         <ul className={styles.menu}>
+          <li>Teams</li>
           {userTeams.map((team: any) => (
             <li id={team.teamId} key={team.teamId} onClick={changeTeam}>
               {team.teamName}
