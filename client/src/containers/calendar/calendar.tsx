@@ -52,12 +52,18 @@ const CalendarComponent = () => {
 
   useEffect(() => {
     dispatch(teamDataFetch(teamId));
-  }, [dispatch, teamId, createState.success, editState.success]);
+  }, [
+    dispatch,
+    teamId,
+    createState.success,
+    editState.success,
+    deleteState.success,
+  ]);
   useEffect(() => {
     if (teamData.teamData!.calendarId) {
       dispatch(getCalendarFetch(teamData!.teamData!.calendarId));
     }
-  }, [teamData, editState.success, dispatch]);
+  }, [teamData, editState.success, dispatch, deleteState.success]);
 
   const [showNewEvent, setShowNewEvent] = useState(false);
   const [showCurrentEvent, setShowCurrentEvent] = useState(false);
@@ -296,6 +302,7 @@ const CalendarComponent = () => {
 
   const handleDeleteEvent = (e: any) => {
     dispatch(deleteEventFetch(teamData.teamData?.calendarId, currentEvent._id));
+    setShowCurrentEvent(false);
   };
 
   return (
