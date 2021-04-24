@@ -32,6 +32,11 @@
   color: $fontWhite;
 }
 
+.notFound {
+  display: flex;
+  justify-content: center !important;
+}
+
 .headerPanel {
   padding: 0 2em;
   align-items: center;
@@ -102,23 +107,27 @@
 
 //Modals
 .invitedUsers {
-  border-top: 1px $lightBorder solid;
+  border-top: 3px $lightBorder solid;
   margin-top: 1.2em;
   padding: 0.4em 2em 0 2em;
   display: flex;
   flex-direction: column;
   align-items: center;
+  
   & > div {
     display: flex;
     justify-content: space-between;
     align-items: center;
     width: 100%;
-    border-bottom: 1px $lightBorder solid;
+    border-bottom: 2px $lightBorder solid;
     padding: 0.2em 1.3em;
     font-size: 1.2em;
   }
+  & > :last-child {
+    border-top: 5px $lightBorder solid;
+  }
   & > :nth-child(2) {
-    border-top: 1px $lightBorder solid;
+    border-top: 2px $lightBorder solid;
   }
 }
 

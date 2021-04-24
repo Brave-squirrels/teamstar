@@ -251,7 +251,10 @@ const Team = () => {
               ))}
             </>
           ) : (
-            <EmptyNotification>There is no invites</EmptyNotification>
+            <div className={styles.notFound}>
+              {" "}
+              <div>There is no invites</div>{" "}
+            </div>
           )}
         </div>
         <FormStructure
@@ -284,7 +287,10 @@ const Team = () => {
               ))}
             </>
           ) : (
-            <EmptyNotification>Team has no members</EmptyNotification>
+            <div className={styles.notFound}>
+              {" "}
+              <div> Team has no members</div>
+            </div>
           )}
         </div>
         <div className={styles.removeWrapper}>
