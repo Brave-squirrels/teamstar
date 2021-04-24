@@ -13,7 +13,6 @@ import confirmation from "../src/users/confirmation";
 import searchUser from "../src/users/searchUser";
 import sendResetMail from "../src/users/changePasswordMail";
 import sendChangeEmail from "../src/users/changeEmailMail";
-import changeName from "../src/users/changeName";
 import changeEmail from "../src/users/changeEmail";
 import deleteUser from "../src/users/deleteUser";
 import userActivity from "../src/users/userActivity";
@@ -43,7 +42,6 @@ export default class UserController {
     this.router.put(`${this.path}/password`, auth, this.newPassword);
     this.router.put(`${this.path}/changepassword`, auth, this.changePassword);
     this.router.put(`${this.path}/changeEmail`, auth, this.sendChangeEmail);
-    this.router.put(`${this.path}/changeName`, auth, this.changeName);
     this.router.put(`${this.path}/active`, auth, this.userActivity);
     this.router.put(`${this.path}/times`, auth, this.editTimes);
     this.router.get(`${this.path}/email/:token/:newEmail`, this.changeEmail);
@@ -92,10 +90,6 @@ export default class UserController {
 
   sendChangeEmail(req: Request, res: Response) {
     sendChangeEmail(req, res);
-  }
-
-  changeName(req: Request, res: Response) {
-    changeName(req, res);
   }
 
   userActivity(req: Request, res: Response) {

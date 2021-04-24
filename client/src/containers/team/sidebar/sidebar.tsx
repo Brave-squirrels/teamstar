@@ -53,6 +53,7 @@ const Sidebar = () => {
   }, [dispatch, teamId]);
   useEffect(() => {
     checkBreak();
+    // eslint-disable-next-line
   }, [loginState.userData]);
 
   const toggle = () => setReveal(!reveal);
