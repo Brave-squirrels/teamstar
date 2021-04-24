@@ -50,6 +50,7 @@ const Sidebar = () => {
   useEffect(() => {
     dispatch(teamDataFetch(teamId));
   }, [dispatch, teamId]);
+
   useEffect(() => {
     checkBreak();
     // eslint-disable-next-line
@@ -74,10 +75,22 @@ const Sidebar = () => {
             <li id={member.id} key={member.id}>
               {member.name}
               <span>
-                {member.status ? (
-                  <span className={styles.active}>Active </span>
+                {member.id === localStorage.getItem("id") ? (
+                  <>
+                    {loginState.userData!.isOnline ? (
+                      <span className={styles.active}>Active </span>
+                    ) : (
+                      <span className={styles.inactive}>Inactive</span>
+                    )}
+                  </>
                 ) : (
-                  <span className={styles.inactive}>Inactive</span>
+                  <>
+                    {member.status ? (
+                      <span className={styles.active}>Active </span>
+                    ) : (
+                      <span className={styles.inactive}>Inactive</span>
+                    )}
+                  </>
                 )}
               </span>
             </li>

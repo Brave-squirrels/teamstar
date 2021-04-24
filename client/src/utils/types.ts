@@ -15,6 +15,7 @@ export interface UserData {
     chats: Chat[];
     times: any;
     breakTime: any;
+    isOnline: boolean;
 }
 
 export interface TeamInvitation {
@@ -59,6 +60,7 @@ export const UserBasic: UserData = {
         endTime: '',
     },
     breakTime: '',
+    isOnline: true,
 }
 
 export interface Owner {

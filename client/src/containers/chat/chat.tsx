@@ -37,6 +37,7 @@ const Chat = () => {
     if (message !== msg) {
       dispatch(getChatFetch(teamId));
     }
+    // eslint-disable-next-line
   }, [dispatch, teamId, msg, sendState.success]);
 
   const renderMessages = () => {
