@@ -4,22 +4,30 @@ import settingsLogo from "../../assets/settingsLogo.svg";
 import trash from "../../assets/trash.svg";
 import Sidebar from "./sidebar/sidebar";
 import { useSelector, useDispatch } from "react-redux";
-import InviteModal from "components/inviteModal/inviteModal"
+import InviteModal from "components/inviteModal/inviteModal";
 import FormStructure from "containers/form/formStructure";
+import { declineInviteFetch } from "reduxState/team/declineInvite";
 
 const Team = () => {
-  const [modalInvite, setModalInvite] = useState(false)
+  const [modalInvite, setModalInvite] = useState(false);
 
   const teamInfo = useSelector((state: any) => state.teamData.teamData);
+
   const handleSendRaport = () => {};
 
-  const changePassword = useSelector(
-    (state: any) => state.changePassword
-  );
+  const changePassword = useSelector((state: any) => state.changePassword);
 
-  const dupa = () => {
-    console.log(teamInfo.invitations)
-  }
+  const dispatch = useDispatch();
+
+  const handleRejectInvite = (e: any) => {
+    e.preventDefault()
+    dispatch(declineInviteFetch({ id: e.target.id }, teamInfo._id));
+  };
+
+  const handleChangePassword = (e:any) => {
+    e.preventDefault()
+    console.log(teamInfo);
+  };
 
   const [changePasswordForm, setChangePasswordForm] = useState({
     oldPassword: {
@@ -34,25 +42,19 @@ const Team = () => {
         maxLength: 26,
         passwordRule: false,
       },
-      error:
-        "It's not an email",
+      error: "It's not an email",
       touched: false,
       valid: false,
-    },    
+    },
     formValid: false,
   });
-  
-  
-  const handleChangePassword = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-  };
 
   return (
     <div className={styles.container}>
       <InviteModal
         show={modalInvite}
         onHide={() => setModalInvite(false)}
-        user={'as'}
+        user={"as"}
         title="Send Invite"
       >
         <FormStructure
@@ -65,16 +67,19 @@ const Team = () => {
           checkPass={true}
         />
         <div className={styles.invitedUsers}>
-        <h4>Invited users</h4>
-        {teamInfo.invitations.map((user: any) => <div key = {user._id}>
-          {user.userName}
-          <img
-              src={trash}
-              alt="Remove invite"
-              className={styles.trashImg}
-              onClick={() => setModalInvite(true)}
-            />
-          </div>)}
+          <h4>Invited users</h4>
+          {teamInfo.invitations.map((user: any) => (
+            <div key={user.userId}>
+              {user.userName}
+              <img
+                id={user.userId}
+                src={trash}
+                alt="Remove invite"
+                className={styles.trashImg}
+                onClick={handleRejectInvite}
+              />
+            </div>
+          ))}
         </div>
       </InviteModal>
       <div className={styles.mainPanel}>
