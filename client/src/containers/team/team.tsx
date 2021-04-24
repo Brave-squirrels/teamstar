@@ -7,6 +7,7 @@ import { useSelector, useDispatch } from "react-redux";
 import InviteModal from "components/inviteModal/inviteModal";
 import FormStructure from "containers/form/formStructure";
 import { declineInviteFetch } from "reduxState/team/declineInvite";
+import { sendInviteFetch } from "reduxState/team/sendInvite";
 
 const Team = () => {
   const [modalInvite, setModalInvite] = useState(false);
@@ -24,13 +25,13 @@ const Team = () => {
     dispatch(declineInviteFetch({ id: e.target.id }, teamInfo._id));
   };
 
-  const handleChangePassword = (e:any) => {
+  const handleSendInvite = (e:any) => {
     e.preventDefault()
-    console.log(teamInfo);
+    dispatch(sendInviteFetch({ email: sendInviteToUser.userEmail.val }, teamInfo._id));
   };
 
-  const [changePasswordForm, setChangePasswordForm] = useState({
-    oldPassword: {
+  const [sendInviteToUser, setSendInviteToUser] = useState({
+    userEmail: {
       val: "",
       type: "email",
       inputType: "input",
@@ -58,11 +59,11 @@ const Team = () => {
         title="Send Invite"
       >
         <FormStructure
-          state={changePasswordForm}
-          setState={setChangePasswordForm}
+          state={sendInviteToUser}
+          setState={setSendInviteToUser}
           btnText="Send"
           title=""
-          submitted={handleChangePassword}
+          submitted={handleSendInvite}
           spinner={changePassword.loading}
           checkPass={true}
         />
