@@ -14,7 +14,7 @@ const initialState: State = {
 };
 
 interface Data {
-  status: string;
+  status: number;
 }
 
 const changeStatus = createSlice({

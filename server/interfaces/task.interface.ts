@@ -11,9 +11,9 @@ interface TeamIDNAME {
 }
 
 export enum STATUS {
-  DONE,
   TODO,
   INPROGRESS,
+  DONE,
 }
 
 interface Task extends mongoose.Document {

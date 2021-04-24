@@ -10,7 +10,8 @@ import { getChatFetch } from "reduxState/chat/getChat";
 import { sendMessageFetch } from "reduxState/chat/sendMessage";
 
 import styles from "./chat.module.scss";
-const ENDPOINT = "http://localhost:5000";
+import { ENDPOINT } from "../../axios/axiosMain";
+
 
 const Chat = () => {
   const location = useLocation();
@@ -77,6 +78,9 @@ const Chat = () => {
     if (message === msg) {
       return;
     }
+    if(message==="") {
+      return;
+    }
     let data = {
       content: message,
     };
@@ -85,6 +89,7 @@ const Chat = () => {
       data,
     });
     dispatch(sendMessageFetch(data, teamId));
+    setMessage("");
   };
 
   return (
