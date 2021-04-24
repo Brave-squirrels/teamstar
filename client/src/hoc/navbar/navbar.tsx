@@ -7,7 +7,7 @@ import NavDropdown from "react-bootstrap/NavDropdown";
 
 import Logo from "assets/logo.png";
 
-import { Team } from "utils/types";
+import { Team, Chat } from "utils/types";
 
 import { logout } from "reduxState/user/loginUser";
 import { RootState } from "reduxState/store";
@@ -35,6 +35,25 @@ const Navigation = () => {
       <Navbar.Toggle aria-controls="responsive-navbar-nav" />
       <Navbar.Collapse id="responsive-navbar-nav">
         <Nav className="ml-auto" style={{ gap: "1.5em" }}>
+        <NavDropdown title="Chats" id="collasible-nav-dropdown">
+        {userData!.chats && userData!.chats.length > 0 ? (
+              <>
+                {userData!.chats.map((chat: Chat) => (
+                  <NavDropdown.Item
+                    to={`/chat/${chat.chatId}`}
+                    as={NavLink}
+                    key={chat.chatName}
+                  >
+                    {chat.chatName}
+                  </NavDropdown.Item>
+                ))}
+              </>
+            ) : (
+              <NavDropdown.Item to={`/home`} as={NavLink}>
+                You don't have any chats
+              </NavDropdown.Item>
+            )}
+        </NavDropdown>
           <NavDropdown title="Teams" id="collasible-nav-dropdown">
             {userData!.teams && userData!.teams.length > 0 ? (
               <>

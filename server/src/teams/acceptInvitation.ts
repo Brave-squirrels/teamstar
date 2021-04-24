@@ -3,6 +3,7 @@ import { StatusCodes } from "http-status-codes";
 import { stubArray } from "lodash";
 import teamModel from "../../models/team.model";
 import userModel from "../../models/user.model";
+import chatModel from "../../models/chat.model";
 
 // Function for creating a new user
 export default async (req: Request, res: Response) => {
@@ -21,6 +22,8 @@ export default async (req: Request, res: Response) => {
     if (invitation.userId == user.id) team.invitations.splice(i, 1);
   });
 
+  const chatOfTeam = await chatModel.findOne({teamId: team._id});
+
   //deleting invite in user
   user.teamInvitation.forEach((invite, i) => {
     if (invite.teamId == team.id) user.teamInvitation.splice(i, 1);
@@ -28,6 +31,11 @@ export default async (req: Request, res: Response) => {
 
   // adding user to team
   user.teams.push({ teamId: team.id, teamName: team.name });
+  user.chats.push({
+    teamId: chatOfTeam.teamId,
+    chatId: chatOfTeam._id,
+    chatName: chatOfTeam.name,
+  });
   // adding team to user
   team.users.push({ name: user.name, id: user.id });
 
