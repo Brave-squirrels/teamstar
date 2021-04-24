@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import initialData from "./initialData";
+import initialData, { dataModel } from "./initialData";
 import { DragDropContext } from "react-beautiful-dnd";
 
 import { getTasksFetch } from "../../../reduxState/tasks/getTasks";
@@ -24,7 +24,7 @@ const Dnd = () => {
   useEffect(() => {
     dispatch(getTasksFetch(teamId));
 
-    // console.log(tasks);
+    dataModel(tasks.taskData);
   }, [teamData!.tasks]);
 
   const onDragEnd = (result: any) => {
