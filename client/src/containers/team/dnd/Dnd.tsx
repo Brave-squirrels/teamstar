@@ -17,13 +17,14 @@ const Dnd = () => {
   const location = useLocation();
   const teamId = location.pathname.split("/")[2];
 
+  const teamData = useSelector((state: RootState) => state.teamData.teamData);
   const tasks = useSelector((state: RootState) => state.getTasks);
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(getTasksFetch(teamId));
     console.log(tasks);
-  }, []);
+  }, [teamData!.tasks]);
 
   const onDragEnd = (result: any) => {
     const { destination, source, draggableId } = result;
