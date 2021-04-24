@@ -1,25 +1,27 @@
-import styles from"./raports.module.scss";
+import styles from "./raports.module.scss";
+import { useSelector } from "react-redux";
 import React from "react";
+import { RootState } from "reduxState/store";
 
-const dupa : any = [1,2,3]
-const Raports = (props : any ) => {
-  return <div className={styles.wrapper}> 
-      {dupa.map((raport : any) =><div className={styles.container}>
-          <div className={styles.raportColumn}>
-            <div>Raport</div> 
-            <div>Data</div>
-          </div>
-          <div className={styles.raportColumn}>
-              <div>Author</div>
-              <div>Delete Raport</div>
-          </div>
-          <p>
-          Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s
-          </p>
-      </div>)}
-
-
-  </div>;
+const Raports = (props: any) => {
+  const raports = useSelector(
+    (state: RootState) => state.getRaports.raportData
+  );
+  return (
+    <div className={styles.wrapper}>
+      {raports.length > 0 && (
+        <>
+          {raports.map((raport: any) => (
+            <div className={styles.container}>
+              <div>{raport.name}</div>
+              <div>{raport.author.name}</div>
+              <p>{raport.description}</p>
+            </div>
+          ))}
+        </>
+      )}
+    </div>
+  );
 };
 
 export default Raports;

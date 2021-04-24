@@ -22,6 +22,7 @@ import { deleteUserTeamFetch } from "reduxState/team/deleteUser";
 import EmptyNotification from "components/emptyNotification/emptyNotification";
 import { leaveTeamFetch } from "reduxState/team/leaveTeam";
 import { createRaportFetch } from "reduxState/raport/createRaport";
+import { getRaportsFetch } from "reduxState/raport/getRaports";
 
 const Team = () => {
   const [modalInvite, setModalInvite] = useState(false);
@@ -37,7 +38,9 @@ const Team = () => {
   );
   const removeUser = useSelector((state: RootState) => state.deleteUserTeam);
   const leaveTeamState = useSelector((state: RootState) => state.leaveTeam);
-  const handleShowRaport = () => {};
+  const createRaportState = useSelector(
+    (state: RootState) => state.createRaport
+  );
 
   const changeDescription = useSelector(
     (state: RootState) => state.changeTeamDescription
@@ -60,6 +63,7 @@ const Team = () => {
 
   useEffect(() => {
     dispatch(teamDataFetch(teamId));
+    dispatch(getRaportsFetch(teamId));
   }, [
     dispatch,
     teamId,
@@ -67,6 +71,7 @@ const Team = () => {
     inviteSendState.success,
     declineInviteState.success,
     removeUser.success,
+    createRaportState.success,
   ]);
 
   useEffect(() => {
@@ -310,7 +315,10 @@ const Team = () => {
 
       <div className={styles.buttonsPanel}>
         <div className={styles.buttonsContainer}>
-          <div className={styles.showRaportButton} onClick={() => setShowAllRaport(true)}>
+          <div
+            className={styles.showRaportButton}
+            onClick={() => setShowAllRaport(true)}
+          >
             Show Raports
           </div>
           <div
