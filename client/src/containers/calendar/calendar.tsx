@@ -22,7 +22,8 @@ const events: any = [
     title: "Today",
     start: new Date(new Date().setHours(new Date().getHours() - 3)),
     end: new Date(new Date().setHours(new Date().getHours() + 3)),
-    author: "twojstary",
+    author: "Sample author",
+    description: "xD",
   },
 ];
 
@@ -37,6 +38,8 @@ const ColoredDateCellWrapper = ({ children, value }: any) =>
   });
 
 const CalendarComponent = () => {
+  const [author, setAuthor] = useState("");
+  const [currentEvent, setCurrentEvent] = useState("");
   const dispatch = useDispatch();
   const location = useLocation();
   /* const teamData = useSelector((state: RootState) => state.teamData); */
@@ -49,6 +52,97 @@ const CalendarComponent = () => {
   const [showNewEvent, setShowNewEvent] = useState(false);
   const [showCurrentEvent, setShowCurrentEvent] = useState(false);
   const [newEvent, setNewEvent] = useState({
+    title: {
+      val: "",
+      type: "text",
+      inputType: "input",
+      placeholder: "Title",
+      label: "Title",
+      validation: {
+        required: true,
+        minLength: 3,
+        maxLength: 24,
+      },
+      error: "Title should be between 3 and 24 characters long",
+      touched: false,
+      valid: false,
+    },
+    description: {
+      val: "",
+      inputType: "textarea",
+      placeholder: "Description",
+      label: "Description",
+      validation: {
+        required: false,
+        minLength: 0,
+        maxLength: 255,
+      },
+      error: "Description should can't be longer than 255 characters",
+      touched: false,
+      valid: false,
+    },
+    start: {
+      val: "",
+      inputType: "input",
+      type: "date",
+      placeholder: "Start date",
+      label: "Start date",
+      validation: {
+        required: true,
+        minDate: Date.now(),
+      },
+      error: `You can't pick previous date`,
+      touched: false,
+      valid: false,
+    },
+    end: {
+      val: "",
+      inputType: "input",
+      type: "date",
+      placeholder: "End date",
+      label: "End date",
+      validation: {
+        required: true,
+        minDate: Date.now(),
+      },
+      error: `You can't pick previous date`,
+      touched: false,
+      valid: false,
+    },
+    fromHour: {
+      val: "",
+      inputType: "input",
+      type: "text",
+      placeholder: "Start",
+      label: "Start",
+      validation: {
+        required: false,
+        minLength: 2,
+        maxLength: 5,
+      },
+      error: `Should be between 2 and 5 characters long`,
+      touched: true,
+      valid: true,
+    },
+    toHour: {
+      val: "",
+      inputType: "input",
+      type: "text",
+      placeholder: "End",
+      label: "End",
+      validation: {
+        required: false,
+        minLength: 2,
+        maxLength: 5,
+      },
+      error: "Should be between 2 and 5 characters long",
+      touched: true,
+      valid: true,
+    },
+    formValid: false,
+  });
+
+  const [editEvent, setEditEvent] = useState({
     title: {
       val: "",
       type: "text",
@@ -143,8 +237,37 @@ const CalendarComponent = () => {
 
   const handleSingleEventCLick = (e: any) => {
     setShowCurrentEvent(true);
+    setCurrentEvent(e.id);
+    setAuthor(e.author);
+    setEditEvent((prevState) => {
+      return {
+        ...prevState,
+        title: {
+          ...prevState.title,
+          val: e.title,
+        },
+        description: {
+          ...prevState.description,
+          val: e.description,
+        },
+        start: {
+          ...prevState.start,
+          val: e.start,
+        },
+        end: {
+          ...prevState.end,
+          val: e.end,
+        },
+      };
+    });
     console.log(e);
   };
+
+  const handleEditEvent = (e: any) => {
+    e.preventDefault();
+  };
+
+  const handleDeleteEvent = (e: any) => {};
 
   return (
     <>
@@ -164,15 +287,24 @@ const CalendarComponent = () => {
       <MyVerticallyCenteredModal
         show={showCurrentEvent}
         onHide={() => setShowCurrentEvent(false)}
-        title={"Add new event"}
+        title={"Current event"}
       >
-        {/* Form if owner, info is user */}
+        {/* Form if owner or creator - info if normal guy */}
+        <div className={styles.authorContainer}>
+          <span className={styles.authInnerCon}>
+            Author: <span className={styles.author}>{author} </span>
+          </span>
+          <span className={styles.delete} onClick={handleDeleteEvent}>
+            Delete
+          </span>
+        </div>
+
         <FormStructure
-          state={newEvent}
-          setState={setNewEvent}
-          btnText="ADD"
+          state={editEvent}
+          setState={setEditEvent}
+          btnText="EDIT"
           title=""
-          submitted={handleCreateEvent}
+          submitted={handleEditEvent}
         />
       </MyVerticallyCenteredModal>
       <Button className={styles.addBtn} onClick={() => setShowNewEvent(true)}>

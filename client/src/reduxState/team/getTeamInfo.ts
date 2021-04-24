@@ -46,7 +46,6 @@ export const teamDataFetch = (teamId: string): AppThunk => async (dispatch) => {
         })
         .then((res) => {
             dispatch(success(res.data));
-            toastNofity(res.status);
         })
         .catch((err) => {
             dispatch(failed());

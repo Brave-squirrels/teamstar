@@ -1,3 +1,4 @@
+@import "styles/variables.scss";
 .wrapper {
   height: 100%;
   padding: 2em 0;
@@ -5,4 +6,22 @@
 
 .addBtn {
   margin: 2em 0 0 2em;
+}
+
+.authorContainer {
+  display: flex;
+  justify-content: space-between;
+}
+
+.delete {
+  font-weight: 500;
+  color: $invalid;
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.author {
+  font-weight: 500;
+  color: $fontLightGreen;
 }
