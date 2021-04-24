@@ -8,7 +8,6 @@ import { RootState } from "reduxState/store";
 const Sidebar = () => {
   const location = useLocation();
   const teamInfo = useSelector((state: any) => state.teamData.teamData);
-  const teamMembers = useSelector((state: any) => teamInfo.users);
   const teamId = location.pathname.split("/")[2];
 
   const dispatch = useDispatch();
