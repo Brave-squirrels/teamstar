@@ -1,7 +1,6 @@
 import React from "react";
 import { Draggable } from "react-beautiful-dnd";
 import { Card, Badge } from "react-bootstrap";
-import styles from "./dnd.module.scss";
 
 const Task = (props: any) => {
   return (

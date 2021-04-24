@@ -1,17 +1,17 @@
 const initialData = {
-  tasks: {
-    "task-1": { id: "task-1", content: "Take out the garbage", status: "todo" },
-    "task-2": { id: "task-2", content: "Coding", status: "todo" },
-    "task-3": { id: "task-3", content: "Charge my phone", status: "todo" },
-    "task-4": { id: "task-4", content: "Cook dinner", status: "todo" },
-    "task-5": { id: "task-5", content: "Clean my desk", status: "todo" },
-    "task-6": { id: "task-6", content: "Clean my desk", status: "todo" },
-    "task-7": { id: "task-7", content: "Clean my desk", status: "todo" },
-    "task-8": { id: "task-8", content: "Clean my desk", status: "todo" },
-  },
-  columns: {
-    "column-1": {
-      id: "column-1",
+  tasks: [
+    { id: "task-1", content: "Take out the garbage", status: "todo" },
+    { id: "task-2", content: "Coding", status: "todo" },
+    { id: "task-3", content: "Charge my phone", status: "todo" },
+    { id: "task-4", content: "Cook dinner", status: "todo" },
+    { id: "task-5", content: "Clean my desk", status: "todo" },
+    { id: "task-6", content: "Clean my desk", status: "todo" },
+    { id: "task-7", content: "Clean my desk", status: "todo" },
+    { id: "task-8", content: "Clean my desk", status: "todo" },
+  ],
+  columns: [
+    {
+      id: "todo",
       title: "To do",
       taskIds: [
         "task-1",
@@ -24,19 +24,19 @@ const initialData = {
         "task-8",
       ],
     },
-    "column-2": {
-      id: "column-2",
+    {
+      id: "inProgress",
       title: "In progress",
       taskIds: [],
     },
-    "column-3": {
-      id: "column-3",
+    {
+      id: "done",
       title: "Done",
       taskIds: [],
     },
-  },
+  ],
   // Facilitate reordering of the columns
-  columnOrder: ["column-1", "column-2", "column-3"],
+  columnOrder: ["todo", "inProgress", "done"],
 };
 
 export default initialData;
