@@ -38,6 +38,7 @@ const Dashboard = () => {
   setInterval(() => {
     setDate({ date: new Date() });
   }, 1000);
+
   useEffect(() => {
     dispatch(authUser());
   }, [
@@ -47,7 +48,6 @@ const Dashboard = () => {
     declineState.success,
     editStartState.success,
   ]);
-
   const [startTime, setStartTime] = useState({
     startTime: {
       val: "",

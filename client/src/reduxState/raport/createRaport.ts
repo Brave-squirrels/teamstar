@@ -44,7 +44,7 @@ export const createRaportFetch = (data: Data, teamId: any): AppThunk => async (
 ) => {
     dispatch(start());
     await axios
-        .post(`/teams/${teamId}`, data, {
+        .post(`/teams/${teamId}/raports`, data, {
             headers: {
                 "x-auth-token": localStorage.getItem("token"),
             },
