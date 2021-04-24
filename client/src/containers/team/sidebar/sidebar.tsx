@@ -34,7 +34,6 @@ const Sidebar = () => {
       const time = now.getHours() * 60 + now.getMinutes();
       if (time > end) {
         setCurrentBreak(loginState.userData!.breakTime["b2"].start);
-        console.log("xD");
       } else {
         setCurrentBreak(loginState.userData!.breakTime["b1"].start);
       }
@@ -55,7 +54,6 @@ const Sidebar = () => {
     checkBreak();
     // eslint-disable-next-line
   }, [loginState.userData]);
-  console.log(teamInfo.users);
   const toggle = () => setReveal(!reveal);
   return (
     <div className={sideClasses.join(" ")}>

@@ -34,7 +34,17 @@ const Task = (props: any) => {
         onHide={() => setShow(false)}
         title={"Details"}
       >
-        {props.task.content}
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            gap: "1em",
+            flexDirection: "column",
+          }}
+        >
+          <div>{props.task.content}</div>
+        </div>
       </MyVerticallyCenteredModal>
     </>
   );

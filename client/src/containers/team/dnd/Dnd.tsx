@@ -25,10 +25,10 @@ const Dnd = () => {
 
   useEffect(() => {
     dispatch(getTasksFetch(teamId));
+    //eslint-disable-next-line
   }, [teamId, createState.success]);
 
   useEffect(() => {
-    console.log(tasks.taskData);
     setData(dataModel(tasks.taskData));
   }, [tasks]);
 
@@ -129,15 +129,8 @@ const Dnd = () => {
 
       const newState = {
         ...data,
-        tasks: [
-          ...data.tasks,
-          // [newTask.id]: newTask,
-        ],
-        columns: [
-          ...data.columns,
-          //     [newStart.id]: newStart,
-          //     [newFinish.id]: newFinish,
-        ],
+        tasks: [...data.tasks],
+        columns: [...data.columns],
       };
 
       newState.tasks.splice(indexT, 1);
