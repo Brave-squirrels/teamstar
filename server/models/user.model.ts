@@ -84,7 +84,7 @@ const userSchema = new mongoose.Schema<User>({
   },
   isVerified: {
     type: Boolean,
-    default: true, // TODO change to false if done
+    default: false,
   },
   date: {
     type: Date,

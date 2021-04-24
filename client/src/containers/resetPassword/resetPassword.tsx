@@ -56,7 +56,6 @@ const ResetPassword = () => {
 
   const handleResetPassword = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log(token);
     dispatch(resetPasswordFetch(mutateToAxios(form), token));
   };
 
