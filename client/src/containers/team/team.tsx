@@ -8,6 +8,9 @@ import InviteModal from "components/inviteModal/inviteModal";
 import FormStructure from "containers/form/formStructure";
 import { declineInviteFetch } from "reduxState/team/declineInvite";
 import { sendInviteFetch } from "reduxState/team/sendInvite";
+import { changeTeamDescriptionFetch } from "reduxState/team/changeDescription";
+import { RootState } from "reduxState/store";
+import { mutateToAxios } from "utils/onChangeForm";
 
 const Team = () => {
   const [modalInvite, setModalInvite] = useState(false);
@@ -17,17 +20,22 @@ const Team = () => {
   const handleSendRaport = () => {};
 
   const changePassword = useSelector((state: any) => state.changePassword);
+  const changeDescription = useSelector(
+    (state: RootState) => state.changeTeamDescription
+  );
 
   const dispatch = useDispatch();
 
   const handleRejectInvite = (e: any) => {
-    e.preventDefault()
+    e.preventDefault();
     dispatch(declineInviteFetch({ id: e.target.id }, teamInfo._id));
   };
 
-  const handleSendInvite = (e:any) => {
-    e.preventDefault()
-    dispatch(sendInviteFetch({ email: sendInviteToUser.userEmail.val }, teamInfo._id));
+  const handleSendInvite = (e: any) => {
+    e.preventDefault();
+    dispatch(
+      sendInviteFetch({ email: sendInviteToUser.userEmail.val }, teamInfo._id)
+    );
   };
 
   const [sendInviteToUser, setSendInviteToUser] = useState({
@@ -49,6 +57,30 @@ const Team = () => {
     },
     formValid: false,
   });
+  const [description, setDescription] = useState({
+    description: {
+      val: "",
+      inputType: "textarea",
+      placeholder: "Description",
+      label: "Description",
+      validation: {
+        required: true,
+        minLength: 0,
+        maxLength: 254,
+      },
+      error: "Description should be max 255 characters long",
+      valid: true,
+      touched: true,
+    },
+    formValid: true,
+  });
+
+  const handleChangeDescription = (e: any) => {
+    e.preventDefault();
+    dispatch(
+      changeTeamDescriptionFetch(mutateToAxios(description), teamInfo._id)
+    );
+  };
 
   return (
     <div className={styles.container}>
@@ -65,7 +97,6 @@ const Team = () => {
           title=""
           submitted={handleSendInvite}
           spinner={changePassword.loading}
-          checkPass={true}
         />
         <div className={styles.invitedUsers}>
           <h4>Invited users</h4>
@@ -82,6 +113,14 @@ const Team = () => {
             </div>
           ))}
         </div>
+        <FormStructure
+          state={description}
+          setState={setDescription}
+          btnText="EDIT"
+          title="Change description"
+          spinner={changeDescription.loading}
+          submitted={handleChangeDescription}
+        />
       </InviteModal>
       <div className={styles.mainPanel}>
         <div className={styles.leftSidePanel}>
