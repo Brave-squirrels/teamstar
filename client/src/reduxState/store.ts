@@ -22,6 +22,9 @@ import declineInvite from 'reduxState/team/declineInvite';
 import acceptInvite from 'reduxState/team/acceptInvite';
 import teamData from 'reduxState/team/getTeamInfo';
 import sendInvite from 'reduxState/team/sendInvite';
+import leaveTeam from 'reduxState/team/leaveTeam';
+import deleteTeam from 'reduxState/team/deleteTeam';
+import changeTeamDescription from 'reduxState/team/changeDescription';
 
 export const store = configureStore({
   reducer: {
@@ -39,6 +42,9 @@ export const store = configureStore({
     acceptInvite,
     teamData,
     sendInvite,
+    leaveTeam,
+    deleteTeam,
+    changeTeamDescription,
   },
   middleware: [
     ...getDefaultMiddleware({
