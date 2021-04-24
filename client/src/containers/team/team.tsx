@@ -3,6 +3,8 @@ import styles from "./team.module.scss";
 import settingsLogo from "../../assets/settingsLogo.svg";
 import Sidebar from "./sidebar/sidebar";
 const team = () => {
+  const handleSendRaport = () => {};
+
   return (
     <div className={styles.container}>
       <div className={styles.mainPanel}>
@@ -24,7 +26,9 @@ const team = () => {
 
       <div className={styles.buttonsPanel}>
         <div className={styles.buttonsContainer}>
-          <div className={styles.raportButton}>Send Raport</div>
+          <div className={styles.raportButton} onClick={handleSendRaport}>
+            Send Raport
+          </div>
           <div className={styles.leaveButton}>Leave Team</div>
         </div>
       </div>
