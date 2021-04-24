@@ -3,6 +3,9 @@ import styles from "./team.module.scss";
 import settingsLogo from "../../assets/settingsLogo.svg";
 import Sidebar from "./sidebar/sidebar";
 const team = () => {
+
+  
+
   return (
     <div className={styles.container}>
       <div className={styles.mainPanel}>
