@@ -13,7 +13,7 @@
 
 ### General Info
 -----------------
-Winning hackathon? For sure we are! But first things first, We are glad to announce that since today, you can use our new Application "**Team Start**",
+Winning hackathon? For sure we are! But first things first, We are glad to announce that since today, you can use our new Application "**Team Star**",
 to make your every day work-life even more organised! We took care both of employees, and their supervisors! Don;t worry, you won't be working too much, and your employees will be relaxed for sure!!
 
 Be our guest, fasten your seatbelts, and see what we've got for you!
