@@ -264,11 +264,11 @@ const CalendarComponent = () => {
         },
         start: {
           ...prevState.start,
-          val: e.start.match(/[0-9]{4}-[0-9]{2}-[0-9]{2}/),
+          val: e.start.match(/[0-9]{4}-[0-9]{2}-[0-9]{2}/)[0],
         },
         end: {
           ...prevState.end,
-          val: e.end.match(/[0-9]{4}-[0-9]{2}-[0-9]{2}/),
+          val: e.end.match(/[0-9]{4}-[0-9]{2}-[0-9]{2}/)[0],
         },
         fromHour: {
           ...prevState.fromHour,

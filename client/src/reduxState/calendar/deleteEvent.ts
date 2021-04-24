@@ -39,7 +39,7 @@ export const deleteEventFetch = (calendarId: any, eventId: any): AppThunk => asy
 ) => {
     dispatch(start());
     await axios
-        .put(`/calendar/${calendarId}/event/${eventId}`, {}, {
+        .put(`/calendar/${calendarId}/event/${eventId}/delete`, {}, {
             headers: {
                 "x-auth-token": localStorage.getItem("token"),
             },
