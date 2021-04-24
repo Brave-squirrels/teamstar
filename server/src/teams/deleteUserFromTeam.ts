@@ -48,6 +48,10 @@ export default async (req: Request, res: Response) => {
     if (task.userId === user._id) user.tasks?.splice(i, 1);
   });
 
+  user.chats?.forEach((chat: any, i: number) => {
+    if (chat.teamId == team.id) user.chats?.splice(i, 1);
+  });
+
   // deleting user from team tasks
   // await team.tasks.forEach(async (teamTask) => {
   //   if (teamTask.userId === user._id) {
@@ -57,6 +61,7 @@ export default async (req: Request, res: Response) => {
   //     });
   //   }
   // });
+
 
   await user.save();
   await team.save();
