@@ -24,7 +24,8 @@ const Dnd = () => {
   useEffect(() => {
     dispatch(getTasksFetch(teamId));
 
-    dataModel(tasks.taskData);
+    console.log(tasks.taskData);
+    setData(dataModel(tasks.taskData));
   }, [teamData!.tasks]);
 
   const onDragEnd = (result: any) => {
@@ -76,7 +77,6 @@ const Dnd = () => {
     }
 
     // change task status
-    // const currentTask = data.tasks[draggableId];
     const newStatus = finish.title;
 
     const currentTask = data.tasks.filter((e: any) => e.id === draggableId)[0];

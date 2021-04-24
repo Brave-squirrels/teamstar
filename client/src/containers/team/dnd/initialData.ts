@@ -1,4 +1,4 @@
-const statusArr = ["", "todo", "inProgress", "done"];
+const statusArr = ["", "To do", "In progress", "Done"];
 
 export function dataModel(data: any) {
   const columns = [
@@ -31,6 +31,8 @@ export function dataModel(data: any) {
   const columnOrder = ["todo", "inProgress", "done"];
 
   const initialData = { tasks, columns, columnOrder };
+
+  console.log(initialData);
 
   return initialData;
 }
