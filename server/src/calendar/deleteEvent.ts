@@ -1,17 +1,13 @@
 import { Response, Request } from "express";
 import { StatusCodes } from "http-status-codes";
 import calendarModel from "../../models/calendar.model";
-import userModel from "../../models/user.model";
 import teamModel from "../../models/team.model";
-import validateEvent from "./validateEvent";
+import userModel from "../../models/user.model";
 
 export default async (req: Request, res: Response) => {
 
     const calendar = await calendarModel.findById(req.params.calendarId);
     if(!calendar) { return res.status(StatusCodes.BAD_REQUEST).send("Calendar not found")};
-
-    const user = await userModel.findById(req.userInfo._id);
-    if(!user) { return res.status(StatusCodes.BAD_REQUEST).send("User not found")};
 
     const team = await teamModel.findOne({calendarId: req.params.calendarId});
 
@@ -21,31 +17,16 @@ export default async (req: Request, res: Response) => {
 
     if(isFromTeam.length === 0 ) { return res.status(StatusCodes.UNAUTHORIZED).send("You are not allowed to do that!")};
 
+    const eventId = req.params.eventId;
 
-    const author = {
-        id: user._id,
-        name: user.name
-    }
-
-    const eventData = {
-        author,
-        ...req.body
-    }
-
-    const { error } = validateEvent(eventData);
-        if (error) { return res.status(StatusCodes.BAD_REQUEST).send(error.details[0].message); 
-    }
-
-    let events = calendar.events;
-
-    events.push(eventData);
+    let eventsUpdated = calendar.events.filter(event => event._id!=eventId);
 
     calendar.set({
-        events: events
-    });
+        events: eventsUpdated
+    })    
 
     await calendar.save();
 
-    res.status(StatusCodes.OK).send('New event succesfully added!');
+    res.status(StatusCodes.OK).send('Event deleted!');
 
 }

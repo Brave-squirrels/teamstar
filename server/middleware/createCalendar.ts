@@ -1,18 +1,16 @@
-import { Request, Response } from "express";
+import { NextFunction, Request, Response } from "express";
 import calendarModel from '../models/calendar.model';
 
-const createCalendar = async (req: Request, res: Response) => {
-    const team = res.locals.team;
+const createCalendar = async (req: Request, res: Response, next: NextFunction) => {
 
     const newCalendar = new calendarModel({
-        team: {
-            id: team._id,
-            name: team.name
-        },
         events: []
     })
 
     await newCalendar.save();
+
+    res.locals.calendar = newCalendar;
+    next();
 }
 
 export default createCalendar;

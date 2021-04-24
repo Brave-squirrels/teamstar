@@ -20,3 +20,13 @@ Content-Type: application/json
     "email": "ltnfodtydsppdixxmh@miucce.com",
     "password": "Password1!"
 }
+
+#create-team
+POST http://localhost:5000/teams
+x-auth-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MDgxYWQ2NjQ1MjQ4OTVjMzBiZGJlZDUiLCJuYW1lIjoia2FtaWwiLCJpYXQiOjE2MTkyMTI1MTJ9.m8VZE5KjGz6B7cJF5wyivdkmGKBpY4xlkN0lpqroRro
+Content-Type: application/json
+
+{
+    "name":"Kamil-nowy-team",
+    "description": "sample description"
+}

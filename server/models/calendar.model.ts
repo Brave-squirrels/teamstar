@@ -4,17 +4,9 @@ import { string } from "joi";
 
 // Creating raportSchema
 const calendarSchema = new mongoose.Schema<Calendar>({
-  team: {
-      id: {
-          type: mongoose.Schema.Types.ObjectId
-      },
-      name: {
-          type: String
-      }
-  },
   events: [
       {
-          creator: {
+          author: {
                   id: {
                       type: mongoose.Schema.Types.ObjectId
                   },
@@ -36,6 +28,14 @@ const calendarSchema = new mongoose.Schema<Calendar>({
           },
           desc: {
               type: String
+          },
+          fromHour: {
+              type: String,
+              required: true
+          },
+          toHour: {
+              type: String,
+              required: true
           }
 
       }

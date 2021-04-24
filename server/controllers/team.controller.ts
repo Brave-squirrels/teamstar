@@ -1,4 +1,4 @@
-import express, { NextFunction, Request, Response } from "express";
+import express, { Request, Response } from "express";
 import auth from "../middleware/auth";
 import createTeam from "../src/teams/createTeam";
 import deleteInvite from "../src/teams/deleteInvite";
@@ -21,15 +21,15 @@ export default class TeamController {
 
   public initializeRoutes() {
 
-    this.router.post(this.path, auth, this.createTeam, createCalendar);
+    this.router.post(this.path, auth, createCalendar, this.createTeam);
     this.router.get(`${this.path}/:teamId`, auth, this.getTeam);
     this.router.put(`${this.path}/:teamId`, auth, this.sendInvite);
     this.router.put(`${this.path}/:teamId`, auth, this.deleteInvite);
     this.router.delete(`${this.path}/:teamId`, auth, this.deleteTeam);
   }
 
-  createTeam(req: Request, res: Response, next: NextFunction) {
-    createTeam(req, res, next);
+  createTeam(req: Request, res: Response) {
+    createTeam(req, res);
   }
 
   getTeam(req: Request, res: Response) {
