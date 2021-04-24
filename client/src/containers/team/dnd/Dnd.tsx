@@ -4,6 +4,7 @@ import { DragDropContext } from "react-beautiful-dnd";
 import styles from "./dnd.module.scss";
 
 import Column from "./Column";
+import { Container } from "react-bootstrap";
 
 const Dnd = () => {
   const [data, setData] = useState<any>(initialData);
@@ -88,7 +89,7 @@ const Dnd = () => {
 
   return (
     <DragDropContext onDragEnd={onDragEnd}>
-      <div className={styles.dndContainer}>
+      <Container className={styles.dndContainer}>
         {data.columnOrder.map((columnId: string) => {
           const column = data.columns[columnId];
           const tasks = column.taskIds.map(
@@ -97,7 +98,7 @@ const Dnd = () => {
 
           return <Column key={column.id} column={column} tasks={tasks} />;
         })}
-      </div>
+      </Container>
     </DragDropContext>
   );
 };

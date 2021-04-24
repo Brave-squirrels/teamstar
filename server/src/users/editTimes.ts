@@ -17,7 +17,7 @@ export default async (req: Request, res: Response) => {
       .status(StatusCodes.INTERNAL_SERVER_ERROR)
       .send("Can not read the user.");
 
-  const result = calculateTime(user.times.startTime, user.times.endTime);
+  const result = calculateTime(req.body.startTime, req.body.endTime);
   if (!result)
     return res
       .status(StatusCodes.BAD_REQUEST)
