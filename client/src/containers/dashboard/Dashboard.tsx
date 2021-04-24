@@ -27,6 +27,8 @@ const Dashboard = () => {
   const editStartState = useSelector(
     (state: RootState) => state.changeStartTime
   );
+  const deleteTeam = useSelector((state: RootState) => state.deleteTeam);
+  const leaveTeamState = useSelector((state: RootState) => state.leaveTeam);
 
   const [show, setShow] = useState(false);
   const [changeTime, setChangeTime] = useState(false);
@@ -47,6 +49,8 @@ const Dashboard = () => {
     acceptState.success,
     declineState.success,
     editStartState.success,
+    deleteTeam.success,
+    leaveTeamState.success,
   ]);
   const [startTime, setStartTime] = useState({
     startTime: {

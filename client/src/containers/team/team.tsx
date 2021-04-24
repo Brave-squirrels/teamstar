@@ -22,6 +22,7 @@ import { deleteUserTeamFetch } from "reduxState/team/deleteUser";
 import { leaveTeamFetch } from "reduxState/team/leaveTeam";
 import { createRaportFetch } from "reduxState/raport/createRaport";
 import { getRaportsFetch } from "reduxState/raport/getRaports";
+import { StartValueType } from "tsparticles/dist/Enums";
 
 const Team = () => {
   const [modalInvite, setModalInvite] = useState(false);
@@ -35,6 +36,7 @@ const Team = () => {
   const declineInviteState = useSelector(
     (state: RootState) => state.declineInvite
   );
+  const deleteTeam = useSelector((state: RootState) => state.deleteTeam);
   const removeUser = useSelector((state: RootState) => state.deleteUserTeam);
   const leaveTeamState = useSelector((state: RootState) => state.leaveTeam);
   const createRaportState = useSelector(
@@ -95,7 +97,7 @@ const Team = () => {
       history.push("/home");
     }
     // eslint-disable-next-line
-  }, [leaveTeamState.success]);
+  }, [leaveTeamState.success, deleteTeam.success]);
 
   const initialEmail = {
     userEmail: {
@@ -135,6 +137,7 @@ const Team = () => {
   });
 
   const [showAllRaport, setShowAllRaport] = useState(false);
+  const [showModalLeave, setShowModalLeave] = useState(false);
 
   const [showRaport, setShowRaport] = useState(false);
   const [raportForm, setRaportForm] = useState({
@@ -220,6 +223,29 @@ const Team = () => {
           title=""
           submitted={handleCreateRaport}
         />
+      </InviteModal>
+      <InviteModal
+        show={showModalLeave}
+        onHide={() => setShowModalLeave(false)}
+        user={"as"}
+        title="Are you sure?"
+      >
+        <div className={styles.leaveButtonsContainer}>
+          <Button
+            style={{ width: "120px", margin: "0 10px" }}
+            variant="danger"
+            onClick={handleLeaveTeam}
+          >
+            Yes
+          </Button>
+          <Button
+            style={{ width: "120px" }}
+            variant="success"
+            onClick={() => setShowModalLeave(false)}
+          >
+            Cancel
+          </Button>
+        </div>
       </InviteModal>
       <InviteModal
         show={modalInvite}
@@ -339,7 +365,10 @@ const Team = () => {
           >
             Send Raport
           </div>
-          <div className={styles.leaveButton} onClick={handleLeaveTeam}>
+          <div
+            className={styles.leaveButton}
+            onClick={() => setShowModalLeave(true)}
+          >
             Leave Team
           </div>
         </div>
