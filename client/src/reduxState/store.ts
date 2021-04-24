@@ -41,6 +41,9 @@ import addEvent from 'reduxState/calendar/addEvent';
 import deleteEvent from 'reduxState/calendar/deleteEvent';
 import editEvent from 'reduxState/calendar/editEvent'
 
+import getChat from 'reduxState/chat/getChat';
+import sendMessage from 'reduxState/chat/sendMessage';
+
 import createRaport from 'reduxState/raport/createRaport';
 
 export const store = configureStore({
@@ -76,6 +79,8 @@ export const store = configureStore({
     removeUser,
     deleteUserTeam,
     createRaport,
+    getChat,
+    sendMessage
   },
   middleware: [
     ...getDefaultMiddleware({

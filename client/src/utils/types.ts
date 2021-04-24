@@ -159,3 +159,25 @@ export interface CalenderSchema {
 export const basicCalendar = {
     events: [],
 }
+
+export interface MessageInterface {
+    _id: string,
+    authorName: string,
+    authorId: string,
+    content: string,
+    date: Date
+}
+
+export interface ChatSchema {
+    _id: string,
+    name: string,
+    teamId: string,
+    messages: MessageInterface[]
+}
+
+export const basicChat = {
+    _id: '',
+    name: '',
+    teamId: '',
+    messages: []
+}

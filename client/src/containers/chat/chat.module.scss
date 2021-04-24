@@ -3,12 +3,14 @@
 
 .flex {
     display: flex;
+    flex-direction: column;
 }
 
 .formBox {
     width: 500px;
     height: 400px;
     background-color: gray;
+    overflow: scroll;
 }
 
 .inpucik {

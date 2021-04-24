@@ -57,9 +57,9 @@ export default class App {
 
       
 
-      socket.on("chat message", function (data) {
+      socket.on("chat-message", data => {
         console.log(data + " message")
-        io.emit("chat message", data);
+        io.emit('message', data)
 });
 
       socket.on("disconnect", async (reason) => {
