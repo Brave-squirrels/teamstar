@@ -41,6 +41,8 @@ import addEvent from 'reduxState/calendar/addEvent';
 import deleteEvent from 'reduxState/calendar/deleteEvent';
 import editEvent from 'reduxState/calendar/editEvent'
 
+import createRaport from 'reduxState/raport/createRaport';
+
 export const store = configureStore({
   reducer: {
     loginUser,
@@ -73,6 +75,7 @@ export const store = configureStore({
     addUser,
     removeUser,
     deleteUserTeam,
+    createRaport,
   },
   middleware: [
     ...getDefaultMiddleware({
